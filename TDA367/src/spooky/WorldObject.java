@@ -6,9 +6,9 @@ package spooky;
 public abstract class WorldObject {
     public WorldObject(){}
 
-    public void Render(){}
+    public void render(){}
 
-    public void Frame() {}
+    public void frame() {}
 
 
 }
