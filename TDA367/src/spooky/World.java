@@ -8,5 +8,11 @@ import java.util.List;
 public class World {
 
     private List<WorldObject> worldObjects;
+    private double difficulty = 1.0;
+
+
+    public void increaseDifficulty (double difficulty){
+        this.difficulty = difficulty + 0.1;
+    }
 
 }
