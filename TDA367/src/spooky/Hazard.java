@@ -34,8 +34,8 @@ public class Hazard extends WorldObject{
     }
 
     @Override
-    public void frame() {
-        super.frame();
+    public void frame(double dt) {
+        super.frame(dt);
     }
 
     @Override

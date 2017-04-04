@@ -4,8 +4,10 @@ package spooky;
  * Created by miktor on 2017-04-03.
  */
 public class MainClass {
-    public static int main(String[] args)
+    public static void main(String[] args)
     {
-        return 0;
+        // Setup a test world to test the UCs with, without UI.
+        Game game = new Game();
+
     }
 }

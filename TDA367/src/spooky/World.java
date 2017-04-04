@@ -15,4 +15,25 @@ public class World {
         this.difficulty = difficulty + 0.1;
     }
 
+    public void addWorldObject(WorldObject obj)
+    {
+        worldObjects.add(obj);
+    }
+
+    public void frame(double dt)
+    {
+        for(WorldObject obj : worldObjects)
+        {
+            obj.frame(dt);
+        }
+    }
+
+    public void render()
+    {
+        for(WorldObject obj : worldObjects)
+        {
+            obj.render();
+        }
+    }
+
 }

@@ -11,7 +11,7 @@ public abstract class WorldObject {
 
     public void render(){}
 
-    public void frame() {}
+    public void frame(double dt) {}
 
 
 }

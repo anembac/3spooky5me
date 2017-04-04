@@ -13,8 +13,8 @@ public class Enemy extends Hazard {
     }
 
     @Override
-    public void frame() {
-        super.frame();
+    public void frame(double dt) {
+        super.frame(dt);
     }
 
     @Override
