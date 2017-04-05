@@ -27,6 +27,7 @@ public class World {
             obj.frame(dt);
         }
     }
+    
 
     public void render()
     {
