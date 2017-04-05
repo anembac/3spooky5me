@@ -5,9 +5,9 @@ package spooky;
  */
 public class Character extends WorldObject{
 
-    protected int health = 1;
-    protected int speed = 1;
-    protected boolean damagable = false;
+    protected int health = 100;
+    protected int speed = 10;
+    protected boolean damagable = true;
 
 
     private final int getHealth()
