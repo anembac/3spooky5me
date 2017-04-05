@@ -5,17 +5,19 @@ package spooky;
  */
 public class Hazard extends WorldObject{
 
-    protected int damage = 0;
-    protected int health = 0;
-    protected boolean damageable = false;
+    protected int damage;
+    protected int health;
+    protected boolean damageable;
+    protected boolean movable;
 
     public Hazard(){}
 
-    public Hazard(int damage, int health, boolean damagable)
+    public Hazard(int damage, int health, boolean damagable, boolean movable)
     {
         this.damage = damage;
         this.damageable = damageable;
         this.health = health;
+        this.movable = movable;
     }
 
     private final boolean getDamageable()

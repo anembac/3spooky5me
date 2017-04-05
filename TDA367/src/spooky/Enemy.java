@@ -5,10 +5,10 @@ package spooky;
  */
 public class Enemy extends Hazard {
 
-    public Enemy(int damage, int health, boolean damagable)
+    public Enemy(int damage, int health, boolean damageable)
     {
         super.damage = damage;
-        this.damagable = damagable;
+        this.damageable = damageable;
         this.health = health;
     }
 
