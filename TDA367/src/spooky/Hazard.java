@@ -7,20 +7,20 @@ public class Hazard extends WorldObject{
 
     protected int damage = 0;
     protected int health = 0;
-    protected boolean damagable = false;
+    protected boolean damageable = false;
 
     public Hazard(){}
 
     public Hazard(int damage, int health, boolean damagable)
     {
         this.damage = damage;
-        this.damagable = damagable;
+        this.damageable = damageable;
         this.health = health;
     }
 
-    private final boolean getDamagable()
+    private final boolean getDamageable()
     {
-        return damagable;
+        return damageable;
     }
 
     private final int getHealth()
