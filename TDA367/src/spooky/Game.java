@@ -7,10 +7,15 @@ package spooky;
 public class Game {
     boolean gameRunning = false;
     World world = null;
+    //Character Player;
 
     public Game()
     {
-
+        Character Player = new Character();
+        startGame();
+        while(gameRunning){
+            System.out.println(Player.getPosition());
+        }
     }
 
     /*
@@ -20,6 +25,8 @@ public class Game {
     {
         world = new World(/* required parameters to create the correct world*/);
         gameRunning = true;
+        System.out.println("World created!");
+
     }
 
     /*

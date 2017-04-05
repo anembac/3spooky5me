@@ -1,5 +1,7 @@
 package spooky;
 
+import java.awt.geom.Point2D;
+
 /**
  * Created by kaffe on 4/3/17.
  */
@@ -10,17 +12,19 @@ public class Character extends WorldObject {
     protected boolean damageable = true;
 
 
-    private final int getHealth() {
+    public final int getHealth() {
         return health;
     }
 
-    private final int getSpeed() {
+    public final int getSpeed() {
         return speed;
     }
 
-    private final boolean getDamageable(){
+    public final boolean getDamageable(){
         return damageable;
     }
 
-
+    public final Point2D.Double getPosition(){
+        return position;
+    }
 }
