@@ -12,7 +12,7 @@ public class World {
 
 
     public void increaseDifficulty (double difficulty){
-        this.difficulty = difficulty + 0.1;
+        this.difficulty = difficulty + 0.05;
     }
 
     public void addWorldObject(WorldObject obj)
