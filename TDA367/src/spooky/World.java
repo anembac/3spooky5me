@@ -33,6 +33,7 @@ public class World {
     {
         for(WorldObject obj : worldObjects)
         {
+
             obj.render();
         }
     }
