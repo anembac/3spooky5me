@@ -1,20 +1,26 @@
 package spooky;
 
+import javax.swing.*;
+
 /**
  * Created by Mikael on 4/4/2017.
  * this should be the mainclass of the entire game, we could have the main method here.
  */
-public class Game {
-    boolean gameRunning = false;
+public class Game extends JComponent{ //We don't want to use swing in the final product and will be replacing this with
+    boolean gameRunning = false;        //an equivalent function in our graphics library of choice
     World world = null;
-    //Character Player;
+    Character player;
+    MovementController mc;
 
     public Game()
     {
-        Character Player = new Character();
+        player = new Character();
+        mc = new MovementController(player);
         startGame();
+        this.setFocusable(true);
         while(gameRunning){
-            System.out.println(Player.getPosition());
+            System.out.println(player.getPosition());
+
         }
     }
 
@@ -23,9 +29,11 @@ public class Game {
      */
     public void startGame()
     {
+
         world = new World(/* required parameters to create the correct world*/);
+        this.addKeyListener(mc);
         gameRunning = true;
-        System.out.println("World created!");
+        System.out.println("Game started!");
 
     }
 
@@ -48,4 +56,10 @@ public class Game {
             world.render();
         }
     }
+
+    public Character getPlayer(){
+        return this.player;
+    }
+
+
 }
