@@ -30,4 +30,53 @@ public class Game extends ApplicationAdapter {
 		batch.dispose();
 		//img.dispose();
 	}
+
+	boolean gameRunning = false;        //an equivalent function in our graphics library of choice
+	World world = null;
+	Character player;
+
+
+	public Game()
+	{
+		player = new Character();
+//        startGame();
+
+	}
+
+	/*
+        This method should be called upon the user clicking start game and select difficuty? or other options.
+     */
+	public void startGame()
+	{
+
+		world = new World(/* required parameters to create the correct world*/);
+
+		gameRunning = true;
+		System.out.println("Game started!");
+
+	}
+
+	/*
+        Takes delta time as argument i case of laggs and stuffs.
+     */
+	public void frame(double dt)
+	{
+		// When the game is running we should frame the world
+		if(gameRunning)
+		{
+			world.frame(dt);
+		}
+	}
+
+	public void renderOld()
+	{
+		if(gameRunning)
+		{
+			world.render();
+		}
+	}
+
+	public Character getPlayer(){
+		return this.player;
+	}
 }
