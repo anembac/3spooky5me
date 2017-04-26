@@ -10,7 +10,7 @@ public class MainClass {
     public static void main(String[] args)
     {
         // Setup a test world to test the UCs with, without UI.
-        Game game = new Game();
+        //Game game = new Game();
 
         KdTree<Integer> kdtree = new KdTree<>();
         kdtree.insert(new Point2D.Double(10,10), 10);

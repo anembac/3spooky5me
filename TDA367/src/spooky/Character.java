@@ -28,10 +28,10 @@ public class Character extends WorldObject {
         return damageable;
     }
 
-    public final Point2D.Double characterMove(){
+    /*public final Point2D.Double characterMove(){
         position.x=position.getX()+1*(speed/100);
         return position;
-    }
+    }*/
 
     public final Point2D.Double getPosition(){
 

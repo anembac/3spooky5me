@@ -18,7 +18,7 @@ public class Game extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		//batch.draw(img, 0, 0);
@@ -44,7 +44,7 @@ public class Game extends ApplicationAdapter {
 	}
 
 	/*
-        This method should be called upon the user clicking start game and select difficuty? or other options.
+        This method should be called upon the user clicking start game and select difficulty? or other options.
      */
 	public void startGame()
 	{
