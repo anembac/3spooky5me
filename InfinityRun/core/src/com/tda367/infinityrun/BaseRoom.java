@@ -21,11 +21,11 @@ public class BaseRoom  {
     }
 
     public void setup (){
-        addWorldObject(new Platform(new Vector2(1,1)));
-        addWorldObject(new Platform(new Vector2(31,1)));
-        addWorldObject(new Platform(new Vector2(61,1)));
-        addWorldObject(new Platform(new Vector2(91,1)));
-        addWorldObject(new Platform(new Vector2(121,1)));
+        addWorldObject(new Platform(new Vector2(0,1)));
+        addWorldObject(new Platform(new Vector2(128,1)));
+        addWorldObject(new Platform(new Vector2(256,1)));
+        addWorldObject(new Platform(new Vector2(386,1)));
+        addWorldObject(new Platform(new Vector2(512,1)));
     }
 
 }
