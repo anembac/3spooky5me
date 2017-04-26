@@ -12,6 +12,8 @@ public class Character extends WorldObject {
 
     protected int health = 100;
     protected int speed = 100; //This speed equals 1 block per second.
+    protected int jumpHeight = 100;
+    protected int numberOfJumps = 1;
     protected boolean damageable = true;
     protected boolean isJumping = false;
 
@@ -52,7 +54,7 @@ public class Character extends WorldObject {
 
     public final void jump(){
         if(!isJumping){
-            this.position = new Point2D.Double(getPosition().getX(), getPosition().getY()+100);
+            this.position = new Point2D.Double(getPosition().getX(), getPosition().getY()+jumpHeight);
             setJumping(true);
         }
 
