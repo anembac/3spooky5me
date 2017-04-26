@@ -20,22 +20,22 @@ public class World {
         worldObjects.add(obj);
     }
 
-    public void frame(double dt)
-    {
-        for(WorldObject obj : worldObjects)
-        {
-            obj.frame(dt);
-        }
-    }
-    
-
-    public void render()
-    {
-        for(WorldObject obj : worldObjects)
-        {
-
-            obj.render();
-        }
-    }
+//    public void frame(double dt)
+//    {
+//        for(WorldObject obj : worldObjects)
+//        {
+//            obj.frame(dt);
+//        }
+//    }
+//
+//
+//    public void render()
+//    {
+//        for(WorldObject obj : worldObjects)
+//        {
+//
+//            obj.render();
+//        }
+//    }
 
 }

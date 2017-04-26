@@ -11,11 +11,10 @@ public abstract class WorldObject {
 
     protected boolean collidable = true;
     protected Vector2 position = new Vector2(0,0);
-    public WorldObject(){}
-
-    public void render(){}
-
-    public void frame(double dt) {}
 
 
+    public WorldObject(Vector2 position){
+        this.position = position;
+
+    }
 }

@@ -1,5 +1,6 @@
 package com.tda367.infinityrun;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import java.awt.geom.Point2D;
@@ -9,11 +10,13 @@ import java.awt.geom.Point2D;
  */
 public class Character extends WorldObject {
 
-    public Character(){
+    public Character(Vector2 position){
+        super(position);
+        new Rectangle(position.x, position.y, size, size);
     }
-
+    private int size = 64;
     protected int health = 102;
-    protected int speed = 100; //This speed equals 1 block per second.
+    protected int speed = 10; //This speed does not equal 1 block per second, speed is arbitary
     protected int jumpHeight = 100;
     protected int numberOfJumps = 1;
     protected boolean damageable = true;

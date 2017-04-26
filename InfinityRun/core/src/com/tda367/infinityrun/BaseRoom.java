@@ -5,14 +5,14 @@ import com.badlogic.gdx.math.Vector2;
 
 import javax.swing.text.Position;
 import java.awt.geom.Point2D;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by kaffe on 4/26/17.
  */
 public class BaseRoom  {
 
-    private List<WorldObject> roomObjects;
+    private List<WorldObject> roomObjects = new ArrayList<WorldObject>();
 
 
     public void addWorldObject(WorldObject obj)
@@ -24,8 +24,12 @@ public class BaseRoom  {
         addWorldObject(new Platform(new Vector2(0,1)));
         addWorldObject(new Platform(new Vector2(128,1)));
         addWorldObject(new Platform(new Vector2(256,1)));
-        addWorldObject(new Platform(new Vector2(386,1)));
+        addWorldObject(new Platform(new Vector2(384,1)));
         addWorldObject(new Platform(new Vector2(512,1)));
+    }
+
+    public List<WorldObject> getRoomObjects(){
+        return roomObjects;
     }
 
 }
