@@ -16,6 +16,7 @@ public class Game extends ApplicationAdapter {
 		//img = new Texture("badlogic.jpg");
 	}
 
+
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(0, 1, 1, 1);
@@ -39,7 +40,9 @@ public class Game extends ApplicationAdapter {
 	public Game()
 	{
 		player = new Character();
-//        startGame();
+
+		System.out.println("lmao");
+	      startGame();
 
 	}
 

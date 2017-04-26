@@ -1,5 +1,8 @@
 package com.tda367.infinityrun;
 
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Rectangle;
+
 import java.awt.geom.Point2D;
 
 /**
@@ -7,10 +10,14 @@ import java.awt.geom.Point2D;
  */
 public class Platform extends WorldObject {
 
-    public Platform(Point2D.Double position)
+    public Platform(Vector2 position)
     {
         this.position = position;
+        new Rectangle().setPosition(position).setWidth(30).setHeight(10);
+
+
     }
+
 
     @Override
     public void frame(double dt) {
