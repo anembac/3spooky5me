@@ -10,7 +10,7 @@ public class Character extends WorldObject {
     public Character(){
     }
 
-    protected int health = 101;
+    protected int health = 102;
     protected int speed = 100; //This speed equals 1 block per second.
     protected int jumpHeight = 100;
     protected int numberOfJumps = 1;
