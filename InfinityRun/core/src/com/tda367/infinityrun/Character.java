@@ -1,5 +1,7 @@
 package com.tda367.infinityrun;
 
+import com.badlogic.gdx.math.Vector2;
+
 import java.awt.geom.Point2D;
 
 /**
@@ -30,12 +32,12 @@ public class Character extends WorldObject {
         return damageable;
     }
 
-    public final Point2D.Double characterMove(){
-        position.x=position.getX()+1*(speed/100);
+    public final Vector2 characterMove(){
+        position.x=position.x+1*(speed/100);
         return position;
     }
 
-    public final Point2D.Double getPosition(){
+    public final Vector2 getPosition(){
 
         return position;
     }
@@ -44,17 +46,17 @@ public class Character extends WorldObject {
     public final void moveXPosition(Direction dir){
         switch(dir){
             case LEFT:
-                this.position = new Point2D.Double(getPosition().getX()-speed, getPosition().getY());
+                this.position.x-=speed;
                 break;
             case RIGHT:
-                this.position = new Point2D.Double(getPosition().getX()+speed, getPosition().getY());
+                this.position.x +=speed;
                 break;
         }
     }
 
     public final void jump(){
         if(!isJumping){
-            this.position = new Point2D.Double(getPosition().getX(), getPosition().getY()+jumpHeight);
+           // this.position = new Vector2(getPosition().getX(), getPosition().getY()+jumpHeight);
             setJumping(true);
         }
 

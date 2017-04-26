@@ -10,10 +10,12 @@ import java.awt.geom.Point2D;
  */
 public class Platform extends WorldObject {
 
+
+    //generic platform is 30 units wide and 10 high
     public Platform(Vector2 position)
     {
         this.position = position;
-        new Rectangle().setPosition(position).setWidth(30).setHeight(10);
+        new Rectangle().setPosition(position).setWidth(128).setHeight(16);
 
 
     }
