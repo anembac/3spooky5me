@@ -16,12 +16,9 @@ public class Game extends JComponent{ //We don't want to use swing in the final 
     {
         player = new Character();
         mc = new MovementController(player);
-        startGame();
-        this.setFocusable(true);
-        while(gameRunning){
-            System.out.println(player.getPosition());
+        this.addKeyListener(mc);
+//        startGame();
 
-        }
     }
 
     /*
@@ -31,7 +28,7 @@ public class Game extends JComponent{ //We don't want to use swing in the final 
     {
 
         world = new World(/* required parameters to create the correct world*/);
-        this.addKeyListener(mc);
+
         gameRunning = true;
         System.out.println("Game started!");
 
