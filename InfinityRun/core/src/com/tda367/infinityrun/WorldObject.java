@@ -9,7 +9,9 @@ import com.badlogic.gdx.math.Vector2;
 import java.awt.geom.Point2D;
 public abstract class WorldObject {
 
-    protected boolean collidable = true;
+
+
+    // position is for some reason a vector, deal w/it
     protected Vector2 position = new Vector2(0,0);
 
 

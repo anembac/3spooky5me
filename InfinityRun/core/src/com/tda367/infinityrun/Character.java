@@ -56,7 +56,7 @@ public class Character extends WorldObject {
 
     public final void jump(){
         if(!isJumping){
-           // this.position = new Vector2(getPosition().getX(), getPosition().getY()+jumpHeight);
+            this.position.y=+jumpHeight;
             setJumping(true);
         }
 
@@ -70,3 +70,4 @@ public class Character extends WorldObject {
         isJumping = b;
     }
 }
+// reworked into libgdx positions with vectors

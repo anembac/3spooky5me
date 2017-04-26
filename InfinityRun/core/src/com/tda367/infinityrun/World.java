@@ -15,7 +15,10 @@ public class World {
         this.difficulty = difficulty + 0.05;
     }
 
-    public void addWorldObject(WorldObject obj)
+
+
+    //to become a method for adding the created rooms to the world. will require some sort of magic box algorithm to not break dimensions as we know it.
+    public void addRoomObject(WorldObject obj)
     {
         worldObjects.add(obj);
     }
