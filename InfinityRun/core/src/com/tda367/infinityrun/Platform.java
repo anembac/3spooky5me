@@ -12,7 +12,10 @@ public class Platform extends WorldObject {
 private int width = 128;
 private int height = 16;
 
-    //generic platform is 128 units wide and 16 high
+    // generic platform is 128 units wide and 16 high
+    // we should rewrite this together with worldobject once we get a
+    // better picture of how we want worldobjects to work
+
     public Platform(Vector2 position){
         super(position);
         new Rectangle(position.x, position.y, width, height);

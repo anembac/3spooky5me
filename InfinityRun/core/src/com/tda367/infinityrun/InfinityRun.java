@@ -10,8 +10,9 @@ public class InfinityRun extends Game {
 	public BitmapFont font;
 
 
-
-//looks at mainmenuscreen, doesn't really do anything else right now, probably...
+    //creates a spritebatch and a font
+    //shows mainmenuscreen, doesn't really do anything else right now I think
+	//based on https://github.com/libgdx/libgdx/wiki/Extending-the-simple-game
 	@Override
 	public void create () {
 		batch = new SpriteBatch();

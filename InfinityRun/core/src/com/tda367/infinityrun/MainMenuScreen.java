@@ -31,7 +31,7 @@ public class MainMenuScreen implements Screen { //this class creates the main me
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-        game.font.draw(game.batch, "Welcome to InfinityRun ALPHA!!! ", 100, 150);
+        game.font.draw(game.batch, "Welcome to InfinityRun PRE-ALPHA!!! ", 100, 150);
         game.font.draw(game.batch, "Press any key to begin!", 100, 100);
         game.batch.end();
 

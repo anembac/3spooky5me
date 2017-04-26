@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 
 import java.awt.geom.Point2D;
-public abstract class WorldObject {
+public abstract class WorldObject { //We should probably refactor this class at some point
 
 
 
