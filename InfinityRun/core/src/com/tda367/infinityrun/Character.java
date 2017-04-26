@@ -35,10 +35,7 @@ public class Character extends WorldObject {
         return damageable;
     }
 
-    public final Vector2 characterMove(){
-        position.x=position.x+1*(speed/100);
-        return position;
-    }
+
 
     public final Vector2 getPosition(){
 
