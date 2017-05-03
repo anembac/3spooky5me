@@ -2,6 +2,7 @@ package com.tda367.infinityrun;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Rectangle;
+import com.tda367.infinityrun.Math.Vec2;
 
 import java.awt.geom.Point2D;
 
@@ -16,9 +17,9 @@ private int height = 16;
     // we should rewrite this together with worldobject once we get a
     // better picture of how we want worldobjects to work
 
-    public Platform(Vector2 position){
-        super(position);
-        new Rectangle(position.x, position.y, width, height);
+    public Platform(Vec2 position){
+        super(position, new Vec2(128,16));
+        setTexture("platform.png");
     }
 
 

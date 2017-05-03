@@ -2,6 +2,7 @@ package com.tda367.infinityrun;
 
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
+import com.tda367.infinityrun.Math.Vec2;
 
 import javax.swing.text.Position;
 import java.awt.geom.Point2D;
@@ -25,14 +26,14 @@ public class BaseRoom  {
     //see actual spatial dimensions of a room
 
     public void setup (){
-        addWorldObject(new Platform(new Vector2(0,1)));
-        addWorldObject(new Platform(new Vector2(128,1)));
-        addWorldObject(new Platform(new Vector2(256,1)));
-        addWorldObject(new Platform(new Vector2(384,1)));
-        addWorldObject(new Platform(new Vector2(512,1)));
-        addWorldObject(new Platform(new Vector2(640,1)));
-        addWorldObject(new Platform(new Vector2(768,1)));
-        addWorldObject(new Platform(new Vector2(896,1)));
+        addWorldObject(new Platform(new Vec2(0,1)));
+        addWorldObject(new Platform(new Vec2(128,1)));
+        addWorldObject(new Platform(new Vec2(256,1)));
+        addWorldObject(new Platform(new Vec2(384,1)));
+        addWorldObject(new Platform(new Vec2(512,1)));
+        addWorldObject(new Platform(new Vec2(640,1)));
+        addWorldObject(new Platform(new Vec2(768,1)));
+        addWorldObject(new Platform(new Vec2(896,1)));
     }
 
     public List<WorldObject> getRoomObjects(){
