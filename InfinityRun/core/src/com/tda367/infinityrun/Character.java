@@ -8,7 +8,7 @@ import java.awt.geom.Point2D;
 /**
  * Created by kaffe on 4/3/17.
  */
-public class Character extends WorldObject {
+public class    Character extends WorldObject {
 
     public Character(Vector2 position){
         super(position);
