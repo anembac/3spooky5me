@@ -19,7 +19,7 @@ public class Character extends MovableObject {
     }
     private int size = 64;
     protected int health = 102;
-    protected int speed = 60; //This speed does not equal 1 block per second, speed is arbitary
+    protected int speed = 180; //This speed does not equal 1 block per second, speed is arbitary
     protected int jumpHeight = 100;
     protected int numberOfJumps = 1;
     protected boolean damageable = true;
