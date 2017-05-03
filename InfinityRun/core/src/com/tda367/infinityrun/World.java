@@ -14,7 +14,7 @@ public class World {
     private List<WorldObject> worldObjects;
     private KdTree<WorldObject> kdTree = new KdTree<WorldObject>();
     private double difficulty = 1.0;
-
+    IInput input = null;
 
     public void increaseDifficulty (double difficulty){
         this.difficulty = difficulty + 0.05;
@@ -23,6 +23,7 @@ public class World {
     public World()
     {
         worldObjects = new ArrayList<WorldObject>();
+        input = new Input();
     }
 
     public List<WorldObject> getWorldObjects()
@@ -47,41 +48,17 @@ public class World {
 
     public void frame(float dt)
     {
+        input.collectInput();
         for(WorldObject obj : worldObjects)
         {
-            if(obj instanceof MovableObject)
-            {
-                MovableObject mo = (MovableObject)obj;
-                mo.position.add(Vec2.mul(mo.acceleration, dt));
-            }
+            obj.frame(dt, input.getInput());
         }
     }
     // to add the player etc to the world.
     public void addWorldObject(WorldObject obj)
     {
         worldObjects.add(obj);
-        kdTree.insert(new Point2D.Double(obj.position.x, obj.position.y), obj);
-        kdTree.insert(new Point2D.Double(obj.position.x, obj.position.y+obj.bounds.y), obj);
-        kdTree.insert(new Point2D.Double(obj.position.x + obj.bounds.x, obj.position.y), obj);
-        kdTree.insert(new Point2D.Double(obj.position.x+obj.bounds.x, obj.position.y+obj.bounds.y), obj);
+        CollisionManager.getInstance().addWorldObject(obj);
     }
-//
-//    public void frame(double dt)
-//    {
-//        for(WorldObject obj : worldObjects)
-//        {
-//            obj.frame(dt);
-//        }
-//    }
-//
-//
-//    public void render()
-//    {
-//        for(WorldObject obj : worldObjects)
-//        {
-//
-//            obj.render();
-//        }
-//    }
 
 }

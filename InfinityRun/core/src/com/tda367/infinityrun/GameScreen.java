@@ -64,11 +64,11 @@ public class GameScreen implements Screen{  //tries to put textures onto the obj
         game.batch.end();
 
         //remove this after testing
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+        /*if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT))
             hero.moveXPosition(Direction.LEFT);
         else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !Gdx.input.isKeyPressed(Input.Keys.LEFT))
             hero.moveXPosition(Direction.RIGHT);
-        else hero.moveXPosition(Direction.NONE);
+        else hero.moveXPosition(Direction.NONE);*/
     }
 
     @Override

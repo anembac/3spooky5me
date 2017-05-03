@@ -2,6 +2,7 @@ package com.tda367.infinityrun;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
 
 import java.awt.geom.Point2D;
@@ -44,8 +45,54 @@ public class Character extends MovableObject {
         return position;
     }
 
+    @Override
+    public void frame(float dt, InputState state)
+    {
+        if(state.forwardPressed()) acceleration.x += speed/6;
+        if(state.backPressed()) acceleration.x -= speed/6;
+        if(!state.backPressed() && !state.forwardPressed())
+        {
+            if(this.acceleration.x < -0.000001)
+            {
+                acceleration.x += speed/4;
+                if(acceleration.x> 0) acceleration.x = 0;
+            }
+            else
+            {
+                acceleration.x -= speed/4;
+                if(acceleration.x < 0) acceleration.x = 0;
+            }
+        }
 
-    public final void moveXPosition(Direction dir){
+        float height = CollisionManager.getInstance().getWalkableHeight(this);
+        if(state.jumpPressed())
+        {
+            if(position.y < height+0.001)
+            {// not flying
+                acceleration.y += 500;
+            }
+        }
+
+        if(this.position.y > height)
+        {
+            //acceleration.y -= 9.82*dt;
+            // so 1 px is 1 unit here, we need to guess the pixel height of the character in meters, etc 150?!
+            acceleration.y -= 9.82*dt*150;
+        }
+
+        acceleration.x = Utils.limit(-speed, acceleration.x, speed);
+        position.add(Vec2.mul(acceleration, dt));
+
+        // if we accelerated below the ground:
+        if(position.y < height)
+        {
+            position.y = height;
+            acceleration.y = 0;
+        }
+
+        //System.out.println(acceleration.y);
+    }
+   /* public final void moveXPosition(Direction dir){
         // I made acceleration from speed, acc = speed/4 atm as an example, i think we would like to have some kind of acceleration right?
         switch(dir){
             case LEFT:
@@ -79,7 +126,7 @@ public class Character extends MovableObject {
             setJumping(true);
         }
 
-    }
+    }*/
 
     public final boolean getJumping(){
         return isJumping;

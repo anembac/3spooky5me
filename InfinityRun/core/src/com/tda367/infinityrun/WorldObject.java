@@ -36,6 +36,8 @@ public abstract class WorldObject { //We should probably refactor this class at 
         this.parent = parent;
     }
 
+    public void frame(float dt, InputState state){}
+
     public void setParent(WorldObject parent)
     {
         this.parent = parent;
