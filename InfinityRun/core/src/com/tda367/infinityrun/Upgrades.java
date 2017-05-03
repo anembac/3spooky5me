@@ -3,6 +3,7 @@ package com.tda367.infinityrun;
 import java.util.List;
 
 public class Upgrades {
+    //list of upgrades
     private List<Upgrade> upgradesList;
 
 
