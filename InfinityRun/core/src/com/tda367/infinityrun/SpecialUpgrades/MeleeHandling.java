@@ -5,8 +5,8 @@ import com.tda367.infinityrun.Upgrade;
  * Created by Jacob on 5/9/2017.
  */
 public class MeleeHandling extends Upgrade{
-    public MeleeHandling(String upgradeName, int cap, boolean multiply, int baseValue) {
-        super(upgradeName, cap, multiply, baseValue);
+    public MeleeHandling(int cap, int basevalue) {
+        super(cap, basevalue);
     }
 
     @Override

@@ -8,8 +8,8 @@ import com.tda367.infinityrun.Upgrade;
 public class Health extends Upgrade{
 
 
-    public Health(String upgradeName, int cap, boolean multiply, int basevalue) {
-        super(upgradeName, cap, multiply, basevalue);
+    public Health(int cap, int basevalue) {
+        super(cap, basevalue);
     }
 
     @Override

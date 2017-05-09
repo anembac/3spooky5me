@@ -8,8 +8,8 @@ import java.util.Timer;
  */
 public class Regeneration extends Upgrade {
 
-    public Regeneration(String upgradeName, int cap, boolean multiply, int basevalue) {
-        super(upgradeName, cap, multiply, basevalue);
+    public Regeneration(int cap, int basevalue) {
+        super(cap, basevalue);
 
     }
 

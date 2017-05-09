@@ -6,8 +6,8 @@ import com.tda367.infinityrun.Upgrade;
  */
 public class JumpH extends Upgrade {
 
-    public JumpH(String upgradeName, int cap, boolean multiply, int baseValue) {
-        super(upgradeName, cap, multiply, baseValue);
+    public JumpH(int cap, int basevalue) {
+        super(cap, basevalue);
     }
 
     @Override

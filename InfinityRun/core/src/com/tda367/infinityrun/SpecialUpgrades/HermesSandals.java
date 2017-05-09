@@ -8,8 +8,8 @@ import com.tda367.infinityrun.Upgrade;
 public class HermesSandals extends Upgrade {
     private boolean isUsed = false;
 
-    public HermesSandals(String upgradeName, int cap, boolean multiply, int basevalue) {
-        super(upgradeName, cap, multiply, basevalue);
+    public HermesSandals(int cap, int basevalue) {
+        super(cap, basevalue);
     }
 
     @Override

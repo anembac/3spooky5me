@@ -9,8 +9,8 @@ import java.util.Random;
  */
 public class Looting extends Upgrade {
 
-    public Looting(String upgradeName, int cap, boolean multiply, int basevalue) {
-        super(upgradeName, cap, multiply, basevalue);
+    public Looting(int cap, int basevalue) {
+        super(cap, basevalue);
     }
 
     public int numberOfCoins() {
