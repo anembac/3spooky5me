@@ -6,8 +6,8 @@ import com.tda367.infinityrun.Upgrade;
  */
 public class JumpH extends Upgrade {
 
-    public JumpH(String upgradeName, int cap, boolean multiply, int basevalue) {
-        super(upgradeName, cap, multiply, basevalue);
+    public JumpH(String upgradeName, int cap, boolean multiply, int baseValue) {
+        super(upgradeName, cap, multiply, baseValue);
     }
 
     @Override
@@ -15,9 +15,12 @@ public class JumpH extends Upgrade {
         return 100 + super.getValue();
     }
 
-    @Override
+    //@Override
     public void frame(float dt) {
-        //add basic jump
+        /*if(data.positionY <= data.groundlevel + 0.00001 && input.JumpKeyPressed){
+        character.doJump;
+        }
+        */
     }
 
 }

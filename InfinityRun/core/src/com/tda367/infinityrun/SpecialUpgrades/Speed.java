@@ -17,6 +17,12 @@ public class Speed extends Upgrade {
 
     @Override
     public void frame(float dt) {
-        //add basic movement
+        /*
+        if(input.movementKeyLeft) {
+        character.moveLeft;
+        } else if {input.movementKeyRight) {
+        character.moveRight;
+        }
+         */
     }
 }

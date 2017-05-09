@@ -6,6 +6,7 @@ import com.tda367.infinityrun.Upgrade;
  */
 
 public class HermesSandals extends Upgrade {
+    private boolean isUsed = false;
 
     public HermesSandals(String upgradeName, int cap, boolean multiply, int basevalue) {
         super(upgradeName, cap, multiply, basevalue);
@@ -13,6 +14,12 @@ public class HermesSandals extends Upgrade {
 
     @Override
     public void frame(float dt) {
-        //If in air and not on cd do extra jump
+        /*if(data.positionY > data.groundlevel + 0.00001 && input.JumpKeyPressed && !isUsed){
+        character.doJump;
+        isUsed = true;
+        } if(data.positionY <= data.groundlevel + 0.00001){
+        isUsed = false;
+        }
+        */
     }
 }
