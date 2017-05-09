@@ -24,14 +24,14 @@ public class MainMenuScreen implements Screen { //this class creates the main me
     Stage mainMenuStage = new Stage();
     OrthographicCamera camera;
 
-
+    
     Texture packedtexture = new Texture(Gdx.files.internal("testpack1.png"));
-    TextureAtlas ta = new TextureAtlas(Gdx.files.internal("testpack1.pack"));
-    TextureRegion tr = new TextureRegion(ta.findRegion("testtexture"));
-    TextureRegion tr2 = new TextureRegion(ta.findRegion("testtexture2"));
-    TextureRegionDrawable trd = new TextureRegionDrawable(tr);
-    TextureRegionDrawable trd2 = new TextureRegionDrawable(tr2);
-    TextButton.TextButtonStyle tbs1;
+    TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("testpack1.pack"));
+    TextureRegion textureUp = new TextureRegion(atlas.findRegion("testtexture"));
+    TextureRegion textureDown = new TextureRegion(atlas.findRegion("testtexture2"));
+    TextureRegionDrawable textureUpDrawable = new TextureRegionDrawable(textureUp);
+    TextureRegionDrawable textureDownDrawable = new TextureRegionDrawable(textureDown);
+    TextButton.TextButtonStyle menuButtonStyle;
     TextButton newCharButton;
     TextButton loadCharButton;
     VerticalGroup buttonGroup;
@@ -40,9 +40,10 @@ public class MainMenuScreen implements Screen { //this class creates the main me
     public MainMenuScreen(final InfinityRun game) {
         this.game = game;
         Gdx.input.setInputProcessor(mainMenuStage);
-        tbs1 = new TextButton.TextButtonStyle(trd, trd2, trd, game.font);
-        newCharButton = new TextButton("NEW CHARACTER", tbs1);
-        loadCharButton = new TextButton("LOAD CHARACTER", tbs1);
+        menuButtonStyle
+                = new TextButton.TextButtonStyle(textureUpDrawable, textureDownDrawable, textureUpDrawable, game.font);
+        newCharButton = new TextButton("NEW CHARACTER", menuButtonStyle);
+        loadCharButton = new TextButton("LOAD CHARACTER", menuButtonStyle);
         buttonGroup = new VerticalGroup();
         buttonGroup.space(10);
         buttonGroup.setX(1600/2-buttonGroup.getWidth()/2);
@@ -113,7 +114,7 @@ public class MainMenuScreen implements Screen { //this class creates the main me
         mainMenuStage.clear();
         buttonGroup.clear();
         mainMenuStage.dispose();
-        ta.dispose();
+        atlas.dispose();
         packedtexture.dispose();
 
     }
