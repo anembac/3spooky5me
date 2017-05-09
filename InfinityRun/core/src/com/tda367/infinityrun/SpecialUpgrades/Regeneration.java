@@ -15,6 +15,6 @@ public class Regeneration extends Upgrade {
 
     @Override
     public void frame(float dt) {
-        float hpreg = System.nanoTime() / 1000000000 * dt * getValue();
+        float hpreg = System.nanoTime() / 1000000000 * dt * getValueInt();
     }
 }

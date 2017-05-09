@@ -11,8 +11,8 @@ public class JumpH extends Upgrade {
     }
 
     @Override
-    public int getValue(){
-        return 100 + super.getValue();
+    public int getValueInt(){
+        return 100 + super.getValueInt();
     }
 
     //@Override
@@ -22,5 +22,4 @@ public class JumpH extends Upgrade {
         }
         */
     }
-
 }

@@ -37,10 +37,7 @@ public class Upgrade {
     }
 
 
-    public int getValue() {
-        if (this.multiply) {
-            return 100 + this.baseValue * this.level; //This is the number of percent that you will get of the current value
-        }
+    public int getValueInt() {
         return this.baseValue * this.level; // this will be added to the current value
     }
 
@@ -48,4 +45,7 @@ public class Upgrade {
         return this.multiply;
     }
 
+    public double getValueDouble() {
+        return (100 + this.baseValue * this.level)/100; //This is the value you will multiply with the standard to get ur true value.
+    }
 }
