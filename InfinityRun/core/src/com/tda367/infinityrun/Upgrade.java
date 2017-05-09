@@ -31,6 +31,11 @@ public class Upgrade {
         return this.cap;
     }
 
+    public void frame(float dt)
+    {
+        //if(inputstate.isjumppressed())
+    }
+
     public int getValue() {
         if (this.multiply) {
             return 100 + this.basevalue * this.level; //This is the number of percent that you will get of the current value
