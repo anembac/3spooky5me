@@ -2,17 +2,17 @@ package com.tda367.infinityrun;
 
 public class Upgrade {
 
-    private final String upgradeName;
-    private final int cap;            //The maximum level of the skill, -1 means it doesn't have a cap.
-    private final boolean multiply;   //If you will multiply the skill with a percentage or if you will add the value flat
-    private final int basevalue;      //This is the basic value you get per level of the upgrade
-    private int level = 0;      //Skill level, the higher the level the more stats it gives. Starts at level 0.
+    protected final String upgradeName;
+    protected final int cap;            //The maximum level of the skill, -1 means it doesn't have a cap.
+    protected final boolean multiply;   //If you will multiply the skill with a percentage or if you will add the value flat
+    protected final int baseValue;      //This is the basic value you get per level of the upgrade
+    protected int level = 0;      //Skill level, the higher the level the more stats it gives. Starts at level 0.
 
     public Upgrade(String upgradeName, int cap, boolean multiply, int basevalue) {
         this.upgradeName = upgradeName;
         this.cap = cap;
         this.multiply = multiply;
-        this.basevalue = basevalue;
+        this.baseValue = basevalue;
     }
 
     public void levelUp() {
@@ -36,11 +36,12 @@ public class Upgrade {
         //if(inputstate.isjumppressed())
     }
 
+
     public int getValue() {
         if (this.multiply) {
-            return 100 + this.basevalue * this.level; //This is the number of percent that you will get of the current value
+            return 100 + this.baseValue * this.level; //This is the number of percent that you will get of the current value
         }
-        return this.basevalue * this.level; // this will be added to the current value
+        return this.baseValue * this.level; // this will be added to the current value
     }
 
     public boolean doMultiply() {
