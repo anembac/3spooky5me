@@ -3,9 +3,6 @@ package spooky;
 import java.awt.geom.Point2D;
 import java.util.List;
 
-/**
- * Created by miktor on 2017-04-03.
- */
 public class MainClass {
     public static void main(String[] args)
     {

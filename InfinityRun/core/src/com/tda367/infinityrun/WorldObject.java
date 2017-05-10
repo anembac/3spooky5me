@@ -3,7 +3,6 @@ package com.tda367.infinityrun;
 /**
  * Created by miktor on 2017-04-03.
  */
-import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Vector2;
 import com.tda367.infinityrun.Math.Rect;
 import com.tda367.infinityrun.Math.Vec2;

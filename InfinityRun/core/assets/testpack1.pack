@@ -1,0 +1,40 @@
+
+testpack1.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+badlogic
+  rotate: false
+  xy: 1, 37
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+platform
+  rotate: false
+  xy: 1, 19
+  size: 128, 16
+  orig: 128, 16
+  offset: 0, 0
+  index: -1
+player
+  rotate: false
+  xy: 259, 229
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+testtexture
+  rotate: false
+  xy: 1, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+testtexture2
+  rotate: false
+  xy: 131, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
