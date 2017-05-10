@@ -1,25 +1,18 @@
 package com.tda367.infinityrun;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-public class MainMenuScreen implements Screen { //this class creates the main menu screen, as shown in
-                                                // https://github.com/libgdx/libgdx/wiki/Extending-the-simple-game
+public class MainMenuScreen implements Screen { //this class creates the main menu screen
     final InfinityRun game;
     Stage mainMenuStage = new Stage();
     OrthographicCamera camera;
@@ -45,7 +38,7 @@ public class MainMenuScreen implements Screen { //this class creates the main me
         newCharButton = new TextButton("NEW CHARACTER", menuButtonStyle);
         loadCharButton = new TextButton("LOAD CHARACTER", menuButtonStyle);
         buttonGroup = new VerticalGroup();
-        buttonGroup.space(10);
+        buttonGroup.space(10); //space between buttons in group
         buttonGroup.setX(1600/2-buttonGroup.getWidth()/2);
         buttonGroup.setY(900/2-buttonGroup.getHeight()/2);
         buttonGroup.addActor(newCharButton);
@@ -110,9 +103,11 @@ public class MainMenuScreen implements Screen { //this class creates the main me
 
     @Override
     public void dispose() {
-
+        //not sure if stage and group need to be cleared or not
         mainMenuStage.clear();
         buttonGroup.clear();
+
+        //disposal calls
         mainMenuStage.dispose();
         atlas.dispose();
         packedtexture.dispose();
