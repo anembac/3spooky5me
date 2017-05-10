@@ -31,7 +31,7 @@ public class GameScreen implements Screen{  //tries to put textures onto the obj
         // setup a new world depending on some menu parameters maybe? diff etc. world could also be called level, std
         world = new World();
         world.generateWorld(/*params*/);
-        world.addWorldObject(hero);
+        world.addHero(hero);
 
         //create camera
         camera = new OrthographicCamera();

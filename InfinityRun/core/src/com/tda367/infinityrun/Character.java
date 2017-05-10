@@ -4,7 +4,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.Math.Vec4;
 
+import javax.rmi.CORBA.Util;
 import java.awt.geom.Point2D;
 
 /**
@@ -48,6 +50,15 @@ public class Character extends MovableObject {
     @Override
     public void frame(float dt, InputState state)
     {
+
+        Vec4 collisionVariables = CollisionManager.getInstance().getDistanceToCollission(this);
+        float height = collisionVariables.x;
+        float roof = collisionVariables.z;
+        float rightIntersection = collisionVariables.w;
+        float leftIntersection = collisionVariables.y;
+
+        // The piece below might be better applied in "Upgrades" as a command pattern ish that is frame based. Since this code will change depending on what upgrades we have.
+        /////////////////////////////////////////////////////////
         if(state.forwardPressed()) acceleration.x += speed/6;
         if(state.backPressed()) acceleration.x -= speed/6;
         if(!state.backPressed() && !state.forwardPressed())
@@ -64,7 +75,7 @@ public class Character extends MovableObject {
             }
         }
 
-        float height = CollisionManager.getInstance().getWalkableHeight(this);
+        //float height = CollisionManager.getInstance().getWalkableHeight(this);
         if(state.jumpPressed())
         {
             if(position.y < height+0.001)
@@ -72,61 +83,50 @@ public class Character extends MovableObject {
                 acceleration.y += 500;
             }
         }
+        /////////////////////////////////////////////////////////
 
+
+        // add acceleration down if we are in the air.
         if(this.position.y > height)
         {
             //acceleration.y -= 9.82*dt;
             // so 1 px is 1 unit here, we need to guess the pixel height of the character in meters, etc 150?!
             acceleration.y -= 9.82*dt*150;
         }
-
+        // limit the forward acceleration
         acceleration.x = Utils.limit(-speed, acceleration.x, speed);
+        // limit the "jump/gravity" acceleration.
+        acceleration.y = Utils.limit(-100000, acceleration.y, 500);
+
+        // move the character according to the acceleration vectors.
         position.add(Vec2.mul(acceleration, dt));
 
+        // if we accelerated right into a "block"
+        if((position.x + bounds.x) > rightIntersection)
+        {
+            position.x = rightIntersection - bounds.x;
+            acceleration.x = 0;
+        }
+        // if we accelerated left into a "blobk"
+        if(position.x < leftIntersection)
+        {
+            position.x = leftIntersection;
+            acceleration.x = 0;
+        }
         // if we accelerated below the ground:
         if(position.y < height)
         {
             position.y = height;
             acceleration.y = 0;
         }
-
-        //System.out.println(acceleration.y);
-    }
-   /* public final void moveXPosition(Direction dir){
-        // I made acceleration from speed, acc = speed/4 atm as an example, i think we would like to have some kind of acceleration right?
-        switch(dir){
-            case LEFT:
-                //this.position.x-=speed;
-                this.acceleration.x -= speed/4;
-                if(this.acceleration.x < -speed) this.acceleration.x = -speed;
-                break;
-            case RIGHT:
-                //this.position.x +=speed;
-                this.acceleration.x += speed/4;
-                if(this.acceleration.x > speed) this.acceleration.x = speed;
-                break;
-            case NONE:
-                if(this.acceleration.x < -0.000001)
-                {
-                    acceleration.x += speed/4;
-                    if(acceleration.x> 0) acceleration.x = 0;
-                }
-                else
-                {
-                    acceleration.x -= speed/4;
-                    if(acceleration.x < 0) acceleration.x = 0;
-                }
-        }
-        System.out.println(acceleration.x);
-    }
-
-    public final void jump(){
-        if(!isJumping){
-            this.position.y=+jumpHeight;
-            setJumping(true);
+        // if we jumped and hit a roof.
+        if((position.y + bounds.y) > roof)
+        {
+            position.y = roof - bounds.y;
+            acceleration.y = 0;
         }
 
-    }*/
+    }
 
     public final boolean getJumping(){
         return isJumping;
@@ -136,4 +136,3 @@ public class Character extends MovableObject {
         isJumping = b;
     }
 }
-// reworked into libgdx positions with vectors

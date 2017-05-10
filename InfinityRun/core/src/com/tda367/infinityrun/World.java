@@ -37,12 +37,8 @@ public class World {
         {
             addWorldObject(new Platform(new Vec2(10+i*128,10+i*16)));
         }
-    }
-
-    public float groundLevel(WorldObject obj)
-    {
-
-        return 0.0f;
+        addWorldObject(new Platform(new Vec2(138,10+4*16)));
+        addWorldObject(new Platform(new Vec2(10+5*128,10+15*16)));
     }
 
 
@@ -59,6 +55,11 @@ public class World {
     {
         worldObjects.add(obj);
         CollisionManager.getInstance().addWorldObject(obj);
+    }
+
+    public void addHero(WorldObject obj)
+    {
+        worldObjects.add(obj);
     }
 
 }
