@@ -21,17 +21,22 @@ public class GameScreen implements Screen{  //tries to put textures onto the obj
     //BaseRoom br;
     Character hero;
     World world;
+    HUD hud;
 
     public GameScreen(final InfinityRun game){
         this.game = game;
 
         //br = new BaseRoom();
         //br.setup();
-        hero = new Character(new Vec2(100,200), new Vec2(64,64),"player.png");
+        hero = new Character(new Vec2(100,200), new Vec2(64,64),"WorldObjects/player.png");
         // setup a new world depending on some menu parameters maybe? diff etc. world could also be called level, std
         world = new World();
         world.generateWorld(/*params*/);
         world.addHero(hero);
+
+
+        //HUDDDDDD
+        hud = new HUD(hero);
 
         //create camera
         camera = new OrthographicCamera();
@@ -51,7 +56,6 @@ public class GameScreen implements Screen{  //tries to put textures onto the obj
 
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
-
         game.batch.begin();
         for(WorldObject wo : world.getWorldObjects()){
             if(!textureMap.containsKey(wo.getTexturename()))
@@ -62,6 +66,8 @@ public class GameScreen implements Screen{  //tries to put textures onto the obj
         }
         //game.batch.draw(ctex, hero.position.x, hero.position.y);
         game.batch.end();
+
+        hud.render();
 
         //remove this after testing
         /*if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT))
