@@ -19,7 +19,7 @@ private int height = 16;
 
     public Platform(Vec2 position){
         super(position, new Vec2(128,16));
-        setTexture("platform.png");
+        setTexture("WorldObjects/platform.png");
     }
 
 
