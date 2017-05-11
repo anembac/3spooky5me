@@ -16,12 +16,10 @@ public class BaseRoom  {
     private List<WorldObject> roomObjects = new ArrayList<WorldObject>();
 
 
-    public void addWorldObject(WorldObject obj)
-    {
+    public void addWorldObject(WorldObject obj) {
         roomObjects.add(obj);
+        CollisionManager.getInstance().addWorldObject(obj);
     }
-
-
 
     //see actual spatial dimensions of a room
 
@@ -38,6 +36,9 @@ public class BaseRoom  {
 
     public List<WorldObject> getRoomObjects(){
         return roomObjects;
+    }
+
+    public void addRoom(){
     }
 
 }
