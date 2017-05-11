@@ -17,8 +17,7 @@ public class MainMenuScreen implements Screen { //this class creates the main me
     Stage mainMenuStage = new Stage();
     OrthographicCamera camera;
 
-    
-    Texture packedtexture = new Texture(Gdx.files.internal("testpack1.png"));
+
     TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("testpack1.pack"));
     TextureRegion textureUp = new TextureRegion(atlas.findRegion("testtexture"));
     TextureRegion textureDown = new TextureRegion(atlas.findRegion("testtexture2"));
@@ -103,14 +102,13 @@ public class MainMenuScreen implements Screen { //this class creates the main me
 
     @Override
     public void dispose() {
-        //not sure if stage and group need to be cleared or not
+        //not sure if stage and group need to be cleared or not for java garbage disposal to deal with the actors
         mainMenuStage.clear();
         buttonGroup.clear();
 
         //disposal calls
         mainMenuStage.dispose();
         atlas.dispose();
-        packedtexture.dispose();
 
     }
 
