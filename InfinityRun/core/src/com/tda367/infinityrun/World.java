@@ -39,6 +39,10 @@ public class World {
         }
         addWorldObject(new Platform(new Vec2(138,10+4*16)));
         addWorldObject(new Platform(new Vec2(10+5*128,10+15*16)));
+        addWorldObject(new Platform(new Vec2(10+4*128,10+15*16)));
+        addWorldObject(new Platform(new Vec2(10+6*128,10+15*16)));
+        addWorldObject(new Platform(new Vec2(10+5*128,10+17*16)));
+        addWorldObject(new Platform(new Vec2(10+8*128,10+13*16)));
     }
 
 

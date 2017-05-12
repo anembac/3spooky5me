@@ -1,7 +1,5 @@
 package com.tda367.infinityrun.Math;
 
-import com.sun.javafx.geom.Vec2f;
-
 import java.awt.geom.Point2D;
 
 /**

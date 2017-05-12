@@ -6,7 +6,7 @@ package com.tda367.infinityrun;
 import com.badlogic.gdx.math.Vector2;
 import com.tda367.infinityrun.Math.Rect;
 import com.tda367.infinityrun.Math.Vec2;
-import javafx.scene.Parent;
+
 
 import java.awt.geom.Point2D;
 public abstract class WorldObject { //We should probably refactor this class at some point

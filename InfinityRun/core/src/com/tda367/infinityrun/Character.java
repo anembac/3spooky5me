@@ -23,7 +23,7 @@ public class Character extends MovableObject {
     protected int health = 102;
     protected int speed = 380; //This speed does not equal 1 block per second, speed is arbitary
     protected int jumpHeight = 100;
-    protected int numberOfJumps = 1;
+    protected int numberOfJumps = 3;
     protected int coins = 0;
     protected boolean damageable = true;
     protected boolean isJumping = false;
@@ -81,12 +81,20 @@ public class Character extends MovableObject {
         //float height = CollisionManager.getInstance().getWalkableHeight(this);
         if(state.jumpPressed())
         {
-            if(position.y < height+0.001)
+            isJumping = true;
+            for(int i =numberOfJumps; i  > 0; i--)
+            {
+                System.out.println(numberOfJumps);
+                System.out.println("i: "+ i);
+
+            //if(position.y < height+0.001)
             {// not flying
-                acceleration.y += 500;
-            }
+                acceleration.y += 200;
+            }}
         }
         /////////////////////////////////////////////////////////
+
+
 
 
         // add acceleration down if we are in the air.
@@ -130,6 +138,11 @@ public class Character extends MovableObject {
         }
 
     }
+
+
+
+
+
 
     public final boolean getJumping(){
         return isJumping;
