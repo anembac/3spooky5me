@@ -2,6 +2,8 @@ package com.tda367.infinityrun.Roomtemplates;
 
 import com.tda367.infinityrun.CollisionManager;
 import com.tda367.infinityrun.WorldObject;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 

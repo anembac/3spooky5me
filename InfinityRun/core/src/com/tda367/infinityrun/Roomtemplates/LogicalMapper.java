@@ -8,12 +8,66 @@ import java.util.HashMap;
  */
 public class LogicalMapper extends RoomTemplate {
 
-        Point p;
         HashMap<Point,RoomTemplate> rooms;
 
-        public LogicalMapper(int x,int y) {
-            this.p = new Point(x,y);
+
+
+    private int checkUp(int x, int y) {
+        try {
+            if(rooms.get(new Point(x - 1, y)).u) {
+            }
+        } catch (NullPointerException n) {
+            return -1;
         }
+        if(rooms.get(new Point(x - 1, y)).u) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+
+    private int checkRight(int x, int y) {
+        try {
+            if(rooms.get(new Point(x - 1, y)).r) {
+            }
+        } catch (NullPointerException n) {
+            return -1;
+        }
+        if(rooms.get(new Point(x - 1, y)).r) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    private int checkDown(int x, int y) {
+        try {
+            if(rooms.get(new Point(x - 1, y)).d) {
+            }
+        } catch (NullPointerException n) {
+            return -1;
+        }
+        if(rooms.get(new Point(x - 1, y)).d) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    private int checkLeft(int x, int y) {
+        try {
+            if(rooms.get(new Point(x - 1, y)).l) {
+            }
+        } catch (NullPointerException n) {
+            return -1;
+        }
+        if(rooms.get(new Point(x - 1, y)).l) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 
 
         private void roomRandomizer(){
