@@ -14,14 +14,14 @@ public class JumpH extends Upgrade {
 
     @Override
     public int getValueInt(){
-        return 100 + super.getValueInt();
+        return 500 + super.getValueInt();
     }
 
     @Override
     public void frame(float dt, InputState state, ObjectModifiers mod) {
         if(state.jumpPressed() && !mod.inAir)
         {
-            mod.acceleration.y += 800;
+            mod.acceleration.y += getValueInt();
         }
     }
 }

@@ -23,6 +23,7 @@ public class HermesSandals extends Upgrade {
     public void frame(float dt, InputState state, ObjectModifiers mod) {
         if(state.jumpPressed() && mod.inAir && (charges > 0))
         {
+            mod.acceleration.y = 0;
             mod.acceleration.y += 800;
             --charges;
         } if(!mod.inAir){

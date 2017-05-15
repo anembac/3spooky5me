@@ -32,7 +32,7 @@ public class GameScreen implements Screen{  //tries to put textures onto the obj
         hero = new Character(new Vec2(100,200), new Vec2(64,64),"WorldObjects/player.png");
         // setup a new world depending on some menu parameters maybe? diff etc. world could also be called level, std
         hero.addUpgrade("Speed", new Speed(100, 4));    //Added as a flat increase to Movement Speed
-        hero.addUpgrade("JumpH", new JumpH(100, 2));    //Added as a flat increase to Jump Power
+        hero.addUpgrade("JumpH", new JumpH(50, 5));    //Added as a flat increase to Jump Power
         hero.addUpgrade("Hermes", new HermesSandals(1, 1));     //Added as a flat increase
         hero.addUpgrade("Health", new Health(-1, 20));  //Added flat on current health
         hero.addUpgrade("Melee", new MeleeHandling(-1, 5));     //Multiplied to your weapons damage to determine your characters overall damage per hit with melee.
@@ -95,17 +95,14 @@ public class GameScreen implements Screen{  //tries to put textures onto the obj
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
     @Override

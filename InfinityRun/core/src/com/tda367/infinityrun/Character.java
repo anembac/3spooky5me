@@ -118,7 +118,7 @@ public class Character extends MovableObject {
         // limit the forward acceleration
         acceleration.x = Utils.limit(-speed, acceleration.x, speed);
         // limit the "jump/gravity" acceleration.
-        acceleration.y = Utils.limit(-100000, acceleration.y, 500);
+        acceleration.y = Utils.limit(-100000, acceleration.y, jumpH);
 
         // move the character according to the acceleration vectors.
         position.add(Vec2.mul(acceleration, dt));
