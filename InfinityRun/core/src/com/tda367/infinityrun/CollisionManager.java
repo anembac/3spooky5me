@@ -107,6 +107,22 @@ public class CollisionManager {
                 // right intersection
                 if(dLen > 0) output.w = Math.min(output.w, tCornerA.x);
             }
+
+            if(node.point.x > oCornerA.x && node.point.x < (oCornerC.x) && node.point.y > oCornerA.y && node.point.y < oCornerC.y)
+            {
+                // Bugg here, this intersection doesnt cover angeled velocity intersections so we have to roll back the position. This doesnt occur very often.
+                // Check what side are the closest
+                float e,f,g,h;
+                //down
+                e = (float)node.point.y - oCornerA.y;
+                f = (float)node.point.x - oCornerA.x;
+                g = oCornerC.y - (float)node.point.y;
+                h = oCornerC.x - (float)node.point.x;
+                if(e < Math.min(Math.min(f,g),h)) output.x = (float)node.point.y;
+                if(f < Math.min(Math.min(e,g),h)) output.y = (float)node.point.x;
+                if(g < Math.min(Math.min(f,e),h)) output.z = (float)node.point.y;
+                if(h < Math.min(Math.min(e,g),f)) output.w = (float)node.point.x;
+            }
         }
 
         // down left up right
