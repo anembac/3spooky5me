@@ -9,6 +9,16 @@ import java.util.HashMap;
 public class LogicalMapper extends RoomTemplate {
 
     HashMap<Point, RoomTemplate> rooms;
+    private int y = 0;
+    private int x = 0;
+
+
+    private int checkedL;
+    private int checkedU;
+    private int checkedR;
+    private int checkedD;
+
+
 
 
     /*
@@ -20,12 +30,12 @@ public class LogicalMapper extends RoomTemplate {
             if (rooms.get(new Point(x, y + 1)).u) {
             }
         } catch (NullPointerException n) {
-            return -1;
+            return 0;
         }
         if (rooms.get(new Point(x, y + 1)).u) {
             return 1;
         } else {
-            return 0;
+            return -1;
         }
     }
 
@@ -35,12 +45,12 @@ public class LogicalMapper extends RoomTemplate {
             if (rooms.get(new Point(x + 1, y)).r) {
             }
         } catch (NullPointerException n) {
-            return -1;
+            return 0;
         }
         if (rooms.get(new Point(x + 1, y)).r) {
             return 1;
         } else {
-            return 0;
+            return -1;
         }
     }
 
@@ -49,12 +59,12 @@ public class LogicalMapper extends RoomTemplate {
             if (rooms.get(new Point(x, y - 1)).d) {
             }
         } catch (NullPointerException n) {
-            return -1;
+            return 0;
         }
         if (rooms.get(new Point(x, y - 1)).d) {
             return 1;
         } else {
-            return 0;
+            return -1;
         }
     }
 
@@ -63,12 +73,12 @@ public class LogicalMapper extends RoomTemplate {
             if (rooms.get(new Point(x - 1, y)).l) {
             }
         } catch (NullPointerException n) {
-            return -1;
+            return 0;
         }
         if (rooms.get(new Point(x - 1, y)).l) {
             return 1;
         } else {
-            return 0;
+            return-1;
         }
     }
 
@@ -78,32 +88,19 @@ public class LogicalMapper extends RoomTemplate {
         rooms.put(new Point(1, 1), new RoomURL());
     }
 
-/*
+
     public void getSurrounding(){
 
+        checkedL =checkLeft(x,y);
+        checkedU = checkUp(x, y);
+        checkedR = checkRight(x, y);
+        checkedD = checkDown(x, y);
 
 
 
-        if(this.coordinate.Y+1 != null){
-            this.u=this.coordinate.Y+1.isd();
 
-        }
 
-        if(this.coordinate.Y-1 != null){
-            this.d=this.coordinate.Y+1.isu();
-
-        }
-
-        if(this.coordinate.X+1 != null){
-            this.r=this.coordinate.Y+1.isl();
-
-        }
-        if(this.coordinate.Y+1 != null){
-            this.l=this.coordinate.Y+1.isr();
-
-        }
-
-    }*/
+    }
 
 
     public void mapper() {
