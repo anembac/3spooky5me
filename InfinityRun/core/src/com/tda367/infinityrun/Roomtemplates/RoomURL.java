@@ -6,10 +6,10 @@ package com.tda367.infinityrun.Roomtemplates;
 public class RoomURL extends RoomTemplate {
     public RoomURL() {
 
-        exitup =true;
-        exitright=true;
-        exitdown=false;
-        exitleft=true;
+        u =true;
+        r=true;
+        d=false;
+        l=true;
     }
 
 }

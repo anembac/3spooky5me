@@ -19,22 +19,25 @@ public class LogicalMapper extends RoomTemplate {
 /*
     public void getSurrounding(){
 
+
+
+
         if(this.coordinate.Y+1 != null){
-            this.exitup=this.coordinate.Y+1.isExitDown();
+            this.u=this.coordinate.Y+1.isd();
 
         }
 
         if(this.coordinate.Y-1 != null){
-            this.exitdown=this.coordinate.Y+1.isExitUp();
+            this.d=this.coordinate.Y+1.isu();
 
         }
 
         if(this.coordinate.X+1 != null){
-            this.exitright=this.coordinate.Y+1.isExitLeft();
+            this.r=this.coordinate.Y+1.isl();
 
         }
         if(this.coordinate.Y+1 != null){
-            this.exitleft=this.coordinate.Y+1.isExitRight();
+            this.l=this.coordinate.Y+1.isr();
 
         }
 
@@ -42,7 +45,7 @@ public class LogicalMapper extends RoomTemplate {
 
 
     public void mapper(){
-
+            rooms.put(new point(1,1), new )
 
     }
 

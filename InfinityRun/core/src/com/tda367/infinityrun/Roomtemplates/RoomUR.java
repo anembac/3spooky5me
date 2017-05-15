@@ -5,10 +5,10 @@ package com.tda367.infinityrun.Roomtemplates;
  */
 public class RoomUR extends  RoomTemplate {
     public RoomUR() {
-        exitup =true;
-        exitright=true;
-        exitdown=false;
-        exitleft=false;
+        u =true;
+        r=true;
+        d=false;
+        l=false;
     }
 
 }

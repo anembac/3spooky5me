@@ -5,25 +5,25 @@ package com.tda367.infinityrun.Roomtemplates;
  */
 public class RoomTemplate {
 
-    public boolean exitup;
-    public boolean exitdown;
-    public boolean exitleft;
-    public boolean exitright;
+    public boolean u;
+    public boolean d;
+    public boolean l;
+    public boolean r;
 
-    public boolean isExitup() {
-        return exitup;
+    public boolean isu() {
+        return u;
     }
 
-    public boolean isExitdown() {
-        return exitdown;
+    public boolean isd() {
+        return d;
     }
 
-    public boolean isExitleft() {
-        return exitleft;
+    public boolean isl() {
+        return l;
     }
 
-    public boolean isExitright() {
-        return exitright;
+    public boolean isr() {
+        return r;
     }
 }
 
