@@ -1,28 +1,21 @@
 package com.tda367.infinityrun.Roomtemplates;
 
+import java.awt.*;
+import java.util.HashMap;
+
 /**
  * Created by kaffe on 5/12/17.
  */
 public class LogicalMapper extends RoomTemplate {
 
-    public void grid() {
-        int x;
-        int y;
-        double coordinate;
-    }
-        public void Coordinate (int xPos, int yPos){
+        Point p;
+        HashMap<Point,RoomTemplate> rooms;
+
+        public LogicalMapper(int x,int y) {
+            this.p = new Point(x,y);
+        }
 
 
-    }
-
-    // sets the value in (something in a coordinate) to that of the roomtemplate
-    public void setRoom(boolean up, boolean left, boolean right, boolean down){
-            this.setExitdown(down);
-            this.setExitleft(left);
-            this.setExitup(up);
-            this.setExitright(right);
-
-    }
 /*
     public void getSurrounding(){
 
