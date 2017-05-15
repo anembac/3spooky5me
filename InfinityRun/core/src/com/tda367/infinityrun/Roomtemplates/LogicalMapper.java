@@ -3,6 +3,7 @@ package com.tda367.infinityrun.Roomtemplates;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Created by kaffe on 5/12/17.
@@ -127,8 +128,13 @@ public class LogicalMapper extends RoomTemplate {
             if (checkedL < 0 && room.r) {
                 possibleRooms.remove(room);
             }
-            return null;
+
+
+
+
         }
+        int rnd =  new Random().nextInt(possibleRooms.size());
+        return possibleRooms.get(rnd);
     }
 
 
