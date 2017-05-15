@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.SpecialUpgrades.HermesSandals;
 import com.tda367.infinityrun.SpecialUpgrades.JumpH;
 import com.tda367.infinityrun.SpecialUpgrades.Speed;
 
@@ -34,6 +35,7 @@ public class GameScreen implements Screen{  //tries to put textures onto the obj
         // setup a new world depending on some menu parameters maybe? diff etc. world could also be called level, std
         hero.addUpgrade(new Speed(100,1));
         hero.addUpgrade(new JumpH(100, 1));
+        hero.addUpgrade(new HermesSandals(1,1));
         world = new World();
         world.generateWorld(/*params*/);
         world.addHero(hero);
