@@ -16,6 +16,11 @@ public class LogicalMapper extends RoomTemplate {
         }
 
 
+        private void roomRandomizer(){
+
+            rooms.put(new Point(1,1),new RoomURL());
+        }
+
 /*
     public void getSurrounding(){
 
@@ -45,8 +50,6 @@ public class LogicalMapper extends RoomTemplate {
 
 
     public void mapper(){
-            rooms.put(new point(1,1), new )
-
     }
 
     }

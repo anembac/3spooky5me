@@ -1,6 +1,7 @@
 package com.tda367.infinityrun;
 
 import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.Roomtemplates.RoomTemplate;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -57,8 +58,10 @@ public class World {
     // to add the player etc to the world.
     public void addWorldObject(WorldObject obj)
     {
-        worldObjects.add(obj);
-        CollisionManager.getInstance().addWorldObject(obj);
+        //for(WorldObject obj:roomObjects) {
+            worldObjects.add(obj);
+            CollisionManager.getInstance().addWorldObject(obj);
+        //}
     }
 
     public void addHero(WorldObject obj)
