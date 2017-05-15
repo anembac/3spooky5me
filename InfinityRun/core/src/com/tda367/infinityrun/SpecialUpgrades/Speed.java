@@ -8,13 +8,13 @@ import com.tda367.infinityrun.Upgrade;
  */
 public class Speed extends Upgrade {
 
-    public Speed(int cap, int basevalue) {
-        super(cap, basevalue);
+    public Speed(int cap, int baseValue) {
+        super(cap, baseValue);
     }
 
     @Override
     public int getValueInt(){
-        return 200 + super.getValueInt();
+        return 100 + super.getValueInt();
     }
 
     @Override

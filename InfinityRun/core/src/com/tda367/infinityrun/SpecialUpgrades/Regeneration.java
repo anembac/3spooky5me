@@ -17,6 +17,10 @@ public class Regeneration extends Upgrade {
 
     @Override
     public void frame(float dt, InputState input, ObjectModifiers modify) {
-        float hpreg = System.nanoTime() / 1000000000 * dt * getValueInt();
+        /*
+        if(character.currentHealth < character.maxHealth) {
+            float HealthReg = System.nanoTime() / 1000000000 * dt * getValueInt();
+        }
+        */
     }
 }

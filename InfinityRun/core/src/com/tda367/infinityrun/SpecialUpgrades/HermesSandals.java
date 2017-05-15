@@ -15,13 +15,13 @@ public class HermesSandals extends Upgrade {
     }
 
     @Override
-    public void frame(float dt, InputState input, ObjectModifiers modify) {
-        /*if(data.positionY > data.groundlevel + 0.00001 && input.JumpKeyPressed && !isUsed){
-        character.doJump;
-        isUsed = true;
-        } if(data.positionY <= data.groundlevel + 0.00001){
-        isUsed = false;
+    public void frame(float dt, InputState state, ObjectModifiers mod) {
+        if(state.jumpPressed() && mod.inAir && !isUsed)
+        {
+            mod.acceleration.y += 800;
+            isUsed = true;
+        } if(!mod.inAir){
+            isUsed = false;
         }
-        */
     }
 }
