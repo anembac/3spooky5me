@@ -101,6 +101,14 @@ public class LogicalMapper extends RoomTemplate {
 
 
     private RoomTemplate roomRandomizer() {
+
+        if (checkedU == 1){exits --;}
+        if (checkedR == 1){exits --;}
+        if (checkedD == 1){exits --;}
+        if (checkedL == 1){exits --;}
+
+
+
         ArrayList<RoomTemplate> possibleRooms = new ArrayList<RoomTemplate>();
         possibleRooms.addAll(roomIndexes);
         for (RoomTemplate room : possibleRooms) {
