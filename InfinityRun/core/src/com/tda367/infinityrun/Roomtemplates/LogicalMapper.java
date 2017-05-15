@@ -1,6 +1,7 @@
 package com.tda367.infinityrun.Roomtemplates;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -9,17 +10,33 @@ import java.util.HashMap;
 public class LogicalMapper extends RoomTemplate {
 
     HashMap<Point, RoomTemplate> rooms;
-    private int y = 0;
     private int x = 0;
-
+    private int y = 0;
+    private int exits = 2;
+    ArrayList<RoomTemplate> roomIndexes = new ArrayList<RoomTemplate>();
 
     private int checkedL;
     private int checkedU;
     private int checkedR;
     private int checkedD;
 
-
-
+    public LogicalMapper() {
+        roomIndexes.add(0,  new RoomU   ());
+        roomIndexes.add(1,  new RoomR   ());
+        roomIndexes.add(2,  new RoomD   ());
+        roomIndexes.add(3,  new RoomL   ());
+        roomIndexes.add(4,  new RoomUR  ());
+        roomIndexes.add(5,  new RoomUD  ());
+        roomIndexes.add(6,  new RoomUL  ());
+        roomIndexes.add(7,  new RoomDL  ());
+        roomIndexes.add(8,  new RoomRL  ());
+        roomIndexes.add(9,  new RoomRD  ());
+        roomIndexes.add(10, new RoomURD ());
+        roomIndexes.add(11, new RoomURL ());
+        roomIndexes.add(12, new RoomRDL ());
+        roomIndexes.add(13, new RoomUDL ());
+        roomIndexes.add(14, new RoomURDL());
+    }
 
     /*
     returns -1 for no room exist, 0 for a blocked path and 1 for path.
@@ -38,7 +55,6 @@ public class LogicalMapper extends RoomTemplate {
             return -1;
         }
     }
-
 
     private int checkRight(int x, int y) {
         try {
@@ -83,23 +99,44 @@ public class LogicalMapper extends RoomTemplate {
     }
 
 
-    private void roomRandomizer() {
-
-        rooms.put(new Point(1, 1), new RoomURL());
+    private RoomTemplate roomRandomizer() {
+        ArrayList<RoomTemplate> possibleRooms = new ArrayList<RoomTemplate>();
+                possibleRooms.addAll(roomIndexes);
+        for (RoomTemplate room : possibleRooms) {
+            if (checkedU > 0 && !room.d) {
+                possibleRooms.remove(room);
+            }
+            if (checkedR > 0 && !room.l) {
+                possibleRooms.remove(room);
+            }
+            if (checkedD > 0 && !room.u) {
+                possibleRooms.remove(room);
+            }
+            if (checkedL > 0 && !room.r) {
+                possibleRooms.remove(room);
+            }
+            if (checkedU < 0 && room.d) {
+                possibleRooms.remove(room);
+            }
+            if (checkedR < 0 && room.l) {
+                possibleRooms.remove(room);
+            }
+            if (checkedD < 0 && room.u) {
+                possibleRooms.remove(room);
+            }
+            if (checkedL < 0 && room.r) {
+                possibleRooms.remove(room);
+            }
+            return null;
+        }
     }
 
 
     public void getSurrounding(){
-
-        checkedL =checkLeft(x,y);
-        checkedU = checkUp(x, y);
-        checkedR = checkRight(x, y);
-        checkedD = checkDown(x, y);
-
-
-
-
-
+        checkedU =  checkUp(x, y);
+        checkedR =  checkRight(x, y);
+        checkedD =  checkDown(x, y);
+        checkedL =  checkLeft(x,y);
     }
 
 
