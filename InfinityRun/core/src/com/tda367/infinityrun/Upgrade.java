@@ -23,9 +23,7 @@ public class Upgrade {
         return this.cap;
     }
 
-    public void frame(float dt, InputState input, ObjectModifiers modifier)
-    {
-        //if(inputstate.isjumppressed())
+    public void frame(float dt, InputState input, ObjectModifiers modifier) {
     }
 
 

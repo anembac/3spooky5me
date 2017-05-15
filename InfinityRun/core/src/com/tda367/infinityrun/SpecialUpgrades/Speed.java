@@ -14,7 +14,7 @@ public class Speed extends Upgrade {
 
     @Override
     public int getValueInt(){
-        return 100 + super.getValueInt();
+        return 400 + super.getValueInt();
     }
 
     @Override

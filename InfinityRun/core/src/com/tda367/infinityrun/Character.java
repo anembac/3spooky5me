@@ -20,10 +20,9 @@ public class Character extends MovableObject {
         //new Rectangle(position.x, position.y, size, size);
     }
     private int size = 64;
-    protected int health = 102;
-    protected int speed = 380; //This speed does not equal 1 block per second, speed is arbitary
-    protected int jumpHeight = 100;
-    protected int numberOfJumps = 3;
+    protected int health;
+    protected int speed; //This speed does not equal 1 block per second, speed is arbitary
+    protected int jumpH;
     protected int coins = 0;
     protected boolean damageable = true;
     protected boolean isJumping = false;
@@ -48,6 +47,12 @@ public class Character extends MovableObject {
     public final Vec2 getPosition(){
 
         return position;
+    }
+
+    public void initializeHero(){
+        health  = upgrades.get("Health").getValueInt();
+        speed   = upgrades.get("Speed").getValueInt();
+        jumpH   = upgrades.get("JumpH").getValueInt();
     }
 
     @Override
