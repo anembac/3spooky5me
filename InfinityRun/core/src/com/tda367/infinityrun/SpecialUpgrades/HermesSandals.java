@@ -8,20 +8,25 @@ import com.tda367.infinityrun.Upgrade;
  */
 
 public class HermesSandals extends Upgrade {
-    private boolean isUsed = false;
+    private int charges;
 
     public HermesSandals(int cap, int basevalue) {
         super(cap, basevalue);
+        charges = getValueInt();
+    }
+    @Override
+    public int getValueInt(){
+        return (2 + super.getValueInt());
     }
 
     @Override
     public void frame(float dt, InputState state, ObjectModifiers mod) {
-        if(state.jumpPressed() && mod.inAir && !isUsed)
+        if(state.jumpPressed() && mod.inAir && (charges > 0))
         {
             mod.acceleration.y += 800;
-            isUsed = true;
+            --charges;
         } if(!mod.inAir){
-            isUsed = false;
+            charges = getValueInt();
         }
     }
 }

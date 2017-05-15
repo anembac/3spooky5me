@@ -3,6 +3,7 @@ package com.tda367.infinityrun;
 import com.tda367.infinityrun.Math.Vec2;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
 // I guess this class will be some kind of base for "Upgradable" objects, moving objects will probably use some kind
     // of upgrade to allow them to use the command pattern to move. RENAME to upgradableObject?
 public class MovableObject extends WorldObject {
-    protected List<Upgrade> upgrades = new ArrayList<Upgrade>();
+    protected HashMap<String, Upgrade> upgrades = new HashMap<String, Upgrade>(); //Holds all of the upgrades, gives them a name as index.
 
     protected Vec2 acceleration = new Vec2(0,0);
 
@@ -29,8 +30,8 @@ public class MovableObject extends WorldObject {
 
     }
 
-    public void addUpgrade(Upgrade upg)
+    public void addUpgrade(String name, Upgrade upg)
     {
-        upgrades.add(upg);
+        upgrades.put(name, upg);
     }
 }

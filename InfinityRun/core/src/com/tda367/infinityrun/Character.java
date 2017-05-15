@@ -63,7 +63,7 @@ public class Character extends MovableObject {
         // The piece below might be better applied in "Upgrades" as a command pattern ish that is frame based. Since this code will change depending on what upgrades we have.
         /////////////////////////////////////////////////////////
         ObjectModifiers modifier = new ObjectModifiers(this.position.y > height, acceleration);
-        for(Upgrade u : upgrades)
+        for(Upgrade u :upgrades.values())
         {
             u.frame(dt, state, modifier);
         }

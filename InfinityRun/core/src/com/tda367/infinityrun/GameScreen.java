@@ -8,9 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.tda367.infinityrun.Math.Vec2;
-import com.tda367.infinityrun.SpecialUpgrades.HermesSandals;
-import com.tda367.infinityrun.SpecialUpgrades.JumpH;
-import com.tda367.infinityrun.SpecialUpgrades.Speed;
+import com.tda367.infinityrun.SpecialUpgrades.*;
 
 import java.util.HashMap;
 
@@ -33,9 +31,15 @@ public class GameScreen implements Screen{  //tries to put textures onto the obj
         //br.setup();
         hero = new Character(new Vec2(100,200), new Vec2(64,64),"WorldObjects/player.png");
         // setup a new world depending on some menu parameters maybe? diff etc. world could also be called level, std
-        hero.addUpgrade(new Speed(100,1));
-        hero.addUpgrade(new JumpH(100, 1));
-        hero.addUpgrade(new HermesSandals(1,1));
+        hero.addUpgrade("Speed", new Speed(100, 4));    //Added as a flat increase to Movement Speed
+        hero.addUpgrade("JumpH", new JumpH(100, 2));    //Added as a flat increase to Jump Power
+        hero.addUpgrade("Hermes", new HermesSandals(1, 1));     //Added as a flat increase
+        hero.addUpgrade("Health", new Health(-1, 20));  //Added flat on current health
+        hero.addUpgrade("Melee", new MeleeHandling(-1, 5));     //Multiplied to your weapons damage to determine your characters overall damage per hit with melee.
+        hero.addUpgrade("CHC", new CriticalHitChance(60, 1)); //Added as flat CriticalHitChance
+        hero.addUpgrade("CHD", new CriticalHitDamage(-1, 5)); //Added as multiplier to your CriticalHitDamage
+        hero.addUpgrade("Looting", new Looting(-1, 2));    //Multiplied as a modifier to increase number of coins dropped - 250% chance of coins means 2 coins and 50% chance of extra.
+        hero.addUpgrade("Regeneration", new Regeneration(-1, 1)); //Added as a flat increase to your overall health regeneration per second
         world = new World();
         world.generateWorld(/*params*/);
         world.addHero(hero);
