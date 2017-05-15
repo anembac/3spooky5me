@@ -10,7 +10,7 @@ public class RoomRDL  extends RoomTemplate {
         r=true;
         d=true;
         l=true;
-
+        roomExits = 3;
     }
 
 }

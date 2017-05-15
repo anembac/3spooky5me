@@ -9,6 +9,7 @@ public class RoomUD extends  RoomTemplate {
         r=false;
         d=true;
         l=false;
+        roomExits = 2;
     }
 
 }

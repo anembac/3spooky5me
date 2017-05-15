@@ -9,6 +9,7 @@ public class RoomDL  extends  RoomTemplate {
         r=false;
         d=false;
         l=false;
+        roomExits = 2;
     }
 
 }

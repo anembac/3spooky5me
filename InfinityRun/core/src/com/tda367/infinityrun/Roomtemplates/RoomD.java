@@ -11,6 +11,7 @@ public class RoomD extends  RoomTemplate {
         r=false;
         d=true;
         l=false;
+        roomExits = 1;
     }
 
 }

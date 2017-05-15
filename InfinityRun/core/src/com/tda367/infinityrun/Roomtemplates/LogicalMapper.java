@@ -22,20 +22,20 @@ public class LogicalMapper extends RoomTemplate {
     private int checkedD;
 
     public LogicalMapper() {
-        roomIndexes.add(0,  new RoomU   ());
-        roomIndexes.add(1,  new RoomR   ());
-        roomIndexes.add(2,  new RoomD   ());
-        roomIndexes.add(3,  new RoomL   ());
-        roomIndexes.add(4,  new RoomUR  ());
-        roomIndexes.add(5,  new RoomUD  ());
-        roomIndexes.add(6,  new RoomUL  ());
-        roomIndexes.add(7,  new RoomDL  ());
-        roomIndexes.add(8,  new RoomRL  ());
-        roomIndexes.add(9,  new RoomRD  ());
-        roomIndexes.add(10, new RoomURD ());
-        roomIndexes.add(11, new RoomURL ());
-        roomIndexes.add(12, new RoomRDL ());
-        roomIndexes.add(13, new RoomUDL ());
+        roomIndexes.add(0, new RoomU());
+        roomIndexes.add(1, new RoomR());
+        roomIndexes.add(2, new RoomD());
+        roomIndexes.add(3, new RoomL());
+        roomIndexes.add(4, new RoomUR());
+        roomIndexes.add(5, new RoomUD());
+        roomIndexes.add(6, new RoomUL());
+        roomIndexes.add(7, new RoomDL());
+        roomIndexes.add(8, new RoomRL());
+        roomIndexes.add(9, new RoomRD());
+        roomIndexes.add(10, new RoomURD());
+        roomIndexes.add(11, new RoomURL());
+        roomIndexes.add(12, new RoomRDL());
+        roomIndexes.add(13, new RoomUDL());
         roomIndexes.add(14, new RoomURDL());
     }
 
@@ -95,14 +95,14 @@ public class LogicalMapper extends RoomTemplate {
         if (rooms.get(new Point(x - 1, y)).l) {
             return 1;
         } else {
-            return-1;
+            return -1;
         }
     }
 
 
     private RoomTemplate roomRandomizer() {
         ArrayList<RoomTemplate> possibleRooms = new ArrayList<RoomTemplate>();
-                possibleRooms.addAll(roomIndexes);
+        possibleRooms.addAll(roomIndexes);
         for (RoomTemplate room : possibleRooms) {
             if (checkedU > 0 && !room.d) {
                 possibleRooms.remove(room);
@@ -128,25 +128,24 @@ public class LogicalMapper extends RoomTemplate {
             if (checkedL < 0 && room.r) {
                 possibleRooms.remove(room);
             }
-
-
-
-
         }
-        int rnd =  new Random().nextInt(possibleRooms.size());
+        int rnd = new Random().nextInt(possibleRooms.size());
         return possibleRooms.get(rnd);
     }
 
 
-    public void getSurrounding(){
-        checkedU =  checkUp(x, y);
-        checkedR =  checkRight(x, y);
-        checkedD =  checkDown(x, y);
-        checkedL =  checkLeft(x,y);
+    public void getSurrounding() {
+        checkedU = checkUp(x, y);
+        checkedR = checkRight(x, y);
+        checkedD = checkDown(x, y);
+        checkedL = checkLeft(x, y);
     }
 
 
     public void mapper() {
+        getSurrounding();
+        RoomTemplate room = roomRandomizer();
+        rooms.put(new Point(x,y), room);
     }
 
 }

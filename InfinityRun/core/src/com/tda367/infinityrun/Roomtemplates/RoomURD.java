@@ -6,6 +6,7 @@ public class RoomURD  extends RoomTemplate {
         r=true;
         d=true;
         l=false;
+        roomExits = 3;
     }
 
 }

@@ -17,6 +17,7 @@ public class RoomTemplate {
     public boolean d;
     public boolean l;
     public boolean r;
+    public int roomExits;
 
     public boolean isExitup() {
         return u;

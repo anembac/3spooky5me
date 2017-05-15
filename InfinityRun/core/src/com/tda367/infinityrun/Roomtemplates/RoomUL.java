@@ -10,6 +10,7 @@ public class RoomUL extends  RoomTemplate {
         r=false;
         d=false;
         l=true;
+        roomExits = 2;
     }
 
 }

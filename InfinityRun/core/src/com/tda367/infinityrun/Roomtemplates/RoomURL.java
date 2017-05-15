@@ -5,11 +5,11 @@ package com.tda367.infinityrun.Roomtemplates;
  */
 public class RoomURL extends RoomTemplate {
     public RoomURL() {
-
         u =true;
         r=true;
         d=false;
         l=true;
+        roomExits = 3;
     }
 
 }
