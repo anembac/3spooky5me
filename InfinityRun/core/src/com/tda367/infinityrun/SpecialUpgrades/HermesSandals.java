@@ -1,4 +1,6 @@
 package com.tda367.infinityrun.SpecialUpgrades;
+import com.tda367.infinityrun.InputState;
+import com.tda367.infinityrun.ObjectModifiers;
 import com.tda367.infinityrun.Upgrade;
 
 /**
@@ -13,7 +15,7 @@ public class HermesSandals extends Upgrade {
     }
 
     @Override
-    public void frame(float dt) {
+    public void frame(float dt, InputState input, ObjectModifiers modify) {
         /*if(data.positionY > data.groundlevel + 0.00001 && input.JumpKeyPressed && !isUsed){
         character.doJump;
         isUsed = true;

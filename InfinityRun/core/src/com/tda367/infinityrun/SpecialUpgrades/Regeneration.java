@@ -1,4 +1,6 @@
 package com.tda367.infinityrun.SpecialUpgrades;
+import com.tda367.infinityrun.InputState;
+import com.tda367.infinityrun.ObjectModifiers;
 import com.tda367.infinityrun.Upgrade;
 
 import java.util.Timer;
@@ -14,7 +16,7 @@ public class Regeneration extends Upgrade {
     }
 
     @Override
-    public void frame(float dt) {
+    public void frame(float dt, InputState input, ObjectModifiers modify) {
         float hpreg = System.nanoTime() / 1000000000 * dt * getValueInt();
     }
 }

@@ -1,4 +1,6 @@
 package com.tda367.infinityrun.SpecialUpgrades;
+import com.tda367.infinityrun.InputState;
+import com.tda367.infinityrun.ObjectModifiers;
 import com.tda367.infinityrun.Upgrade;
 
 /**
@@ -10,7 +12,7 @@ public class MeleeHandling extends Upgrade{
     }
 
     @Override
-    public void frame(float dt) {
+    public void frame(float dt, InputState input, ObjectModifiers modify) {
         //double characterDamage = weapon.getDamage*getValueDouble(); not sure if it should be like this, might be a little different like a setter or something.
     }
 }

@@ -115,11 +115,11 @@ public class CollisionManager {
 
     private boolean pointBetweenHorizontal(Vec2 start, Vec2 point, Vec2 end)
     {
-        return start.x < point.x && end.x > point.x;
+        return start.x <= point.x && end.x >= point.x;
     }
 
     private boolean pointBetweenVertical(Vec2 start, Vec2 point, Vec2 end)
     {
-        return start.y < point.y && end.y > point.y;
+        return start.y <= point.y && end.y >= point.y;
     }
 }

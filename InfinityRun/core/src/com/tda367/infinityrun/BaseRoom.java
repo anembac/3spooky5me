@@ -34,6 +34,7 @@ public class BaseRoom  {
         addWorldObject(new Platform(new Vec2(896,1)));
     }
 
+
     public List<WorldObject> getRoomObjects(){
         return roomObjects;
     }

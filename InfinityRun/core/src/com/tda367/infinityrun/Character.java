@@ -62,7 +62,14 @@ public class Character extends MovableObject {
 
         // The piece below might be better applied in "Upgrades" as a command pattern ish that is frame based. Since this code will change depending on what upgrades we have.
         /////////////////////////////////////////////////////////
-        if(state.forwardPressed()) acceleration.x += speed/6;
+        ObjectModifiers modifier = new ObjectModifiers(this.position.y > height, acceleration);
+        for(Upgrade u : upgrades)
+        {
+            u.frame(dt, state, modifier);
+        }
+        acceleration = modifier.acceleration.clone();
+
+        /*if(state.forwardPressed()) acceleration.x += speed/6;
         if(state.backPressed()) acceleration.x -= speed/6;
         if(!state.backPressed() && !state.forwardPressed())
         {
@@ -78,7 +85,6 @@ public class Character extends MovableObject {
             }
         }
 
-        //float height = CollisionManager.getInstance().getWalkableHeight(this);
         if(state.jumpPressed())
         {
             isJumping = true;
@@ -91,7 +97,7 @@ public class Character extends MovableObject {
             {// not flying
                 acceleration.y += 200;
             }}
-        }
+        }*/
         /////////////////////////////////////////////////////////
 
 

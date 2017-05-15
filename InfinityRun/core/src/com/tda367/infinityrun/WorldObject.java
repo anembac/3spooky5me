@@ -57,6 +57,4 @@ public abstract class WorldObject { //We should probably refactor this class at 
         if(parent == null) return new Rect(position, bounds);
         else return new Rect(Vec2.add(position, parent.getDrawingRect().getBottomLeft()), bounds);
     }
-
-
 }

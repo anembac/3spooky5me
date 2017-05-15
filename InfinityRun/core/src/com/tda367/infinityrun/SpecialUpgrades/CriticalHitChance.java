@@ -1,5 +1,7 @@
 package com.tda367.infinityrun.SpecialUpgrades;
 
+import com.tda367.infinityrun.InputState;
+import com.tda367.infinityrun.ObjectModifiers;
 import com.tda367.infinityrun.Upgrade;
 
 import java.util.Random;
@@ -25,7 +27,7 @@ public class CriticalHitChance extends Upgrade{
     }
 
     @Override
-    public void frame(float dt) {
+    public void frame(float dt, InputState input, ObjectModifiers modify) {
     /*
         if(character.attacks) {
         isCritical();

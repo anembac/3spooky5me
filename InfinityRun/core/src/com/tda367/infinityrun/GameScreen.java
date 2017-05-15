@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.SpecialUpgrades.JumpH;
+import com.tda367.infinityrun.SpecialUpgrades.Speed;
 
 import java.util.HashMap;
 
@@ -30,6 +32,8 @@ public class GameScreen implements Screen{  //tries to put textures onto the obj
         //br.setup();
         hero = new Character(new Vec2(100,200), new Vec2(64,64),"WorldObjects/player.png");
         // setup a new world depending on some menu parameters maybe? diff etc. world could also be called level, std
+        hero.addUpgrade(new Speed(100,1));
+        hero.addUpgrade(new JumpH(100, 1));
         world = new World();
         world.generateWorld(/*params*/);
         world.addHero(hero);
