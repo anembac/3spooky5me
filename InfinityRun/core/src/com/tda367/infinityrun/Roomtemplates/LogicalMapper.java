@@ -8,18 +8,21 @@ import java.util.HashMap;
  */
 public class LogicalMapper extends RoomTemplate {
 
-        HashMap<Point,RoomTemplate> rooms;
+    HashMap<Point, RoomTemplate> rooms;
 
 
-
+    /*
+    returns -1 for no room exist, 0 for a blocked path and 1 for path.
+    (same for all of the check methods)
+     */
     private int checkUp(int x, int y) {
         try {
-            if(rooms.get(new Point(x - 1, y)).u) {
+            if (rooms.get(new Point(x, y + 1)).u) {
             }
         } catch (NullPointerException n) {
             return -1;
         }
-        if(rooms.get(new Point(x - 1, y)).u) {
+        if (rooms.get(new Point(x, y + 1)).u) {
             return 1;
         } else {
             return 0;
@@ -29,12 +32,12 @@ public class LogicalMapper extends RoomTemplate {
 
     private int checkRight(int x, int y) {
         try {
-            if(rooms.get(new Point(x - 1, y)).r) {
+            if (rooms.get(new Point(x + 1, y)).r) {
             }
         } catch (NullPointerException n) {
             return -1;
         }
-        if(rooms.get(new Point(x - 1, y)).r) {
+        if (rooms.get(new Point(x + 1, y)).r) {
             return 1;
         } else {
             return 0;
@@ -43,12 +46,12 @@ public class LogicalMapper extends RoomTemplate {
 
     private int checkDown(int x, int y) {
         try {
-            if(rooms.get(new Point(x - 1, y)).d) {
+            if (rooms.get(new Point(x, y - 1)).d) {
             }
         } catch (NullPointerException n) {
             return -1;
         }
-        if(rooms.get(new Point(x - 1, y)).d) {
+        if (rooms.get(new Point(x, y - 1)).d) {
             return 1;
         } else {
             return 0;
@@ -57,12 +60,12 @@ public class LogicalMapper extends RoomTemplate {
 
     private int checkLeft(int x, int y) {
         try {
-            if(rooms.get(new Point(x - 1, y)).l) {
+            if (rooms.get(new Point(x - 1, y)).l) {
             }
         } catch (NullPointerException n) {
             return -1;
         }
-        if(rooms.get(new Point(x - 1, y)).l) {
+        if (rooms.get(new Point(x - 1, y)).l) {
             return 1;
         } else {
             return 0;
@@ -70,10 +73,10 @@ public class LogicalMapper extends RoomTemplate {
     }
 
 
-        private void roomRandomizer(){
+    private void roomRandomizer() {
 
-            rooms.put(new Point(1,1),new RoomURL());
-        }
+        rooms.put(new Point(1, 1), new RoomURL());
+    }
 
 /*
     public void getSurrounding(){
@@ -103,9 +106,9 @@ public class LogicalMapper extends RoomTemplate {
     }*/
 
 
-    public void mapper(){
+    public void mapper() {
     }
 
-    }
+}
 
 
