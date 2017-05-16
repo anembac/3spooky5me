@@ -20,7 +20,8 @@ public class Character extends MovableObject {
         //new Rectangle(position.x, position.y, size, size);
     }
     private int size = 64;
-    protected int health;
+    protected int maxHelth;
+    protected int currentHealth;
     protected int speed; //This speed does not equal 1 block per second, speed is arbitary
     protected int jumpH;
     protected int coins = 0;
@@ -28,19 +29,21 @@ public class Character extends MovableObject {
     protected boolean isJumping = false;
 
 
-    public final int getHealth() {
-        return health;
+    public int getHealth() {
+        return currentHealth;
     }
 
-    public final int getSpeed() {
+    public int getMaxHelth() {return maxHelth; }
+
+    public int getSpeed() {
         return speed;
     }
 
-    public final boolean getDamageable(){
+    public boolean getDamageable(){
         return damageable;
     }
 
-    public final int getCoins(){
+    public int getCoins(){
         return coins;
     }
 
@@ -50,7 +53,8 @@ public class Character extends MovableObject {
     }
 
     public void initializeHero(){
-        health  = upgrades.get("Health").getValueInt();
+        maxHelth  = upgrades.get("Health").getValueInt();
+        currentHealth = maxHelth;
         speed   = upgrades.get("Speed").getValueInt();
         jumpH   = upgrades.get("JumpH").getValueInt();
     }
@@ -73,40 +77,6 @@ public class Character extends MovableObject {
             u.frame(dt, state, modifier);
         }
         acceleration = modifier.acceleration.clone();
-
-        /*if(state.forwardPressed()) acceleration.x += speed/6;
-        if(state.backPressed()) acceleration.x -= speed/6;
-        if(!state.backPressed() && !state.forwardPressed())
-        {
-            if(this.acceleration.x < -0.000001)
-            {
-                acceleration.x += speed/4;
-                if(acceleration.x> 0) acceleration.x = 0;
-            }
-            else
-            {
-                acceleration.x -= speed/4;
-                if(acceleration.x < 0) acceleration.x = 0;
-            }
-        }
-
-        if(state.jumpPressed())
-        {
-            isJumping = true;
-            for(int i =numberOfJumps; i  > 0; i--)
-            {
-                System.out.println(numberOfJumps);
-                System.out.println("i: "+ i);
-
-            //if(position.y < height+0.001)
-            {// not flying
-                acceleration.y += 200;
-            }}
-        }*/
-        /////////////////////////////////////////////////////////
-
-
-
 
         // add acceleration down if we are in the air.
         if(this.position.y > height)

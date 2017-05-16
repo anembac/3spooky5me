@@ -6,6 +6,10 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.SpecialUpgrades.*;
@@ -23,12 +27,15 @@ public class GameScreen implements Screen{  //tries to put textures onto the obj
     Character hero;
     World world;
     HUD hud;
+    final int windowWidth = 1600;
+    final int windowHeight = 900;
 
     public GameScreen(final InfinityRun game){
         this.game = game;
 
         //br = new BaseRoom();
         //br.setup();
+
         hero = new Character(new Vec2(100,200), new Vec2(64,64),"WorldObjects/player.png");
         // setup a new world depending on some menu parameters maybe? diff etc. world could also be called level, std
         hero.addUpgrade("Speed", new Speed(100, 4));    //Added as a flat increase to Movement Speed
@@ -51,7 +58,7 @@ public class GameScreen implements Screen{  //tries to put textures onto the obj
 
         //create camera
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 1600, 900);
+        camera.setToOrtho(false, windowWidth, windowHeight);
     }
 
     @Override
@@ -66,6 +73,9 @@ public class GameScreen implements Screen{  //tries to put textures onto the obj
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         camera.update();
+        Matrix4 translation = new Matrix4();
+        translation.translate(Math.min(-hero.position.x-hero.bounds.x / 2+windowWidth/2,0), -hero.position.y + windowHeight/2 - hero.bounds.y / 2, 0);
+        game.batch.setTransformMatrix(translation);
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         for(WorldObject wo : world.getWorldObjects()){
@@ -73,7 +83,9 @@ public class GameScreen implements Screen{  //tries to put textures onto the obj
             {
                 textureMap.put(wo.getTexturename(), new Texture(Gdx.files.internal(wo.getTexturename())));
             }
+
             game.batch.draw(textureMap.get(wo.getTexturename()), wo.position.x, wo.position.y);
+
         }
         //game.batch.draw(ctex, hero.position.x, hero.position.y);
         game.batch.end();

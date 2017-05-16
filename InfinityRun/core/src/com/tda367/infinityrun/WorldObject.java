@@ -9,18 +9,20 @@ import com.tda367.infinityrun.Math.Vec2;
 
 
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class WorldObject { //We should probably refactor this class at some point
 
 
 
     // position is for some reason a vector, deal w/it
-    public Vec2 position = new Vec2(0,0);
+    protected Vec2 position = new Vec2(0,0);
     protected Vec2 bounds = new Vec2(0,0);
     private WorldObject parent = null;
     private String texturename = "";
-    /*public WorldObject(Vec2 position){
-        this.position = position;
-    }*/
+    private List<WorldObject> children = new ArrayList<WorldObject>();
+
 
     public WorldObject(Vec2 position, Vec2 bounds)
     {
@@ -50,6 +52,27 @@ public abstract class WorldObject { //We should probably refactor this class at 
     public String getTexturename()
     {
         return texturename;
+    }
+
+    public void addChildren(WorldObject object)
+    {
+        object.setParent(object);
+        children.add(object);
+    }
+
+    public void removeChildren(WorldObject object)
+    {
+        children.remove(object);
+    }
+
+    public Vec2 getPosition()
+    {
+        if(parent == null) return position.clone();
+        else
+        {
+            Vec2 parentPos = parent.getPosition();
+            return new Vec2(position.x + parentPos.x, position.y + parentPos.y);
+        }
     }
 
     public Rect getDrawingRect()
