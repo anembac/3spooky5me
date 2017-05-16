@@ -17,7 +17,7 @@ import com.tda367.infinityrun.WorldObject;
 
         public Verticalplatform(Vec2 position) {
             super(position, new Vec2(16, 128));
-            setTexture("WorldObjects/platform.png");
+            setTexture("WorldObjects/Spike.png");
 
         }
     }

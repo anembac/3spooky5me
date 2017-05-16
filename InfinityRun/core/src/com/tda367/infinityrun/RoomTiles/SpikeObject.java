@@ -15,7 +15,7 @@ public class SpikeObject extends WorldObject {
 
     public SpikeObject(Vec2 position) {
         super(position, new Vec2(32, 32));
-        setTexture("WorldObjects/platform.png");
+        setTexture("WorldObjects/Spike.png");
 
     }
 }

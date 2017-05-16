@@ -2,6 +2,7 @@ package com.tda367.infinityrun;
 
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.RoomTiles.Platform;
+import com.tda367.infinityrun.RoomTiles.SpikeObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class World {
             addWorldObject(new Platform(new Vec2(512, 528 + 64 * i)));
             addWorldObject(new Platform(new Vec2(512, 544 + 64 * i)));
             addWorldObject(new Platform(new Vec2(512, 560 + 64 * i)));
+            addWorldObject(new SpikeObject(new Vec2(128, 256)));
 
 
 
