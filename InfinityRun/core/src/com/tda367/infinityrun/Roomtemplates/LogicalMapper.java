@@ -13,7 +13,7 @@ public class LogicalMapper extends RoomTemplate {
     HashMap<Point, RoomTemplate> rooms;
     private int x = 0;
     private int y = 0;
-    private int exits = 2;
+    private static int exits = 2;
     ArrayList<RoomTemplate> roomIndexes = new ArrayList<RoomTemplate>();
 
     private int checkedL;
@@ -135,14 +135,25 @@ public class LogicalMapper extends RoomTemplate {
             }
             if (checkedL < 0 && room.r) {
                 possibleRooms.remove(room);
+
+                int rnd = new Random().nextInt(possibleRooms.size());
+                exits -= possibleRooms.get(rnd).roomExits;
+                while(true){
+                if (exits > 2){
+                    return possibleRooms.get(rnd);}
+                    else {
+                    rnd = new Random().nextInt(possibleRooms.size());
+                }
+                }
+
             }
         }
-        int rnd = new Random().nextInt(possibleRooms.size());
-        return possibleRooms.get(rnd);
+
+        return possibleRooms.get(0);
     }
 
-
-    public void getSurrounding() {
+    public void
+    getSurrounding() {
         checkedU = checkUp(x, y);
         checkedR = checkRight(x, y);
         checkedD = checkDown(x, y);
@@ -154,6 +165,7 @@ public class LogicalMapper extends RoomTemplate {
         getSurrounding();
         RoomTemplate room = roomRandomizer();
         rooms.put(new Point(x,y), room);
+
     }
 
 }

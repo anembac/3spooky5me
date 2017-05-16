@@ -1,9 +1,8 @@
 package com.tda367.infinityrun;
 
 import com.tda367.infinityrun.Math.Vec2;
-import com.tda367.infinityrun.Roomtemplates.RoomTemplate;
+import com.tda367.infinityrun.RoomTiles.Platform;
 
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +31,22 @@ public class World {
         return worldObjects;
     }
 
-    public void generateWorld()
-    {
+    public void generateWorld() {
+        for (int i = 0; i < 5; i++) {
+            addWorldObject(new Platform(new Vec2(1 + i * 128, 512)));
+            addWorldObject(new Platform(new Vec2(512, 512 + 64 * i)));
+            addWorldObject(new Platform(new Vec2(512, 528 + 64 * i)));
+            addWorldObject(new Platform(new Vec2(512, 544 + 64 * i)));
+            addWorldObject(new Platform(new Vec2(512, 560 + 64 * i)));
+
+
+
+
+            addWorldObject(new Platform(new Vec2(1 + i * 128, 128)));
+
+
+        }/*
+
         for(int i = 0; i < 200; i++)
         {
             addWorldObject(new Platform(new Vec2(10+i*128,10+i*16)));
@@ -44,6 +57,15 @@ public class World {
         addWorldObject(new Platform(new Vec2(10+6*128,10+15*16)));
         addWorldObject(new Platform(new Vec2(10+5*128,10+17*16)));
         addWorldObject(new Platform(new Vec2(10+8*128,10+13*16)));
+    }*/}
+
+
+
+
+    public void URDL(){
+        for(int i = 0; i < 5; i++){
+            addWorldObject(new Platform(new Vec2(i*128, 1024)));
+        }
     }
 
 

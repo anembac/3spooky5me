@@ -1,11 +1,8 @@
 package com.tda367.infinityrun;
 
-import com.badlogic.gdx.math.GridPoint2;
-import com.badlogic.gdx.math.Vector2;
 import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.RoomTiles.Platform;
 
-import javax.swing.text.Position;
-import java.awt.geom.Point2D;
 import java.util.*;
 
 /**
