@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
+import com.tda367.infinityrun.Math.Rect;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.SpecialUpgrades.*;
 
@@ -74,7 +75,8 @@ public class GameScreen implements Screen{  //tries to put textures onto the obj
 
         camera.update();
         Matrix4 translation = new Matrix4();
-        translation.translate(Math.min(-hero.position.x-hero.bounds.x / 2+windowWidth/2,0), -hero.position.y + windowHeight/2 - hero.bounds.y / 2, 0);
+        Rect heroRect = hero.getDrawingRect();
+        translation.translate(Math.min(-heroRect.position.x-heroRect.bounds.x / 2+windowWidth/2,0), -heroRect.position.y + windowHeight/2 - heroRect.bounds.y / 2, 0);
         game.batch.setTransformMatrix(translation);
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
@@ -83,8 +85,7 @@ public class GameScreen implements Screen{  //tries to put textures onto the obj
             {
                 textureMap.put(wo.getTexturename(), new Texture(Gdx.files.internal(wo.getTexturename())));
             }
-
-            game.batch.draw(textureMap.get(wo.getTexturename()), wo.position.x, wo.position.y);
+            game.batch.draw(textureMap.get(wo.getTexturename()), wo.getPosition().x, wo.getPosition().y);
 
         }
         //game.batch.draw(ctex, hero.position.x, hero.position.y);
