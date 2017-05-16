@@ -102,12 +102,14 @@ public class LogicalMapper extends RoomTemplate {
 
     private RoomTemplate roomRandomizer() {
 
-        if (checkedU == 1){exits --;}
-        if (checkedR == 1){exits --;}
-        if (checkedD == 1){exits --;}
-        if (checkedL == 1){exits --;}
+        //removes 2 exits for every connection.
 
+        if (checkedU == 1){exits -=2;}
+        if (checkedR == 1){exits -=2;}
+        if (checkedD == 1){exits -=2;}
+        if (checkedL == 1){exits -=2;}
 
+            //checks what rooms are available
 
         ArrayList<RoomTemplate> possibleRooms = new ArrayList<RoomTemplate>();
         possibleRooms.addAll(roomIndexes);
@@ -135,21 +137,17 @@ public class LogicalMapper extends RoomTemplate {
             }
             if (checkedL < 0 && room.r) {
                 possibleRooms.remove(room);
+            }
+            if (exits + room.roomExits < 2) {
+                possibleRooms.remove(room);
+            }
 
-                int rnd = new Random().nextInt(possibleRooms.size());
-                exits -= possibleRooms.get(rnd).roomExits;
-                while(true){
-                if (exits > 2){
-                    return possibleRooms.get(rnd);}
-                    else {
-                    rnd = new Random().nextInt(possibleRooms.size());
-                }
-                }
 
             }
-        }
-
-        return possibleRooms.get(0);
+            //randomly picks a room of what's left in the lift.
+        int rnd = new Random().nextInt(possibleRooms.size());
+        exits += possibleRooms.get(rnd).roomExits;
+        return possibleRooms.get(rnd);
     }
 
     public void

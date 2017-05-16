@@ -4,6 +4,7 @@ import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.RoomTiles.BrickObject;
 import com.tda367.infinityrun.RoomTiles.Platform;
 import com.tda367.infinityrun.RoomTiles.SpikeObject;
+import jdk.nashorn.internal.ir.Block;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,22 +35,7 @@ public class World {
     }
 
     public void generateWorld() {
-        for (int i = 0; i < 5; i++) {
-            addWorldObject(new Platform(new Vec2(1 + i * 128, 512)));
-            addWorldObject(new Platform(new Vec2(512, 512 + 64 * i)));
-            addWorldObject(new Platform(new Vec2(512, 528 + 64 * i)));
-            addWorldObject(new Platform(new Vec2(512, 544 + 64 * i)));
-            addWorldObject(new Platform(new Vec2(512, 560 + 64 * i)));
-            addWorldObject(new SpikeObject(new Vec2(128, 256)));
-            addWorldObject(new SpikeObject(new Vec2(96, 256)));
-            addWorldObject(new SpikeObject(new Vec2(64, 256)));
-            addWorldObject(new BrickObject(new Vec2(0,256)));
-            addWorldObject(new BrickObject(new Vec2(160,256)));
-            addWorldObject(new BrickObject(new Vec2(224,256)));
-            addWorldObject(new Platform(new Vec2(1 + i * 128, 128)));
 
-
-        }/*
 
         for(int i = 0; i < 200; i++)
         {
@@ -61,7 +47,7 @@ public class World {
         addWorldObject(new Platform(new Vec2(10+6*128,10+15*16)));
         addWorldObject(new Platform(new Vec2(10+5*128,10+17*16)));
         addWorldObject(new Platform(new Vec2(10+8*128,10+13*16)));
-    }*/}
+    }
 
 
 
