@@ -18,38 +18,67 @@ public class World {
     private double difficulty = 1.0;
     IInput input = null;
 
-    public void increaseDifficulty (double difficulty){
+    public void increaseDifficulty(double difficulty) {
         this.difficulty = difficulty + 0.05;
     }
 
-    public World()
-    {
+    public World() {
         worldObjects = new ArrayList<WorldObject>();
         input = new Input();
     }
 
-    public List<WorldObject> getWorldObjects()
-    {
+    public List<WorldObject> getWorldObjects() {
         return worldObjects;
     }
 
     public void generateWorld() {
-        for (int i = 0; i < 5; i++) {
-            addWorldObject(new Platform(new Vec2(1 + i * 128, 512)));
-            addWorldObject(new Platform(new Vec2(512, 512 + 64 * i)));
-            addWorldObject(new Platform(new Vec2(512, 528 + 64 * i)));
-            addWorldObject(new Platform(new Vec2(512, 544 + 64 * i)));
-            addWorldObject(new Platform(new Vec2(512, 560 + 64 * i)));
-            addWorldObject(new SpikeObject(new Vec2(128, 256)));
-            addWorldObject(new SpikeObject(new Vec2(96, 256)));
-            addWorldObject(new SpikeObject(new Vec2(64, 256)));
-            addWorldObject(new BrickObject(new Vec2(0,256)));
-            addWorldObject(new BrickObject(new Vec2(160,256)));
-            addWorldObject(new BrickObject(new Vec2(224,256)));
-            addWorldObject(new Platform(new Vec2(1 + i * 128, 128)));
+        int block = 64;
+        addWorldObject(new BrickObject(new Vec2(0, block)));
+        addWorldObject(new SpikeObject(new Vec2(block, block)));
+        addWorldObject(new SpikeObject(new Vec2((int) (1.5 * block), block)));
+        addWorldObject(new SpikeObject(new Vec2(2 * block, block)));
+        addWorldObject(new SpikeObject(new Vec2((int) (2.5 * block), block)));
+        addWorldObject(new SpikeObject(new Vec2(3 * block, block)));
+        addWorldObject(new BrickObject(new Vec2((int) (3.5 * block), block)));
+        addWorldObject(new BrickObject(new Vec2(4 * block, block)));
+        addWorldObject(new BrickObject(new Vec2(5 * block, block)));
+        addWorldObject(new SpikeObject(new Vec2(6 * block, block)));
+        addWorldObject(new SpikeObject(new Vec2((int) (6.5 * block), block)));
+        addWorldObject(new SpikeObject(new Vec2(7 * block, block)));
+        addWorldObject(new SpikeObject(new Vec2((int) (7.5 * block), block)));
+        addWorldObject(new BrickObject(new Vec2(8 * block, block)));
+        addWorldObject(new BrickObject(new Vec2(9 * block, block)));
+        addWorldObject(new BrickObject(new Vec2(10 * block, block)));
+        addWorldObject(new BrickObject(new Vec2(11 * block, block)));
+        addWorldObject(new BrickObject(new Vec2(12 * block, block)));
+        addWorldObject(new BrickObject(new Vec2(13 * block, block)));
+        addWorldObject(new BrickObject(new Vec2(14 * block, block)));
+        addWorldObject(new SpikeObject(new Vec2(15 * block, block)));
+        addWorldObject(new SpikeObject(new Vec2((int) (15.5 * block), block)));
+        addWorldObject(new SpikeObject(new Vec2(16 * block, block)));
+        addWorldObject(new SpikeObject(new Vec2((int) (16.5 * block), block)));
+        addWorldObject(new SpikeObject(new Vec2(17 * block, block)));
+        addWorldObject(new BrickObject(new Vec2(17 * block, 3*block)));
+        addWorldObject(new SpikeObject(new Vec2((int) (17.5 * block), block)));
+        addWorldObject(new SpikeObject(new Vec2(18 * block, block)));
+        addWorldObject(new BrickObject(new Vec2(18 * block, 3* block)));
+        addWorldObject(new SpikeObject(new Vec2((int) (18.5 * block), block)));
+        addWorldObject(new SpikeObject(new Vec2(19 * block, block)));
+        addWorldObject(new SpikeObject(new Vec2((int) (19.5 * block), block)));
+        addWorldObject(new SpikeObject(new Vec2(20 * block, block)));
+        addWorldObject(new SpikeObject(new Vec2((int) (20.5 * block), block)));
+        addWorldObject(new BrickObject(new Vec2(21 * block, block)));
+        addWorldObject(new BrickObject(new Vec2(22 * block, block)));
+        addWorldObject(new BrickObject(new Vec2(23 * block, block)));
+        addWorldObject(new BrickObject(new Vec2(24 * block, block)));
 
-
-        }/*
+        for (int i = 0; i < 50; i++) { //Should be 25 for a standard room - ordinarie room is 25*20
+            for (int j = 0; j < 8; j++) {
+                addWorldObject(new BrickObject(new Vec2(block * i, 0 - block * j))); //Creates Floor
+                addWorldObject(new BrickObject(new Vec2(block * i, 14*block + block * j))); //Creates Roof
+            }
+        }
+        /*
 
         for(int i = 0; i < 200; i++)
         {
@@ -61,37 +90,33 @@ public class World {
         addWorldObject(new Platform(new Vec2(10+6*128,10+15*16)));
         addWorldObject(new Platform(new Vec2(10+5*128,10+17*16)));
         addWorldObject(new Platform(new Vec2(10+8*128,10+13*16)));
-    }*/}
+    }*/
+    }
 
 
-
-
-    public void URDL(){
-        for(int i = 0; i < 5; i++){
-            addWorldObject(new Platform(new Vec2(i*128, 1024)));
+    public void URDL() {
+        for (int i = 0; i < 5; i++) {
+            addWorldObject(new Platform(new Vec2(i * 128, 1024)));
         }
     }
 
 
-    public void frame(float dt)
-    {
+    public void frame(float dt) {
         input.collectInput();
-        for(WorldObject obj : worldObjects)
-        {
+        for (WorldObject obj : worldObjects) {
             obj.frame(dt, input.getInput());
         }
     }
+
     // to add the player etc to the world.
-    public void addWorldObject(WorldObject obj)
-    {
+    public void addWorldObject(WorldObject obj) {
         //for(WorldObject obj:roomObjects) {
-            worldObjects.add(obj);
-            CollisionManager.getInstance().addWorldObject(obj);
+        worldObjects.add(obj);
+        CollisionManager.getInstance().addWorldObject(obj);
         //}
     }
 
-    public void addHero(WorldObject obj)
-    {
+    public void addHero(WorldObject obj) {
         worldObjects.add(obj);
     }
 
