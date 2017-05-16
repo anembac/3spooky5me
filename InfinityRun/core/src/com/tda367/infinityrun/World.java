@@ -1,6 +1,7 @@
 package com.tda367.infinityrun;
 
 import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.RoomTiles.BrickObject;
 import com.tda367.infinityrun.RoomTiles.Platform;
 import com.tda367.infinityrun.RoomTiles.SpikeObject;
 
@@ -40,10 +41,11 @@ public class World {
             addWorldObject(new Platform(new Vec2(512, 544 + 64 * i)));
             addWorldObject(new Platform(new Vec2(512, 560 + 64 * i)));
             addWorldObject(new SpikeObject(new Vec2(128, 256)));
-
-
-
-
+            addWorldObject(new SpikeObject(new Vec2(96, 256)));
+            addWorldObject(new SpikeObject(new Vec2(64, 256)));
+            addWorldObject(new BrickObject(new Vec2(0,256)));
+            addWorldObject(new BrickObject(new Vec2(160,256)));
+            addWorldObject(new BrickObject(new Vec2(224,256)));
             addWorldObject(new Platform(new Vec2(1 + i * 128, 128)));
 
 
