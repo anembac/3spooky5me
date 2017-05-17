@@ -8,13 +8,37 @@ import com.tda367.infinityrun.RoomTiles.BrickObject;
  */
 public class RoomL extends  RoomTemplate {
     public RoomL() {
-        u =false;
-        r=false;
-        d=false;
-        l=true;
+        u = false;
+        r = false;
+        d = false;
+        l = true;
         roomExits = 1;
-    }
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
 
+                //floor
+                roomObjects.add(new BrickObject(new Vec2(0 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(5 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(10 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(15 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(20 * block + i * block, 0 * block + j * block)));
+
+                // roof
+                roomObjects.add(new BrickObject(new Vec2(0 * block + i * block, 10 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(5 * block + i * block, 10 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(10 * block + i * block, 10 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(15 * block + i * block, 10 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(20 * block + i * block, 10 * block + j * block)));
+                //extra roof shit
+                roomObjects.add(new BrickObject(new Vec2(0 * block + i * block, 9 * block)));
+                roomObjects.add(new BrickObject(new Vec2(5 * block + i * block, 9 * block)));
+                roomObjects.add(new BrickObject(new Vec2(10 * block + i * block, 9 * block)));
+                roomObjects.add(new BrickObject(new Vec2(15 * block + i * block, 9 * block)));
+                roomObjects.add(new BrickObject(new Vec2(20 * block + i * block, 9 * block)));
+
+            }
+        }
+    }
 }
 /*
     public void generateWorld() {
@@ -24,23 +48,23 @@ public class RoomL extends  RoomTemplate {
             for (int j = 0; j < 5; j++) {
 
                 //floor
-                addWorldObject(new BrickObject(new Vec2(0 * block + i * block, 0 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(5 * block + i * block, 0 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(10 * block + i * block, 0 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(15 * block + i * block, 0 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(20 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(0 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(5 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(10 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(15 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(20 * block + i * block, 0 * block + j * block)));
 
                 // roof
-                addWorldObject(new BrickObject(new Vec2(0 * block + i * block, 10 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(5 * block + i * block, 10 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(10 * block + i * block, 10 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(15 * block + i * block, 10 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(20 * block + i * block, 10 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(0 * block + i * block, 10 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(5 * block + i * block, 10 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(10 * block + i * block, 10 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(15 * block + i * block, 10 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(20 * block + i * block, 10 * block + j * block)));
                 //extra roof shit
-                addWorldObject(new BrickObject(new Vec2(0 * block + i * block, 9 * block )));
-                addWorldObject(new BrickObject(new Vec2(5 * block + i * block, 9 * block )));
-                addWorldObject(new BrickObject(new Vec2(10 * block + i * block, 9 * block )));
-                addWorldObject(new BrickObject(new Vec2(15 * block + i * block, 9 * block )));
-                addWorldObject(new BrickObject(new Vec2(20 * block + i * block, 9 * block )));
+                roomObjects.add(new BrickObject(new Vec2(0 * block + i * block, 9 * block )));
+                roomObjects.add(new BrickObject(new Vec2(5 * block + i * block, 9 * block )));
+                roomObjects.add(new BrickObject(new Vec2(10 * block + i * block, 9 * block )));
+                roomObjects.add(new BrickObject(new Vec2(15 * block + i * block, 9 * block )));
+                roomObjects.add(new BrickObject(new Vec2(20 * block + i * block, 9 * block )));
 
                 */
