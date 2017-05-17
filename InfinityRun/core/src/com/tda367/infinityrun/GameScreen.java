@@ -37,7 +37,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         //br = new BaseRoom();
         //br.setup();
 
-        hero = new Character(new Vec2(768, 450), new Vec2(64, 64), "WorldObjects/player.png");
+        hero = new Character(new Vec2(768, 450), new Vec2(32, 48), "WorldObjects/player.png");
         // setup a new world depending on some menu parameters maybe? diff etc. world could also be called level, std
         hero.addUpgrade("Speed", new Speed(4));    //Added as a flat increase to Movement Speed
         hero.addUpgrade("JumpH", new JumpH(5));    //Added as a flat increase to Jump Power
