@@ -20,13 +20,4 @@ public class CriticalHitDamage extends Upgrade{
     public double getValueDouble(){
         return  2 + super.getValueDouble();
     }
-
-    @Override
-    public void frame(float dt, InputState input, ObjectModifiers modify) {
-        /*
-        if(attack.criticalHit) {
-            character.damage*getValueDouble();
-        }
-        */
-    }
 }

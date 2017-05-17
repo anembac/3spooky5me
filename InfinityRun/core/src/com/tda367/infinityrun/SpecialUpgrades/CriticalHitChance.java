@@ -25,13 +25,4 @@ public class CriticalHitChance extends Upgrade{
         Random rnd = new Random();
         return getValueInt() >= (rnd.nextInt(100)+1);
     }
-
-    @Override
-    public void frame(float dt, InputState input, ObjectModifiers modify) {
-    /*
-        if(character.attacks) {
-        isCritical();
-    }
-    */
-    }
 }

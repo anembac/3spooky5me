@@ -29,12 +29,4 @@ public class Looting extends Upgrade {
         return chance >= (rnd.nextInt(100) + 1);
     }
 
-    @Override
-    public void frame(float dt, InputState input, ObjectModifiers modify) {
-        /*
-        if(character.findCoin) {
-            character.addCoin(numberOfCoins);
-        }
-        */
-    }
 }

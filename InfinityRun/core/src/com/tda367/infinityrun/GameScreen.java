@@ -48,7 +48,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         hero.addUpgrade("CHD", new CriticalHitDamage(5)); //Added as multiplier to your CriticalHitDamage
         hero.addUpgrade("Looting", new Looting(2));    //Multiplied as a modifier to increase number of coins dropped - 250% chance of coins means 2 coins and 50% chance of extra.
         hero.addUpgrade("Regeneration", new Regeneration(1)); //Added as a flat increase to your overall health regeneration per second
-        hero.initializeHero();
+        hero.updateUpgrades();
         world = new World();
         world.generateWorld(/*params*/);
         world.addHero(hero);
@@ -89,7 +89,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         }
         //game.batch.draw(ctex, hero.position.x, hero.position.y);
         game.batch.end();
-
+        //System.out.println(game.batch.renderCalls);
         hud.render();
 
         //remove this after testing
@@ -102,7 +102,6 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
 
     @Override
     public void resize(int width, int height) {
-
     }
 
     @Override
