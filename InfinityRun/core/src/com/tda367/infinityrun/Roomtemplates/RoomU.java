@@ -15,6 +15,35 @@ public class RoomU extends RoomTemplate {
         d = true;
         l = false;
         roomExits = 1;
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+
+
+                roomObjects.add(new BrickObject(new Vec2(0 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(5 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(10 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(15 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(20 * block + i * block, 0 * block + j * block)));
+
+
+                roomObjects.add(new BrickObject(new Vec2(0 * block + i * block, 5 * block + j * block)));
+
+
+                roomObjects.add(new BrickObject(new Vec2(0 * block + i * block, 10 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(5 * block + i * block, 10 * block + j * block)));
+
+                roomObjects.add(new BrickObject(new Vec2(20 * block + i * block, 5 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(20 * block + i * block, 10 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(15 * block + i * block, 10 * block + j * block)));
+
+
+                roomObjects.add(new Platform(new Vec2(12 * block, 12 * block)));
+                roomObjects.add(new Platform(new Vec2(13 * block, 10 * block)));
+
+
+            }
+
+        }
     }
 
 }
@@ -26,26 +55,26 @@ public class RoomU extends RoomTemplate {
             for (int j = 0; j < 5; j++) {
 
 
-                addWorldObject(new BrickObject(new Vec2(0 * block + i * block, 0 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(5 * block + i * block, 0 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(10 * block + i * block, 0 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(15 * block + i * block, 0 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(20 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(0 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(5 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(10 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(15 * block + i * block, 0 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(20 * block + i * block, 0 * block + j * block)));
 
 
-                addWorldObject(new BrickObject(new Vec2(0 * block + i * block, 5 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(0 * block + i * block, 5 * block + j * block)));
 
 
-                addWorldObject(new BrickObject(new Vec2(0 * block + i * block, 10 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(5 * block + i * block, 10 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(0 * block + i * block, 10 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(5 * block + i * block, 10 * block + j * block)));
 
-                addWorldObject(new BrickObject(new Vec2(20 * block + i * block, 5 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(20 * block + i * block, 10 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(15 * block + i * block, 10 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(20 * block + i * block, 5 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(20 * block + i * block, 10 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(15 * block + i * block, 10 * block + j * block)));
 
 
-                addWorldObject(new Platform(new Vec2(12 * block, 12 * block)));
-                addWorldObject(new Platform(new Vec2(13 * block, 10 * block)));
+                roomObjects.add(new Platform(new Vec2(12 * block, 12 * block)));
+                roomObjects.add(new Platform(new Vec2(13 * block, 10 * block)));
 
 
             }

@@ -12,12 +12,13 @@ import java.util.List;
  */
 public class RoomTemplate {
 
-    private List<WorldObject> roomObjects = new ArrayList<WorldObject>();
-    public boolean u;
-    public boolean d;
-    public boolean l;
-    public boolean r;
-    public int roomExits;
+    protected boolean u;
+    protected boolean d;
+    protected boolean l;
+    protected boolean r;
+    protected int roomExits;
+    protected List<WorldObject> roomObjects;
+    protected int block = 64;
 
     public boolean isExitup() {
         return u;

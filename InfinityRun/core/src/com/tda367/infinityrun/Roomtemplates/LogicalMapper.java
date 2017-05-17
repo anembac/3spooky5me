@@ -1,9 +1,10 @@
 package com.tda367.infinityrun.Roomtemplates;
 
+import com.tda367.infinityrun.WorldObject;
+
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by kaffe on 5/12/17.
@@ -159,11 +160,11 @@ public class LogicalMapper extends RoomTemplate {
     }
 
 
-    public void mapper() {
+    public List<WorldObject> mapper() {
         getSurrounding();
         RoomTemplate room = roomRandomizer();
         rooms.put(new IndexPoint(x,y), room);
-
+        return room.roomObjects;
     }
 
 }

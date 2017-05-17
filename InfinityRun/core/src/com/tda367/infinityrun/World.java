@@ -4,6 +4,8 @@ import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.RoomTiles.BrickObject;
 import com.tda367.infinityrun.RoomTiles.Platform;
 import com.tda367.infinityrun.RoomTiles.SpikeObject;
+import com.tda367.infinityrun.Roomtemplates.LogicalMapper;
+import com.tda367.infinityrun.Roomtemplates.RoomTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ public class World {
     private KdTree<WorldObject> kdTree = new KdTree<WorldObject>();
     private double difficulty = 1.0;
     IInput input = null;
+    private LogicalMapper logicalMapper = new LogicalMapper();
 
     public void increaseDifficulty(double difficulty) {
         this.difficulty = difficulty + 0.05;
@@ -87,6 +90,12 @@ public class World {
         worldObjects.add(obj);
         CollisionManager.getInstance().addWorldObject(obj);
         //}
+    }
+
+    public void addRoom (List<WorldObject> objects) {
+        for(WorldObject w:objects){
+            addWorldObject(w);
+        }
     }
 
     public void addHero(WorldObject obj) {
