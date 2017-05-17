@@ -10,7 +10,7 @@ import java.util.Random;
  */
 public class LogicalMapper extends RoomTemplate {
 
-    HashMap<Point, RoomTemplate> rooms;
+    HashMap<IndexPoint, RoomTemplate> rooms;
     private int x = 0;
     private int y = 0;
     private static int exits = 2;
@@ -162,7 +162,8 @@ public class LogicalMapper extends RoomTemplate {
     public void mapper() {
         getSurrounding();
         RoomTemplate room = roomRandomizer();
-        rooms.put(new Point(x,y), room);
+        rooms.put(new IndexPoint(x,y), room);
+
     }
 
 }
