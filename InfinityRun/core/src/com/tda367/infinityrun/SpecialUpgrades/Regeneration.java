@@ -10,17 +10,12 @@ import java.util.Timer;
  */
 public class Regeneration extends Upgrade {
 
-    public Regeneration(int cap, int basevalue) {
-        super(cap, basevalue);
-
+    public Regeneration(int baseValue) {
+        super(-1, baseValue);
     }
 
     @Override
-    public void frame(float dt, InputState input, ObjectModifiers modify) {
-        /*
-        if(character.currentHealth < character.maxHealth) {
-            float HealthReg = System.nanoTime() / 1000000000 * dt * getValueInt();
-        }
-        */
+    public int getValueInt() {
+        return 1 + super.getValueInt();
     }
 }

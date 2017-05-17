@@ -11,8 +11,8 @@ import java.util.Random;
  */
 public class Looting extends Upgrade {
 
-    public Looting(int cap, int basevalue) {
-        super(cap, basevalue);
+    public Looting(int basevalue) {
+        super(-1, basevalue);
     }
 
     public int numberOfCoins() {
@@ -29,12 +29,4 @@ public class Looting extends Upgrade {
         return chance >= (rnd.nextInt(100) + 1);
     }
 
-    @Override
-    public void frame(float dt, InputState input, ObjectModifiers modify) {
-        /*
-        if(character.findCoin) {
-            character.addCoin(numberOfCoins);
-        }
-        */
-    }
 }

@@ -8,8 +8,10 @@ import com.tda367.infinityrun.Upgrade;
  */
 public class JumpH extends Upgrade {
 
-    public JumpH(int cap, int basevalue) {
-        super(cap, basevalue);
+
+
+    public JumpH(int basevalue) {
+        super(100, basevalue);
     }
 
     @Override

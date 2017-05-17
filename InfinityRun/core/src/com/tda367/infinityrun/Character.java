@@ -27,7 +27,11 @@ public class Character extends MovableObject {
     protected int coins = 0;
     protected boolean damageable = true;
     protected boolean isJumping = false;
-
+    protected double criticalHitChance;
+    protected double criticalHitDamage;
+    protected double meleeHandling;
+    protected int regeneration;
+    protected double timeSinceRegen = 0;
 
     public int getHealth() {
         return currentHealth;
@@ -52,17 +56,25 @@ public class Character extends MovableObject {
         return position;
     }
 
-    public void initializeHero(){
+    public void updateUpgrades(){
         maxHelth  = upgrades.get("Health").getValueInt();
         currentHealth = maxHelth;
         speed   = upgrades.get("Speed").getValueInt();
         jumpH   = upgrades.get("JumpH").getValueInt();
+        criticalHitDamage = upgrades.get("CHD").getValueDouble();
+        criticalHitChance = upgrades.get("CHC").getValueDouble();
+        meleeHandling = upgrades.get("Melee").getValueDouble();
+        regeneration = upgrades.get("Regeneration").getValueInt();
     }
 
     @Override
     public void frame(float dt, InputState state)
     {
-
+        timeSinceRegen += dt;
+        if(timeSinceRegen >= 1) {
+            currentHealth = Math.min(regeneration+currentHealth,maxHelth);
+            timeSinceRegen = 0;
+        }
         Vec4 collisionVariables = CollisionManager.getInstance().getDistanceToCollission(this);
         float height = collisionVariables.x;
         float roof = collisionVariables.z;

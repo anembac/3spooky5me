@@ -12,21 +12,12 @@ import java.util.Random;
 public class CriticalHitDamage extends Upgrade{
 
 
-    public CriticalHitDamage(int cap, int basevalue) {
-        super(cap, basevalue);
+    public CriticalHitDamage(int baseValue) {
+        super(-1, baseValue);
     }
 
     @Override
     public double getValueDouble(){
         return  2 + super.getValueDouble();
-    }
-
-    @Override
-    public void frame(float dt, InputState input, ObjectModifiers modify) {
-        /*
-        if(attack.criticalHit) {
-            character.damage*getValueDouble();
-        }
-        */
     }
 }

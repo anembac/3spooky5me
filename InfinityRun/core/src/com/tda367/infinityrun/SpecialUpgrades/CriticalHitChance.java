@@ -12,8 +12,8 @@ import java.util.Random;
 public class CriticalHitChance extends Upgrade{
 
 
-    public CriticalHitChance(int cap, int basevalue) {
-        super(cap, basevalue);
+    public CriticalHitChance(int baseValue) {
+        super(60, baseValue);
     }
 
     @Override
@@ -24,14 +24,5 @@ public class CriticalHitChance extends Upgrade{
     public boolean isCritical (){
         Random rnd = new Random();
         return getValueInt() >= (rnd.nextInt(100)+1);
-    }
-
-    @Override
-    public void frame(float dt, InputState input, ObjectModifiers modify) {
-    /*
-        if(character.attacks) {
-        isCritical();
-    }
-    */
     }
 }

@@ -1,5 +1,7 @@
 package com.tda367.infinityrun;
 
+import com.tda367.infinityrun.Math.Utils;
+
 public class Upgrade {
 
     protected final int cap;            //The maximum level of the skill, -1 means it doesn't have a cap.
@@ -11,8 +13,12 @@ public class Upgrade {
         this.baseValue = basevalue;
     }
 
-    public void levelUp() {
-        this.level++;
+    public void addLevel() {
+        level = Math.min(level + 1, cap);
+    }
+
+    public void addLevel(int level){
+        this.level = Math.min(this.level + level, cap);
     }
 
     public int getLevel() {
