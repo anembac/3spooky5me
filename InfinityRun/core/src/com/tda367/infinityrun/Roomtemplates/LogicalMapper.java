@@ -165,7 +165,6 @@ public class LogicalMapper extends RoomTemplate {
         getSurrounding();
         RoomTemplate room = roomRandomizer();
         rooms.put(new Point(x,y), room);
-
     }
 
 }

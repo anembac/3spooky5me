@@ -10,8 +10,8 @@ import com.tda367.infinityrun.Upgrade;
 public class HermesSandals extends Upgrade {
     private int charges;
 
-    public HermesSandals(int cap, int basevalue) {
-        super(cap, basevalue);
+    public HermesSandals(int basevalue) {
+        super(2, basevalue);
         charges = getValueInt();
     }
     @Override

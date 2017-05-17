@@ -12,8 +12,8 @@ import java.util.Random;
 public class CriticalHitChance extends Upgrade{
 
 
-    public CriticalHitChance(int cap, int basevalue) {
-        super(cap, basevalue);
+    public CriticalHitChance(int baseValue) {
+        super(60, baseValue);
     }
 
     @Override
