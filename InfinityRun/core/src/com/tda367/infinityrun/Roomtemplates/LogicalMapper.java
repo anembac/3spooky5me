@@ -46,6 +46,7 @@ public class LogicalMapper extends RoomTemplate {
             if (rooms.get(new IndexPoint(x, y + 1)).d) {
             }
         } catch (NullPointerException n) {
+            System.out.println("Up");
             return 0;
         }
         if (rooms.get(new IndexPoint(x, y + 1)).d) {
@@ -60,6 +61,7 @@ public class LogicalMapper extends RoomTemplate {
             if (rooms.get(new IndexPoint(x + 1, y)).l) {
             }
         } catch (NullPointerException n) {
+            System.out.println("Right");
             return 0;
         }
         if (rooms.get(new IndexPoint(x + 1, y)).l) {
@@ -74,6 +76,7 @@ public class LogicalMapper extends RoomTemplate {
             if (rooms.get(new IndexPoint(x, y - 1)).u) {
             }
         } catch (NullPointerException n) {
+            System.out.println("Down");
             return 0;
         }
         if (rooms.get(new IndexPoint(x, y - 1)).u) {
@@ -88,6 +91,7 @@ public class LogicalMapper extends RoomTemplate {
             if (rooms.get(new IndexPoint(x - 1, y)).r) {
             }
         } catch (NullPointerException n) {
+            System.out.println("Left");
             return 0;
         }
         if (rooms.get(new IndexPoint(x - 1, y)).r) {
