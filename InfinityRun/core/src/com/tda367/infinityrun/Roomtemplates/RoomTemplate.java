@@ -17,7 +17,7 @@ public class RoomTemplate {
     protected boolean l;
     protected boolean r;
     protected int roomExits;
-    protected List<WorldObject> roomObjects;
+    protected ArrayList<WorldObject> roomObjects = new ArrayList<WorldObject>();
     protected int block = 64;
 
     public boolean isExitup() {
@@ -35,10 +35,5 @@ public class RoomTemplate {
     public boolean isExitright() {
         return r;
     }
-
-    public List<WorldObject> getRoomObjects(){
-        return roomObjects;
-    }
-
 }
 

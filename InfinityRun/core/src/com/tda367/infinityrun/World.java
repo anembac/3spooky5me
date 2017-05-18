@@ -35,37 +35,9 @@ public class World {
     }
 
     public void generateWorld() {
-        int block = 64;
-
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-
-                //floor
-                addWorldObject(new BrickObject(new Vec2(0 * block + i * block, 0 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(5 * block + i * block, 0 * block + j * block)));
-
-                addWorldObject(new BrickObject(new Vec2(15 * block + i * block, 0 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(20 * block + i * block, 0 * block + j * block)));
-
-                // roof
-                addWorldObject(new BrickObject(new Vec2(0 * block + i * block, 10 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(5 * block + i * block, 10 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(10 * block + i * block, 10 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(15 * block + i * block, 10 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(20 * block + i * block, 10 * block + j * block)));
-                //extra roof shit
-                addWorldObject(new BrickObject(new Vec2(0 * block + i * block, 9 * block)));
-                addWorldObject(new BrickObject(new Vec2(5 * block + i * block, 9 * block)));
-                addWorldObject(new BrickObject(new Vec2(10 * block + i * block, 9 * block)));
-                addWorldObject(new BrickObject(new Vec2(15 * block + i * block, 9 * block)));
-                addWorldObject(new BrickObject(new Vec2(20 * block + i * block, 9 * block)));
-
-
-                //right wall
-
-                addWorldObject(new BrickObject(new Vec2(0 * block + i * block, 5 * block + j * block)));
-            }
-            }
+        for(WorldObject w:logicalMapper.mapper()){
+            addWorldObject(w);
+        }
         }
 
 
@@ -92,7 +64,7 @@ public class World {
         //}
     }
 
-    public void addRoom (List<WorldObject> objects) {
+    public void addRoom (ArrayList<WorldObject> objects) {
         for(WorldObject w:objects){
             addWorldObject(w);
         }

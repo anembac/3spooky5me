@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class LogicalMapper extends RoomTemplate {
 
-    HashMap<IndexPoint, RoomTemplate> rooms;
+    HashMap<IndexPoint, RoomTemplate> rooms = new HashMap<IndexPoint, RoomTemplate>();
     private int x = 0;
     private int y = 0;
     private static int exits = 2;
@@ -159,14 +159,13 @@ public class LogicalMapper extends RoomTemplate {
         checkedL = checkLeft(x, y);
     }
 
-
-    public List<WorldObject> mapper() {
+    public ArrayList<WorldObject> mapper() {
         getSurrounding();
         RoomTemplate room = roomRandomizer();
         rooms.put(new IndexPoint(x,y), room);
+
         return room.roomObjects;
     }
-
 }
 
 

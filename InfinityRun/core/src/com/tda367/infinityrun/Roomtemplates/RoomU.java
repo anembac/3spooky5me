@@ -17,8 +17,6 @@ public class RoomU extends RoomTemplate {
         roomExits = 1;
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-
-
                 roomObjects.add(new BrickObject(new Vec2(0 * block + i * block, 0 * block + j * block)));
                 roomObjects.add(new BrickObject(new Vec2(5 * block + i * block, 0 * block + j * block)));
                 roomObjects.add(new BrickObject(new Vec2(10 * block + i * block, 0 * block + j * block)));
@@ -39,8 +37,6 @@ public class RoomU extends RoomTemplate {
 
                 roomObjects.add(new Platform(new Vec2(12 * block, 12 * block)));
                 roomObjects.add(new Platform(new Vec2(13 * block, 10 * block)));
-
-
             }
 
         }
