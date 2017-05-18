@@ -6,23 +6,26 @@ import com.tda367.infinityrun.RoomTiles.BrickObject;
 /**
  * Created by kaffe on 5/12/17.
  */
-public class RoomRDL  extends RoomTemplate {
+public class RoomRDL extends RoomTemplate {
 
     public RoomRDL() {
-        u =false;
-        r=true;
-        d=true;
-        l=true;
+        u = false;
+        r = true;
+        d = true;
+        l = true;
         roomExits = 3;
+    }
+
+    public void addRoomObjects(int offsetX, int offsetY) {
         for (int x = 0; x < 10; x++) {
             for (int y = 0; y < 5; y++) {
-                roomObjects.add(new BrickObject(new Vec2(x*block,y*block)));
-                roomObjects.add(new BrickObject(new Vec2((24-x)*block,y*block)));
+                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + x * block, offsetY * 14 * block + y * block)));
+                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + (24 - x) * block, offsetY * 14 * block + y * block)));
             }
         }
         for (int x = 0; x < 25; x++) {
             for (int y = 0; y < 5; y++) {
-                roomObjects.add(new BrickObject(new Vec2(x * block, (13-y) * block)));
+                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + x * block, offsetY * 14 * block + (13 - y) * block)));
             }
         }
     }

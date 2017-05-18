@@ -13,12 +13,15 @@ public class RoomURDL extends RoomTemplate {
         d=true;
         l=true;
         roomExits = 4;
+    }
+
+    public void addRoomObjects(int offsetX, int offsetY){
         for (int x = 0; x < 10; x++) {
             for (int y = 0; y < 5; y++) {
-                roomObjects.add(new BrickObject(new Vec2(x*block,y*block)));
-                roomObjects.add(new BrickObject(new Vec2(x*block,(13-y)*block)));
-                roomObjects.add(new BrickObject(new Vec2((24-x)*block,y*block)));
-                roomObjects.add(new BrickObject(new Vec2((24-x)*block,(13-y)*block)));
+                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + x*block,offsetY * 14 * block + y*block)));
+                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + x*block,offsetY * 14 * block + (13-y)*block)));
+                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + (24-x)*block,offsetY * 14 * block + y*block)));
+                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + (24-x)*block,offsetY * 14 * block + (13-y)*block)));
             }
         }
     }

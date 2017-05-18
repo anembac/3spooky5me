@@ -35,5 +35,9 @@ public class RoomTemplate {
     public boolean isExitright() {
         return r;
     }
+
+    public void addRoomObjects(int x, int y) {
+
+    }
 }
 

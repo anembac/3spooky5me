@@ -26,6 +26,7 @@ public class World {
     }
 
     public World() {
+
         worldObjects = new ArrayList<WorldObject>();
         input = new Input();
     }
@@ -35,19 +36,25 @@ public class World {
     }
 
     public void generateWorld() {
-        for(WorldObject w:logicalMapper.mapper()){
+        for(WorldObject w:logicalMapper.mapper(0,0)) {
             addWorldObject(w);
         }
+        for(WorldObject w:logicalMapper.mapper(1,0)) {
+            addWorldObject(w);
         }
-
-
+        for(WorldObject w:logicalMapper.mapper(1,1)) {
+            addWorldObject(w);
+        }
+        for(WorldObject w:logicalMapper.mapper(0,1)) {
+            addWorldObject(w);
+        }
+    }
 
     public void URDL() {
         for (int i = 0; i < 5; i++) {
             addWorldObject(new Platform(new Vec2(i * 128, 1024)));
         }
     }
-
 
     public void frame(float dt) {
         input.collectInput();
@@ -64,7 +71,7 @@ public class World {
         //}
     }
 
-    public void addRoom (ArrayList<WorldObject> objects) {
+    private void addRoom (ArrayList<WorldObject> objects) {
         for(WorldObject w:objects){
             addWorldObject(w);
         }

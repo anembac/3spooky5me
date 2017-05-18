@@ -12,9 +12,20 @@ public class IndexPoint {
 
     @Override
     public int hashCode() {
-        return x+y*1000000;
-
+        return x*104119+y*104729;
     }
 
+
+    @Override
+    public boolean equals(Object obj){
+        if(this == obj) {
+            return true;
+        }
+        if(obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        IndexPoint point = (IndexPoint) obj;
+        return point.x == this.x && point.y == this.y && point.hashCode() == this.hashCode();
+    }
 
 }
