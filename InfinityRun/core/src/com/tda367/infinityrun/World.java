@@ -20,6 +20,7 @@ public class World {
     private KdTree<WorldObject> kdTree = new KdTree<WorldObject>();
     private double difficulty = 1.0;
     IInput input = null;
+    private WorldObject hero = null;
     private LogicalMapper logicalMapper = new LogicalMapper();
 
     public void increaseDifficulty(double difficulty) {
@@ -33,18 +34,17 @@ public class World {
     }
 
     public void generateWorld() {
-        for(WorldObject w:logicalMapper.mapper(0,0)) {
-            addWorldObject(w);
-        }
-        for(WorldObject w:logicalMapper.mapper(1,0)) {
-            addWorldObject(w);
-        }
-        for(WorldObject w:logicalMapper.mapper(1,1)) {
-            addWorldObject(w);
-        }
-        for(WorldObject w:logicalMapper.mapper(0,1)) {
-            addWorldObject(w);
-        }
+        int x = (int)(Math.floor((hero.getPosition().x+hero.getDrawingRect().bounds.x/2) / (Constants.roomWidth*Constants.meter)) + 0.5);
+        int y = (int)(Math.floor((hero.getPosition().y+hero.getDrawingRect().bounds.y/2) / (Constants.roomHeight*Constants.meter)) + 0.5);
+        addRoomIfItDoesntExist(x-1,y-1);
+        addRoomIfItDoesntExist(x-1,y);
+        addRoomIfItDoesntExist(x-1,y+1);
+        addRoomIfItDoesntExist(x,y-1);
+        addRoomIfItDoesntExist(x,y);
+        addRoomIfItDoesntExist(x,y+1);
+        addRoomIfItDoesntExist(x+1,y-1);
+        addRoomIfItDoesntExist(x+1,y);
+        addRoomIfItDoesntExist(x+1,y+1);
     }
 
     public List<WorldObject> getWorldObjects()
@@ -59,6 +59,10 @@ public class World {
     }
 
     public void frame(float dt) {
+        // 25 15
+        generateWorld();
+
+
         input.collectInput();
         for (WorldObject obj : worldObjects) {
             obj.frame(dt, input.getInput());
@@ -81,11 +85,27 @@ public class World {
         //}
     }
 
-    private void addRoom (ArrayList<WorldObject> objects) {
-        for(WorldObject w:objects){
-            addWorldObject(w);
+    public void setHero(WorldObject obj)
+    {
+        this.hero = obj;
+    }
+
+    public void addWorldObjects(List<WorldObject> objs)
+    {
+        for(WorldObject wo : objs)
+        {
+            addWorldObject(wo);
         }
     }
+
+    public void addRoomIfItDoesntExist(int x, int y)
+    {
+        if(!logicalMapper.roomExists(x,y))
+        {
+            addWorldObjects(logicalMapper.mapper(x,y));
+        }
+    }
+
 
     /*public void addHero(WorldObject obj) {
         worldObjects.add(obj);

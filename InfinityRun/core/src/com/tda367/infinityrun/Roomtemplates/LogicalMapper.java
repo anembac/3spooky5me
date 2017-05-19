@@ -177,6 +177,11 @@ public class LogicalMapper extends RoomTemplate {
         room.addRoomObjects(x, y);
         return room.roomObjects;
     }
+
+    public boolean roomExists(int x, int y)
+    {
+        return rooms.containsKey(new IndexPoint(x,y));
+    }
 }
 
 

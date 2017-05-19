@@ -40,14 +40,13 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         //br.setup();
 
         hero = new Character(new Vec2(768, 450), new Vec2(64, 64));
-        Enemy enemy = new Enemy(new Vec2(768,500), new Vec2(64,64),1,1,1,1,1,1,1,1);
+        Enemy enemy = new Enemy(new Vec2(768,520), new Vec2(64,64),1,1,1,1,1,1,1,1);
         // setup a new world depending on some menu parameters maybe? diff etc. world could also be called level, std
 
         world = new World();
-        world.generateWorld(/*params*/);
-        //world.setHero(hero);
         world.addWorldObject(enemy);
         world.addWorldObject(hero);
+        world.setHero(hero);
 
         //HUDDDDDD
         hud = new HUD(hero);
@@ -71,6 +70,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         camera.update();
         Matrix4 translation = new Matrix4();
         Rect heroRect = hero.getDrawingRect();
+
         float cx = Math.min(-heroRect.position.x - heroRect.bounds.x / 2 + windowWidth / 2, 0);
         float cy = -heroRect.position.y + windowHeight / 2 - heroRect.bounds.y / 2;
         translation.translate(cx, cy, 0);
