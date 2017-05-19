@@ -71,7 +71,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         Matrix4 translation = new Matrix4();
         Rect heroRect = hero.getDrawingRect();
 
-        float cx = Math.min(-heroRect.position.x - heroRect.bounds.x / 2 + windowWidth / 2, 0);
+        float cx = -heroRect.position.x - heroRect.bounds.x / 2 + windowWidth / 2;
         float cy = -heroRect.position.y + windowHeight / 2 - heroRect.bounds.y / 2;
         translation.translate(cx, cy, 0);
         game.batch.setTransformMatrix(translation);
