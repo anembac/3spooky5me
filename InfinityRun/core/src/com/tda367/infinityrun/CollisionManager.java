@@ -72,6 +72,7 @@ public class CollisionManager {
 
         List<KdTreeNode<WorldObject>> nodes = kdTree.getKNN(new Point2D.Double(cx,cy), 100); // get the 100 closest points, this should be enough, We could update this to use the range search algo later.
         for(KdTreeNode<WorldObject> node : nodes){
+            if(node.data == obj) continue;
             /*
                 We just calculate the distance to the 4 directional planes on the center of the WorldObject
              */
