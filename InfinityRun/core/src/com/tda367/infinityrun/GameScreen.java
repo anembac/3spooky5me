@@ -37,18 +37,9 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         //br = new BaseRoom();
         //br.setup();
 
-        hero = new Character(new Vec2(768, 450), new Vec2(64, 64), "WorldObjects/player.png");
+        hero = new Character(new Vec2(768, 450), new Vec2(64, 64));
         // setup a new world depending on some menu parameters maybe? diff etc. world could also be called level, std
-        hero.addUpgrade("Speed", new Speed(4));    //Added as a flat increase to Movement Speed
-        hero.addUpgrade("JumpH", new JumpH(5));    //Added as a flat increase to Jump Power
-        hero.addUpgrade("Hermes", new HermesSandals(1));     //Added as a flat increase
-        hero.addUpgrade("Health", new Health(20));  //Added flat on current health
-        hero.addUpgrade("Melee", new MeleeHandling(5));     //Multiplied to your weapons damage to determine your characters overall damage per hit with melee.
-        hero.addUpgrade("CHC", new CriticalHitChance(1)); //Added as flat CriticalHitChance
-        hero.addUpgrade("CHD", new CriticalHitDamage(5)); //Added as multiplier to your CriticalHitDamage
-        hero.addUpgrade("Looting", new Looting(2));    //Multiplied as a modifier to increase number of coins dropped - 250% chance of coins means 2 coins and 50% chance of extra.
-        hero.addUpgrade("Regeneration", new Regeneration(1)); //Added as a flat increase to your overall health regeneration per second
-        hero.updateUpgrades();
+
         world = new World();
         world.generateWorld(/*params*/);
         world.addHero(hero);
