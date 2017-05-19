@@ -16,6 +16,8 @@ import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.SpecialUpgrades.*;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 public class GameScreen implements Screen {  //tries to put textures onto the objects created in baseroom and draw them
     final InfinityRun game;                 // but it's not currently successful...
@@ -69,10 +71,29 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         camera.update();
         Matrix4 translation = new Matrix4();
         Rect heroRect = hero.getDrawingRect();
-        translation.translate(Math.min(-heroRect.position.x - heroRect.bounds.x / 2 + windowWidth / 2, 0), -heroRect.position.y + windowHeight / 2 - heroRect.bounds.y / 2, 0);
+        float cx = Math.min(-heroRect.position.x - heroRect.bounds.x / 2 + windowWidth / 2, 0);
+        float cy = -heroRect.position.y + windowHeight / 2 - heroRect.bounds.y / 2;
+        translation.translate(cx, cy, 0);
         game.batch.setTransformMatrix(translation);
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
+
+        /*
+        Object culling in case of lagg for future, may contain buggs so i will leave this commented for now.
+        List<KdTreeNode<WorldObject>> efficientObjectsToRender = CollisionManager.getInstance().kdTree.rangeSearch2D(-cx-windowWidth/2,-cx+windowWidth,-cy+windowHeight, -cy);
+        HashSet<WorldObject> efficientSet = new HashSet<WorldObject>();
+        for(KdTreeNode<WorldObject> node : efficientObjectsToRender)
+        {
+            efficientSet.add(node.data);
+        }
+        for (WorldObject wo : efficientSet) {
+            if (!textureMap.containsKey(wo.getTexturename())) {
+                textureMap.put(wo.getTexturename(), new Texture(Gdx.files.internal(wo.getTexturename())));
+            }
+            game.batch.draw(textureMap.get(wo.getTexturename()), wo.getPosition().x, wo.getPosition().y);
+
+        }*/
+
         for (WorldObject wo : world.getWorldObjects()) {
             if (!textureMap.containsKey(wo.getTexturename())) {
                 textureMap.put(wo.getTexturename(), new Texture(Gdx.files.internal(wo.getTexturename())));
