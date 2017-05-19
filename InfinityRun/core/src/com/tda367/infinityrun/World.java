@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class World {
 
+    //private List<WorldObject> worldObjects;
     private List<WorldObject> worldObjects;
     private KdTree<WorldObject> kdTree = new KdTree<WorldObject>();
     private double difficulty = 1.0;
@@ -29,10 +30,6 @@ public class World {
 
         worldObjects = new ArrayList<WorldObject>();
         input = new Input();
-    }
-
-    public List<WorldObject> getWorldObjects() {
-        return worldObjects;
     }
 
     public void generateWorld() {
@@ -50,6 +47,11 @@ public class World {
         }
     }
 
+    public List<WorldObject> getWorldObjects()
+    {
+        return worldObjects;
+    }
+
     public void URDL() {
         for (int i = 0; i < 5; i++) {
             addWorldObject(new Platform(new Vec2(i * 128, 1024)));
@@ -61,13 +63,21 @@ public class World {
         for (WorldObject obj : worldObjects) {
             obj.frame(dt, input.getInput());
         }
+        for (WorldObject obj : worldObjects) {
+            if(obj instanceof MovableObject)
+            {
+                // This object might have a different position now, the easiest way is to remove it and then re add it.
+                CollisionManager.getInstance().updatePosition(obj);
+            }
+        }
     }
 
     // to add the player etc to the world.
     public void addWorldObject(WorldObject obj) {
         //for(WorldObject obj:roomObjects) {
-        worldObjects.add(obj);
+
         CollisionManager.getInstance().addWorldObject(obj);
+        worldObjects.add(obj);
         //}
     }
 
@@ -77,8 +87,8 @@ public class World {
         }
     }
 
-    public void addHero(WorldObject obj) {
+    /*public void addHero(WorldObject obj) {
         worldObjects.add(obj);
-    }
+    }*/
 
 }

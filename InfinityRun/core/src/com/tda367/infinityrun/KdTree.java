@@ -26,14 +26,14 @@ public class KdTree<T> {
         return (isEven(index) ? val.getX() : val.getY());
     }
 
-    void insert(Point2D.Double point, T data)
+    KdTreeNode<T> insert(Point2D.Double point, T data)
     {
         KdTreeNode<T> cNode = parentNode;
 
         if (parentNode == null)
         {
             parentNode = new KdTreeNode<T>(point, null, data, 0);
-            //cNode = parentNode;
+            cNode = parentNode;
         }
         else
         {
@@ -48,7 +48,7 @@ public class KdTree<T> {
                     else
                     {
                         cNode.left = new KdTreeNode<T>(point, cNode, data, (cNode.splitIndex + 1) % dimensions);
-                        //cNode = cNode.left;
+                        cNode = cNode.left;
                         break;
                     }
                 }
@@ -61,12 +61,13 @@ public class KdTree<T> {
                     else
                     {
                         cNode.right = new KdTreeNode<T>(point, cNode, data, (cNode.splitIndex + 1) % dimensions);
-                        //cNode = cNode.right;
+                        cNode = cNode.right;
                         break;
                     }
                 }
             }
         }
+        return cNode;
     }
 
     float square(float a)

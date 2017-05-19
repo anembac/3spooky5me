@@ -38,12 +38,14 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         //br.setup();
 
         hero = new Character(new Vec2(768, 450), new Vec2(64, 64));
+        Enemy enemy = new Enemy(new Vec2(768,500), new Vec2(64,64),1,1,1,1,1,1,1,1);
         // setup a new world depending on some menu parameters maybe? diff etc. world could also be called level, std
 
         world = new World();
         world.generateWorld(/*params*/);
-        world.addHero(hero);
-
+        //world.setHero(hero);
+        world.addWorldObject(enemy);
+        world.addWorldObject(hero);
 
         //HUDDDDDD
         hud = new HUD(hero);
