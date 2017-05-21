@@ -11,7 +11,7 @@ import java.util.*;
 public class LogicalMapper extends RoomTemplate {
 
     private HashMap<IndexPoint, RoomTemplate> rooms = new HashMap<IndexPoint, RoomTemplate>();
-    private static int exits = 2;
+    private static int exits = 0;
     private ArrayList<RoomTemplate> roomIndexes = new ArrayList<RoomTemplate>();
 
     private int checkedL;
@@ -46,7 +46,6 @@ public class LogicalMapper extends RoomTemplate {
             if (rooms.get(new IndexPoint(x, y + 1)).d) {
             }
         } catch (NullPointerException n) {
-            System.out.println("Up");
             return 0;
         }
         if (rooms.get(new IndexPoint(x, y + 1)).d) {
@@ -61,7 +60,6 @@ public class LogicalMapper extends RoomTemplate {
             if (rooms.get(new IndexPoint(x + 1, y)).l) {
             }
         } catch (NullPointerException n) {
-            System.out.println("Right");
             return 0;
         }
         if (rooms.get(new IndexPoint(x + 1, y)).l) {
@@ -76,7 +74,6 @@ public class LogicalMapper extends RoomTemplate {
             if (rooms.get(new IndexPoint(x, y - 1)).u) {
             }
         } catch (NullPointerException n) {
-            System.out.println("Down");
             return 0;
         }
         if (rooms.get(new IndexPoint(x, y - 1)).u) {
@@ -91,7 +88,6 @@ public class LogicalMapper extends RoomTemplate {
             if (rooms.get(new IndexPoint(x - 1, y)).r) {
             }
         } catch (NullPointerException n) {
-            System.out.println("Left");
             return 0;
         }
         if (rooms.get(new IndexPoint(x - 1, y)).r) {
@@ -123,9 +119,9 @@ public class LogicalMapper extends RoomTemplate {
 
         ArrayList<RoomTemplate> possibleRooms = new ArrayList<RoomTemplate>();
         possibleRooms.addAll(roomIndexes);
-        for (int i = 0; i < possibleRooms.size(); i++) {
+        for (int i = 0; i < possibleRooms.size(); i++ ) {
             if (checkedU > 0 && !possibleRooms.get(i).u) {
-                possibleRooms.remove(possibleRooms.get(i).d);
+                possibleRooms.remove(possibleRooms.get(i));
                 i--;
             } else if (checkedR > 0 && !possibleRooms.get(i).r) {
                 possibleRooms.remove(possibleRooms.get(i));
@@ -148,13 +144,10 @@ public class LogicalMapper extends RoomTemplate {
             } else if (checkedL < 0 && possibleRooms.get(i).l) {
                 possibleRooms.remove(possibleRooms.get(i));
                 i--;
+            } else if (exits + possibleRooms.get(i).roomExits < 2) {
+                possibleRooms.remove(possibleRooms.get(i));
+                i--;
             }
-            /*
-            if (exits + room.roomExits < 2) {
-                possibleRooms.remove(room);
-            }
-        */
-
         }
         //randomly picks a room of what's left in the list.
         int rnd = new Random().nextInt(possibleRooms.size());
@@ -178,9 +171,8 @@ public class LogicalMapper extends RoomTemplate {
         return room.roomObjects;
     }
 
-    public boolean roomExists(int x, int y)
-    {
-        return rooms.containsKey(new IndexPoint(x,y));
+    public boolean roomExists(int x, int y) {
+        return rooms.containsKey(new IndexPoint(x, y));
     }
 }
 

@@ -13,7 +13,6 @@ public class RoomUD extends  RoomTemplate {
         d=true;
         l=false;
         roomExits = 2;
-        int block = 64;
     }
 
     public void addRoomObjects(int offsetX, int offsetY){
