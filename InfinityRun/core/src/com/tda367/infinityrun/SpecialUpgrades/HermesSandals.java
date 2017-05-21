@@ -8,11 +8,10 @@ import com.tda367.infinityrun.Upgrade;
  */
 
 public class HermesSandals extends Upgrade {
-    private int charges;
 
-    public HermesSandals(int basevalue) {
-        super(2, basevalue);
-        charges = getValueInt();
+    public HermesSandals(int level) {
+        super(2, level);
+        upgradeValue = getValueInt();
     }
     @Override
     public int getValueInt(){
@@ -21,13 +20,13 @@ public class HermesSandals extends Upgrade {
 
     @Override
     public void frame(float dt, InputState state, ObjectModifiers mod) {
-        if(state.jumpPressed() && mod.inAir && (charges > 0))
+        if(state.jumpPressed() && mod.inAir && (upgradeValue > 0))
         {
             mod.acceleration.y = 0;
-            mod.acceleration.y += 800;
-            --charges;
+            mod.acceleration.y += 2000;
+            --upgradeValue;
         } if(!mod.inAir){
-            charges = getValueInt();
+            upgradeValue = getValueInt();
         }
     }
 }

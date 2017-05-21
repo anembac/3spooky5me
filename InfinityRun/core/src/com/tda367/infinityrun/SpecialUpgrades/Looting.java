@@ -11,8 +11,9 @@ import java.util.Random;
  */
 public class Looting extends Upgrade {
 
-    public Looting(int basevalue) {
-        super(-1, basevalue);
+    public Looting(int level) {
+        super(-1, level);
+        upgradeValue = 5;
     }
 
     public int numberOfCoins() {

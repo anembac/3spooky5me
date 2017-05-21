@@ -10,8 +10,9 @@ import java.util.Timer;
  */
 public class Regeneration extends Upgrade {
 
-    public Regeneration(int baseValue) {
-        super(-1, baseValue);
+    public Regeneration(int level) {
+        super(-1, level);
+        upgradeValue = 1;
     }
 
     @Override
