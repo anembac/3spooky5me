@@ -5,10 +5,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.Math.Vec4;
+import com.tda367.infinityrun.RoomTiles.CoinObject;
 import com.tda367.infinityrun.SpecialUpgrades.Looting;
 
 import javax.rmi.CORBA.Util;
 import java.awt.geom.Point2D;
+import java.util.List;
 
 /**
  * Created by kaffe on 4/3/17.
@@ -29,8 +31,18 @@ public class Character extends MovableObject {
     }
 
     @Override
-    public void frame(float dt, InputState state)
+    public void frame(float dt,float heroX, float heroY, InputState state)
     {
-        super.frame(dt,state);
+        List<WorldObject> rlt =  CollisionManager.getInstance().getKNearest(this, 5);
+        for(WorldObject wo : rlt)
+        {
+            if(wo instanceof CoinObject)
+            {
+                wo.despawn();
+                //upgrades.get("Looting").
+                coins++;
+            }
+        }
+        super.frame(dt, heroX, heroY, state);
     }
 }

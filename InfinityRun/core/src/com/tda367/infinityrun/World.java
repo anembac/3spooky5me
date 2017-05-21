@@ -15,9 +15,7 @@ import java.util.List;
  */
 public class World {
 
-    //private List<WorldObject> worldObjects;
     private List<WorldObject> worldObjects;
-    private KdTree<WorldObject> kdTree = new KdTree<WorldObject>();
     private double difficulty = 1.0;
     IInput input = null;
     private WorldObject hero = null;
@@ -71,11 +69,11 @@ public class World {
         // 25 15
 
         generateWorld();
-
+        List<WorldObject> objectsToRemove = new ArrayList<WorldObject>();
 
         input.collectInput();
         for (WorldObject obj : worldObjects) {
-            obj.frame(dt, input.getInput());
+            obj.frame(dt, hero.getPosition().x + hero.getDrawingRect().bounds.x / 2, hero.getPosition().y + hero.getDrawingRect().bounds.y / 2, input.getInput());
         }
         for (WorldObject obj : worldObjects) {
             if(obj instanceof MovableObject)
@@ -83,16 +81,22 @@ public class World {
                 // This object might have a different position now, the easiest way is to remove it and then re add it.
                 CollisionManager.getInstance().updatePosition(obj);
             }
+            if(obj.getDespawn())
+            {
+                objectsToRemove.add(obj);
+            }
+        }
+        for(WorldObject wo : objectsToRemove)
+        {
+            CollisionManager.getInstance().removeObject(wo);
+            worldObjects.remove(wo);
         }
     }
 
     // to add the player etc to the world.
     public void addWorldObject(WorldObject obj) {
-        //for(WorldObject obj:roomObjects) {
-
         CollisionManager.getInstance().addWorldObject(obj);
         worldObjects.add(obj);
-        //}
     }
 
     public void setHero(WorldObject obj)
@@ -102,6 +106,7 @@ public class World {
 
     public void addWorldObjects(List<WorldObject> objs)
     {
+
         for(WorldObject wo : objs)
         {
             addWorldObject(wo);
@@ -112,7 +117,15 @@ public class World {
     {
         if(!logicalMapper.roomExists(x,y))
         {
-            addWorldObjects(logicalMapper.mapper(x,y));
+            List<WorldObject> newWorldObjects = logicalMapper.mapper(x,y);
+            for(int i = 0; i < newWorldObjects.size(); i++)
+            {
+                for(int j = 0; j < worldObjects.size(); j++)
+                {
+                    if(newWorldObjects.get(i) == worldObjects.get(j)) System.out.println("Error worldobject already added!?");
+                }
+            }
+            addWorldObjects(newWorldObjects);
         }
     }
 

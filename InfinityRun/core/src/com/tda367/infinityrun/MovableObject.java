@@ -70,7 +70,7 @@ public class MovableObject extends WorldObject {
     }
 
     @Override
-    public void frame(float dt, InputState state){
+    public void frame(float dt, float heroX, float heroY, InputState state){
 
         timeSinceRegen += dt;
         if(timeSinceRegen >= 1) {

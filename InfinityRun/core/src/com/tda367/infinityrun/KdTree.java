@@ -225,12 +225,12 @@ public class KdTree<T> {
         n = n % 2;
         if ((n % 2) == 0)
         {
-            if (getIndexValue(parent.point, n) < l)
+            if (parent.point.x < l)
             {
                 n++;
                 rangeSearch2DIntern(l, r, t, b, output, parent.right, n);
             }
-            else if (getIndexValue(parent.point, n) > r)
+            else if (parent.point.x > r)
             {
                 n++;
                 rangeSearch2DIntern(l, r, t, b, output, parent.left, n);
@@ -239,7 +239,7 @@ public class KdTree<T> {
             {
                 n++;
                 n = n % 2;
-                if (getIndexValue(parent.point, n) > b && getIndexValue(parent.point, n) < t)
+                if (parent.point.y > b && parent.point.y < t)
                 {
                     output.add(parent);
                 }
@@ -249,12 +249,12 @@ public class KdTree<T> {
         }
         else
         {
-            if (getIndexValue(parent.point, n) < b)
+            if ( parent.point.y < b)
             {
                 n++;
                 rangeSearch2DIntern(l, r, t, b, output, parent.right, n);
             }
-            else if (getIndexValue(parent.point, n) > t)
+            else if ( parent.point.y > t)
             {
                 n++;
                 rangeSearch2DIntern(l, r, t, b, output, parent.left, n);
@@ -263,7 +263,7 @@ public class KdTree<T> {
             {
                 n++;
                 n = n % 2;
-                if (getIndexValue(parent.point, n) > l && getIndexValue(parent.point, n) < r)
+                if (parent.point.x > l && parent.point.x < r)
                 {
                     output.add(parent);
                 }

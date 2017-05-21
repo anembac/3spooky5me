@@ -14,8 +14,24 @@ public class Enemy extends MovableObject {
     }
 
     @Override
-    public void frame(float dt, InputState input) {
-        InputState state = new InputState(true, false,false,false);
-        super.frame(dt, state);
+    public void frame(float dt,float heroX, float heroY, InputState input) {
+
+        float cx = position.x + bounds.x / 2;
+        float cy = position.y + bounds.y / 2;
+        boolean r = false, l = false, jump = false, attack = false;
+        if(cx + 90 < heroX) r = true;
+        else if(cx - 90 > heroX) l = true;
+        if(heroY - 90 > cy) jump = true;
+        //if(acceleration.x > -1 && acceleration.y < 1) jump = true;
+        if(Math.sqrt((cx-heroX)*(cx-heroX)+(cy-heroY)*(cy-heroY)) < 100) attack = true;
+
+
+        InputState state = new InputState(r, l,jump,attack);
+
+
+
+
+
+        super.frame(dt, heroX, heroY, state);
     }
 }

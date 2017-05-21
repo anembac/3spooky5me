@@ -22,12 +22,33 @@ public abstract class WorldObject { //We should probably refactor this class at 
     private WorldObject parent = null;
     private String texturename = "";
     private List<WorldObject> children = new ArrayList<WorldObject>();
-
+    private boolean collidable = true;
+    private boolean despawn = false;
 
     public WorldObject(Vec2 position, Vec2 bounds)
     {
         this.position = position;
         this.bounds = bounds;
+    }
+
+    public void despawn()
+    {
+        despawn = true;
+    }
+
+    public boolean getDespawn()
+    {
+        return despawn;
+    }
+
+    public boolean getCollidable()
+    {
+        return collidable;
+    }
+
+    public void setCollidable(boolean col)
+    {
+        collidable = col;
     }
 
     public WorldObject(Vec2 pos, Vec2 bound, WorldObject parent)
@@ -37,7 +58,7 @@ public abstract class WorldObject { //We should probably refactor this class at 
         this.parent = parent;
     }
 
-    public void frame(float dt, InputState state){}
+    public void frame(float dt, float heroX, float heroY, InputState state){}
 
     public void setParent(WorldObject parent)
     {

@@ -80,9 +80,9 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
 
-        /*
-        Object culling in case of lagg for future, may contain buggs so i will leave this commented for now.
-        List<KdTreeNode<WorldObject>> efficientObjectsToRender = CollisionManager.getInstance().kdTree.rangeSearch2D(-cx-windowWidth/2,-cx+windowWidth,-cy+windowHeight, -cy);
+
+        //Object culling in case of lagg for future, may contain buggs so i will leave this commented for now.
+        /*List<KdTreeNode<WorldObject>> efficientObjectsToRender = CollisionManager.getInstance().kdTree.rangeSearch2D(heroRect.position.x-100,heroRect.position.x+100,heroRect.position.y+100, heroRect.position.y-100);
         HashSet<WorldObject> efficientSet = new HashSet<WorldObject>();
         for(KdTreeNode<WorldObject> node : efficientObjectsToRender)
         {

@@ -6,6 +6,7 @@ import com.tda367.infinityrun.Math.Vec4;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -46,18 +47,59 @@ public class CollisionManager {
 
     public void updatePosition(WorldObject obj)
     {
+        // might cause a bug in rangesearch :/ mikael
         removeObject(obj);
         addWorldObject(obj);
     }
 
     public void removeObject(WorldObject obj)
     {
+        if(!worldObjectToNodes.containsKey(obj))
+        {
+            return;
+        }
         List<KdTreeNode<WorldObject>> nodes = worldObjectToNodes.get(obj);
         for(KdTreeNode<WorldObject> node : nodes)
         {
             kdTree.removePoint(node);
         }
         worldObjectToNodes.remove(obj);
+    }
+
+    // seems buggy for some reason, dont use without carefully testing the result.
+    public List<WorldObject> rangeSearch(float left, float right, float top, float bot, WorldObject requestor)
+    {
+         List<WorldObject> output = nodeListToWOList(kdTree.rangeSearch2D(left, right, top, bot));
+         if(output.contains(requestor)) output.remove(requestor);
+         return output;
+    }
+
+    public List<WorldObject> getKNearest(WorldObject requestor, int k)
+    {
+        float cx, cy;
+        cx = requestor.position.x + requestor.bounds.x / 2;
+        cy = requestor.position.y + requestor.bounds.y / 2;
+
+        List<KdTreeNode<WorldObject>> nodes = kdTree.getKNN(new Point2D.Double(cx,cy), k*4+4);
+        List<WorldObject> output= nodeListToWOList(nodes);
+        if(output.contains(requestor)) output.remove(requestor);
+        while (output.size() > 10) output.remove(10);
+        return output;
+    }
+
+    private List<WorldObject> nodeListToWOList(List<KdTreeNode<WorldObject>> list)
+    {
+        HashSet<WorldObject> objects = new HashSet<WorldObject>();
+        for(KdTreeNode<WorldObject> o : list)
+        {
+            objects.add(o.data);
+        }
+        List<WorldObject> output = new ArrayList<WorldObject>();
+        for(WorldObject wo : objects)
+        {
+            output.add(wo);
+        }
+        return output;
     }
 
     // Complexity = O(log(n))
@@ -70,9 +112,9 @@ public class CollisionManager {
         // Initialize the intersection pts to never intersect
         Vec4 output = new Vec4(-1000000000,-100000000,10000000,10000000);
 
-        List<KdTreeNode<WorldObject>> nodes = kdTree.getKNN(new Point2D.Double(cx,cy), 100); // get the 100 closest points, this should be enough, We could update this to use the range search algo later.
+        List<KdTreeNode<WorldObject>> nodes = kdTree.getKNN(new Point2D.Double(cx,cy), 1000); // get the 100 closest points, this should be enough, We could update this to use the range search algo later.
         for(KdTreeNode<WorldObject> node : nodes){
-            if(node.data == obj) continue;
+            if(node.data == obj || !node.data.getCollidable()) continue;
             /*
                 We just calculate the distance to the 4 directional planes on the center of the WorldObject
              */
