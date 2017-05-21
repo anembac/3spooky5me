@@ -2,6 +2,7 @@ package com.tda367.infinityrun.Roomtemplates;
 
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.RoomTiles.BrickObject;
+import com.tda367.infinityrun.RoomTiles.CoinObject;
 
 /**
  * Created by kaffe on 5/12/17.
@@ -38,6 +39,7 @@ public class RoomD extends  RoomTemplate {
                 roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 20 * block + i * block, offsetY * 14 * block + 5 * block + j * block)));
             }
         }
+        roomObjects.add(new CoinObject(new Vec2(offsetX * 25 * block  + block + 11 * block, offsetY * 14 * block + 7  * block)));
     }
 
 }

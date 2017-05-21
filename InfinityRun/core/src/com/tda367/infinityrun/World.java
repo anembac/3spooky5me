@@ -30,21 +30,34 @@ public class World {
     public World() {
 
         worldObjects = new ArrayList<WorldObject>();
+
         input = new Input();
+
     }
 
     public void generateWorld() {
         int x = (int)(Math.floor((hero.getPosition().x+hero.getDrawingRect().bounds.x/2) / (Constants.roomWidth*Constants.meter)));
         int y = (int)(Math.floor((hero.getPosition().y+hero.getDrawingRect().bounds.y/2) / (Constants.roomHeight*Constants.meter)));
         //System.out.println(x + "  " + y + "  " + (hero.getPosition().x+hero.getDrawingRect().bounds.x/2) / (Constants.roomWidth*Constants.meter));
-        addRoomIfItDoesntExist(x-1,y-1);
-        addRoomIfItDoesntExist(x-1,y);
-        addRoomIfItDoesntExist(x-1,y+1);
-        addRoomIfItDoesntExist(x-0,y-1);
-        addRoomIfItDoesntExist(x-0,y);
-        addRoomIfItDoesntExist(x-0,y+1);
-        addRoomIfItDoesntExist(x+1,y-1);
+
+      //creates the first room
+        addRoomIfItDoesntExist(x - 0, y-0);
+        //creates the non-corner rooms
         addRoomIfItDoesntExist(x+1,y);
+        addRoomIfItDoesntExist(x-1,y);
+        addRoomIfItDoesntExist(x-0,y-1);
+        addRoomIfItDoesntExist(x-0,y+1);
+
+
+        //creates diagonal rooms
+        addRoomIfItDoesntExist(x-1,y-1);
+
+        addRoomIfItDoesntExist(x-1,y+1);
+
+
+
+        addRoomIfItDoesntExist(x+1,y-1);
+
         addRoomIfItDoesntExist(x+1,y+1);
     }
 
@@ -53,11 +66,6 @@ public class World {
         return worldObjects;
     }
 
-    public void URDL() {
-        for (int i = 0; i < 5; i++) {
-            addWorldObject(new Platform(new Vec2(i * 128, 1024)));
-        }
-    }
 
     public void frame(float dt) {
         // 25 15

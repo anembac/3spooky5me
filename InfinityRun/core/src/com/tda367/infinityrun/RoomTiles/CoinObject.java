@@ -12,7 +12,7 @@ public class CoinObject extends WorldObject {
 
     public CoinObject(Vec2 position) {
         super(position, new Vec2(32, 32));
-        setTexture("WorldObjects/Coin.png");
+        setTexture("WorldObjects/coin.png");
 
     }
 }
