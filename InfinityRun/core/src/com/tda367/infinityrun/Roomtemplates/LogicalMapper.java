@@ -11,7 +11,7 @@ import java.util.*;
 public class LogicalMapper extends RoomTemplate {
 
     private HashMap<IndexPoint, RoomTemplate> rooms = new HashMap<IndexPoint, RoomTemplate>();
-    private static int exits = 0;
+    private static int exits = -2;
     private ArrayList<RoomTemplate> roomIndexes = new ArrayList<RoomTemplate>();
 
     private int checkedL;
@@ -161,6 +161,13 @@ public class LogicalMapper extends RoomTemplate {
         checkedR = checkRight(x, y);
         checkedD = checkDown(x, y);
         checkedL = checkLeft(x, y);
+    }
+
+    public ArrayList<WorldObject> addBaseroom (){
+        RoomTemplate room =  new RoomURL();
+        rooms.put(new IndexPoint(0, 0), room);
+        room.addRoomObjects(0, 0);
+        return room.roomObjects;
     }
 
     public ArrayList<WorldObject> mapper(int x, int y) {

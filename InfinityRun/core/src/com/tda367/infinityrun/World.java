@@ -30,6 +30,7 @@ public class World {
     public World() {
 
         worldObjects = new ArrayList<WorldObject>();
+
         input = new Input();
     }
 
@@ -53,11 +54,6 @@ public class World {
         return worldObjects;
     }
 
-    public void URDL() {
-        for (int i = 0; i < 5; i++) {
-            addWorldObject(new Platform(new Vec2(i * 128, 1024)));
-        }
-    }
 
     public void frame(float dt) {
         // 25 15
