@@ -15,10 +15,12 @@ import java.util.List;
  */
 public class World {
 
+    //private List<WorldObject> worldObjects;
     private List<WorldObject> worldObjects;
     private KdTree<WorldObject> kdTree = new KdTree<WorldObject>();
     private double difficulty = 1.0;
     IInput input = null;
+    private WorldObject hero = null;
     private LogicalMapper logicalMapper = new LogicalMapper();
 
     public void increaseDifficulty(double difficulty) {
@@ -26,49 +28,30 @@ public class World {
     }
 
     public World() {
+
         worldObjects = new ArrayList<WorldObject>();
         input = new Input();
     }
 
-    public List<WorldObject> getWorldObjects() {
-        return worldObjects;
+    public void generateWorld() {
+        int x = (int)(Math.floor((hero.getPosition().x+hero.getDrawingRect().bounds.x/2) / (Constants.roomWidth*Constants.meter)));
+        int y = (int)(Math.floor((hero.getPosition().y+hero.getDrawingRect().bounds.y/2) / (Constants.roomHeight*Constants.meter)));
+        //System.out.println(x + "  " + y + "  " + (hero.getPosition().x+hero.getDrawingRect().bounds.x/2) / (Constants.roomWidth*Constants.meter));
+        addRoomIfItDoesntExist(x-1,y-1);
+        addRoomIfItDoesntExist(x-1,y);
+        addRoomIfItDoesntExist(x-1,y+1);
+        addRoomIfItDoesntExist(x-0,y-1);
+        addRoomIfItDoesntExist(x-0,y);
+        addRoomIfItDoesntExist(x-0,y+1);
+        addRoomIfItDoesntExist(x+1,y-1);
+        addRoomIfItDoesntExist(x+1,y);
+        addRoomIfItDoesntExist(x+1,y+1);
     }
 
-    public void generateWorld() {
-        int block = 64;
-
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-
-                //floor
-                addWorldObject(new BrickObject(new Vec2(0 * block + i * block, 0 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(5 * block + i * block, 0 * block + j * block)));
-
-                addWorldObject(new BrickObject(new Vec2(15 * block + i * block, 0 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(20 * block + i * block, 0 * block + j * block)));
-
-                // roof
-                addWorldObject(new BrickObject(new Vec2(0 * block + i * block, 10 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(5 * block + i * block, 10 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(10 * block + i * block, 10 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(15 * block + i * block, 10 * block + j * block)));
-                addWorldObject(new BrickObject(new Vec2(20 * block + i * block, 10 * block + j * block)));
-                //extra roof shit
-                addWorldObject(new BrickObject(new Vec2(0 * block + i * block, 9 * block)));
-                addWorldObject(new BrickObject(new Vec2(5 * block + i * block, 9 * block)));
-                addWorldObject(new BrickObject(new Vec2(10 * block + i * block, 9 * block)));
-                addWorldObject(new BrickObject(new Vec2(15 * block + i * block, 9 * block)));
-                addWorldObject(new BrickObject(new Vec2(20 * block + i * block, 9 * block)));
-
-
-                //right wall
-
-                addWorldObject(new BrickObject(new Vec2(0 * block + i * block, 5 * block + j * block)));
-            }
-            }
-        }
-
-
+    public List<WorldObject> getWorldObjects()
+    {
+        return worldObjects;
+    }
 
     public void URDL() {
         for (int i = 0; i < 5; i++) {
@@ -76,30 +59,58 @@ public class World {
         }
     }
 
-
     public void frame(float dt) {
+        // 25 15
+
+        generateWorld();
+
+
         input.collectInput();
         for (WorldObject obj : worldObjects) {
             obj.frame(dt, input.getInput());
+        }
+        for (WorldObject obj : worldObjects) {
+            if(obj instanceof MovableObject)
+            {
+                // This object might have a different position now, the easiest way is to remove it and then re add it.
+                CollisionManager.getInstance().updatePosition(obj);
+            }
         }
     }
 
     // to add the player etc to the world.
     public void addWorldObject(WorldObject obj) {
         //for(WorldObject obj:roomObjects) {
-        worldObjects.add(obj);
+
         CollisionManager.getInstance().addWorldObject(obj);
+        worldObjects.add(obj);
         //}
     }
 
-    public void addRoom (List<WorldObject> objects) {
-        for(WorldObject w:objects){
-            addWorldObject(w);
+    public void setHero(WorldObject obj)
+    {
+        this.hero = obj;
+    }
+
+    public void addWorldObjects(List<WorldObject> objs)
+    {
+        for(WorldObject wo : objs)
+        {
+            addWorldObject(wo);
         }
     }
 
-    public void addHero(WorldObject obj) {
-        worldObjects.add(obj);
+    public void addRoomIfItDoesntExist(int x, int y)
+    {
+        if(!logicalMapper.roomExists(x,y))
+        {
+            addWorldObjects(logicalMapper.mapper(x,y));
+        }
     }
+
+
+    /*public void addHero(WorldObject obj) {
+        worldObjects.add(obj);
+    }*/
 
 }

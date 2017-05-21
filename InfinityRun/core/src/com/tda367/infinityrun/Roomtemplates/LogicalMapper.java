@@ -4,18 +4,15 @@ import com.tda367.infinityrun.WorldObject;
 
 import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 /**
  * Created by kaffe on 5/12/17.
  */
 public class LogicalMapper extends RoomTemplate {
 
-    HashMap<IndexPoint, RoomTemplate> rooms;
-    private int x = 0;
-    private int y = 0;
-    private static int exits = 2;
-    ArrayList<RoomTemplate> roomIndexes = new ArrayList<RoomTemplate>();
+    private HashMap<IndexPoint, RoomTemplate> rooms = new HashMap<IndexPoint, RoomTemplate>();
+    private static int exits = 0;
+    private ArrayList<RoomTemplate> roomIndexes = new ArrayList<RoomTemplate>();
 
     private int checkedL;
     private int checkedU;
@@ -46,12 +43,12 @@ public class LogicalMapper extends RoomTemplate {
      */
     private int checkUp(int x, int y) {
         try {
-            if (rooms.get(new Point(x, y + 1)).u) {
+            if (rooms.get(new IndexPoint(x, y + 1)).d) {
             }
         } catch (NullPointerException n) {
             return 0;
         }
-        if (rooms.get(new Point(x, y + 1)).u) {
+        if (rooms.get(new IndexPoint(x, y + 1)).d) {
             return 1;
         } else {
             return -1;
@@ -60,12 +57,12 @@ public class LogicalMapper extends RoomTemplate {
 
     private int checkRight(int x, int y) {
         try {
-            if (rooms.get(new Point(x + 1, y)).r) {
+            if (rooms.get(new IndexPoint(x + 1, y)).l) {
             }
         } catch (NullPointerException n) {
             return 0;
         }
-        if (rooms.get(new Point(x + 1, y)).r) {
+        if (rooms.get(new IndexPoint(x + 1, y)).l) {
             return 1;
         } else {
             return -1;
@@ -74,12 +71,12 @@ public class LogicalMapper extends RoomTemplate {
 
     private int checkDown(int x, int y) {
         try {
-            if (rooms.get(new Point(x, y - 1)).d) {
+            if (rooms.get(new IndexPoint(x, y - 1)).u) {
             }
         } catch (NullPointerException n) {
             return 0;
         }
-        if (rooms.get(new Point(x, y - 1)).d) {
+        if (rooms.get(new IndexPoint(x, y - 1)).u) {
             return 1;
         } else {
             return -1;
@@ -88,12 +85,12 @@ public class LogicalMapper extends RoomTemplate {
 
     private int checkLeft(int x, int y) {
         try {
-            if (rooms.get(new Point(x - 1, y)).l) {
+            if (rooms.get(new IndexPoint(x - 1, y)).r) {
             }
         } catch (NullPointerException n) {
             return 0;
         }
-        if (rooms.get(new Point(x - 1, y)).l) {
+        if (rooms.get(new IndexPoint(x - 1, y)).r) {
             return 1;
         } else {
             return -1;
@@ -105,68 +102,78 @@ public class LogicalMapper extends RoomTemplate {
 
         //removes 2 exits for every connection.
 
-        if (checkedU == 1){exits -=2;}
-        if (checkedR == 1){exits -=2;}
-        if (checkedD == 1){exits -=2;}
-        if (checkedL == 1){exits -=2;}
+        if (checkedU == 1) {
+            exits -= 2;
+        }
+        if (checkedR == 1) {
+            exits -= 2;
+        }
+        if (checkedD == 1) {
+            exits -= 2;
+        }
+        if (checkedL == 1) {
+            exits -= 2;
+        }
 
-            //checks what rooms are available
+        //checks what rooms are available
 
         ArrayList<RoomTemplate> possibleRooms = new ArrayList<RoomTemplate>();
         possibleRooms.addAll(roomIndexes);
-        for (RoomTemplate room : possibleRooms) {
-            if (checkedU > 0 && !room.d) {
-                possibleRooms.remove(room);
+        for (int i = 0; i < possibleRooms.size(); i++ ) {
+            if (checkedU > 0 && !possibleRooms.get(i).u) {
+                possibleRooms.remove(possibleRooms.get(i));
+                i--;
+            } else if (checkedR > 0 && !possibleRooms.get(i).r) {
+                possibleRooms.remove(possibleRooms.get(i));
+                i--;
+            } else if (checkedD > 0 && !possibleRooms.get(i).d) {
+                possibleRooms.remove(possibleRooms.get(i));
+                i--;
+            } else if (checkedL > 0 && !possibleRooms.get(i).l) {
+                possibleRooms.remove(possibleRooms.get(i));
+                i--;
+            } else if (checkedU < 0 && possibleRooms.get(i).u) {
+                possibleRooms.remove(possibleRooms.get(i));
+                i--;
+            } else if (checkedR < 0 && possibleRooms.get(i).r) {
+                possibleRooms.remove(possibleRooms.get(i));
+                i--;
+            } else if (checkedD < 0 && possibleRooms.get(i).d) {
+                possibleRooms.remove(possibleRooms.get(i));
+                i--;
+            } else if (checkedL < 0 && possibleRooms.get(i).l) {
+                possibleRooms.remove(possibleRooms.get(i));
+                i--;
+            } else if (exits + possibleRooms.get(i).roomExits < 2) {
+                possibleRooms.remove(possibleRooms.get(i));
+                i--;
             }
-            if (checkedR > 0 && !room.l) {
-                possibleRooms.remove(room);
-            }
-            if (checkedD > 0 && !room.u) {
-                possibleRooms.remove(room);
-            }
-            if (checkedL > 0 && !room.r) {
-                possibleRooms.remove(room);
-            }
-            if (checkedU < 0 && room.d) {
-                possibleRooms.remove(room);
-            }
-            if (checkedR < 0 && room.l) {
-                possibleRooms.remove(room);
-            }
-            if (checkedD < 0 && room.u) {
-                possibleRooms.remove(room);
-            }
-            if (checkedL < 0 && room.r) {
-                possibleRooms.remove(room);
-            }
-            if (exits + room.roomExits < 2) {
-                possibleRooms.remove(room);
-            }
-
-
-            }
-            //randomly picks a room of what's left in the lift.
+        }
+        //randomly picks a room of what's left in the list.
         int rnd = new Random().nextInt(possibleRooms.size());
         exits += possibleRooms.get(rnd).roomExits;
         return possibleRooms.get(rnd);
     }
 
-    public void
-    getSurrounding() {
+    private void
+    getSurrounding(int x, int y) {
         checkedU = checkUp(x, y);
         checkedR = checkRight(x, y);
         checkedD = checkDown(x, y);
         checkedL = checkLeft(x, y);
     }
 
-
-    public List<WorldObject> mapper() {
-        getSurrounding();
+    public ArrayList<WorldObject> mapper(int x, int y) {
+        getSurrounding(x, y);
         RoomTemplate room = roomRandomizer();
-        rooms.put(new IndexPoint(x,y), room);
+        rooms.put(new IndexPoint(x, y), room);
+        room.addRoomObjects(x, y);
         return room.roomObjects;
     }
 
+    public boolean roomExists(int x, int y) {
+        return rooms.containsKey(new IndexPoint(x, y));
+    }
 }
 
 

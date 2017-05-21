@@ -13,10 +13,13 @@ public class RoomRL extends  RoomTemplate {
         d=false;
         l=true;
         roomExits = 2;
+    }
+
+    public void addRoomObjects(int offsetX, int offsetY){
         for (int x = 0; x < 25; x++) {
             for (int y = 0; y < 5; y++) {
-                roomObjects.add(new BrickObject(new Vec2(x * block, (13-y) * block)));
-                roomObjects.add(new BrickObject(new Vec2(x * block, y * block)));
+                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + x * block, offsetY * 14 * block + (13-y) * block)));
+                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + x * block, offsetY * 14 * block + y * block)));
             }
         }
     }

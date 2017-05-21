@@ -16,6 +16,8 @@ import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.SpecialUpgrades.*;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 public class GameScreen implements Screen {  //tries to put textures onto the objects created in baseroom and draw them
     final InfinityRun game;                 // but it's not currently successful...
@@ -37,22 +39,14 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         //br = new BaseRoom();
         //br.setup();
 
-        hero = new Character(new Vec2(768, 450), new Vec2(32, 48), "WorldObjects/player.png");
+        hero = new Character(new Vec2(768, 450), new Vec2(64, 64));
+        Enemy enemy = new Enemy(new Vec2(768,520), new Vec2(64,64),1,1,1,1,1,1,1,1);
         // setup a new world depending on some menu parameters maybe? diff etc. world could also be called level, std
-        hero.addUpgrade("Speed", new Speed(4));    //Added as a flat increase to Movement Speed
-        hero.addUpgrade("JumpH", new JumpH(5));    //Added as a flat increase to Jump Power
-        hero.addUpgrade("Hermes", new HermesSandals(1));     //Added as a flat increase
-        hero.addUpgrade("Health", new Health(20));  //Added flat on current health
-        hero.addUpgrade("Melee", new MeleeHandling(5));     //Multiplied to your weapons damage to determine your characters overall damage per hit with melee.
-        hero.addUpgrade("CHC", new CriticalHitChance(1)); //Added as flat CriticalHitChance
-        hero.addUpgrade("CHD", new CriticalHitDamage(5)); //Added as multiplier to your CriticalHitDamage
-        hero.addUpgrade("Looting", new Looting(2));    //Multiplied as a modifier to increase number of coins dropped - 250% chance of coins means 2 coins and 50% chance of extra.
-        hero.addUpgrade("Regeneration", new Regeneration(1)); //Added as a flat increase to your overall health regeneration per second
-        hero.updateUpgrades();
-        world = new World();
-        world.generateWorld(/*params*/);
-        world.addHero(hero);
 
+        world = new World();
+        world.addWorldObject(enemy);
+        world.addWorldObject(hero);
+        world.setHero(hero);
 
         //HUDDDDDD
         hud = new HUD(hero);
@@ -76,10 +70,30 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         camera.update();
         Matrix4 translation = new Matrix4();
         Rect heroRect = hero.getDrawingRect();
-        translation.translate(Math.min(-heroRect.position.x - heroRect.bounds.x / 2 + windowWidth / 2, 0), -heroRect.position.y + windowHeight / 2 - heroRect.bounds.y / 2, 0);
+
+        float cx = -heroRect.position.x - heroRect.bounds.x / 2 + windowWidth / 2;
+        float cy = -heroRect.position.y + windowHeight / 2 - heroRect.bounds.y / 2;
+        translation.translate(cx, cy, 0);
         game.batch.setTransformMatrix(translation);
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
+
+        /*
+        Object culling in case of lagg for future, may contain buggs so i will leave this commented for now.
+        List<KdTreeNode<WorldObject>> efficientObjectsToRender = CollisionManager.getInstance().kdTree.rangeSearch2D(-cx-windowWidth/2,-cx+windowWidth,-cy+windowHeight, -cy);
+        HashSet<WorldObject> efficientSet = new HashSet<WorldObject>();
+        for(KdTreeNode<WorldObject> node : efficientObjectsToRender)
+        {
+            efficientSet.add(node.data);
+        }
+        for (WorldObject wo : efficientSet) {
+            if (!textureMap.containsKey(wo.getTexturename())) {
+                textureMap.put(wo.getTexturename(), new Texture(Gdx.files.internal(wo.getTexturename())));
+            }
+            game.batch.draw(textureMap.get(wo.getTexturename()), wo.getPosition().x, wo.getPosition().y);
+
+        }*/
+
         for (WorldObject wo : world.getWorldObjects()) {
             if (!textureMap.containsKey(wo.getTexturename())) {
                 textureMap.put(wo.getTexturename(), new Texture(Gdx.files.internal(wo.getTexturename())));
