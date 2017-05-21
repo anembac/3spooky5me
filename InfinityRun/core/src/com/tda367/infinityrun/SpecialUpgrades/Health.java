@@ -7,8 +7,9 @@ import com.tda367.infinityrun.Upgrade;
  */
 public class Health extends Upgrade{
 
-    public Health(int baseValue) {
-        super(-1, baseValue);
+    public Health(int level) {
+        super(-1, level);
+        upgradeValue = 20;
     }
 
     @Override

@@ -34,8 +34,8 @@ public class RoomUR extends RoomTemplate {
                 roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 20 * block + i * block, offsetY * 14 * block + 9 * block + block * j)));
 
                 //left wall
-                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 5 * block + i * block, 5 * block + j * block)));
-                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 0 * block + i * block, 5 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 5 * block + i * block, offsetY * 14 * block +5 * block + j * block)));
+                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 0 * block + i * block, offsetY * 14 * block +5 * block + j * block)));
             }
         }
     }

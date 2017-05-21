@@ -10,13 +10,14 @@ public class JumpH extends Upgrade {
 
 
 
-    public JumpH(int basevalue) {
-        super(100, basevalue);
+    public JumpH(int level) {
+        super(100, level);
+        upgradeValue = 20;
     }
 
     @Override
     public int getValueInt(){
-        return 500 + super.getValueInt();
+        return 800 + super.getValueInt();
     }
 
     @Override
