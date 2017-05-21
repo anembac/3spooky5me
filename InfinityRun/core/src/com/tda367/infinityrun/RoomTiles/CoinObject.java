@@ -8,10 +8,10 @@ import com.tda367.infinityrun.WorldObject;
  */
 public class CoinObject extends WorldObject {
     private  int damage = 10;
-    //Generic coin, 32x32 size.
+    //Generic coin,64x64 size.
 
     public CoinObject(Vec2 position) {
-        super(position, new Vec2(32, 32));
+        super(position, new Vec2(64, 64));
         setTexture("WorldObjects/coin.png");
 
     }

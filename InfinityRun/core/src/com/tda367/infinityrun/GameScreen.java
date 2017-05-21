@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.tda367.infinityrun.Math.Rect;
 import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.RoomTiles.AttackHitbox;
 import com.tda367.infinityrun.SpecialUpgrades.*;
 
 import java.util.HashMap;
@@ -40,6 +41,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         //br.setup();
 
         hero = new Character(new Vec2(768, 450), new Vec2(64, 64));
+        WorldObject hitbox = new AttackHitbox(new Vec2(hero.getPosition().x + 64, hero.getPosition().y));
         Enemy enemy = new Enemy(new Vec2(768,520), new Vec2(64,64),1,1,1,1,1,1,1,1);
         // setup a new world depending on some menu parameters maybe? diff etc. world could also be called level, std
 
