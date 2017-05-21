@@ -3,6 +3,7 @@ package com.tda367.infinityrun.Roomtemplates;
 
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.RoomTiles.BrickObject;
+import com.tda367.infinityrun.RoomTiles.SpikeObject;
 
 /**
  * Created by kaffe on 5/12/17.
@@ -21,6 +22,8 @@ public class RoomURL extends RoomTemplate {
             for (int y = 0; y < 5; y++) {
                 roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + x * block, offsetY * 14 * block + (13 - y) * block)));
                 roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + (24 - x) * block, offsetY * 14 * block + (13 - y) * block)));
+
+                roomObjects.add(new SpikeObject(new Vec2(offsetX * 25 * block + (12)*block, offsetY* 14 * block + 7*block )));
             }
         }
         for (int x = 0; x < 25; x++) {
