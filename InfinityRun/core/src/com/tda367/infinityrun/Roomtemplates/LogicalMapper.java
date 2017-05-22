@@ -20,6 +20,13 @@ public class LogicalMapper extends RoomTemplate {
     private int checkedD;
 
     public LogicalMapper() {
+        gen();
+    }
+
+    void gen()
+    {
+        roomIndexes.clear();
+
         roomIndexes.add(0, new RoomU());
         roomIndexes.add(1, new RoomR());
         roomIndexes.add(2, new RoomD());
@@ -36,7 +43,6 @@ public class LogicalMapper extends RoomTemplate {
         roomIndexes.add(13, new RoomUDL());
         roomIndexes.add(14, new RoomURDL());
     }
-
     /*
     returns -1 for no room exist, 0 for a blocked path and 1 for path.
     (same for all of the check methods)
@@ -99,6 +105,7 @@ public class LogicalMapper extends RoomTemplate {
 
 
     private RoomTemplate roomRandomizer() {
+        gen();
 
         //removes 2 exits for every connection.
 

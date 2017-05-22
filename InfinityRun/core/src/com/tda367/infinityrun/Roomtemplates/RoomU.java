@@ -49,9 +49,9 @@ public class RoomU extends RoomTemplate {
     }
 }
 /*
-    public void generateWorld() {
-        int block = 64;
+    public void generateWorld() {ck = 64;
 
+        int blo
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
 

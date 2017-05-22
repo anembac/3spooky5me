@@ -1,7 +1,5 @@
 package com.tda367.infinityrun.RoomTiles;
 
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Rectangle;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.WorldObject;
 

@@ -69,6 +69,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+
         camera.update();
         Matrix4 translation = new Matrix4();
         Rect heroRect = hero.getDrawingRect();

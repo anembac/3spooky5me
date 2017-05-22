@@ -34,10 +34,12 @@ public class Character extends MovableObject {
     public void frame(float dt,float heroX, float heroY, InputState state)
     {
         List<WorldObject> rlt =  CollisionManager.getInstance().getKNearest(this, 5);
+
         for(WorldObject wo : rlt)
         {
             if(wo instanceof CoinObject)
             {
+
                 wo.despawn();
                 //upgrades.get("Looting").
                 coins++;
