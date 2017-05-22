@@ -28,7 +28,6 @@ public class World {
 
     public World() {
         worldObjects = new ArrayList<WorldObject>();
-
         input = new Input();
 
     }

@@ -55,7 +55,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         world.addWorldObject(hero);
         world.setHero(hero);
         hero.setMeleeWeapon(new AdminsDebugginStaff());
-        hero.setMeleeWeapon(new Sword());
+        //hero.setMeleeWeapon(new Sword());
         //Shop
         shop = new Shop(hero);
 
