@@ -167,4 +167,6 @@ public class LivingObject extends WorldObject {
     {
         upgrades.put(name, upg);
     }
+
+
 }

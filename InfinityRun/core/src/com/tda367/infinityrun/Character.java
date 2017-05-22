@@ -6,6 +6,7 @@ import com.tda367.infinityrun.RoomTiles.CoinObject;
 import com.tda367.infinityrun.SpecialUpgrades.Looting;
 
 import javax.rmi.CORBA.Util;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -43,5 +44,9 @@ public class Character extends LivingObject {
             }
         }
         super.frame(dt, heroX, heroY, state);
+    }
+
+    public HashMap<String, Upgrade> getUpgrades(){
+        return upgrades;
     }
 }

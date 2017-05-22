@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -29,10 +30,12 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
     //Texture ctex;
     HashMap<String, Texture> textureMap = new HashMap<String, Texture>();
     OrthographicCamera camera;
+    Stage gameStage = new Stage();
     //BaseRoom br;
     Character hero;
     World world;
     HUD hud;
+    Shop shop;
     final int windowWidth = 1600;
     final int windowHeight = 900;
 
@@ -46,14 +49,19 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         //WorldObject hitbox = new AttackHitbox(new Vec2(hero.getPosition().x + 64, hero.getPosition().y));
         Enemy enemy = new Enemy(new Vec2(768,520), new Vec2(64,64),1,1,1,1,1,1,1,1);
         // setup a new world depending on some menu parameters maybe? diff etc. world could also be called level, std
+
         world = new World();
         world.addWorldObject(enemy);
         world.addWorldObject(hero);
         world.setHero(hero);
         hero.setMeleeWeapon(new AdminsDebugginStaff());
+        hero.setMeleeWeapon(new Sword());
+        //Shop
+        shop = new Shop(hero);
+
         //HUDDDDDD
         hud = new HUD(hero);
-
+        Gdx.input.setInputProcessor(gameStage);
         //create camera
         camera = new OrthographicCamera();
         camera.setToOrtho(false, windowWidth, windowHeight);
@@ -118,6 +126,14 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !Gdx.input.isKeyPressed(Input.Keys.LEFT))
             hero.moveXPosition(Direction.RIGHT);
         else hero.moveXPosition(Direction.NONE);*/
+        if(Gdx.input.isKeyPressed(Input.Keys.TAB)){
+            this.dispose();
+            game.setScreen(new ShopScreen(shop));
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+            //this.dispose();
+            game.setScreen(new PauseMenuScreen(this));
+        }
     }
 
     private void checkTexture(WorldObject wo)
@@ -145,6 +161,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
 
     @Override
     public void dispose() {
+        gameStage.dispose();
         for (Texture tex : textureMap.values()) {
             tex.dispose();
         }
