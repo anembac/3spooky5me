@@ -10,11 +10,12 @@ public class Speed extends Upgrade {
 
     public Speed(int level) {
         super(-1, level);
+        upgradeValue = 5;
     }
 
     @Override
     public int getValueInt(){
-        return 1000 + super.getValueInt();
+        return 500 + super.getValueInt();
     }
 
     @Override

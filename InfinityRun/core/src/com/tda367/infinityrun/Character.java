@@ -18,7 +18,7 @@ import java.util.List;
 public class Character extends MovableObject {
 
     public Character(Vec2 position, Vec2 bounds){
-        super(position, bounds,4,5,1,20,5,1,5,1);
+        super(position, bounds,100,10,50,20,5,1,5,1);
         addUpgrade("Looting", new Looting(2));    //Multiplied as a modifier to increase number of coins dropped - 250% chance of coins means 2 coins and 50% chance of extra.
         setTexture("WorldObjects/player.png");// default hero texture
         //new Rectangle(position.x, position.y, size, size);

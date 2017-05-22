@@ -10,12 +10,12 @@ import com.tda367.infinityrun.Upgrade;
 public class HermesSandals extends Upgrade {
 
     public HermesSandals(int level) {
-        super(2, level);
+        super(100, level);
         upgradeValue = getValueInt();
     }
     @Override
     public int getValueInt(){
-        return (200 + super.getValueInt());
+        return (level);
     }
 
     @Override

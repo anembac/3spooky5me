@@ -26,8 +26,8 @@ public class RoomUDL extends RoomTemplate {
                 roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 0 + i * 64, offsetY * 14 * block + 0 + j * 64)));
                 roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 5 * block + i * block, offsetY * 14 * block + 0 * block + j * block)));
                 // top left bricks
-                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 0 * block + i * 64, offsetY * 14 * block + 10 * block + j * 64)));
-                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 5 * block + i * 64, offsetY * 14 * block + 10 * block + j * 64)));
+                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 0 * block + i * 64, offsetY * 14 * block + 9 * block + j * 64)));
+                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 5 * block + i * 64, offsetY * 14 * block + 9 * block + j * 64)));
 
 
                 //right wall of bricks
@@ -35,9 +35,9 @@ public class RoomUDL extends RoomTemplate {
                 roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 15 * block + i * 64, offsetY * 14 * block + 5 * block + j * 64)));
                 roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 20 * block + i * 64, offsetY * 14 * block + 0 + j * 64)));
                 roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 20 * block + i * 64, offsetY * 14 * block + 5 * block + j * 64)));
-                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 20 * block + i * 64, offsetY * 14 * block + 10 * block + j * 64)));
-                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 15 * block + i * 64, offsetY * 14 * block + 10 * block + j * 64)));
-                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 15 * block + i * 64, offsetY * 14 * block + 10 + j * 64)));
+                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 20 * block + i * 64, offsetY * 14 * block + 9 * block + j * 64)));
+                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 15 * block + i * 64, offsetY * 14 * block + 9 * block + j * 64)));
+                roomObjects.add(new BrickObject(new Vec2(offsetX * 25 * block + 15 * block + i * 64, offsetY * 14 * block + 9 + j * 64)));
 
 
                 //central platforms
