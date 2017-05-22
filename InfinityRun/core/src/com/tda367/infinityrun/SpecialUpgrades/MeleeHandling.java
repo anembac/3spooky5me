@@ -10,5 +10,6 @@ public class MeleeHandling extends Upgrade{
     public MeleeHandling(int level) {
         super(-1, level);
         upgradeValue = 5;
+        basePrice = 20;
     }
 }

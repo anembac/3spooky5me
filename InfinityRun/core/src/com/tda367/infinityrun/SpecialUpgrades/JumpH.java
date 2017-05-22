@@ -13,6 +13,7 @@ public class JumpH extends Upgrade {
     public JumpH(int level) {
         super(100, level);
         upgradeValue = 20;
+        basePrice = 20;
     }
 
     @Override

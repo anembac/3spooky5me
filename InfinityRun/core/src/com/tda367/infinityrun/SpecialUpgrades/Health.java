@@ -10,6 +10,7 @@ public class Health extends Upgrade{
     public Health(int level) {
         super(-1, level);
         upgradeValue = 20;
+        basePrice = 10;
     }
 
     @Override

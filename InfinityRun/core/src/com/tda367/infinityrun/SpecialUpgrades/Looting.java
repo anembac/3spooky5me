@@ -14,6 +14,7 @@ public class Looting extends Upgrade {
     public Looting(int level) {
         super(-1, level);
         upgradeValue = 5;
+        basePrice = 10;
     }
 
     public int numberOfCoins() {

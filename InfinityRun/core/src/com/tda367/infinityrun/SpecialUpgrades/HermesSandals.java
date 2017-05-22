@@ -12,6 +12,7 @@ public class HermesSandals extends Upgrade {
     public HermesSandals(int level) {
         super(100, level);
         upgradeValue = getValueInt();
+        basePrice = 1000;
     }
     @Override
     public int getValueInt(){

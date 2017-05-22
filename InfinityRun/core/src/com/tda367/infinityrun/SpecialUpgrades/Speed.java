@@ -11,6 +11,7 @@ public class Speed extends Upgrade {
     public Speed(int level) {
         super(-1, level);
         upgradeValue = 5;
+        basePrice = 20;
     }
 
     @Override

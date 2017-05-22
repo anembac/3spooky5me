@@ -13,6 +13,7 @@ public class Regeneration extends Upgrade {
     public Regeneration(int level) {
         super(-1, level);
         upgradeValue = 1;
+        basePrice = 100;
     }
 
     @Override
