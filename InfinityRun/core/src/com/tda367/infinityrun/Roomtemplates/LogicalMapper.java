@@ -4,11 +4,12 @@ import com.tda367.infinityrun.WorldObject;
 
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by kaffe on 5/12/17.
  */
-public class LogicalMapper extends RoomTemplate {
+public class LogicalMapper extends RoomTemplate implements WorldGenerator{
 
     private HashMap<IndexPoint, RoomTemplate> rooms = new HashMap<IndexPoint, RoomTemplate>();
     private static int exits = -2;
@@ -176,8 +177,8 @@ public class LogicalMapper extends RoomTemplate {
         room.addRoomObjects(0, 0);
         return room.roomObjects;
     }
-
-    public ArrayList<WorldObject> mapper(int x, int y) {
+    @Override
+    public List<WorldObject> generate(int x, int y) {
         getSurrounding(x, y);
         RoomTemplate room = roomRandomizer();
         rooms.put(new IndexPoint(x, y), room);
@@ -185,6 +186,7 @@ public class LogicalMapper extends RoomTemplate {
         return room.roomObjects;
     }
 
+    @Override
     public boolean roomExists(int x, int y) {
         return rooms.containsKey(new IndexPoint(x, y));
     }

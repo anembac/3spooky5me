@@ -8,6 +8,6 @@ package com.tda367.infinityrun.WeaponTypes;
 
 public class Sword extends MeleeWeapon {
     public Sword() {
-        super(10,1,1);
+        super(10,1,2);
     }
 }

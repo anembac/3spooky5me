@@ -15,6 +15,7 @@ import com.tda367.infinityrun.Math.Rect;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.RoomTiles.AttackHitbox;
 import com.tda367.infinityrun.SpecialUpgrades.*;
+import com.tda367.infinityrun.WeaponTypes.Sword;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -48,6 +49,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         world.addWorldObject(enemy);
         world.addWorldObject(hero);
         world.setHero(hero);
+        hero.setMeleeWeapon(new Sword());
         //HUDDDDDD
         hud = new HUD(hero);
 
@@ -96,11 +98,13 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         }*/
 
         for (WorldObject wo : world.getWorldObjects()) {
-            if (!textureMap.containsKey(wo.getTexturename())) {
-                textureMap.put(wo.getTexturename(), new Texture(Gdx.files.internal(wo.getTexturename())));
-            }
+            checkTexture(wo);
             game.batch.draw(textureMap.get(wo.getTexturename()), wo.getPosition().x, wo.getPosition().y);
-
+            for(WorldObject child : wo.getChildren())
+            {
+                checkTexture(child);
+                game.batch.draw(textureMap.get(child.getTexturename()), child.getPosition().x, child.getPosition().y);
+            }
         }
         //game.batch.draw(ctex, hero.position.x, hero.position.y);
         game.batch.end();
@@ -113,6 +117,13 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !Gdx.input.isKeyPressed(Input.Keys.LEFT))
             hero.moveXPosition(Direction.RIGHT);
         else hero.moveXPosition(Direction.NONE);*/
+    }
+
+    private void checkTexture(WorldObject wo)
+    {
+        if (!textureMap.containsKey(wo.getTexturename())) {
+            textureMap.put(wo.getTexturename(), new Texture(Gdx.files.internal(wo.getTexturename())));
+        }
     }
 
     @Override

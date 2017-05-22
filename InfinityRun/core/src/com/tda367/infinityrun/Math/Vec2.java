@@ -31,6 +31,7 @@ public class Vec2 {
         y = (float)pt.y;
     }
 
+    // refactor this is not the dot product lolz!!! :D
     public static Vec2 dotProduct(Vec2 a, Vec2 b)
     {
         return new Vec2(a.x*b.x,a.y*b.y);
@@ -63,6 +64,13 @@ public class Vec2 {
         x -= v.x;
         y -= v.y;
         return this;
+    }
+
+    public static float distance(Vec2 a, Vec2 b)
+    {
+        Vec2 c = new Vec2(a.x, a.y);
+        c.sub(b);
+        return c.len();
     }
 
     public static Vec2 mul(Vec2 v, float factor)

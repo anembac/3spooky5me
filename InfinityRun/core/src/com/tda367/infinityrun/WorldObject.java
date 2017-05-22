@@ -77,13 +77,21 @@ public abstract class WorldObject { //We should probably refactor this class at 
 
     public void addChildren(WorldObject object)
     {
-        object.setParent(object);
+        object.setParent(this);
         children.add(object);
     }
 
     public void removeChildren(WorldObject object)
     {
-        children.remove(object);
+        if(children.contains(object))
+        {
+            children.remove(object);
+        }
+    }
+
+    public List<WorldObject> getChildren()
+    {
+        return children;
     }
 
     public Vec2 getPosition()
@@ -94,6 +102,11 @@ public abstract class WorldObject { //We should probably refactor this class at 
             Vec2 parentPos = parent.getPosition();
             return new Vec2(position.x + parentPos.x, position.y + parentPos.y);
         }
+    }
+
+    public WorldObject getParent()
+    {
+        return parent;
     }
 
     public Rect getDrawingRect()

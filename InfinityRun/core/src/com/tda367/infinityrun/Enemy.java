@@ -5,7 +5,7 @@ import com.tda367.infinityrun.Math.Vec2;
 /**
  * Created by miktor on 2017-04-03.
  */
-public class Enemy extends MovableObject {
+public class Enemy extends LivingObject {
 
 
     public Enemy(Vec2 position, Vec2 bounds, int speedLvl, int jumpLvl, int hermesLvl, int healthLvl, int meleeHandlingLvl, int ChcLvl, int Chdlvl, int regLvl) {

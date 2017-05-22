@@ -1,47 +1,30 @@
-//package com.tda367.infinityrun;
-//
-///**
-// * Created by miktor on 2017-04-03.
-// */
-//public class Hazard extends WorldObject{
-//
-//    protected int damage;
-//    protected int health;
-//    protected boolean damageable;
-//    protected boolean movable;
-//
-//    public Hazard(){}
-//
-//    public Hazard(int damage, int health, boolean damagable, boolean movable)
-//    {
-//        this.damage = damage;
-//        this.damageable = damageable;
-//        this.health = health;
-//        this.movable = movable;
-//    }
-//
-//    private final boolean getDamageable()
-//    {
-//        return damageable;
-//    }
-//
-//    private final int getHealth()
-//    {
-//        return health;
-//    }
-//
-//    private final int getDamage()
-//    {
-//        return damage;
-//    }
-//
-//    @Override
-//    public void frame(double dt) {
-//        super.frame(dt);
-//    }
-//
-//    @Override
-//    public void render() {
-//        super.render();
-//    }
-//}
+package com.tda367.infinityrun;
+
+import com.tda367.infinityrun.Math.Utils;
+import com.tda367.infinityrun.Math.Vec2;
+
+import java.util.List;
+
+public class Hazard extends WorldObject
+{
+    final float range;
+    final float dps;
+    public Hazard(Vec2 position, Vec2 bounds, float dps) {
+        super(position, bounds);
+        range = Vec2.distance(position, Utils.getCenter(this)) * 3;
+        this.dps = dps;
+    }
+
+    @Override
+    public void frame(float dt, float heroX, float heroY, InputState state) {
+        super.frame(dt, heroX, heroY, state);
+        List<WorldObject> objects = CollisionManager.getInstance().getKNearest(this, 10);
+        for(WorldObject wo : objects)
+        {
+            if(Utils.distance(this, wo) < range && wo instanceof LivingObject)
+            {
+                ((LivingObject)wo).damage(dps*dt);
+            }
+        }
+    }
+}

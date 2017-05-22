@@ -5,35 +5,60 @@ import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.Math.Vec4;
 import com.tda367.infinityrun.SpecialUpgrades.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by Mikael on 5/3/2017.
  */
 // I guess this class will be some kind of base for "Upgradable" objects, moving objects will probably use some kind
     // of upgrade to allow them to use the command pattern to move. RENAME to upgradableObject?
-public class MovableObject extends WorldObject {
+public class LivingObject extends WorldObject {
     protected HashMap<String, Upgrade> upgrades = new HashMap<String, Upgrade>(); //Holds all of the upgrades, gives them a name as index.
 
     protected double timeSinceRegen = 0;
-    protected int currentHealth = 0;
+    protected double currentHealth = 0;
     protected Vec2 acceleration = new Vec2(0,0);
+    private MeleeWeapon meleeWeapon = null;
+    private RangedWeapon rangedWeapon = null;
 
-    public MovableObject(Vec2 position, Vec2 bounds) {
+    public LivingObject(Vec2 position, Vec2 bounds) {
         // Initialize the default enemy with lvl 1.
         this(position,bounds,1,1,1,1,1,1,1,1);
     }
 
-    public int getHealth()
+    public void setMeleeWeapon(MeleeWeapon weapon)
+    {
+        if(weapon != null)
+        {
+            removeChildren(weapon);
+        }
+        addChildren(weapon);
+        meleeWeapon = weapon;
+    }
+
+    public void setRangedWeapon(RangedWeapon weapon)
+    {
+
+    }
+
+    public void damage(double damage)
+    {
+        currentHealth -= damage;
+        if(this.currentHealth < 0)
+        {
+            despawn();
+        }
+        System.out.println(currentHealth + " health left for some creature.");
+    }
+
+    public double getHealth()
     {
         return currentHealth;
     }
 
-    public int getMaxHealth()
+    public double getMaxHealth()
     {
-        return upgrades.get("Health").getValueInt();
+        return (double)upgrades.get("Health").getValueInt();
     }
 
     public int getRegeneration()
@@ -51,7 +76,7 @@ public class MovableObject extends WorldObject {
         return upgrades.get("Speed").getValueInt();
     }
 
-    public MovableObject(Vec2 position, Vec2 bounds, int speedLvl, int jumpLvl, int hermesLvl, int healthLvl, int meleeHandlingLvl, int ChcLvl, int Chdlvl, int regLvl)
+    public LivingObject(Vec2 position, Vec2 bounds, int speedLvl, int jumpLvl, int hermesLvl, int healthLvl, int meleeHandlingLvl, int ChcLvl, int Chdlvl, int regLvl)
     {
         super(position,bounds);
         addUpgrade("Speed", new Speed(speedLvl));    //Added as a flat increase to Movement Speed
@@ -65,7 +90,7 @@ public class MovableObject extends WorldObject {
         currentHealth = getMaxHealth();
     }
 
-    public MovableObject(Vec2 pos, Vec2 bound, WorldObject parent) {
+    public LivingObject(Vec2 pos, Vec2 bound, WorldObject parent) {
         super(pos, bound, parent);
     }
 
@@ -133,7 +158,9 @@ public class MovableObject extends WorldObject {
             position.y = roof - bounds.y;
             acceleration.y = 0;
         }
-
+        if(meleeWeapon != null) meleeWeapon.frame(dt,heroX, heroY, state);
+        if(this.acceleration.x > 0.1 && meleeWeapon != null) meleeWeapon.setDirRight();
+        else if(meleeWeapon != null && this.acceleration.x < -0.1) meleeWeapon.setDirLeft();
     }
 
     public void addUpgrade(String name, Upgrade upg)

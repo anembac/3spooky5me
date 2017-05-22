@@ -26,6 +26,7 @@ public class Input implements IInput {
         if(Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.RIGHT)) forward = true;
         if(Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.LEFT)) back = true;
         if(Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.UP)) jump = true;
+        if(Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.SPACE)) attack = true;
         //if(Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.)) attack = true;
         state = new InputState(forward, back, jump, attack);
     }

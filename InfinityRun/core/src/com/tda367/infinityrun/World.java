@@ -1,12 +1,11 @@
 package com.tda367.infinityrun;
 
+import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
-import com.tda367.infinityrun.RoomTiles.BrickObject;
-import com.tda367.infinityrun.RoomTiles.Platform;
-import com.tda367.infinityrun.RoomTiles.SpikeObject;
 import com.tda367.infinityrun.Roomtemplates.LogicalMapper;
-import com.tda367.infinityrun.Roomtemplates.RoomTemplate;
+import com.tda367.infinityrun.Roomtemplates.WorldGenerator;
 
+import javax.rmi.CORBA.Util;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class World {
     private double difficulty = 1.0;
     IInput input = null;
     private WorldObject hero = null;
-    private LogicalMapper logicalMapper = new LogicalMapper();
+    private WorldGenerator generator = new LogicalMapper();
 
     public void increaseDifficulty(double difficulty) {
         this.difficulty = difficulty + 0.05;
@@ -71,11 +70,13 @@ public class World {
         List<WorldObject> objectsToRemove = new ArrayList<WorldObject>();
 
         input.collectInput();
+
+        Vec2 heroPos = Utils.getCenter(hero);
         for (WorldObject obj : worldObjects) {
-            obj.frame(dt, hero.getPosition().x + hero.getDrawingRect().bounds.x / 2, hero.getPosition().y + hero.getDrawingRect().bounds.y / 2, input.getInput());
-        }
-        for (WorldObject obj : worldObjects) {
-            if(obj instanceof MovableObject)
+            if(Vec2.distance(Utils.getCenter(obj), heroPos) > 1500) continue; // no need to make logic that far away, the player wont see this anyway.
+            obj.frame(dt, heroPos.x, heroPos.y, input.getInput());
+
+            if(obj instanceof LivingObject)
             {
                 // This object might have a different position now, the easiest way is to remove it and then re add it.
                 CollisionManager.getInstance().updatePosition(obj);
@@ -85,6 +86,7 @@ public class World {
                 objectsToRemove.add(obj);
             }
         }
+
         for(WorldObject wo : objectsToRemove)
         {
             CollisionManager.getInstance().removeObject(wo);
@@ -114,9 +116,9 @@ public class World {
 
     public void addRoomIfItDoesntExist(int x, int y)
     {
-        if(!logicalMapper.roomExists(x,y))
+        if(!generator.roomExists(x,y))
         {
-            List<WorldObject> newWorldObjects = logicalMapper.mapper(x,y);
+            List<WorldObject> newWorldObjects = generator.generate(x,y);
             for(int i = 0; i < newWorldObjects.size(); i++)
             {
                 for(int j = 0; j < worldObjects.size(); j++)

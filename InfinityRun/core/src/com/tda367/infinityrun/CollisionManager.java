@@ -77,13 +77,13 @@ public class CollisionManager {
     public List<WorldObject> getKNearest(WorldObject requestor, int k)
     {
         float cx, cy;
-        cx = requestor.position.x + requestor.bounds.x / 2;
-        cy = requestor.position.y + requestor.bounds.y / 2;
+        cx = requestor.getDrawingRect().position.x + requestor.getDrawingRect().bounds.x / 2;
+        cy = requestor.getDrawingRect().position.y + requestor.getDrawingRect().bounds.y / 2;
 
         List<KdTreeNode<WorldObject>> nodes = kdTree.getKNN(new Point2D.Double(cx,cy), k*4+4);
         List<WorldObject> output= nodeListToWOList(nodes);
         if(output.contains(requestor)) output.remove(requestor);
-        while (output.size() > 10) output.remove(10);
+        while (output.size() > k) output.remove(k);
         return output;
     }
 
