@@ -11,6 +11,7 @@ public class DesktopLauncher { //Make sure you've set working dir to InfinityRun
 		config.width = 1600;
 		config.height = 900;
 		config.resizable = false;
+		config.forceExit=true;
 		new LwjglApplication(new InfinityRun(), config);
 	}
 }
