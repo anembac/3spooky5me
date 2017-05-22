@@ -1,5 +1,6 @@
 package com.tda367.infinityrun;
 
+import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.Math.Vec4;
 
@@ -16,7 +17,7 @@ public class CollisionManager {
     private static CollisionManager manager = null;
     KdTree<WorldObject> kdTree = new KdTree<WorldObject>();
     // This is kind of double stored data but it is neccecary for good complexity, it allows us to map some things in both ways with O(1) and O(logn) complexity.
-    HashMap<WorldObject, List<KdTreeNode<WorldObject>>> worldObjectToNodes;
+    HashMap<WorldObject, KdTreeNode<WorldObject>> worldObjectToNodes;
 
     public static CollisionManager getInstance()
     {
@@ -32,17 +33,17 @@ public class CollisionManager {
 
     public CollisionManager()
     {
-        worldObjectToNodes = new HashMap<WorldObject, List<KdTreeNode<WorldObject>>>();
+        worldObjectToNodes = new HashMap<WorldObject, KdTreeNode<WorldObject>>();
     }
 
     public void addWorldObject(WorldObject obj)
     {
-        List<KdTreeNode<WorldObject>> output = new ArrayList<KdTreeNode<WorldObject>>();
-        output.add(kdTree.insert(new Point2D.Double(obj.position.x, obj.position.y), obj));
+       /* output.add(kdTree.insert(new Point2D.Double(obj.position.x, obj.position.y), obj));
         output.add(kdTree.insert(new Point2D.Double(obj.position.x, obj.position.y+obj.bounds.y), obj));
         output.add(kdTree.insert(new Point2D.Double(obj.position.x + obj.bounds.x, obj.position.y), obj));
-        output.add(kdTree.insert(new Point2D.Double(obj.position.x+obj.bounds.x, obj.position.y+obj.bounds.y), obj));
-        worldObjectToNodes.put(obj, output);
+        output.add(kdTree.insert(new Point2D.Double(obj.position.x+obj.bounds.x, obj.position.y+obj.bounds.y), obj));*/
+        Vec2 a = Utils.getCenter(obj);
+        worldObjectToNodes.put(obj, kdTree.insert(new Point2D.Double(a.x, a.y), obj));
     }
 
     public void updatePosition(WorldObject obj)
@@ -58,11 +59,7 @@ public class CollisionManager {
         {
             return;
         }
-        List<KdTreeNode<WorldObject>> nodes = worldObjectToNodes.get(obj);
-        for(KdTreeNode<WorldObject> node : nodes)
-        {
-            kdTree.removePoint(node);
-        }
+        kdTree.removePoint(worldObjectToNodes.get(obj));
         worldObjectToNodes.remove(obj);
     }
 
@@ -76,28 +73,19 @@ public class CollisionManager {
 
     public List<WorldObject> getKNearest(WorldObject requestor, int k)
     {
-        float cx, cy;
-        cx = requestor.getDrawingRect().position.x + requestor.getDrawingRect().bounds.x / 2;
-        cy = requestor.getDrawingRect().position.y + requestor.getDrawingRect().bounds.y / 2;
-
-        List<KdTreeNode<WorldObject>> nodes = kdTree.getKNN(new Point2D.Double(cx,cy), k*4+4);
+        Vec2 center = Utils.getCenter(requestor);
+        List<KdTreeNode<WorldObject>> nodes = kdTree.getKNN(new Point2D.Double(center.x,center.y), k);
         List<WorldObject> output= nodeListToWOList(nodes);
         if(output.contains(requestor)) output.remove(requestor);
-        while (output.size() > k) output.remove(k);
         return output;
     }
 
     private List<WorldObject> nodeListToWOList(List<KdTreeNode<WorldObject>> list)
     {
-        HashSet<WorldObject> objects = new HashSet<WorldObject>();
+        List<WorldObject> output = new ArrayList<WorldObject>();
         for(KdTreeNode<WorldObject> o : list)
         {
-            objects.add(o.data);
-        }
-        List<WorldObject> output = new ArrayList<WorldObject>();
-        for(WorldObject wo : objects)
-        {
-            output.add(wo);
+            output.add(o.data);
         }
         return output;
     }
@@ -112,7 +100,7 @@ public class CollisionManager {
         // Initialize the intersection pts to never intersect
         Vec4 output = new Vec4(-1000000000,-100000000,10000000,10000000);
 
-        List<KdTreeNode<WorldObject>> nodes = kdTree.getKNN(new Point2D.Double(cx,cy), 1000); // get the 100 closest points, this should be enough, We could update this to use the range search algo later.
+        List<KdTreeNode<WorldObject>> nodes = kdTree.getKNN(new Point2D.Double(cx,cy), 20); // get the 100 closest points, this should be enough, We could update this to use the range search algo later.
         for(KdTreeNode<WorldObject> node : nodes){
             if(node.data == obj || !node.data.getCollidable()) continue;
             /*

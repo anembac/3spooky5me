@@ -15,6 +15,7 @@ import com.tda367.infinityrun.Math.Rect;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.RoomTiles.AttackHitbox;
 import com.tda367.infinityrun.SpecialUpgrades.*;
+import com.tda367.infinityrun.WeaponTypes.AdminsDebugginStaff;
 import com.tda367.infinityrun.WeaponTypes.Sword;
 
 import java.util.HashMap;
@@ -49,7 +50,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         world.addWorldObject(enemy);
         world.addWorldObject(hero);
         world.setHero(hero);
-        hero.setMeleeWeapon(new Sword());
+        hero.setMeleeWeapon(new AdminsDebugginStaff());
         //HUDDDDDD
         hud = new HUD(hero);
 

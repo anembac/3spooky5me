@@ -3,6 +3,7 @@ package com.tda367.infinityrun;
 import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.Roomtemplates.LogicalMapper;
+import com.tda367.infinityrun.Roomtemplates.TextbasedWorldGenerator;
 import com.tda367.infinityrun.Roomtemplates.WorldGenerator;
 
 import javax.rmi.CORBA.Util;
@@ -18,7 +19,8 @@ public class World {
     private double difficulty = 1.0;
     IInput input = null;
     private WorldObject hero = null;
-    private WorldGenerator generator = new LogicalMapper();
+    private WorldGenerator generator1 = new LogicalMapper();
+    private WorldGenerator generator = new TextbasedWorldGenerator();
 
     public void increaseDifficulty(double difficulty) {
         this.difficulty = difficulty + 0.05;
@@ -67,6 +69,7 @@ public class World {
         // 25 15
 
         generateWorld();
+        //addWorldObjects(generator2.generate(0,0));
         List<WorldObject> objectsToRemove = new ArrayList<WorldObject>();
 
         input.collectInput();
