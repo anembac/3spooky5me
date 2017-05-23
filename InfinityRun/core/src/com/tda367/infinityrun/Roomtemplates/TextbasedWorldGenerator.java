@@ -84,13 +84,13 @@ public class TextbasedWorldGenerator implements WorldGenerator {
         if(map.get(0).get(6) == 'E') l = true;
         if(map.get(24).get(6) == 'E') r = true;
         RoomType room = new RoomType(r,l,u,d);
-        if(allRooms.containsKey(room.hashCode()))
+        if(allRooms.containsKey(room.bitmaskCode()))
         {
-            allRooms.get(room.hashCode()).addType(map);
+            allRooms.get(room.bitmaskCode()).addType(map);
         }
         else
         {
-            allRooms.put(room.hashCode(), room);
+            allRooms.put(room.bitmaskCode(), room);
             room.addType(map);
         }
     }
@@ -154,8 +154,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
             down = d;
         }
 
-        @Override
-        public int hashCode() {
+        public int bitmaskCode() {
             return (right ? 1 : 0) + (left ? 2 : 0) + (up ? 4 : 0) + (down ? 8 : 0);
         }
 
