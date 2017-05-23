@@ -45,12 +45,13 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         //br = new BaseRoom();
         //br.setup();
 
-        hero = new Character(new Vec2(768, 450), new Vec2(64, 64));
+        hero = new Character(new Vec2(768, 450));
         //WorldObject hitbox = new AttackHitbox(new Vec2(hero.getPosition().x + 64, hero.getPosition().y));
         Enemy enemy = new Enemy(new Vec2(768,520), new Vec2(64,64),1,1,1,1,1,1,1,1);
         // setup a new world depending on some menu parameters maybe? diff etc. world could also be called level, std
 
         world = new World();
+        world.setInput(new InputGDX());
         world.addWorldObject(enemy);
         world.addWorldObject(hero);
         world.setHero(hero);
@@ -121,9 +122,9 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         hud.render();
 
         //remove this after testing
-        /*if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+        /*if (Gdx.input.isKeyPressed(InputGDX.Keys.LEFT) && !Gdx.input.isKeyPressed(InputGDX.Keys.RIGHT))
             hero.moveXPosition(Direction.LEFT);
-        else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !Gdx.input.isKeyPressed(Input.Keys.LEFT))
+        else if (Gdx.input.isKeyPressed(InputGDX.Keys.RIGHT) && !Gdx.input.isKeyPressed(InputGDX.Keys.LEFT))
             hero.moveXPosition(Direction.RIGHT);
         else hero.moveXPosition(Direction.NONE);*/
         if(Gdx.input.isKeyPressed(Input.Keys.TAB)){

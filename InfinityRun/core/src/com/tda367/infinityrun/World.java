@@ -6,7 +6,6 @@ import com.tda367.infinityrun.Roomtemplates.LogicalMapper;
 import com.tda367.infinityrun.Roomtemplates.TextbasedWorldGenerator;
 import com.tda367.infinityrun.Roomtemplates.WorldGenerator;
 
-import javax.rmi.CORBA.Util;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +27,11 @@ public class World {
 
     public World() {
         worldObjects = new ArrayList<WorldObject>();
-        input = new Input();
+    }
 
+    public void setInput(IInput input)
+    {
+        this.input = input;
     }
 
     public void generateWorld() {

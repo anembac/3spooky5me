@@ -1,5 +1,10 @@
 package Tests;
 
+import com.tda367.infinityrun.Character;
+import com.tda367.infinityrun.InputEmpty;
+import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.RoomTiles.CoinObject;
+import com.tda367.infinityrun.World;
 import com.tda367.infinityrun.desktop.DesktopLauncher;
 import junit.framework.TestCase;
 import org.junit.*;
@@ -20,6 +25,14 @@ public class DesktopLauncherTest extends TestCase{
 
     @org.junit.Test
     public void testSomething() {
-        assertTrue(k == 2);
+        World world = new World();
+        world.setInput(new InputEmpty());
+        Character hero = new Character(new Vec2(0,0));
+        world.addWorldObject(hero);
+        world.setHero(hero);
+        world.addWorldObject(new CoinObject(new Vec2(0,0)));
+        assertTrue(hero.getCoins() == 0);
+        world.frame(1);
+        assertTrue(hero.getCoins() == 1);
     }
 }
