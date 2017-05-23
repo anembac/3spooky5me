@@ -24,7 +24,7 @@ public class DesktopLauncherTest extends TestCase{
     }
 
     @org.junit.Test
-    public void testSomething() {
+    public void testCoinCollection() {
         World world = new World();
         world.setInput(new InputEmpty());
         Character hero = new Character(new Vec2(0,0));
