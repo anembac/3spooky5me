@@ -23,7 +23,6 @@ public class TextbasedWorldGenerator implements WorldGenerator {
         try
         {
             BufferedReader br = new BufferedReader(new FileReader("WorldRooms.txt"));
-            StringBuilder sb = new StringBuilder();
             String line = br.readLine();
             int i = 0; // keep track of y axis
             int lineRow = 1;
