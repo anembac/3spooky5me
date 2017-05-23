@@ -111,19 +111,40 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                 if(madeRooms.containsKey(new IndexPoint(x+1,y)) && madeRooms.get(new IndexPoint(x+1,y)).left) cleanPossible(possible,1);
                 if(madeRooms.containsKey(new IndexPoint(x-1,y)) && madeRooms.get(new IndexPoint(x-1,y)).right) cleanPossible(possible,2);
                 if(madeRooms.containsKey(new IndexPoint(x,y+1)) && madeRooms.get(new IndexPoint(x,y+1)).down) cleanPossible(possible,4);
-                if(madeRooms.containsKey(new IndexPoint(x,y-1)) && madeRooms.get(new IndexPoint(x,y-1)).up) cleanPossible(possible,4);
+                if(madeRooms.containsKey(new IndexPoint(x,y-1)) && madeRooms.get(new IndexPoint(x,y-1)).up) cleanPossible(possible,8);
 
-                int q = rand.nextInt(possible.size());
-                madeRooms.put(new IndexPoint(x,y), possible.get(q));
-                return possible.get(q).generate(x,y);
+                RoomType madeRoom = null;
+                while(madeRoom == null)
+                {
+                    int q = rand.nextInt(possible.size());
+                    madeRoom = possible.get(q);
+                    madeRooms.put(new IndexPoint(x,y), madeRoom);
+                    if(!pathOut(new HashSet<IndexPoint>(), 0,0)){
+                        madeRoom = null;
+                        possible.remove(q);
+                    }
+                }
+                return madeRoom.generate(x,y);
             }
         }
+    }
+
+    private boolean pathOut(HashSet<IndexPoint> checked, int x, int y) {
+        IndexPoint pos = new IndexPoint(x,y);
+        checked.add(pos);
+        if(madeRooms.containsKey(pos)) {
+            return  ((madeRooms.get(pos).down && !checked.contains(new IndexPoint(x,y-1))) ? pathOut(checked,x,y-1) : false) ||
+                    ((madeRooms.get(pos).up && !checked.contains(new IndexPoint(x,y+1))) ? pathOut(checked,x,y+1) : false) ||
+                    ((madeRooms.get(pos).right && !checked.contains(new IndexPoint(x+1,y))) ? pathOut(checked,x+1,y) : false) ||
+                    ((madeRooms.get(pos).left && !checked.contains(new IndexPoint(x-1,y))) ? pathOut(checked,x-1,y) : false);
+        }
+        else return true;
     }
 
     private void cleanPossible(List<RoomType> possible, int i)
     {
         for(int k = 0; k < possible.size();) {
-            if((possible.get(k).hashCode() & i) == 0) {
+            if((possible.get(k).bitmaskCode() & i) == 0) {
                 possible.remove(k);
                 continue;
             }

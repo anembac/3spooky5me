@@ -21,12 +21,17 @@ public class AdminsDebugginStaff extends MeleeWeapon {
         {
             List<WorldObject> objects = CollisionManager.getInstance().getKNearest(this.getParent(), 20);
             int i = 0;
+            int x = (int)(Math.floor((getPosition().x+getDrawingRect().bounds.x/2) / (Constants.roomWidth*Constants.meter)));
+            int y = (int)(Math.floor((getPosition().y+getDrawingRect().bounds.y/2) / (Constants.roomHeight*Constants.meter)));
+
             for(WorldObject wo : objects)
             {
                 i++;
                 float dist = Utils.distance(this.getParent(), wo);
+
                 System.out.println(i + " : Distance is : " + dist + " and the class name is : " + wo.getClass().getName());
             }
+            System.out.println("x y " + x + " " + y);
             ccd = getCD();
         }
 
