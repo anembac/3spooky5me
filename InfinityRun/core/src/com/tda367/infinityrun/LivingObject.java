@@ -76,6 +76,13 @@ public class LivingObject extends WorldObject {
         return upgrades.get("Speed").getValueInt();
     }
 
+    public double getMeleeHandling() {return upgrades.get("Melee").getValueDouble();}
+
+    public int getCriticalHitChance(){return upgrades.get("CHC").getValueInt();}
+
+    public double getCriticalHitDamage(){return upgrades.get("CHD").getValueDouble();}
+
+
     public LivingObject(Vec2 position, Vec2 bounds, int speedLvl, int jumpLvl, int hermesLvl, int healthLvl, int meleeHandlingLvl, int ChcLvl, int Chdlvl, int regLvl)
     {
         super(position,bounds);

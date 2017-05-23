@@ -4,8 +4,6 @@ import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.RoomTiles.CoinObject;
 import com.tda367.infinityrun.SpecialUpgrades.Looting;
-
-import javax.rmi.CORBA.Util;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,13 +13,52 @@ import java.util.List;
 public class Character extends LivingObject {
 
     public Character(Vec2 position, Vec2 bounds){
-        super(position, bounds,100,10,50,20,5,1,5,1);
-        addUpgrade("Looting", new Looting(2));    //Multiplied as a modifier to increase number of coins dropped - 250% chance of coins means 2 coins and 50% chance of extra.
+        super(position, bounds,0,0,50,0,0,0,0,0);
+        addUpgrade("Looting", new Looting(0));    //Multiplied as a modifier to increase number of coins dropped - 250% chance of coins means 2 coins and 50% chance of extra.
         setTexture("WorldObjects/player.png");// default hero texture
         //new Rectangle(position.x, position.y, size, size);
     }
 
     private int coins = 0;
+
+    @Override
+    public double getMaxHealth(){
+        return (20 * 20) + super.getMaxHealth();
+    }
+
+    @Override
+    public int getMaxSpeed(){
+        return (5 * 100) + super.getMaxSpeed();
+    }
+
+    @Override
+    public int getJumpAcceleration(){
+        return (20 * 10) + super.getJumpAcceleration();
+    }
+
+    @Override
+    public int getRegeneration(){
+        return (1 * 2) + super.getRegeneration();
+    }
+
+    @Override
+    public double getMeleeHandling(){
+        return (0.05 * 5) + super.getMeleeHandling();
+    }
+
+    @Override
+    public int getCriticalHitChance(){
+        return (1 * 5) + super.getCriticalHitChance();
+    }
+
+    @Override
+    public double getCriticalHitDamage(){
+        return (5 * 5) + super.getCriticalHitDamage();
+    }
+
+    public double getCoinMultiplier(){
+        return (5 * 2) + upgrades.get("Looting").getValueDouble();
+    }
 
     public int getCoins(){
         return coins;

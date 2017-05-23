@@ -18,11 +18,6 @@ public class CriticalHitChance extends Upgrade{
         basePrice = 10;
     }
 
-    @Override
-    public int getValueInt(){
-        return (5 + super.getValueInt());
-    }
-
     public boolean isCritical (){
         Random rnd = new Random();
         return getValueInt() >= (rnd.nextInt(100)+1);
