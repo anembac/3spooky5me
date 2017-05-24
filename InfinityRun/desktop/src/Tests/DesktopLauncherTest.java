@@ -9,6 +9,7 @@ import com.tda367.infinityrun.RoomTiles.CoinObject;
 import com.tda367.infinityrun.Roomtemplates.TestingWorldGenerator;
 import com.tda367.infinityrun.Shop;
 import com.tda367.infinityrun.World;
+import com.tda367.infinityrun.SpecialUpgrades.Health;
 import com.tda367.infinityrun.desktop.DesktopLauncher;
 import junit.framework.TestCase;
 import org.junit.*;
@@ -131,5 +132,19 @@ public class DesktopLauncherTest extends TestCase{
             oldJumpH = newJumpH;
             simulatedWorld.frame(0.016f);
         }
+    }
+
+    @Test
+    public void testUpgradesExist(){
+        Character hero = new Character((new Vec2(0,0)));
+        setHero(hero);
+        assertTrue(hero.getUpgrades().get("Health").getValueInt() == 100);
+        assertTrue(hero.getUpgrades().get("Speed").getValueInt() == 500);
+        assertTrue(hero.getUpgrades().get("JumpH").getValueInt() == 800);
+        assertTrue(hero.getUpgrades().get("Regeneration").getValueInt() == 1);
+        assertTrue(hero.getUpgrades().get("CHC").getValueDouble() == 1);
+        assertTrue(hero.getUpgrades().get("CHD").getValueDouble() == 1.05);
+        assertTrue(hero.getUpgrades().get("Melee").getValueDouble() == 1);
+        assertTrue(hero.getUpgrades().get("Hermes").getValueInt() == 0);
     }
 }
