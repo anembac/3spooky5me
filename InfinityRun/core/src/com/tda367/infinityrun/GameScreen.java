@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.tda367.infinityrun.Math.Rect;
 import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.RoomTiles.Animator;
 import com.tda367.infinityrun.RoomTiles.AttackHitbox;
 import com.tda367.infinityrun.SpecialUpgrades.*;
 import com.tda367.infinityrun.WeaponTypes.AdminsDebugginStaff;
@@ -36,6 +37,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
     World world;
     HUD hud;
     Shop shop;
+    Animator anime;
     final int windowWidth = 1600;
     final int windowHeight = 900;
 
@@ -59,6 +61,8 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         //hero.setMeleeWeapon(new Sword());
         //Shop
         shop = new Shop(hero);
+        anime = new Animator(hero);
+
 
         //HUDDDDDD
         hud = new HUD(hero);
@@ -116,6 +120,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
                 game.batch.draw(textureMap.get(child.getTexturename()), child.getPosition().x, child.getPosition().y);
             }
         }
+        anime.render();
         //game.batch.draw(ctex, hero.position.x, hero.position.y);
         game.batch.end();
         //System.out.println(game.batch.renderCalls);

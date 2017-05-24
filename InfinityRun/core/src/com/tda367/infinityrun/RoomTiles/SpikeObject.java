@@ -15,5 +15,8 @@ public class SpikeObject extends Hazard {
         super(position, new Vec2(32, 32), 10);
         setTexture("WorldObjects/Spike.png");
 
+
+
+
     }
 }

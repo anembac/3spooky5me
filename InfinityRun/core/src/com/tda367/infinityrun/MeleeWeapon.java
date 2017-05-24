@@ -16,7 +16,7 @@ public class MeleeWeapon extends WorldObject {
      private double currentCD = 0;
 
      public MeleeWeapon (int damage, double CD, double range) {
-         super(new Vec2(/*offset from character*/32,26), new Vec2(/*size*/64,12));
+         super(new Vec2(/*offset from character*/32,26), new Vec2(/*size*/164,12));
          setTexture("WorldObjects/weapon.png");
          setCollidable(false);
          this.damage = damage;
@@ -54,9 +54,9 @@ public class MeleeWeapon extends WorldObject {
         if(state.attackPressed())
         {
             // temp animation to see when we are auctually attacking
-            position.y = (position.y-1) % 10 + 16;
+            position.y = (position.y-1) % 30 +21;
         }
-        else position.y = 26.0f;
+        else position.y = 16.0f;
 
         if(state.attackPressed() && currentCD < 0.001)
         {
@@ -68,6 +68,9 @@ public class MeleeWeapon extends WorldObject {
                 if(wo != this.getParent() && Utils.distance(this.getParent(), wo) < (range * Constants.meter) && wo instanceof LivingObject)
                 {
                     ((LivingObject)wo).damage(damage);
+                    ((LivingObject)wo).acceleration.y = 400;
+
+
                     currentCD = CD;
                 }
             }

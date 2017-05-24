@@ -120,7 +120,18 @@ public class World {
 
     public void addRoomIfItDoesntExist(int x, int y)
     {
-        if(!generator.roomExists(x,y))
+        if(!generator.roomExists(x,y)){
+        int o = 0;
+        o++;
+        if (o % 2== 0){
+                List<WorldObject> newWorldObjects = generator1.generate(x,y);
+                for(int i = 0; i < newWorldObjects.size(); i++)
+                {
+                    for(int j = 0; j < worldObjects.size(); j++)
+                    {
+                        if(newWorldObjects.get(i) == worldObjects.get(j)) System.out.println("Error worldobject already added!?");
+                    }}
+    }
         {
             List<WorldObject> newWorldObjects = generator.generate(x,y);
             for(int i = 0; i < newWorldObjects.size(); i++)
@@ -139,4 +150,4 @@ public class World {
         worldObjects.add(obj);
     }*/
 
-}
+}}

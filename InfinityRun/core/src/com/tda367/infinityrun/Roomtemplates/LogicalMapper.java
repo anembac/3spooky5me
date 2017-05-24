@@ -44,6 +44,10 @@ public class LogicalMapper extends RoomTemplate implements WorldGenerator{
         roomIndexes.add(13, new RoomUDL());
         roomIndexes.add(14, new RoomURDL());
     }
+
+    public void recycleWorld (){
+        rooms.clear();
+    }
     /*
     returns -1 for no room exist, 0 for a blocked path and 1 for path.
     (same for all of the check methods)
@@ -183,6 +187,7 @@ public class LogicalMapper extends RoomTemplate implements WorldGenerator{
         RoomTemplate room = roomRandomizer();
         rooms.put(new IndexPoint(x, y), room);
         room.addRoomObjects(x, y);
+        rooms.clear();
         return room.roomObjects;
     }
 
