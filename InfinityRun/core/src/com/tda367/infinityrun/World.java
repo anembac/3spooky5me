@@ -5,7 +5,6 @@ import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.Roomtemplates.LogicalMapper;
 import com.tda367.infinityrun.Roomtemplates.TextbasedWorldGenerator;
 import com.tda367.infinityrun.Roomtemplates.WorldGenerator;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,15 +17,16 @@ public class World {
     private double difficulty = 1.0;
     IInput input = null;
     private WorldObject hero = null;
-    private WorldGenerator generator1 = new LogicalMapper();
-    private WorldGenerator generator = new TextbasedWorldGenerator();
+    private WorldGenerator generator = null;
 
     public void increaseDifficulty(double difficulty) {
         this.difficulty = difficulty + 0.05;
     }
 
-    public World() {
+    public World(WorldGenerator gen) {
+        CollisionManager.getInstance().forceNewInstance();
         worldObjects = new ArrayList<WorldObject>();
+        generator = gen;
     }
 
     public void setInput(IInput input)

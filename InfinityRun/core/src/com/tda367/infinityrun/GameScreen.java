@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.tda367.infinityrun.Math.Rect;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.RoomTiles.AttackHitbox;
+import com.tda367.infinityrun.Roomtemplates.TextbasedWorldGenerator;
 import com.tda367.infinityrun.SpecialUpgrades.*;
 import com.tda367.infinityrun.WeaponTypes.AdminsDebugginStaff;
 import com.tda367.infinityrun.WeaponTypes.Sword;
@@ -45,12 +46,12 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         //br = new BaseRoom();
         //br.setup();
 
-        hero = new Character(new Vec2(768, 450));
+        hero = new Character(new Vec2(768, 450),0,0,0,0,0,0,0,0);
         //WorldObject hitbox = new AttackHitbox(new Vec2(hero.getPosition().x + 64, hero.getPosition().y));
         Enemy enemy = new Enemy(new Vec2(768,520), new Vec2(64,64),1,1,1,1,1,1,1,1);
         // setup a new world depending on some menu parameters maybe? diff etc. world could also be called level, std
 
-        world = new World();
+        world = new World(new TextbasedWorldGenerator());
         world.setInput(new InputGDX());
         world.addWorldObject(enemy);
         world.addWorldObject(hero);

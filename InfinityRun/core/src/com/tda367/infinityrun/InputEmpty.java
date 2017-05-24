@@ -7,9 +7,9 @@ import com.badlogic.gdx.Gdx;
  */
 public class InputEmpty implements IInput {
     private InputState state = new InputState(false,false,false,false);
-    public InputEmpty()
+    public InputEmpty(boolean forw, boolean back, boolean jump, boolean attack)
     {
-
+        state = new InputState(forw, back, jump, attack);
     }
 
     @Override
@@ -19,6 +19,6 @@ public class InputEmpty implements IInput {
 
     @Override
     public void collectInput() {
-        state = new InputState(false, false, false, false);
+
     }
 }
