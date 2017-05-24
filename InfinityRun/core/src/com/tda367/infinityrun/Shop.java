@@ -14,9 +14,7 @@ public class Shop {
 
     public void purchaseUpgrade(String upgName){
         Upgrade currentUpg = upgList.get(upgName);
-        //System.out.println(currentUpg);
-        //System.out.println("Name: " + upgName + ", level: " + currentUpg.getLevel());
-        //System.out.println("Coins: " + shopOwner.getCoins() + ", Cost: " + getPrice(currentUpg));
+
         if(getPrice(currentUpg)<=shopOwner.getCoins()){
             currentUpg.addLevel();
             //System.out.println(upgName + ": " + currentUpg.getLevel());

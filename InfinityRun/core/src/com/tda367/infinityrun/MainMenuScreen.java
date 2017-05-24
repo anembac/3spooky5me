@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.Roomtemplates.TextbasedWorldGenerator;
 
 public class MainMenuScreen implements Screen { //this class creates the main menu screen
     final InfinityRun game;
@@ -72,7 +74,8 @@ public class MainMenuScreen implements Screen { //this class creates the main me
 
         if(newCharButton.isPressed()){
             this.dispose();
-            game.setScreen(new GameScreen(game));
+            game.setScreen(new GameScreen(game,
+                    new World(new TextbasedWorldGenerator(), new Character(new Vec2(768,450)))));
         }
 
     }

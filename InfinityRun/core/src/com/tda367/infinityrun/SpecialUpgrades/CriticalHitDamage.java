@@ -14,7 +14,7 @@ public class CriticalHitDamage extends Upgrade{
 
     public CriticalHitDamage(int baseValue) {
         super(-1, baseValue);
-        upgradeValue = 5;
+        perLevelMultiplier = 5;
         basePrice = 10;
     }
 

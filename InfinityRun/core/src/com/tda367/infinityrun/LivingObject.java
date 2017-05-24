@@ -133,7 +133,7 @@ public class LivingObject extends WorldObject {
         {
             //acceleration.y -= 9.82*dt;
             // so 1 px is 1 unit here, we need to guess the pixel height of the character in meters, etc 150?! this is 64 now but we gravity feels quite low...
-            acceleration.y -= 9.82*dt*150;
+            acceleration.y -= 2.5*9.82*Constants.meter*dt;
         }
         // limit the forward acceleration
         acceleration.x = Utils.limit(-getMaxSpeed(), acceleration.x, getMaxSpeed());

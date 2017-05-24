@@ -11,7 +11,7 @@ public class HermesSandals extends Upgrade {
 
     public HermesSandals(int level) {
         super(100, level);
-        upgradeValue = getValueInt();
+        perLevelMultiplier = getValueInt();
         basePrice = 1000;
     }
     @Override
@@ -21,13 +21,13 @@ public class HermesSandals extends Upgrade {
 
     @Override
     public void frame(float dt, InputState state, ObjectModifiers mod) {
-        if(state.jumpPressed() && mod.inAir && (upgradeValue > 0))
+        if(state.jumpPressed() && mod.inAir && (perLevelMultiplier > 0))
         {
             mod.acceleration.y = 0;
             mod.acceleration.y += 2000;
-            --upgradeValue;
+            --perLevelMultiplier;
         } if(!mod.inAir){
-            upgradeValue = getValueInt();
+            perLevelMultiplier = getValueInt();
         }
     }
 }

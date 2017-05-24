@@ -2,9 +2,7 @@ package com.tda367.infinityrun;
 
 import com.badlogic.gdx.Gdx;
 
-/**
- * Created by Mikael on 5/3/2017.
- */
+//FOR TESTING ONLY
 public class InputEmpty implements IInput {
     private InputState state = new InputState(false,false,false,false);
     public InputEmpty(boolean forw, boolean back, boolean jump, boolean attack)

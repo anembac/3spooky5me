@@ -2,8 +2,6 @@ package com.tda367.infinityrun;
 
 import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
-import com.tda367.infinityrun.Roomtemplates.LogicalMapper;
-import com.tda367.infinityrun.Roomtemplates.TextbasedWorldGenerator;
 import com.tda367.infinityrun.Roomtemplates.WorldGenerator;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,18 +13,28 @@ public class World {
 
     private List<WorldObject> worldObjects;
     private double difficulty = 1.0;
-    IInput input = null;
-    private WorldObject hero = null;
+    IInput input;
+    private final Character hero;
     private WorldGenerator generator = null;
+    Shop shop;
 
     public void increaseDifficulty(double difficulty) {
         this.difficulty = difficulty + 0.05;
     }
 
-    public World(WorldGenerator gen) {
+    public World(WorldGenerator gen, Character hero) {
         CollisionManager.getInstance().forceNewInstance();
         worldObjects = new ArrayList<WorldObject>();
         generator = gen;
+        // not sure where to put this really since the entry points for the project are tied to libgdx
+        input = new InputGDX();
+        addWorldObject(hero);
+        this.hero = hero;
+        shop = new Shop(getHero());
+    }
+
+    public Character getHero(){
+        return hero;
     }
 
     public void setInput(IInput input)
@@ -35,12 +43,15 @@ public class World {
     }
 
     public void generateWorld() {
-        int x = (int)(Math.floor((hero.getPosition().x+hero.getDrawingRect().bounds.x/2) / (Constants.roomWidth*Constants.meter)));
-        int y = (int)(Math.floor((hero.getPosition().y+hero.getDrawingRect().bounds.y/2) / (Constants.roomHeight*Constants.meter)));
-        //System.out.println(x + "  " + y + "  " + (hero.getPosition().x+hero.getDrawingRect().bounds.x/2) / (Constants.roomWidth*Constants.meter));
+        int x = (int)(Math.floor((hero.getPosition().x+hero.getDrawingRect().bounds.x/2)
+                / (Constants.roomWidth*Constants.meter)));
 
-      //creates the first room
+        int y = (int)(Math.floor((hero.getPosition().y+hero.getDrawingRect().bounds.y/2)
+                / (Constants.roomHeight*Constants.meter)));
+
+        //creates the first room
         addRoomIfItDoesntExist(x - 0, y-0);
+
         //creates the non-corner rooms
         addRoomIfItDoesntExist(x+1,y);
         addRoomIfItDoesntExist(x-1,y);
@@ -50,13 +61,8 @@ public class World {
 
         //creates diagonal rooms
         addRoomIfItDoesntExist(x-1,y-1);
-
         addRoomIfItDoesntExist(x-1,y+1);
-
-
-
         addRoomIfItDoesntExist(x+1,y-1);
-
         addRoomIfItDoesntExist(x+1,y+1);
     }
 
@@ -80,19 +86,16 @@ public class World {
             if(Vec2.distance(Utils.getCenter(obj), heroPos) > 1500) continue; // no need to make logic that far away, the player wont see this anyway.
             obj.frame(dt, heroPos.x, heroPos.y, input.getInput());
 
-            if(obj instanceof LivingObject)
-            {
+            if(obj instanceof LivingObject) {
                 // This object might have a different position now, the easiest way is to remove it and then re add it.
                 CollisionManager.getInstance().updatePosition(obj);
             }
-            if(obj.getDespawn())
-            {
+            if(obj.getDespawn()) {
                 objectsToRemove.add(obj);
             }
         }
 
-        for(WorldObject wo : objectsToRemove)
-        {
+        for(WorldObject wo : objectsToRemove) {
             CollisionManager.getInstance().removeObject(wo);
             worldObjects.remove(wo);
         }
@@ -102,11 +105,6 @@ public class World {
     public void addWorldObject(WorldObject obj) {
         CollisionManager.getInstance().addWorldObject(obj);
         worldObjects.add(obj);
-    }
-
-    public void setHero(WorldObject obj)
-    {
-        this.hero = obj;
     }
 
     public void addWorldObjects(List<WorldObject> objs)
@@ -133,10 +131,8 @@ public class World {
             addWorldObjects(newWorldObjects);
         }
     }
-
-
-    /*public void addHero(WorldObject obj) {
-        worldObjects.add(obj);
-    }*/
+    public Shop getShop() {
+        return shop;
+    }
 
 }

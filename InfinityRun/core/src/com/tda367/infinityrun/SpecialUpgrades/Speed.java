@@ -10,7 +10,7 @@ public class Speed extends Upgrade {
 
     public Speed(int level) {
         super(-1, level);
-        upgradeValue = 5;
+        perLevelMultiplier = 5;
         basePrice = 20;
     }
 
@@ -21,8 +21,8 @@ public class Speed extends Upgrade {
 
     @Override
     public void frame(float dt, InputState state, ObjectModifiers modify) {
-        if(state.forwardPressed()) modify.acceleration.x += 100;
-        if(state.backPressed()) modify.acceleration.x -= 100;
+        if(state.forwardPressed()) modify.acceleration.x += 50;
+        if(state.backPressed()) modify.acceleration.x -= 50;
         if(!state.backPressed() && !state.forwardPressed())
         {
             if(modify.acceleration.x < -0.000001)

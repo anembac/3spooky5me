@@ -8,7 +8,8 @@ import com.tda367.infinityrun.Math.Vec2;
 public class Enemy extends LivingObject {
 
 
-    public Enemy(Vec2 position, Vec2 bounds, int speedLvl, int jumpLvl, int hermesLvl, int healthLvl, int meleeHandlingLvl, int ChcLvl, int Chdlvl, int regLvl) {
+    public Enemy(Vec2 position, Vec2 bounds, int speedLvl, int jumpLvl, int hermesLvl, int healthLvl,
+                 int meleeHandlingLvl, int ChcLvl, int Chdlvl, int regLvl) {
         super(position, bounds, speedLvl, jumpLvl, hermesLvl, healthLvl, meleeHandlingLvl, ChcLvl, Chdlvl, regLvl);
         setTexture("WorldObjects/enemy.png");
     }

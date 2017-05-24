@@ -9,7 +9,7 @@ import com.tda367.infinityrun.Upgrade;
 public class MeleeHandling extends Upgrade{
     public MeleeHandling(int level) {
         super(-1, level);
-        upgradeValue = 5;
+        perLevelMultiplier = 5;
         basePrice = 20;
     }
 }

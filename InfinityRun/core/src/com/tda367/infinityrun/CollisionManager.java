@@ -16,7 +16,8 @@ import java.util.List;
 public class CollisionManager {
     private static CollisionManager manager = null;
     KdTree<WorldObject> kdTree = new KdTree<WorldObject>();
-    // This is kind of double stored data but it is neccecary for good complexity, it allows us to map some things in both ways with O(1) and O(logn) complexity.
+    // This is kind of double stored data but it is neccecary for good complexity,
+    // it allows us to map some things in both ways with O(1) and O(logn) complexity.
     HashMap<WorldObject, KdTreeNode<WorldObject>> worldObjectToNodes;
 
     public static CollisionManager getInstance()
@@ -38,10 +39,6 @@ public class CollisionManager {
 
     public void addWorldObject(WorldObject obj)
     {
-       /* output.add(kdTree.insert(new Point2D.Double(obj.position.x, obj.position.y), obj));
-        output.add(kdTree.insert(new Point2D.Double(obj.position.x, obj.position.y+obj.bounds.y), obj));
-        output.add(kdTree.insert(new Point2D.Double(obj.position.x + obj.bounds.x, obj.position.y), obj));
-        output.add(kdTree.insert(new Point2D.Double(obj.position.x+obj.bounds.x, obj.position.y+obj.bounds.y), obj));*/
         Vec2 a = Utils.getCenter(obj);
         worldObjectToNodes.put(obj, kdTree.insert(new Point2D.Double(a.x, a.y), obj));
     }
@@ -163,7 +160,9 @@ public class CollisionManager {
 
             if(node.point.x > oCornerA.x && node.point.x < (oCornerC.x) && node.point.y > oCornerA.y && node.point.y < oCornerC.y)
             {
-                // Bugg here, this intersection doesnt cover angeled velocity intersections so we have to roll back the position. This doesnt occur very often.
+                // Bugg here, this intersection doesnt cover angeled velocity intersections so we have to
+                // roll back the position. This doesnt occur very often.
+
                 // Check what side are the closest
                 float e,f,g,h;
                 //down
