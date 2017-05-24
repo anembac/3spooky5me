@@ -12,7 +12,7 @@ public class JumpH extends Upgrade {
 
     public JumpH(int level) {
         super(100, level);
-        upgradeValue = 20;
+        perLevelMultiplier = 20;
         basePrice = 20;
     }
 

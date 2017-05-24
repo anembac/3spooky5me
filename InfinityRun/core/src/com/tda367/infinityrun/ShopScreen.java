@@ -29,6 +29,7 @@ public class ShopScreen implements Screen {
             new Button.ButtonStyle(textureUpDrawable, textureDownDrawable, textureUpDrawable);
     Button[] buttonArray;
     String[] nameList;
+    static int count = 0;
 
 
 
@@ -56,7 +57,10 @@ public class ShopScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        buttonClickedCheck();
+        if(!(altButtonClick()==0)){
+            count -= count;
+            buttonClickedCheck();
+        }
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
@@ -77,6 +81,21 @@ public class ShopScreen implements Screen {
             }
         }
     }
+
+    private void clickButton(int x){
+        shop.purchaseUpgrade((nameList[x]));
+    }
+
+    private int altButtonClick(){
+        for(int i = 0; i<buttonArray.length;i++){
+            if(buttonArray[i].isPressed()){
+                System.out.println("Ping " + ++count);
+                return i;
+            }
+        }
+        return 0;
+    }
+
     @Override
     public void resize(int width, int height) {
 

@@ -26,8 +26,7 @@ public class LivingObject extends WorldObject {
         this(position,bounds,1,1,1,1,1,1,1,1);
     }
 
-    public void setMeleeWeapon(MeleeWeapon weapon)
-    {
+    public void setMeleeWeapon(MeleeWeapon weapon) {
         if(meleeWeapon != null)
         {
             removeChildren(meleeWeapon);
@@ -49,6 +48,11 @@ public class LivingObject extends WorldObject {
             despawn();
         }
         System.out.println(currentHealth + " health left for some creature.");
+    }
+
+    public Vec2 getAcceleration()
+    {
+        return acceleration.clone();
     }
 
     public double getHealth()
@@ -117,8 +121,6 @@ public class LivingObject extends WorldObject {
         float rightIntersection = collisionVariables.w;
         float leftIntersection = collisionVariables.y;
 
-        // The piece below might be better applied in "Upgrades" as a command pattern ish that is frame based. Since this code will change depending on what upgrades we have.
-        /////////////////////////////////////////////////////////
         ObjectModifiers modifier = new ObjectModifiers(this.position.y > height, acceleration);
         for(Upgrade u :upgrades.values())
         {
@@ -130,8 +132,8 @@ public class LivingObject extends WorldObject {
         if(this.position.y > height)
         {
             //acceleration.y -= 9.82*dt;
-            // so 1 px is 1 unit here, we need to guess the pixel height of the character in meters, etc 150?!
-            acceleration.y -= 9.82*dt*150;
+            // so 1 px is 1 unit here, we need to guess the pixel height of the character in meters, etc 150?! this is 64 now but we gravity feels quite low...
+            acceleration.y -= 2.5*9.82*Constants.meter*dt;
         }
         // limit the forward acceleration
         acceleration.x = Utils.limit(-getMaxSpeed(), acceleration.x, getMaxSpeed());
@@ -165,6 +167,7 @@ public class LivingObject extends WorldObject {
             position.y = roof - bounds.y;
             acceleration.y = 0;
         }
+
         if(meleeWeapon != null) meleeWeapon.frame(dt,heroX, heroY, state);
         if(this.acceleration.x > 0.1 && meleeWeapon != null) meleeWeapon.setDirRight();
         else if(meleeWeapon != null && this.acceleration.x < -0.1) meleeWeapon.setDirLeft();

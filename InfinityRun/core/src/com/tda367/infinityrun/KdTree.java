@@ -70,10 +70,10 @@ public class KdTree<T> {
         return cNode;
     }
 
-    float square(float a)
-    {
-        return a*a;
-    }
+//    float square(float a)
+//    {
+//        return a*a;
+//    }
 
     List<KdTreeNode<T>> getKNN(Point2D.Double obj, int k)
     {
@@ -182,17 +182,17 @@ public class KdTree<T> {
         }
     }
 
-    void moveNodeTo(KdTreeNode<T> pNode, Point2D.Double pos)
-    {
-        pNode.point = pos;
-
-        List<KdTreeNode<T>> allNodes = getAllNodes(pNode);
-
-        for (int i = 0; i < allNodes.size(); i++)
-        {
-            insert(allNodes.get(i));
-        }
-    }
+//    void moveNodeTo(KdTreeNode<T> pNode, Point2D.Double pos)
+//    {
+//        pNode.point = pos;
+//
+//        List<KdTreeNode<T>> allNodes = getAllNodes(pNode);
+//
+//        for (int i = 0; i < allNodes.size(); i++)
+//        {
+//            insert(allNodes.get(i));
+//        }
+//    }
 
     void removePoint(KdTreeNode<T> pNode)
     {
@@ -204,10 +204,10 @@ public class KdTree<T> {
         pNode = null;
     }
 
-    private KdTreeNode<T> getParent()
-    {
-        return this.parentNode;
-    }
+//    private KdTreeNode<T> getParent()
+//    {
+//        return this.parentNode;
+//    }
 
     List<KdTreeNode<T>> rangeSearch2D(float l, float r, float t, float b)
     {

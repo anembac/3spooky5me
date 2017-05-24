@@ -14,7 +14,7 @@ public class CriticalHitChance extends Upgrade{
 
     public CriticalHitChance(int level) {
         super(60, level);
-        upgradeValue = 1;
+        perLevelMultiplier = 1;
         basePrice = 10;
     }
 

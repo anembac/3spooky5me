@@ -26,7 +26,7 @@ public class HUD {
         //health
         hudbatch.begin();
         hudbatch.draw(healthicon, 100-healthicon.getRegionWidth(), 100-healthicon.getRegionHeight()/2);
-        hudfont.draw(hudbatch, ": "+character.getHealth() + "/" + character.getMaxHealth(), 100,100);
+        hudfont.draw(hudbatch, ": "+(int)character.getHealth() + "/" + (int)character.getMaxHealth(), 100,100);
 
         //coins
         hudbatch.draw(coinicon, 100-coinicon.getRegionWidth(), 850-coinicon.getRegionHeight()/2);

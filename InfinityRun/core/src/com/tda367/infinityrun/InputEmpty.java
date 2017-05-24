@@ -2,14 +2,12 @@ package com.tda367.infinityrun;
 
 import com.badlogic.gdx.Gdx;
 
-/**
- * Created by Mikael on 5/3/2017.
- */
-public class    InputEmpty implements IInput {
+//FOR TESTING ONLY
+public class InputEmpty implements IInput {
     private InputState state = new InputState(false,false,false,false);
-    public InputEmpty()
+    public InputEmpty(boolean forw, boolean back, boolean jump, boolean attack)
     {
-
+        state = new InputState(forw, back, jump, attack);
     }
 
     @Override
@@ -19,6 +17,6 @@ public class    InputEmpty implements IInput {
 
     @Override
     public void collectInput() {
-        state = new InputState(false, false, false, false);
+
     }
 }

@@ -47,24 +47,25 @@ public class PauseMenuScreen implements Screen{
         if(unPauseButton.isPressed()){
             masterScreen.game.setScreen(masterScreen);
             this.dispose();
-
         }
+
         if(backToMenuButton.isPressed()){   //broken; graphics disposed, collision with old objects still occurs
-            masterScreen.game.setScreen(new MainMenuScreen(masterScreen.game));
-            masterScreen.dispose();
+
+            masterScreen.game.setScreen(new MainMenuScreen(masterScreen.game)); //masterscreen.game is an instance of
+            masterScreen.dispose();                                             //the InfinityRun class
             this.dispose();
         }
+
         if(exitButton.isPressed()){
             masterScreen.dispose();
             this.dispose();
+            System.out.println("Exiting Game...");
             Gdx.app.exit();
         }
     }
 
     @Override
-    public void show() {
-
-    }
+    public void show() {}
 
     @Override
     public void render(float delta) {
@@ -75,25 +76,16 @@ public class PauseMenuScreen implements Screen{
     }
 
     @Override
-    public void resize(int width, int height) {
-
-    }
+    public void resize(int width, int height) {}
 
     @Override
-    public void pause() {
-
-    }
+    public void pause() {}
 
     @Override
-    public void resume() {
-
-    }
+    public void resume() {}
 
     @Override
-    public void hide() {
-
-
-    }
+    public void hide() {    }
 
     @Override
     public void dispose() {
