@@ -7,7 +7,6 @@ public class Shop {
     private Character shopOwner;
     private HashMap<String, Upgrade> upgList;
 
-
     public Shop(Character currentChar){
         shopOwner = currentChar;
         upgList = shopOwner.getUpgrades();
@@ -15,11 +14,14 @@ public class Shop {
 
     public void purchaseUpgrade(String upgName){
         Upgrade currentUpg = upgList.get(upgName);
-        System.out.println("Name: " + upgName + ", level: " + currentUpg.getLevel());
-        System.out.println("Coins: " + shopOwner.getCoins() + ", Cost: " + getPrice(currentUpg));
+        //System.out.println(currentUpg);
+        //System.out.println("Name: " + upgName + ", level: " + currentUpg.getLevel());
+        //System.out.println("Coins: " + shopOwner.getCoins() + ", Cost: " + getPrice(currentUpg));
         if(getPrice(currentUpg)<=shopOwner.getCoins()){
             currentUpg.addLevel();
-            System.out.println(upgName + ": " + currentUpg.getLevel());
+            //System.out.println(upgName + ": " + currentUpg.getLevel());
+        }else{
+            System.out.println("You cannot afford this upgrade.");
         }
     }
 

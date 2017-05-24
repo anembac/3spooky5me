@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.tda367.infinityrun.Roomtemplates.LogicalMapper;
 
 public class PauseMenuScreen implements Screen{
     SpriteBatch batch = new SpriteBatch();
@@ -50,6 +51,7 @@ public class PauseMenuScreen implements Screen{
 
         }
         if(backToMenuButton.isPressed()){   //broken; graphics disposed, collision with old objects still occurs
+
             masterScreen.game.setScreen(new MainMenuScreen(masterScreen.game));
             masterScreen.dispose();
             this.dispose();
@@ -57,6 +59,7 @@ public class PauseMenuScreen implements Screen{
         if(exitButton.isPressed()){
             masterScreen.dispose();
             this.dispose();
+            System.out.println("Exiting Game...");
             Gdx.app.exit();
         }
     }

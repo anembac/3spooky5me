@@ -190,6 +190,10 @@ public class LogicalMapper extends RoomTemplate implements WorldGenerator{
     public boolean roomExists(int x, int y) {
         return rooms.containsKey(new IndexPoint(x, y));
     }
+
+    public void clearRooms(){
+        rooms.clear();
+    }
 }
 
 

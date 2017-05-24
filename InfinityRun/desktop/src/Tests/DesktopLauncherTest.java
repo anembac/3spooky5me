@@ -7,15 +7,17 @@ import com.tda367.infinityrun.Math.Vec4;
 import com.tda367.infinityrun.RoomTiles.BrickObject;
 import com.tda367.infinityrun.RoomTiles.CoinObject;
 import com.tda367.infinityrun.Roomtemplates.TestingWorldGenerator;
+import com.tda367.infinityrun.Shop;
+import com.tda367.infinityrun.World;
 import com.tda367.infinityrun.desktop.DesktopLauncher;
 import junit.framework.TestCase;
 import org.junit.*;
 
-import static org.junit.Assert.*;
 
 /**
  * Created by Mikael on 5/23/2017.
  */
+
 public class DesktopLauncherTest extends TestCase{
     World simulatedWorld;
 
@@ -58,6 +60,32 @@ public class DesktopLauncherTest extends TestCase{
         assertTrue(hero.getCoins() == 0);
         simulatedWorld.frame(1);
         assertTrue(hero.getCoins() == 1);
+
+    }
+
+
+    @Test
+    public void testPurchaseSpeed(){
+        Character hero = new Character(new Vec2(0,0));
+        Shop shop = new Shop(hero);
+        String upgradeName = "Speed";
+        int before1 = shop.getUpgList().get(upgradeName).getLevel();
+        //System.out.println("before1: " + before1);
+        shop.purchaseUpgrade(upgradeName);
+        int after1 = shop.getUpgList().get(upgradeName).getLevel();
+        //System.out.println("after1: " + after1);
+        assertTrue(before1+1 == after1);
+        int before2 = shop.getUpgList().get(upgradeName).getLevel();
+        //System.out.println("before2 " + before2 );
+
+        //At this point the hero should be too poor to afford more speed upgrades
+        shop.purchaseUpgrade(upgradeName);
+        int after2 = shop.getUpgList().get(upgradeName).getLevel();
+        //System.out.println("after2 " + after2);
+        assertTrue(after2 == before2);
+        assertTrue(shop.getPrice(shop.getUpgList().get(upgradeName)) > hero.getCoins());
+
+
     }
 
 

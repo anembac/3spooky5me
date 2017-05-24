@@ -15,11 +15,20 @@ public class Upgrade {
     }
 
     public void addLevel() {
-        level = Math.min(level + 1, cap);
+        if(cap>=0){
+            level = Math.min(level + 1, cap);
+        }else{
+            level = level + 1;
+        }
+
     }
 
-    public void addLevel(int level) {
-        this.level = Math.min(this.level + level, cap);
+    public void addLevel(int addlevel) {
+        if(cap>0){
+            this.level = Math.min(this.level + addlevel, cap);
+        }else{
+            this.level = this.level + addlevel;
+        }
     }
 
     public int getLevel() {
