@@ -185,6 +185,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
 
         public List<WorldObject> generate(int ox, int oy)
         {
+            int difficulty = (int)Math.sqrt(ox*ox+oy+oy);
             List<WorldObject> output = new ArrayList<WorldObject>();
             int k = rand.nextInt(allTypes.size());
             for(int x = 0; x < 25; x++)

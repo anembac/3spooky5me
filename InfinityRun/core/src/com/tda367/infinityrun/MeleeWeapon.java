@@ -69,7 +69,7 @@ public class MeleeWeapon extends WorldObject {
                 {
                     ((LivingObject)wo).damage(damage);
                     ((LivingObject)wo).acceleration.y = 400;
-
+                    ((LivingObject)wo).acceleration.x = 700;
 
                     currentCD = CD;
                 }
