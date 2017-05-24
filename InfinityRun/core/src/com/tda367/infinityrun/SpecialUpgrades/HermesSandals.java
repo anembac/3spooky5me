@@ -16,7 +16,7 @@ public class HermesSandals extends Upgrade {
     }
     @Override
     public int getValueInt(){
-        return (level);
+        return (level + 1);
     }
 
     @Override
