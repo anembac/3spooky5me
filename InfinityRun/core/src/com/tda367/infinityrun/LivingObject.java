@@ -26,8 +26,7 @@ public class LivingObject extends WorldObject {
         this(position,bounds,1,1,1,1,1,1,1,1);
     }
 
-    public void setMeleeWeapon(MeleeWeapon weapon)
-    {
+    public void setMeleeWeapon(MeleeWeapon weapon) {
         if(meleeWeapon != null)
         {
             removeChildren(meleeWeapon);

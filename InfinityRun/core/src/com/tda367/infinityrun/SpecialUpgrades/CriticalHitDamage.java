@@ -20,6 +20,6 @@ public class CriticalHitDamage extends Upgrade{
 
     @Override
     public double getValueDouble(){
-        return  2 + super.getValueDouble();
+        return  0.05 + super.getValueDouble();
     }
 }
