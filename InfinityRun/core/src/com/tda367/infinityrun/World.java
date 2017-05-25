@@ -2,7 +2,7 @@ package com.tda367.infinityrun;
 
 import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
-import com.tda367.infinityrun.Roomtemplates.WorldGenerator;
+import com.tda367.infinityrun.WorldGeneration.WorldGenerator;
 import com.tda367.infinityrun.WeaponTypes.Sword;
 
 import java.util.ArrayList;

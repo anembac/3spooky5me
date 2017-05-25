@@ -1,4 +1,4 @@
-package com.tda367.infinityrun.Roomtemplates;
+package com.tda367.infinityrun.WorldGeneration;
 
 /**
  * Created by kaffe on 5/17/17.
