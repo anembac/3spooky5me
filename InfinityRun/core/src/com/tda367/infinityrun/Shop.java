@@ -13,11 +13,15 @@ public class Shop {
     }
 
     public void purchaseUpgrade(String upgName){
+
         Upgrade currentUpg = upgList.get(upgName);
 
         if(getPrice(currentUpg)<=shopOwner.getCoins()){
+            int templvl = currentUpg.getLevel();
             currentUpg.addLevel();
-            //System.out.println(upgName + ": " + currentUpg.getLevel());
+            if(currentUpg.getLevel()!=templvl){
+                shopOwner.chargeCoins(getPrice(currentUpg));
+            }
         }else{
             System.out.println("You cannot afford this upgrade.");
         }

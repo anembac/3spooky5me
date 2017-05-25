@@ -75,6 +75,12 @@ public class Character extends LivingObject {
         return coins;
     }
 
+    public void chargeCoins(int cost){
+        coins = coins-cost;
+        if(coins<0){ //this case should never happen if shop is implemented properly
+            coins = 0;
+        }
+    }
     @Override
     public void frame(float dt, float heroX, float heroY, InputState state) {
         List<WorldObject> rlt = CollisionManager.getInstance().getKNearest(this, 5);
