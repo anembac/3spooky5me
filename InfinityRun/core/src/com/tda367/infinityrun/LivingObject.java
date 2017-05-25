@@ -4,6 +4,7 @@ import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.Math.Vec4;
 import com.tda367.infinityrun.Upgrades.*;
+import com.tda367.infinityrun.WeaponTypes.Sword;
 
 import java.util.HashMap;
 
@@ -26,7 +27,8 @@ public class LivingObject extends WorldObject {
         this(position,bounds,1,1,1,1,1,1,1,1);
     }
 
-    public void setMeleeWeapon(MeleeWeapon weapon) {
+    public void setMeleeWeapon() {
+        MeleeWeapon weapon = new Sword(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
         if(meleeWeapon != null)
         {
             removeChildren(meleeWeapon);

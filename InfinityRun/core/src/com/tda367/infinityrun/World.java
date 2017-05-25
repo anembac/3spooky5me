@@ -2,6 +2,7 @@ package com.tda367.infinityrun;
 
 import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.WeaponTypes.Spear;
 import com.tda367.infinityrun.WorldGeneration.WorldGenerator;
 import com.tda367.infinityrun.WeaponTypes.Sword;
 
@@ -32,7 +33,7 @@ public class World {
         input = new InputGDX();
         addWorldObject(hero);
         this.hero = hero;
-        hero.setMeleeWeapon(new Sword());
+        hero.setMeleeWeapon();
         shop = new Shop(getHero());
     }
 

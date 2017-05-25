@@ -7,7 +7,11 @@ package com.tda367.infinityrun.WeaponTypes;
  */
 
 public class Sword extends MeleeWeapon {
-    public Sword() {
+    public Sword(double meleeHandling, double criticalChance, double criticalDamage) {
         super(10,1,2);
+        damage *= meleeHandling;
+        criticalHitChance = criticalChance;
+        criticalHitDamage = criticalDamage;
+
     }
 }

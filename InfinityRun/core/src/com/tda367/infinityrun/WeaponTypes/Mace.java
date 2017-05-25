@@ -7,7 +7,10 @@ import com.tda367.infinityrun.MeleeWeapon;
  */
 
 public class Mace extends MeleeWeapon {
-    public Mace() {
-        super(10,1.5,1);
+    public Mace(double meleeHandling, double criticalChance, double criticalDamage) {
+        super(10, 1.5, 1);
+        damage *= meleeHandling;
+        criticalHitChance = criticalChance;
+        criticalHitDamage = criticalDamage;
     }
 }

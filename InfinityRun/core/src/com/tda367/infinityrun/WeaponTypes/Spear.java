@@ -7,7 +7,11 @@ import com.tda367.infinityrun.MeleeWeapon;
  */
 
 public class Spear extends MeleeWeapon {
-    public Spear() {
-        super(15,1.5,1.5);
+    public Spear(double meleeHandling, double criticalChance, double criticalDamage) {
+        super(15, 1.5, 1.5);
+        damage *= meleeHandling;
+        criticalHitChance = criticalChance;
+        criticalHitDamage = criticalDamage;
     }
+
 }

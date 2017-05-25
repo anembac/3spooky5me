@@ -205,7 +205,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
 
                             Enemy enemy = (new Enemy(pos, new Vec2(64,64),1*(difficulty/4),1*(difficulty/8),1*(difficulty/32),1*(difficulty/4),1*(difficulty/8),1*(difficulty/16),1*(difficulty/24),1));
                             output.add(enemy);
-                            enemy.setMeleeWeapon(new Sword());}
+                            enemy.setMeleeWeapon();}
                         } break;
                         case 'S' : output.add(new SpikeObject(pos)); break;
                     }
