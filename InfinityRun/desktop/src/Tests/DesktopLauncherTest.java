@@ -5,13 +5,10 @@ import com.tda367.infinityrun.*;
 import com.tda367.infinityrun.Character;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.Math.Vec4;
-import com.tda367.infinityrun.RoomTiles.BrickObject;
 import com.tda367.infinityrun.RoomTiles.CoinObject;
 import com.tda367.infinityrun.Roomtemplates.TestingWorldGenerator;
 import com.tda367.infinityrun.Shop;
 import com.tda367.infinityrun.World;
-import com.tda367.infinityrun.SpecialUpgrades.Health;
-import com.tda367.infinityrun.desktop.DesktopLauncher;
 import junit.framework.TestCase;
 import org.junit.*;
 
@@ -152,10 +149,10 @@ public class DesktopLauncherTest extends TestCase{
         assertTrue(hero.getUpgrades().get("Speed").getValueInt() == 500);
         assertTrue(hero.getUpgrades().get("JumpH").getValueInt() == 800);
         assertTrue(hero.getUpgrades().get("Regeneration").getValueInt() == 1);
-        assertTrue(hero.getUpgrades().get("CHC").getValueDouble() == 1);
-        assertTrue(hero.getUpgrades().get("CHD").getValueDouble() == 1.05);
+        assertTrue(hero.getUpgrades().get("CHC").getValueDouble() == 0);
+        assertTrue(hero.getUpgrades().get("CHD").getValueDouble() == 2);
         assertTrue(hero.getUpgrades().get("Melee").getValueDouble() == 1);
-        assertTrue(hero.getUpgrades().get("Hermes").getValueInt() == 0);
+        assertTrue(hero.getUpgrades().get("Hermes").getValueInt() == 1);
     }
 
     @Test

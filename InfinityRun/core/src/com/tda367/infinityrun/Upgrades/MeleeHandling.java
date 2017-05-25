@@ -1,12 +1,13 @@
-package com.tda367.infinityrun.SpecialUpgrades;
-import com.tda367.infinityrun.InputState;
-import com.tda367.infinityrun.ObjectModifiers;
+package com.tda367.infinityrun.Upgrades;
+
 import com.tda367.infinityrun.Upgrade;
 
 /**
  * Created by Jacob on 5/9/2017.
  */
-public class MeleeHandling extends Upgrade{
+public class MeleeHandling extends Upgrade {
+
+    //This upgrade increase your damage by a percentage modifier.
     public MeleeHandling(int level) {
         super(-1, level);
         perLevelMultiplier = 5;

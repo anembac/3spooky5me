@@ -3,7 +3,7 @@ package com.tda367.infinityrun;
 import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.Math.Vec4;
-import com.tda367.infinityrun.SpecialUpgrades.*;
+import com.tda367.infinityrun.Upgrades.*;
 
 import java.util.HashMap;
 

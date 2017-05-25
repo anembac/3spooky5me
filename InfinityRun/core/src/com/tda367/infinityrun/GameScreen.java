@@ -7,22 +7,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.Vector2;
 import com.tda367.infinityrun.Math.Rect;
-import com.tda367.infinityrun.Math.Vec2;
-import com.tda367.infinityrun.RoomTiles.AttackHitbox;
-import com.tda367.infinityrun.Roomtemplates.TextbasedWorldGenerator;
-import com.tda367.infinityrun.SpecialUpgrades.*;
-import com.tda367.infinityrun.WeaponTypes.AdminsDebugginStaff;
-import com.tda367.infinityrun.WeaponTypes.Sword;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 
 public class GameScreen implements Screen {  //tries to put textures onto the objects created in baseroom and draw them
     final InfinityRun game;                 // but it's not currently successful...

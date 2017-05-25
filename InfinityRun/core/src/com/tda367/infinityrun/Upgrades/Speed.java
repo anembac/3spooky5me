@@ -1,6 +1,5 @@
-package com.tda367.infinityrun.SpecialUpgrades;
+package com.tda367.infinityrun.Upgrades;
 import com.tda367.infinityrun.InputState;
-import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.ObjectModifiers;
 import com.tda367.infinityrun.Upgrade;
 
@@ -9,17 +8,20 @@ import com.tda367.infinityrun.Upgrade;
  */
 public class Speed extends Upgrade {
 
+    //This upgrades handles the movement speed
     public Speed(int level) {
         super(-1, level);
         perLevelMultiplier = 5;
         basePrice = 20;
     }
 
+    //Everything that moves needs a base value to be able to move
     @Override
     public int getValueInt(){
         return 500 + super.getValueInt();
     }
 
+    //This handles the movement with acceleration, if you press forward you will get acceleration in positive x-direction.
     @Override
     public void frame(float dt, InputState state, ObjectModifiers modify) {
         if(state.forwardPressed() && modify.acceleration.x < getValueInt()) modify.acceleration.x += 100;

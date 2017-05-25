@@ -7,27 +7,28 @@ public class Upgrade {
     protected final int cap;            //The maximum level of the skill, -1 means it doesn't have a cap.
     protected int perLevelMultiplier;      //This is the basic value you get per level of the upgrade
     protected int level = 0;      //Skill level, the higher the level the more stats it gives. Starts at level 0.
-    protected int basePrice;
+    protected int basePrice;    //The base cost of an upgrade - the higher the level the higher the price will become.
 
     public Upgrade(int cap, int level) {
         this.cap = cap;
         this.level = level;
     }
 
+    //Adds a level to the upgrade unless it is at the upgrade cap, the uncapped will go to the else condition and give a level.
     public void addLevel() {
-        if(cap>=0){
+        if (cap >= 0) {
             level = Math.min(level + 1, cap);
-        }else{
+        } else {
             level = level + 1;
         }
-
     }
 
-    public void addLevel(int addlevel) {
-        if(cap>0){
-            this.level = Math.min(this.level + addlevel, cap);
-        }else{
-            this.level = this.level + addlevel;
+    //Works like the add single level but this can takes an int and give the upgrade the value of the int levels.
+    public void addLevel(int level) {
+        if (cap > 0) {
+            this.level = Math.min(this.level + level, cap);
+        } else {
+            this.level = this.level + level;
         }
     }
 
@@ -46,12 +47,13 @@ public class Upgrade {
     public void frame(float dt, InputState input, ObjectModifiers modifier) {
     }
 
-
+    //Returns the int value - which is a flat increase of your normal stats.
     public int getValueInt() {
         return this.perLevelMultiplier * this.level; // this will be added to the current value
     }
 
+    //Return the double value - this is a multiplier to your different stats.
     public double getValueDouble() {
-        return (100 + this.perLevelMultiplier * this.level) / 100; //This is the value you will multiply with the standard to get ur true value.
+        return 1 + (this.perLevelMultiplier * this.level) / 100;
     }
 }
