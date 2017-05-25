@@ -28,7 +28,7 @@ public class Shop {
     }
 
     public int getPrice(Upgrade upg){
-        return upg.getBasePrice()*upg.getLevel();
+        return upg.getBasePrice()*(upg.getLevel()+1);
     }
 
     public HashMap<String, Upgrade> getUpgList(){

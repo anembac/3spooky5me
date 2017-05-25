@@ -28,8 +28,8 @@ public class ShopScreen implements Screen {
     TextureRegion[] textureRegionsDown;
     TextureRegionDrawable[] texturesUpDrawable;
     TextureRegionDrawable[] texturesDownDrawable;
-    Button.ButtonStyle[] buttonStyles;
-    Button[] buttonArray;
+    TextButton.TextButtonStyle[] buttonStyles;
+    TextButton[] buttonArray;
     String[] nameList;
     private int numberOfUpgrades;
     private ChangeListener changeListener;
@@ -41,7 +41,7 @@ public class ShopScreen implements Screen {
         nameList = shop.getUpgNameList();
         upgradeTable = new Table();
         numberOfUpgrades = shop.getUpgList().size();
-        System.out.println("number of upgrade: " + numberOfUpgrades);
+        //System.out.println("number of upgrade: " + numberOfUpgrades);
         changeListener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -50,12 +50,12 @@ public class ShopScreen implements Screen {
             }
         };
 
-        buttonArray = new Button[numberOfUpgrades+1];
+        buttonArray = new TextButton[numberOfUpgrades+1];
         textureRegionsUp = new TextureRegion[numberOfUpgrades+1];
         textureRegionsDown = new TextureRegion[numberOfUpgrades+1];
         texturesUpDrawable = new TextureRegionDrawable[numberOfUpgrades+1];
         texturesDownDrawable = new TextureRegionDrawable[numberOfUpgrades+1];
-        buttonStyles = new Button.ButtonStyle[numberOfUpgrades+1];
+        buttonStyles = new TextButton.TextButtonStyle[numberOfUpgrades+1];
 
         //Loading in images and connecting them with the buttons, as well as connecting the buttons with the upgrades
         for(int i = 0; i < numberOfUpgrades; i++){
@@ -64,11 +64,16 @@ public class ShopScreen implements Screen {
             textureRegionsDown[i] = new TextureRegion((atlas.findRegion(nameList[i] + "down")));
             texturesUpDrawable[i] = new TextureRegionDrawable(textureRegionsUp[i]);
             texturesDownDrawable[i] = new TextureRegionDrawable(textureRegionsDown[i]);
-            buttonStyles[i] = new Button.ButtonStyle(
-                    texturesUpDrawable[i], texturesDownDrawable[i], texturesUpDrawable[i]);
-            buttonArray[i] = new Button(buttonStyles[i]);
+            buttonStyles[i] = new TextButton.TextButtonStyle(
+                    texturesUpDrawable[i], texturesDownDrawable[i], texturesUpDrawable[i], font);
+            buttonArray[i] = new TextButton(nameList[i]
+                    + ", Level: " + shop.getUpgList().get(nameList[i]).getLevel()
+                    + ", Price: "
+                    + shop.getPrice(shop.getUpgList().get(nameList[i])), buttonStyles[i]);
+            buttonArray[i].getLabel().setWrap(true);
+            buttonArray[i].getLabel().setWidth(128);
             buttonArray[i].setName(nameList[i]);
-
+           buttonArray[i].getCell(buttonArray[i].getLabel()).padBottom(-158);
             //adds listener to button
             buttonArray[i].addListener(changeListener);
 
@@ -78,7 +83,7 @@ public class ShopScreen implements Screen {
             }
             //Fetches the cost for the corresponding upgrade.
             //buttonArray[i].add("Cost: " + shop.getPrice(shop.getUpgList().get(nameList[i])));
-            upgradeTable.add(buttonArray[i]).width(buttonArray[i].getPrefWidth()).pad(10);
+            upgradeTable.add(buttonArray[i]).width(buttonArray[i].getPrefWidth()).pad(15);
         }//end of loop
 
         //Since array initilization uses the amount of elements wanted, but then starts indexing at 0,
@@ -88,11 +93,11 @@ public class ShopScreen implements Screen {
         textureRegionsDown[numberOfUpgrades] = new TextureRegion(atlas.findRegion("backdown"));
         texturesUpDrawable[numberOfUpgrades] = new TextureRegionDrawable(textureRegionsUp[numberOfUpgrades]);
         texturesDownDrawable[numberOfUpgrades] = new TextureRegionDrawable(textureRegionsDown[numberOfUpgrades]);
-        buttonStyles[numberOfUpgrades] = new Button.ButtonStyle(
-                texturesUpDrawable[numberOfUpgrades],
+        buttonStyles[numberOfUpgrades] = new TextButton.TextButtonStyle
+                (texturesUpDrawable[numberOfUpgrades],
                 texturesDownDrawable[numberOfUpgrades],
-                texturesUpDrawable[numberOfUpgrades]);
-        buttonArray[numberOfUpgrades] = new Button(buttonStyles[numberOfUpgrades]);
+                texturesUpDrawable[numberOfUpgrades], font);
+        buttonArray[numberOfUpgrades] = new TextButton("Back", buttonStyles[numberOfUpgrades]);
         buttonArray[numberOfUpgrades].setPosition(1400, 50);
         buttonArray[numberOfUpgrades].setName("back");
         buttonArray[numberOfUpgrades].addListener(changeListener);
@@ -132,6 +137,11 @@ public class ShopScreen implements Screen {
     private void buttonClickedCheck(int i){
         if(i>=0 && i<numberOfUpgrades){ //i>=0 because getIndex() returns -1 on unfamiliar actor names
             shop.purchaseUpgrade(nameList[i]);
+            buttonArray[i].getLabel().setText(nameList[i]
+                    + ", Level: " + shop.getUpgList().get(nameList[i]).getLevel()
+                    + ", Price: "
+                    + shop.getPrice(shop.getUpgList().get(nameList[i])));
+
 
         }else if(i>=numberOfUpgrades){ //should only happen for the back button
 
