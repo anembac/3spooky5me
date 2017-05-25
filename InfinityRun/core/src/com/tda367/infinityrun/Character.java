@@ -30,8 +30,12 @@ public class Character extends LivingObject {
         //new Rectangle(position.x, position.y, size, size);
     }
 
-
+    private int characterID;
     private int coins = 0;
+
+    public void setCharacterID(int id){
+        characterID = id;
+    }
 
     @Override
     public void damage(double damage) {
