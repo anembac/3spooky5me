@@ -11,7 +11,7 @@ public class CriticalHitChance extends Upgrade {
     public CriticalHitChance(int level) {
         super(60, level);
         perLevelMultiplier = 1;
-        basePrice = 10;
+        basePrice = 5;
     }
 
     //Returns the chance of a critical hit in decimal form

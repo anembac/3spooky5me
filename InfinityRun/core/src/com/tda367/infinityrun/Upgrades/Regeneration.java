@@ -11,7 +11,7 @@ public class Regeneration extends Upgrade {
     public Regeneration(int level) {
         super(-1, level);
         perLevelMultiplier = 1;
-        basePrice = 100;
+        basePrice = 10;
     }
 
     //The base value is 1 health/second

@@ -11,8 +11,8 @@ public class Speed extends Upgrade {
     //This upgrades handles the movement speed
     public Speed(int level) {
         super(-1, level);
-        perLevelMultiplier = 5;
-        basePrice = 20;
+        perLevelMultiplier = 10;
+        basePrice = 10;
     }
 
     //Everything that moves needs a base value to be able to move

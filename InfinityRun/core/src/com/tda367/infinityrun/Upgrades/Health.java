@@ -10,7 +10,7 @@ public class Health extends Upgrade {
     //This upgrades handles the player health
     public Health(int level) {
         super(-1, level);
-        perLevelMultiplier = 20;
+        perLevelMultiplier = 25;
         basePrice = 10;
     }
 

@@ -49,12 +49,15 @@ public class MeleeWeapon extends WorldObject {
          position.x = -32;
      }
 
+
+     //Checks if you will get a critical hit based on your current chance of a critical hit.
      private boolean isCritical(){
          int rnd = new Random().nextInt(100);
          return (criticalHitChance * 100) > rnd;
      }
 
-     private double getCritDamage(){
+     //Calculates the damage you will get if you get a critical strike.
+     private double getCriticalDamage(){
          return damage * criticalHitDamage;
      }
 
@@ -80,10 +83,11 @@ public class MeleeWeapon extends WorldObject {
                 if(wo != this.getParent() && Utils.distance(this.getParent(), wo) < (range * Constants.meter) && wo instanceof LivingObject)
                 {
                     if(isCritical()) {
-                        ((LivingObject)wo).damage(getCritDamage());
-                        System.out.println(getCritDamage() + " CRIT");
+                        ((LivingObject)wo).damage(getCriticalDamage());
+                        System.out.println("Player dealt " +  getCriticalDamage() + " CRITICAL HIT");
                     } else {
                         ((LivingObject) wo).damage(damage);
+                        System.out.println("Player dealt " +  damage);
                     }
                     ((LivingObject)wo).acceleration.y = 400;
                     if (position.x >  0){

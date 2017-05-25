@@ -11,6 +11,6 @@ public class MeleeHandling extends Upgrade {
     public MeleeHandling(int level) {
         super(-1, level);
         perLevelMultiplier = 5;
-        basePrice = 20;
+        basePrice = 10;
     }
 }
