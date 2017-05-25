@@ -87,7 +87,7 @@ public class MeleeWeapon extends WorldObject {
                         System.out.println("Player dealt " +  getCriticalDamage() + " CRITICAL HIT");
                     } else {
                         ((LivingObject) wo).damage(damage);
-                        System.out.println("Player dealt " +  damage);
+                        //System.out.println("Player dealt " +  damage);
                     }
                     ((LivingObject)wo).acceleration.y = 400;
                     if (position.x >  0){

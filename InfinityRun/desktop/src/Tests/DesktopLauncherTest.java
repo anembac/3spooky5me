@@ -6,6 +6,7 @@ import com.tda367.infinityrun.Character;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.Math.Vec4;
 import com.tda367.infinityrun.RoomTiles.CoinObject;
+import com.tda367.infinityrun.RoomTiles.Platform;
 import com.tda367.infinityrun.WorldGeneration.TestingWorldGenerator;
 import com.tda367.infinityrun.Shop;
 import com.tda367.infinityrun.World;
@@ -44,11 +45,29 @@ public class DesktopLauncherTest extends TestCase{
     @Test
     public void testDemage(){
 
-        Character hero = new Character(((new Vec2(0,0))),1,1,1,0,1,1,1,1);
+        Character hero = new Character(((new Vec2(0,0))),1,1,1,0,1,1,1,0);
         setHero(hero);
+        Enemy enemy = new Enemy((new Vec2(0,0)),((new Vec2(64,64))),1,1,1,1,1,1,1,1);
+        enemy.setMeleeWeapon();
+        simulatedWorld.addWorldObject(enemy);
+        simulatedWorld.addWorldObject(new Platform(new Vec2(0,0)));
         simulatedWorld.addWorldObject(new Enemy(new Vec2(0,0),((new Vec2(64,64))),1,1,1,1,1,1,1,1));
-        simulatedWorld.frame(1);
-        assertTrue(hero.getHealth() < 500);
+        simulatedWorld.addWorldObject(new CoinObject(new Vec2(0,0)));
+        assertTrue(hero.getHealth() == 500);
+        simulatedWorld.frame(0.5f);
+        System.out.println(enemy.getPosition().y);
+        System.out.println(enemy.getPosition().x);
+        simulatedWorld.frame(0.5f);
+        System.out.println(enemy.getPosition().y);
+        System.out.println(enemy.getPosition().x);
+        simulatedWorld.frame(2);
+        System.out.println(enemy.getPosition().y);
+        System.out.println(enemy.getHealth() + "helatgb");
+        System.out.println(enemy.getPosition().x);
+        System.out.println(hero.getHealth());
+        System.out.println(hero.getPosition().x);
+        System.out.println(hero.getCoins());
+        assertTrue(hero.getHealth() == 500);
     }
 
     @Test

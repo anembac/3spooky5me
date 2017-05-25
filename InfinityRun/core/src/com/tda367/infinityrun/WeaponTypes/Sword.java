@@ -12,6 +12,5 @@ public class Sword extends MeleeWeapon {
         damage *= meleeHandling;
         criticalHitChance = criticalChance;
         criticalHitDamage = criticalDamage;
-
     }
 }

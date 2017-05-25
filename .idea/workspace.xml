@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db82eca7-d54e-43c9-bc74-23aa624d9adb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InfinityRun/core/src/com/tda367/infinityrun/LivingObject.java" afterPath="$PROJECT_DIR$/InfinityRun/core/src/com/tda367/infinityrun/LivingObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InfinityRun/core/src/com/tda367/infinityrun/MeleeWeapon.java" afterPath="$PROJECT_DIR$/InfinityRun/core/src/com/tda367/infinityrun/MeleeWeapon.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InfinityRun/core/src/com/tda367/infinityrun/WeaponTypes/Spear.java" afterPath="$PROJECT_DIR$/InfinityRun/core/src/com/tda367/infinityrun/WeaponTypes/Spear.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InfinityRun/desktop/src/Tests/DesktopLauncherTest.java" afterPath="$PROJECT_DIR$/InfinityRun/desktop/src/Tests/DesktopLauncherTest.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -64,7 +63,6 @@
               <caret line="14" column="22" lean-forward="false" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#648#661#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -85,7 +83,7 @@
       <file leaf-file-name="World.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/InfinityRun/core/src/com/tda367/infinityrun/World.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
+            <state relative-caret-position="72">
               <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
@@ -105,9 +103,11 @@
       <file leaf-file-name="Upgrade.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/InfinityRun/core/src/com/tda367/infinityrun/Upgrade.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="684">
+            <state relative-caret-position="720">
               <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="e#1398#1399#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -180,7 +180,7 @@
     <option name="jreName" value="#JAVA_INTERNAL" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1914" />
+    <option name="width" value="1917" />
     <option name="height" value="1049" />
   </component>
   <component name="ProjectView">
@@ -198,7 +198,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -301,39 +300,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="3spooky5me" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="3spooky5me" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="InfinityRun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="infinityrun" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Roomtemplates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -775,7 +745,7 @@
     <option name="totallyTimeSpent" value="7813000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1914" height="1049" extended-state="0" />
+    <frame x="0" y="0" width="1917" height="1049" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -792,7 +762,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24960835" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1076,9 +1046,11 @@
     <entry file="file://$PROJECT_DIR$/InfinityRun/core/src/com/tda367/infinityrun/Upgrades.java" />
     <entry file="file://$PROJECT_DIR$/InfinityRun/core/src/com/tda367/infinityrun/Upgrade.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
+        <state relative-caret-position="720">
           <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#1398#1399#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1111,7 +1083,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/InfinityRun/core/src/com/tda367/infinityrun/World.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
+        <state relative-caret-position="72">
           <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
@@ -1123,7 +1095,6 @@
           <caret line="14" column="22" lean-forward="false" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#648#661#0" expanded="true" />
           </folding>
         </state>
       </provider>

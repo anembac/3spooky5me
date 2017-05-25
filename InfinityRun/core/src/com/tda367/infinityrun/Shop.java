@@ -19,6 +19,7 @@ public class Shop {
         if(getPrice(currentUpg)<=shopOwner.getCoins()){
             int templvl = currentUpg.getLevel();
             currentUpg.addLevel();
+            shopOwner.setMeleeWeapon();
             if(currentUpg.getLevel()!=templvl){
                 shopOwner.chargeCoins(getPrice(currentUpg));
             }

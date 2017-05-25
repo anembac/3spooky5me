@@ -28,11 +28,11 @@ public class LivingObject extends WorldObject {
     }
 
     public void setMeleeWeapon() {
-        MeleeWeapon weapon = new Sword(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
         if(meleeWeapon != null)
         {
             removeChildren(meleeWeapon);
         }
+        MeleeWeapon weapon = new Sword(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
         addChildren(weapon);
         meleeWeapon = weapon;
     }
@@ -45,9 +45,10 @@ public class LivingObject extends WorldObject {
     public void damage(double damage)
     {
         currentHealth -= damage;
-        if(this.currentHealth < 0)
+        if(this.currentHealth <= 0)
         {
             despawn();
+
         }
         System.out.println(currentHealth + " health left for some creature.");
     }
@@ -89,7 +90,7 @@ public class LivingObject extends WorldObject {
     public double getCriticalHitDamage(){return upgrades.get("CHD").getValueDouble();}
 
 
-    public LivingObject(Vec2 position, Vec2 bounds, int speedLvl, int jumpLvl, int hermesLvl, int healthLvl, int meleeHandlingLvl, int ChcLvl, int Chdlvl, int regLvl)
+    public LivingObject(Vec2 position, Vec2 bounds, int speedLvl, int jumpLvl, int hermesLvl, int healthLvl, int meleeHandlingLvl, int ChcLvl, int ChdLvl, int regLvl)
     {
         super(position,bounds);
         addUpgrade("Speed", new Speed(speedLvl));    //Added as a flat increase to Movement Speed
@@ -98,7 +99,7 @@ public class LivingObject extends WorldObject {
         addUpgrade("Health", new Health(healthLvl));  //Added flat on current health
         addUpgrade("Melee", new MeleeHandling(meleeHandlingLvl));     //Multiplied to your weapons damage to determine your characters overall damage per hit with melee.
         addUpgrade("CHC", new CriticalHitChance(ChcLvl)); //Added as flat CriticalHitChance
-        addUpgrade("CHD", new CriticalHitDamage(Chdlvl)); //Added as multiplier to your CriticalHitDamage
+        addUpgrade("CHD", new CriticalHitDamage(ChdLvl)); //Added as multiplier to your CriticalHitDamage
         addUpgrade("Regeneration", new Regeneration(regLvl)); //Added as a flat increase to your overall health regeneration per second
         currentHealth = getMaxHealth();
     }

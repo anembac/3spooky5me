@@ -1,6 +1,7 @@
 package com.tda367.infinityrun;
 
 import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.RoomTiles.CoinObject;
 
 /**
  * Created by miktor on 2017-04-03.
@@ -13,6 +14,7 @@ public class Enemy extends LivingObject {
         super(position, bounds, speedLvl, jumpLvl, hermesLvl, healthLvl, meleeHandlingLvl, ChcLvl, Chdlvl, regLvl);
         setTexture("WorldObjects/enemy.png");
     }
+
 
     @Override
     public void frame(float dt,float heroX, float heroY, InputState input) {

@@ -17,6 +17,6 @@ public class CriticalHitChance extends Upgrade {
     //Returns the chance of a critical hit in decimal form
     @Override
     public double getValueDouble() {
-        return level * perLevelMultiplier / 100;
+        return (level * perLevelMultiplier) / (double)(100);
     }
 }

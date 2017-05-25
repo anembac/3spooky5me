@@ -1,5 +1,6 @@
 package com.tda367.infinityrun;
 
+import com.sun.org.apache.bcel.internal.classfile.Constant;
 import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.RoomTiles.CoinObject;
@@ -30,12 +31,12 @@ public class Character extends LivingObject {
     }
 
 
-    private int coins = 0;
+    private int coins = 999999990;
 
     @Override
     public void damage(double damage) {
         currentHealth -= damage;
-        if (this.currentHealth < 0) {
+        if (this.currentHealth <= 0) {
             despawn();
         }
     System.out.println(currentHealth + " health left for player");
@@ -101,6 +102,12 @@ public class Character extends LivingObject {
                     coins += numberOfCoins();
                 }
             }
+            if( wo instanceof Enemy) {
+                if (Vec2.distance(Utils.getCenter(this), Utils.getCenter(wo)) < 64 * 5) {
+                    coins += numberOfCoins();
+                }
+            }
+
         }
         super.frame(dt, heroX, heroY, state);
     }
@@ -108,7 +115,6 @@ public class Character extends LivingObject {
     public HashMap<String, Upgrade> getUpgrades() {
         return upgrades;
     }
-
 
     /*
     This method determines how many coins you will get, 200% would equal 2 coins.
