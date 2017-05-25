@@ -44,6 +44,15 @@ public class DesktopLauncherTest extends TestCase{
         simulatedWorld = new World(new TestingWorldGenerator(),hero);
         simulatedWorld.setInput(new InputEmpty(false,false,false,false));
     }
+    @Test
+    public void testDemage(){
+
+        Character hero = new Character(((new Vec2(0,0))),1,1,1,0,1,1,1,1);
+        setHero(hero);
+        simulatedWorld.addWorldObject(new Enemy(new Vec2(0,0),((new Vec2(64,64))),1,1,1,1,1,1,1,1));
+        simulatedWorld.frame(1);
+        assertTrue(hero.getHealth() < 500);
+    }
 
     @Test
     public void testGroundCollision()
@@ -157,14 +166,7 @@ public class DesktopLauncherTest extends TestCase{
         simulatedWorld.frame(0.016f);
         assertTrue(hero.getHealth() < hero.getMaxHealth());
     }
-    @Test
-    public void testDemage(){
-        Character hero = new Character(((new Vec2(0,0))),1,1,1,1,1,1,1,1);
-        setHero(hero);
-        Enemy monster = new Enemy((new Vec2(0,0)),((new Vec2(64,64))),1,1,1,1,1,1,1,1);
-        simulatedWorld.frame(0.01f);
-        assertTrue(hero.getHealth() < 500);
-    }
+
 
 }
 

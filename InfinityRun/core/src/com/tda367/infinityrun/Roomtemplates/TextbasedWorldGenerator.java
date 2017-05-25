@@ -200,10 +200,12 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                         case 'B' : output.add(new BrickObject(pos)); break;
                         case '_' : output.add(new Platform(pos)); break;
                         case 'C' : output.add(new CoinObject(pos)); break;
-                        case 'Q' : {
-                            Enemy enemy = (new Enemy(pos, new Vec2(64,64),1,1,1,1,1,1,1,1));
+                        case 'Q' : { int rnd = new Random().nextInt((100)+1);
+                            if (rnd < (((difficulty/6)+Math.sqrt(difficulty)*(Math.sin(difficulty)*difficulty*difficulty)/2)+0.43)*100){
+
+                            Enemy enemy = (new Enemy(pos, new Vec2(64,64),1*(difficulty/4),1*(difficulty/8),1*(difficulty/32),1*(difficulty/4),1*(difficulty/8),1*(difficulty/16),1*(difficulty/24),1));
                             output.add(enemy);
-                            enemy.setMeleeWeapon(new Sword());
+                            enemy.setMeleeWeapon(new Sword());}
                         } break;
                         case 'S' : output.add(new SpikeObject(pos)); break;
                     }
