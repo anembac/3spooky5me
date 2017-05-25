@@ -182,7 +182,5 @@ public class DesktopLauncherTest extends TestCase{
         simulatedWorld.frame(0.016f);
         assertTrue(hero.getHealth() < hero.getMaxHealth());
     }
-
-
-}
+ }
 
