@@ -102,16 +102,12 @@ public class Character extends LivingObject {
                     coins += numberOfCoins();
                 }
             }
-            /*
-            if( wo instanceof Enemy) {
-                if (Vec2.distance(Utils.getCenter(this), Utils.getCenter(wo)) < (256)) {
-                    coins += numberOfCoins();
-                }
-            }
-            */
-
         }
         super.frame(dt, heroX, heroY, state);
+    }
+
+    public void lootEnemy () {
+        coins += numberOfCoins();
     }
 
     public HashMap<String, Upgrade> getUpgrades() {
