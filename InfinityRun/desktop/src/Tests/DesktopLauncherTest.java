@@ -71,7 +71,7 @@ public class DesktopLauncherTest extends TestCase{
         simulatedWorld.addWorldObject(new CoinObject(new Vec2(768,450)));
         assertTrue(hero.getCoins() == 0);
         simulatedWorld.frame(1);
-        assertTrue(hero.getCoins() == 1);
+        assertTrue(hero.getCoins() > 0);
 
     }
 

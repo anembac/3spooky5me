@@ -84,7 +84,7 @@ public class LivingObject extends WorldObject {
 
     public double getMeleeHandling() {return upgrades.get("Melee").getValueDouble();}
 
-    public int getCriticalHitChance(){return upgrades.get("CHC").getValueInt();}
+    public double getCriticalHitChance(){return upgrades.get("CHC").getValueDouble();}
 
     public double getCriticalHitDamage(){return upgrades.get("CHD").getValueDouble();}
 
