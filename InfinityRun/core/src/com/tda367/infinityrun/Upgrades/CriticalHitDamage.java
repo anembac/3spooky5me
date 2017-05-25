@@ -17,6 +17,6 @@ public class CriticalHitDamage extends Upgrade {
     //The base damage increase of a critical hit is to 200% of the normal damage and then 5% for every level of this upgrade
     @Override
     public double getValueDouble() {
-        return 2 + (level * perLevelMultiplier) / 100;
+        return (2 + (level * perLevelMultiplier) / 100);
     }
 }
