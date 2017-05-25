@@ -31,7 +31,7 @@ public class Character extends LivingObject {
     }
 
 
-    private int coins = 999999990;
+    private int coins = 0;
 
     @Override
     public void damage(double damage) {
@@ -102,11 +102,13 @@ public class Character extends LivingObject {
                     coins += numberOfCoins();
                 }
             }
+            /*
             if( wo instanceof Enemy) {
-                if (Vec2.distance(Utils.getCenter(this), Utils.getCenter(wo)) < 64 * 5) {
+                if (Vec2.distance(Utils.getCenter(this), Utils.getCenter(wo)) < (256)) {
                     coins += numberOfCoins();
                 }
             }
+            */
 
         }
         super.frame(dt, heroX, heroY, state);
