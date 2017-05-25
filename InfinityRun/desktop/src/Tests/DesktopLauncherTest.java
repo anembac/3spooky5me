@@ -6,7 +6,7 @@ import com.tda367.infinityrun.Character;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.Math.Vec4;
 import com.tda367.infinityrun.RoomTiles.CoinObject;
-import com.tda367.infinityrun.Roomtemplates.TestingWorldGenerator;
+import com.tda367.infinityrun.WorldGeneration.TestingWorldGenerator;
 import com.tda367.infinityrun.Shop;
 import com.tda367.infinityrun.World;
 import junit.framework.TestCase;

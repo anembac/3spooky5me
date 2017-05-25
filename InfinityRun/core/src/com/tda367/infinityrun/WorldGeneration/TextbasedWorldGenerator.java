@@ -1,4 +1,4 @@
-package com.tda367.infinityrun.Roomtemplates;
+package com.tda367.infinityrun.WorldGeneration;
 
 import com.tda367.infinityrun.Enemy;
 import com.tda367.infinityrun.Math.Vec2;
