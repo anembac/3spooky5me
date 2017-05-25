@@ -11,8 +11,8 @@ public class Axe extends MeleeWeapon {
     public Axe(double meleeHandling, double criticalChance, double criticalDamage) {
         super(15,1.5,1);
         damage *= meleeHandling;
-        criticalHitChance = criticalChance;
-        criticalHitDamage = criticalDamage;
+        criticalHitChance = criticalChance+0.05;
+        criticalHitDamage = criticalDamage*1.05;
 
     }
 }

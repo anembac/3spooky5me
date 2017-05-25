@@ -11,7 +11,7 @@ public class Spear extends MeleeWeapon {
         super(15, 1.5, 1.5);
         damage *= meleeHandling;
         criticalHitChance = criticalChance;
-        criticalHitDamage = criticalDamage;
+        criticalHitDamage = criticalDamage*1.2;
     }
 
 }
