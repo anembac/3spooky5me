@@ -30,8 +30,21 @@ public class Character extends LivingObject {
         //new Rectangle(position.x, position.y, size, size);
     }
 
+
+
     private int characterID;
     private int coins = 0;
+
+
+    public void setCoins(int coins) {
+        this.coins = coins;
+    }
+
+    public int getCharacterID() {
+        return characterID;
+    }
+
+
 
     public void setCharacterID(int id){
         characterID = id;

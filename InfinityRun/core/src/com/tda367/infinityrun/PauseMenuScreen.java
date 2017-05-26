@@ -57,7 +57,7 @@ public class PauseMenuScreen implements Screen{
         }
 
         if(exitButton.isPressed()){
-            SaveCharacter.saveCharacter(masterScreen.world.getHero(), false);
+            SaveCharacter.saveCharacter(masterScreen.world.getHero(), masterScreen.world.getHero().getCharacterID());
             masterScreen.dispose();
             this.dispose();
             System.out.println("Exiting Game...");
