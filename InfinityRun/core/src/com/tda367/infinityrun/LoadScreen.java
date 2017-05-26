@@ -44,7 +44,6 @@ public class LoadScreen implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
 
                 int whatthefuckdidyoujustsayaboutmeyoulittleshit = Integer.parseInt(actor.getName());
-
                 dispose();
                 infRun.setScreen(new GameScreen(infRun,
                         new World(new TextbasedWorldGenerator()
@@ -54,7 +53,7 @@ public class LoadScreen implements Screen {
         };
         for(int i = 0; i<numberOfButtons;i++){
             buttons[i] = new TextButton("Save "+(i+1), style);
-            buttons[i].setName(""+i);
+            buttons[i].setName(""+(i+1));
             buttons[i].setWidth(128);
             buttons[i].addListener(changeListener);
             //buttonTable.add(buttons[i]);

@@ -26,17 +26,20 @@ public class LoadCharacter {
             LoadCharacter loader = new LoadCharacter(Id);
             int levels[] = loader.getSaveData();
 
-        // we count in a special way because 0 is coins and 7 is looting with a special method
+        //index 0 is coins and index 7 is looting,
+        //both of which have unique methods attached to them so they are handled later
+        //the order seems random because the upgrade order of the savedata and the constructor are different
+        //an oversight that should be fixed if there is time, but isn't gamebreaking as long as you're aware of it.
         Character loadedCharacter
                 =  new Character(new Vec2(800, 450),
                 levels[1],
-                levels[2],
                 levels[3],
-                levels[4],
                 levels[5],
+                levels[4],
                 levels[6],
+                levels[9],
                 levels[8],
-                levels[9] );
+                levels[2] );
 
         loadedCharacter.setCoins(levels[0]);
         loadedCharacter.setLooting(levels[7]);
@@ -51,30 +54,34 @@ public class LoadCharacter {
         int[] returnData;
 
         String fullSaveData = saveFile.readString();
-
+        //System.out.println("SaveID: "+saveID);
         int start = fullSaveData.indexOf("STARTOFSAVE"+saveID)
                 +"STARTOFSAVE".length()+Integer.toString(saveID).length()+1;
-        int end = fullSaveData.indexOf("END"+saveID)-1;
-        System.out.println(start);
-        System.out.println(end);
+        int end = fullSaveData.indexOf("END"+saveID); //character at end index is not included
+        //System.out.println("Start: "+start);
+        //System.out.println("End: "+end);
         String activeSaveData = fullSaveData.substring(start,end);
 
         int relevantAmount = activeSaveData.length()
                 - activeSaveData.replace(":","").length();
 
-        ////System.out.println("RelevantAmount: "+ relevantAmount);
+        System.out.println("RelevantAmount: "+ relevantAmount);
 
         returnData = new int[relevantAmount];
         for(int i = 0; i < relevantAmount; i++){
-            ////System.out.println(i);
+            /* //FOR DEBUGGING
+            System.out.println("Loopindex: "+i);
+            System.out.println("Start2: "+(activeSaveData.indexOf(" ")+1));
+            System.out.println("End2: "+activeSaveData.indexOf("\n"));
+            */
             returnData[i] = Integer.parseInt((
                     activeSaveData.substring(
-                            activeSaveData.indexOf(" ")+1, activeSaveData.indexOf("\n")
+                            (activeSaveData.indexOf(" ")+1), activeSaveData.indexOf("\n")
                     )
             ));
-            System.out.println("Set 1: "+activeSaveData);
-            activeSaveData = activeSaveData.substring(activeSaveData.indexOf("\n"));
-            System.out.println("Set 2: "+activeSaveData);
+            //System.out.println("Set 1: "+activeSaveData);
+            activeSaveData = activeSaveData.substring((activeSaveData.indexOf("\n")+1));
+            //System.out.println("Set 2: "+activeSaveData);
 
         }
 
