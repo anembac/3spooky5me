@@ -220,7 +220,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                             output.add(enemy);
                             enemy.setMeleeWeapon();}
                         } break;
-                        case 'S' : output.add(new SpikeObject(pos)); break;
+                        case 'S' : output.add(new SpikeObject(pos, (difficulty))); break;
                     }
                 }
             }

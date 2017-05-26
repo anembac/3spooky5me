@@ -43,7 +43,6 @@ public class LoadScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                System.out.println("ping");
                 int whatthefuckdidyoujustsayaboutmeyoulittleshit = Integer.parseInt(actor.getName());
 
                 dispose();

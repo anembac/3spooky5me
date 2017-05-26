@@ -9,6 +9,9 @@ import java.util.logging.FileHandler;
 /**
  * Created by kaffe on 5/26/17.
  */
+
+
+//TODO: UNBREAK THIS SHTI
 public class LoadCharacter {
     private static FileHandle saveFile = Gdx.files.local("savedata.txt");
     private int saveID;
@@ -37,6 +40,7 @@ public class LoadCharacter {
 
         loadedCharacter.setCoins(levels[0]);
         loadedCharacter.setLooting(levels[7]);
+        loadedCharacter.setCharacterID(Id);
 
         return loadedCharacter;
 
@@ -51,22 +55,26 @@ public class LoadCharacter {
         int start = fullSaveData.indexOf("STARTOFSAVE"+saveID)
                 +"STARTOFSAVE".length()+Integer.toString(saveID).length()+1;
         int end = fullSaveData.indexOf("END"+saveID)-1;
-
+        System.out.println(start);
+        System.out.println(end);
         String activeSaveData = fullSaveData.substring(start,end);
 
         int relevantAmount = activeSaveData.length()
                 - activeSaveData.replace(":","").length();
 
+        ////System.out.println("RelevantAmount: "+ relevantAmount);
+
         returnData = new int[relevantAmount];
         for(int i = 0; i < relevantAmount; i++){
-            System.out.println(i);
+            ////System.out.println(i);
             returnData[i] = Integer.parseInt((
                     activeSaveData.substring(
                             activeSaveData.indexOf(" ")+1, activeSaveData.indexOf("\n")
                     )
             ));
-            System.out.println(i);
-            activeSaveData = activeSaveData.substring(activeSaveData.indexOf(" "));
+            System.out.println("Set 1: "+activeSaveData);
+            activeSaveData = activeSaveData.substring(activeSaveData.indexOf("\n"));
+            System.out.println("Set 2: "+activeSaveData);
 
         }
 

@@ -29,7 +29,7 @@ public final class SaveCharacter {
 
                 //Takes the string before and after the desired section of the save, then rewrites the entire file
                 //with only the specific section altered.
-                String tmp4 = tmp.substring(0,tmp2);
+                String tmp4 = tmp.substring(1,tmp2);
                 String tmp5 = tmp.substring(tmp3);
                 saveFile.writeString(tmp4 + saveString + tmp5, false);
             }else{
