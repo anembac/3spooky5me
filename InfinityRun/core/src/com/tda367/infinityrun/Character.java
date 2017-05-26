@@ -5,6 +5,7 @@ import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.RoomTiles.CoinObject;
 import com.tda367.infinityrun.Upgrades.Looting;
+import com.tda367.infinityrun.WorldGeneration.TextbasedWorldGenerator;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,12 +31,27 @@ public class Character extends LivingObject {
         //new Rectangle(position.x, position.y, size, size);
     }
 
-
+    private int maxdistance = 0;
 
     private int characterID;
     private int coins = 0;
 
+    public void setLooting(int val){
+        if(upgrades.containsKey("Looting")){
+            upgrades.remove("Looting");
+        }
+        addUpgrade("Looting", new Looting(val));
 
+    }
+
+
+    public void setMaxdistance(int i){
+        maxdistance = i;
+    }
+
+    public int getMaxdistance(){
+        return maxdistance;
+    }
     public void setCoins(int coins) {
         this.coins = coins;
     }

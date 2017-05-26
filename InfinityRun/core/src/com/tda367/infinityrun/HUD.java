@@ -34,7 +34,7 @@ public class HUD {
 
 
         //rooms
-        hudfont.draw(hudbatch, "Rooms cleared: " , 1400, 850);
+        hudfont.draw(hudbatch, "Rooms cleared: " + character.getMaxdistance() , 1400, 850);
         hudbatch.end();
     }
 

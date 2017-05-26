@@ -18,6 +18,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
     private HashMap<Integer, RoomType> allRooms = new HashMap<Integer, RoomType>();
     private HashMap<IndexPoint, RoomType> madeRooms = new HashMap<IndexPoint, RoomType>();
     private static Random rand = new Random();
+    int maxDistanceFromSpawn ;
     public TextbasedWorldGenerator()
     {
         try
@@ -152,6 +153,10 @@ public class TextbasedWorldGenerator implements WorldGenerator {
         }
     }
 
+    public int getMaxDistance(){
+        return maxDistanceFromSpawn;
+    }
+
     @Override
     public boolean roomExists(int x, int y) {
         return madeRooms.containsKey(new IndexPoint(x,y));
@@ -183,9 +188,17 @@ public class TextbasedWorldGenerator implements WorldGenerator {
             allTypes.add(input);
         }
 
+        public boolean isRight() {
+            return right;
+        }
+
         public List<WorldObject> generate(int ox, int oy)
         {
             int difficulty = (int)Math.sqrt(ox*ox+oy+oy);
+            if(difficulty > maxDistanceFromSpawn){
+                maxDistanceFromSpawn = difficulty;
+            }
+
             List<WorldObject> output = new ArrayList<WorldObject>();
             int k = rand.nextInt(allTypes.size());
             for(int x = 0; x < 25; x++)
@@ -214,4 +227,5 @@ public class TextbasedWorldGenerator implements WorldGenerator {
             return output;
         }
     }
+
 }

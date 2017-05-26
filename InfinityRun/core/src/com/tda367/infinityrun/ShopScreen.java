@@ -73,7 +73,7 @@ public class ShopScreen implements Screen {
             buttonArray[i].getLabel().setWrap(true);
             buttonArray[i].getLabel().setWidth(128);
             buttonArray[i].setName(nameList[i]);
-           buttonArray[i].getCell(buttonArray[i].getLabel()).padBottom(-158);
+            buttonArray[i].getCell(buttonArray[i].getLabel()).padBottom(-158);
             //adds listener to button
             buttonArray[i].addListener(changeListener);
 
@@ -95,8 +95,8 @@ public class ShopScreen implements Screen {
         texturesDownDrawable[numberOfUpgrades] = new TextureRegionDrawable(textureRegionsDown[numberOfUpgrades]);
         buttonStyles[numberOfUpgrades] = new TextButton.TextButtonStyle
                 (texturesUpDrawable[numberOfUpgrades],
-                texturesDownDrawable[numberOfUpgrades],
-                texturesUpDrawable[numberOfUpgrades], font);
+                        texturesDownDrawable[numberOfUpgrades],
+                        texturesUpDrawable[numberOfUpgrades], font);
         buttonArray[numberOfUpgrades] = new TextButton("Back", buttonStyles[numberOfUpgrades]);
         buttonArray[numberOfUpgrades].setPosition(1400, 50);
         buttonArray[numberOfUpgrades].setName("back");

@@ -74,7 +74,11 @@ public class MainMenuScreen implements Screen { //this class creates the main me
         if(newCharButton.isPressed()){
             this.dispose();
             game.setScreen(new GameScreen(game,
-                    new World(new TextbasedWorldGenerator(), new Character(new Vec2(768,450)))));
+                    new World(new TextbasedWorldGenerator(), new Character(new Vec2(800,450)))));
+        }
+        if(loadCharButton.isPressed()){
+            this.dispose();
+            game.setScreen(new LoadScreen(game));
         }
 
     }

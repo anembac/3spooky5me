@@ -106,6 +106,9 @@ public class World {
             CollisionManager.getInstance().removeObject(wo);
             worldObjects.remove(wo);
         }
+
+        hero.setMaxdistance(generator.getMaxDistance());
+
     }
 
     // to add the player etc to the world.

@@ -30,4 +30,9 @@ public class TestingWorldGenerator implements WorldGenerator {
     public boolean roomExists(int x, int y) {
         return madeRooms.contains(new IndexPoint(x,y));
     }
+
+    @Override
+    public int getMaxDistance() {
+        return maxdistance;
+    }
 }
