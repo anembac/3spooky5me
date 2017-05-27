@@ -173,8 +173,8 @@ public class LivingObject extends WorldObject {
         }
 
         if(meleeWeapon != null) meleeWeapon.frame(dt,heroX, heroY, state);
-        if(this.acceleration.x > 0.1 && meleeWeapon != null) meleeWeapon.setDirRight();
-        else if(meleeWeapon != null && this.acceleration.x < -0.1) meleeWeapon.setDirLeft();
+        if(this.acceleration.x > 0 && meleeWeapon != null) meleeWeapon.setDirRight();
+        else if(meleeWeapon != null && this.acceleration.x < 0) meleeWeapon.setDirLeft();
     }
 
     public void addUpgrade(String name, Upgrade upg)

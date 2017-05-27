@@ -39,7 +39,7 @@ public class CollisionManager {
 
     public void addWorldObject(WorldObject obj)
     {
-        Vec2 a = Utils.getCenter(obj);
+        Vec2 a = WOWrapper.worldObjectCenter(obj);
         worldObjectToNodes.put(obj, kdTree.insert(new Point2D.Double(a.x, a.y), obj));
     }
 
@@ -70,7 +70,7 @@ public class CollisionManager {
 
     public List<WorldObject> getKNearest(WorldObject requestor, int k)
     {
-        Vec2 center = Utils.getCenter(requestor);
+        Vec2 center = WOWrapper.worldObjectCenter(requestor);
         List<KdTreeNode<WorldObject>> nodes = kdTree.getKNN(new Point2D.Double(center.x,center.y), k);
         List<WorldObject> output= nodeListToWOList(nodes);
         if(output.contains(requestor)) output.remove(requestor);

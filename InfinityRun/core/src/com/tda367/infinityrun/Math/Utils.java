@@ -10,14 +10,14 @@ public class Utils {
     {
         return Math.max(Math.min(max,val),min);
     }
-    public static Vec2 getCenter(WorldObject obj)
+    public static Vec2 getCenter(Vec2 A, Vec2 B)
     {
-        float x = obj.getDrawingRect().position.x + obj.getDrawingRect().bounds.x / 2;
-        float y = obj.getDrawingRect().position.y + obj.getDrawingRect().bounds.y / 2;
+        float x = A.x + B.x/2;
+        float y = A.y + B.y/2;
         return new Vec2(x,y);
     }
-    public static float distance(WorldObject a, WorldObject b)
+    public static float distance(Vec2 centerA, Vec2 centerB)
     {
-        return Vec2.distance(getCenter(a), getCenter(b));
+        return Vec2.distance(centerA, centerB);
     }
 }

@@ -80,7 +80,7 @@ public class MeleeWeapon extends WorldObject {
 
             for(WorldObject wo : output)
             {
-                if(wo != this.getParent() && Utils.distance(this.getParent(), wo) < (range * Constants.meter) && wo instanceof LivingObject)
+                if(wo != this.getParent() && WOWrapper.centerDistance(this.getParent(), wo) < (range * Constants.meter) && wo instanceof LivingObject)
                 {
                     if(isCritical()) {
                         ((LivingObject)wo).damage(getCriticalDamage());
@@ -91,7 +91,8 @@ public class MeleeWeapon extends WorldObject {
                     }
                     ((LivingObject)wo).acceleration.y = 400;
                     if (position.x >  0){
-                    ((LivingObject)wo).acceleration.x = 700;}
+                    ((LivingObject)wo).acceleration.x = 700;
+                    }
                     if (position.x <  0){
                         ((LivingObject)wo).acceleration.x = -700;
                     }

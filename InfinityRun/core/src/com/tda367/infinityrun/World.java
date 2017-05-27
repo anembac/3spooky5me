@@ -15,15 +15,11 @@ import java.util.List;
 public class World {
 
     private List<WorldObject> worldObjects;
-    private double difficulty = 1.0;
     IInput input;
     private final Character hero;
     private WorldGenerator generator = null;
     Shop shop;
 
-    public void increaseDifficulty(double difficulty) {
-        this.difficulty = difficulty + 0.05;
-    }
 
     public World(WorldGenerator gen, Character hero) {
         CollisionManager.getInstance().forceNewInstance();
@@ -85,9 +81,9 @@ public class World {
 
         input.collectInput();
 
-        Vec2 heroPos = Utils.getCenter(hero);
+        Vec2 heroPos = WOWrapper.worldObjectCenter(hero);
         for (WorldObject obj : worldObjects) {
-            if(Vec2.distance(Utils.getCenter(obj), heroPos) > 1500) continue; // no need to make logic that far away, the player wont see this anyway.
+            if(Vec2.distance(WOWrapper.worldObjectCenter(obj), heroPos) > 1500) continue; // no need to make logic that far away, the player wont see this anyway.
             obj.frame(dt, heroPos.x, heroPos.y, input.getInput());
 
             if(obj instanceof LivingObject) {
@@ -129,8 +125,7 @@ public class World {
     public void addRoomIfItDoesntExist(int x, int y)
     {
         if(!generator.roomExists(x,y)){
-        int o = 0;
-        o++;
+
      }
         {
             List<WorldObject> newWorldObjects = generator.generate(x,y);

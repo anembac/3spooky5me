@@ -11,7 +11,7 @@ public class Hazard extends WorldObject
     final float dps;
     public Hazard(Vec2 position, Vec2 bounds, float dps) {
         super(position, bounds);
-        range = Vec2.distance(position, Utils.getCenter(this)) * 3;
+        range = Vec2.distance(position, WOWrapper.worldObjectCenter(this)) * 3;
         this.dps = dps;
     }
 
@@ -21,7 +21,7 @@ public class Hazard extends WorldObject
         List<WorldObject> objects = CollisionManager.getInstance().getKNearest(this, 10);
         for(WorldObject wo : objects)
         {
-            if(Utils.distance(this, wo) < range && wo instanceof LivingObject)
+            if(WOWrapper.centerDistance(this, wo) < range && wo instanceof LivingObject)
             {
                 ((LivingObject)wo).damage(dps*dt);
             }

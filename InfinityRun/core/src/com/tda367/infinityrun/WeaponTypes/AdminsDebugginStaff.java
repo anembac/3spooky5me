@@ -27,7 +27,7 @@ public class AdminsDebugginStaff extends MeleeWeapon {
             for(WorldObject wo : objects)
             {
                 i++;
-                float dist = Utils.distance(this.getParent(), wo);
+                float dist = WOWrapper.centerDistance(this.getParent(), wo);
 
                 System.out.println(i + " : Distance is : " + dist + " and the class name is : " + wo.getClass().getName());
             }

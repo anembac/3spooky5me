@@ -130,7 +130,8 @@ public class Character extends LivingObject {
 
         for (WorldObject wo : rlt) {
             if (wo instanceof CoinObject) {
-                if (Vec2.distance(Utils.getCenter(this), Utils.getCenter(wo)) < Constants.collectRange) {
+                if (Vec2.distance(WOWrapper.worldObjectCenter(this)
+                        , WOWrapper.worldObjectCenter(wo)) < Constants.collectRange) {
                     wo.despawn();
                     coins += numberOfCoins();
                 }
