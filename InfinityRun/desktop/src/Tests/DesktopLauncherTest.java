@@ -5,11 +5,15 @@ import com.tda367.infinityrun.*;
 import com.tda367.infinityrun.Character;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.Math.Vec4;
+import com.tda367.infinityrun.RoomTiles.BrickObject;
 import com.tda367.infinityrun.RoomTiles.CoinObject;
 import com.tda367.infinityrun.RoomTiles.Platform;
+import com.tda367.infinityrun.WeaponTypes.Sword;
 import com.tda367.infinityrun.WorldGeneration.TestingWorldGenerator;
 import com.tda367.infinityrun.Shop;
 import com.tda367.infinityrun.World;
+import com.tda367.infinityrun.WorldGeneration.TextbasedWorldGenerator;
+import com.tda367.infinityrun.WorldGeneration.WorldGenerator;
 import junit.framework.TestCase;
 import org.junit.*;
 
@@ -19,7 +23,9 @@ import org.junit.*;
  **/
 
 public class DesktopLauncherTest extends TestCase{
+    TextbasedWorldGenerator testgenerator;
     World simulatedWorld;
+    World simulatedWorldExtra;
 
     public boolean almostEqual(float a, float b)
     {
@@ -40,6 +46,7 @@ public class DesktopLauncherTest extends TestCase{
     {
         Character hero = new Character(new Vec2(768,200));
         simulatedWorld = new World(new TestingWorldGenerator(),hero);
+        simulatedWorldExtra = new World(new TextbasedWorldGenerator(), hero);
         simulatedWorld.setInput(new InputEmpty(false,false,false,false));
     }
     @Test
@@ -47,28 +54,12 @@ public class DesktopLauncherTest extends TestCase{
 
         Character hero = new Character(((new Vec2(0,0))),1,1,1,0,1,1,1,0);
         setHero(hero);
-        Enemy enemy = new Enemy((new Vec2(0,0)),((new Vec2(64,64))),1,1,1,1,1,1,1,1);
-        enemy.setMeleeWeapon();
-        simulatedWorld.addWorldObject(enemy);
-        simulatedWorld.addWorldObject(new Platform(new Vec2(0,0)));
-        simulatedWorld.addWorldObject(new Enemy(new Vec2(0,0),((new Vec2(64,64))),1,1,1,1,1,1,1,1));
-        simulatedWorld.addWorldObject(new CoinObject(new Vec2(0,0)));
-        assertTrue(hero.getHealth() == 500);
-        simulatedWorld.frame(0.5f);
-        System.out.println(enemy.getPosition().y);
-        System.out.println(enemy.getPosition().x);
-        simulatedWorld.frame(0.5f);
-        System.out.println(enemy.getPosition().y);
-        System.out.println(enemy.getPosition().x);
-        simulatedWorld.frame(2);
-        System.out.println(enemy.getPosition().y);
-        System.out.println(enemy.getHealth() + "helatgb");
-        System.out.println(enemy.getPosition().x);
-        System.out.println(hero.getHealth());
-        System.out.println(hero.getPosition().x);
-        System.out.println(hero.getCoins());
-        assertTrue(hero.getHealth() == 500);
+        hero.damage(30);
+        assertTrue(hero.getHealth()  < hero.getMaxHealth());
     }
+
+
+
 
     @Test
     public void testGroundCollision()
@@ -114,6 +105,16 @@ public class DesktopLauncherTest extends TestCase{
 
 
     }
+
+    @Test
+    public void TestSetMeleeWeapon(){
+        Enemy monster = new Enemy(new Vec2(1,1), new Vec2(64,64), 1,0,0,0,0,0,0,0);
+        simulatedWorld.addWorldObject(monster);
+        int i = 0;
+        monster.setMeleeWeapon();
+        assertTrue( monster.getRegeneration() == i);
+    }
+
 
 
     @Test
@@ -174,13 +175,6 @@ public class DesktopLauncherTest extends TestCase{
         assertTrue(hero.getUpgrades().get("Hermes").getValueInt() == 1);
     }
 
-    @Test
-    public void Testdamage(){
-        Character hero = new Character((new Vec2(0,0)));
-        setHero(hero);
-        Enemy monster = new Enemy((new Vec2(0,0)),((new Vec2(64,64))),1,1,1,1,1,1,1,1);
-        simulatedWorld.frame(0.016f);
-        assertTrue(hero.getHealth() < hero.getMaxHealth());
-    }
+
  }
 
