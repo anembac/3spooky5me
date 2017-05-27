@@ -216,11 +216,13 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                         case 'Q' : { int rnd = new Random().nextInt((100)+1);
                             if (rnd < (((difficulty/6)+Math.sqrt(difficulty)*(Math.sin(difficulty)*difficulty*difficulty)/2)+0.43)*100){
 
-                            Enemy enemy = (new Enemy(pos, new Vec2(64,64),1*(difficulty/4),1*(difficulty/8),1*(difficulty/32),1*(difficulty/4),1*(difficulty/8),1*(difficulty/16),1*(difficulty/24),1));
+                            Enemy enemy = (new Enemy(pos, new Vec2(64,64),1*(difficulty/4),1*(difficulty/8),1*(difficulty/32),1*(difficulty/8),1*(difficulty*2),1*(difficulty/16),1*(difficulty/24),1*(difficulty/24)));
                             output.add(enemy);
                             enemy.setMeleeWeapon();}
                         } break;
-                        case 'S' : output.add(new SpikeObject(pos, (difficulty))); break;
+                        case 'S' : output.add(new SpikeObject(pos, (difficulty)));
+                            output.add(new SpikeObject((new Vec2(pos.x+32,pos.y)), (difficulty))); break;
+
                     }
                 }
             }
