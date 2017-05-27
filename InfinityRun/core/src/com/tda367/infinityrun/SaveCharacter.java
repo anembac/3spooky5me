@@ -29,11 +29,11 @@ public final class SaveCharacter {
 
                 //Takes the string before and after the desired section of the save, then rewrites the entire file
                 //with only the specific section altered.
-                String tmp4 = tmp.substring(1,tmp2);
+                String tmp4 = tmp.substring(0,tmp2);
                 String tmp5 = tmp.substring(tmp3);
                 saveFile.writeString(tmp4 + saveString + tmp5, false);
             }else{
-                saveFile.writeString(saveString,true);
+                saveFile.writeString("\n"+saveString,true);
             }
 
             //if storage exists, creates the file, and saves the character with ID 1.
@@ -51,7 +51,6 @@ public final class SaveCharacter {
     //with "STARTOFSAVE#" where # is the ID of the character. It ends with "END#", this is so it will be easy to search
     //for specific saves later on.
     private String generateSave(Character hero) {
-        saveText.append("\n");
         saveText.append("STARTOFSAVE" + saveID);
         saveText.append("\n");
         saveText.append("Coins: " + hero.getCoins());

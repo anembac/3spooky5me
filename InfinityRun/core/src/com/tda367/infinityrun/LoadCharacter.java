@@ -72,8 +72,8 @@ public class LoadCharacter {
             /* //FOR DEBUGGING
             System.out.println("Loopindex: "+i);
             System.out.println("Start2: "+(activeSaveData.indexOf(" ")+1));
-            System.out.println("End2: "+activeSaveData.indexOf("\n"));
-            */
+            System.out.println("End2: "+activeSaveData.indexOf("\n"));*/
+
             returnData[i] = Integer.parseInt((
                     activeSaveData.substring(
                             (activeSaveData.indexOf(" ")+1), activeSaveData.indexOf("\n")

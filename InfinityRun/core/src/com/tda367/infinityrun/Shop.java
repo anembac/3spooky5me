@@ -17,11 +17,10 @@ public class Shop {
         Upgrade currentUpg = upgList.get(upgName);
 
         if(getPrice(currentUpg)<=shopOwner.getCoins()){
-            int templvl = currentUpg.getLevel();
-            currentUpg.addLevel();
-            shopOwner.setMeleeWeapon();
-            if(currentUpg.getLevel()!=templvl){
+            if(currentUpg.getLevel()<currentUpg.getCap() ||currentUpg.getCap()<0){
                 shopOwner.chargeCoins(getPrice(currentUpg));
+                currentUpg.addLevel();
+                shopOwner.setMeleeWeapon();
             }
         }else{
             System.out.println("You cannot afford this upgrade.");
