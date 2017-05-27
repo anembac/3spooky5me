@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.tda367.infinityrun.Screens.GameScreen;
 import com.tda367.infinityrun.WorldGeneration.TextbasedWorldGenerator;
 
 public class LoadScreen implements Screen {

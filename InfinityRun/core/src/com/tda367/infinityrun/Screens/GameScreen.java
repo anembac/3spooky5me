@@ -1,4 +1,4 @@
-package com.tda367.infinityrun;
+package com.tda367.infinityrun.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -8,7 +8,11 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.math.Matrix4;
+import com.tda367.infinityrun.HUD;
+import com.tda367.infinityrun.InfinityRun;
 import com.tda367.infinityrun.Math.Rect;
+import com.tda367.infinityrun.World;
+import com.tda367.infinityrun.WorldObject;
 
 import java.util.HashMap;
 

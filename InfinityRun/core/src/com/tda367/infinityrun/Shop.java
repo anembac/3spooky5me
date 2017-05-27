@@ -23,7 +23,7 @@ public class Shop {
                 shopOwner.setMeleeWeapon();
             }
         }else{
-            System.out.println("You cannot afford this upgrade.");
+            //System.out.println("You cannot afford this upgrade.");
         }
     }
 

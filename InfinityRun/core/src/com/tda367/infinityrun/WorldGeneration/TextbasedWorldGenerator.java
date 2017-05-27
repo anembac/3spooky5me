@@ -194,7 +194,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
 
         public List<WorldObject> generate(int ox, int oy)
         {
-            int difficulty = (int)Math.sqrt(ox*ox+oy+oy);
+            int difficulty = (int)Math.sqrt(ox*ox+oy*oy);
             if(difficulty > maxDistanceFromSpawn){
                 maxDistanceFromSpawn = difficulty;
             }

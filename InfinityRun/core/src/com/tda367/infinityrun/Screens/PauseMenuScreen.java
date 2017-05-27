@@ -1,4 +1,4 @@
-package com.tda367.infinityrun;
+package com.tda367.infinityrun.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.tda367.infinityrun.SaveCharacter;
 
 public class PauseMenuScreen implements Screen{
     SpriteBatch batch = new SpriteBatch();

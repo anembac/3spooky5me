@@ -87,21 +87,37 @@ public class DesktopLauncherTest extends TestCase{
 
 
     @Test
-    public void testPurchaseSpeed(){
+    public void testPurchaseUpgrade(){
         Character hero = new Character(new Vec2(0,0));
         Shop shop = new Shop(hero);
+        hero.setCoins(10);
         String upgradeName = "Speed";
         int before1 = shop.getUpgList().get(upgradeName).getLevel();
         shop.purchaseUpgrade(upgradeName);
         int after1 = shop.getUpgList().get(upgradeName).getLevel();
-        assertTrue(before1+1 == after1);
+        String message = "Upgrade level before purchase was " + before1 + ". Upgrade level after is " + after1+".";
+        assertTrue(message,before1+1 == after1);
         int before2 = shop.getUpgList().get(upgradeName).getLevel();
 
-//At this point the hero should be too poor to afford more speed upgrades
+        //At this point the hero should be too poor to afford more speed upgrades
         shop.purchaseUpgrade(upgradeName);
         int after2 = shop.getUpgList().get(upgradeName).getLevel();
-        assertTrue(after2 == before2);
+        message = "Upgrade level before purchase was " + before2 + ". Upgrade level after is " + after2+".";
+        assertTrue(message,after2 == before2);
         assertTrue(shop.getPrice(shop.getUpgList().get(upgradeName)) > hero.getCoins());
+
+        //Gave hero more coins, checking that upgrading beyond level 1 works
+        hero.setCoins(20);
+        shop.purchaseUpgrade(upgradeName);
+        assertTrue("Upgrade level should be 2,  is now: " + shop.getUpgList().get(upgradeName).getLevel()
+                , shop.getUpgList().get(upgradeName).getLevel() == 2 );
+
+
+        //Change upgrade, making sure it doesn't have the level of the previous one for some reason
+        upgradeName = "Looting";
+        hero.setCoins(100);
+        shop.purchaseUpgrade(upgradeName);
+        assertTrue(shop.getUpgList().get(upgradeName).getLevel() == 1);
 
 
     }

@@ -1,4 +1,4 @@
-package com.tda367.infinityrun;
+package com.tda367.infinityrun.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -10,7 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.tda367.infinityrun.Character;
+import com.tda367.infinityrun.InfinityRun;
+import com.tda367.infinityrun.LoadScreen;
 import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.World;
 import com.tda367.infinityrun.WorldGeneration.TextbasedWorldGenerator;
 
 public class MainMenuScreen implements Screen { //this class creates the main menu screen
