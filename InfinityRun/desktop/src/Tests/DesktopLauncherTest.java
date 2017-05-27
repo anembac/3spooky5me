@@ -47,7 +47,7 @@ public class DesktopLauncherTest extends TestCase{
         Character hero = new Character(new Vec2(768,200));
         simulatedWorld = new World(new TestingWorldGenerator(),hero);
         simulatedWorldExtra = new World(new TextbasedWorldGenerator(), hero);
-        simulatedWorld.setInput(new InputEmpty(false,false,false,false));
+        simulatedWorld.setInput(new InputEmpty(false,false,false,true));
     }
     @Test
     public void testDemage(){
@@ -107,12 +107,24 @@ public class DesktopLauncherTest extends TestCase{
     }
 
     @Test
-    public void TestSetMeleeWeapon(){
+    public void testRegeneration(){
         Enemy monster = new Enemy(new Vec2(1,1), new Vec2(64,64), 1,0,0,0,0,0,0,0);
         simulatedWorld.addWorldObject(monster);
-        int i = 0;
-        monster.setMeleeWeapon();
-        assertTrue( monster.getRegeneration() == i);
+        assertTrue(monster.getHealth() == monster.getMaxHealth());
+        monster.damage(50);
+        simulatedWorld.frame(1);
+
+        double lastdmg = monster.getHealth();
+        assertTrue(monster.getHealth() < monster.getMaxHealth());
+
+        simulatedWorld.frame(1);
+        assertTrue(monster.getHealth() > lastdmg);
+        lastdmg = monster.getHealth();
+        simulatedWorld.frame(1);
+        assertTrue(monster.getHealth() > lastdmg);
+        lastdmg = monster.getHealth();
+        simulatedWorld.frame(1);
+        assertTrue(monster.getHealth() > lastdmg);
     }
 
 
