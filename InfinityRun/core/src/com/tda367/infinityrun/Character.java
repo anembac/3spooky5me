@@ -51,15 +51,6 @@ public class Character extends LivingObject {
     }
 
     @Override
-    public void damage(double damage) {
-        currentHealth -= damage;
-        if (this.currentHealth <= 0) {
-            despawn();
-        }
-        System.out.println(currentHealth + " health left for player");
-    }
-
-    @Override
     public double getMaxHealth() {
         return (20 * 5) + super.getMaxHealth();
     }

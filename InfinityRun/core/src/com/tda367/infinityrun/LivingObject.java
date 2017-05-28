@@ -44,11 +44,10 @@ public class LivingObject extends WorldObject {
 
     public void damage(double damage) {
         currentHealth -= damage;
-        if (this.currentHealth < 0) {
+        if (this.currentHealth <= 0) {
             despawn();
 
         }
-        System.out.println(currentHealth + " health left for some creature.");
     }
 
     public Vec2 getAcceleration() {
