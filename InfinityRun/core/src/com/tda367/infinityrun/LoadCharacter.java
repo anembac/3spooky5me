@@ -29,9 +29,9 @@ public class LoadCharacter {
         //an oversight that should be fixed if there is time, but isn't gamebreaking as long as you're aware of it.
         Character loadedCharacter
                 = new Character(new Vec2(800, 450),
-                levels[1],
                 levels[0],
                 levels[7],
+                levels[1],
                 levels[3],
                 levels[5],
                 levels[4],

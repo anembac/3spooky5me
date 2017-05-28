@@ -25,8 +25,8 @@ class PauseMenuScreen implements Screen {
     private final TextButton.TextButtonStyle menuButtonStyle =
             new TextButton.TextButtonStyle(textureUpDrawable, textureDownDrawable, textureUpDrawable, font);
 
-    private final TextButton exitButton = new TextButton("EXIT GAME", menuButtonStyle);
-    private final TextButton backToMenuButton = new TextButton("MAIN MENU", menuButtonStyle);
+    private final TextButton exitButton = new TextButton("SAVE AND EXIT", menuButtonStyle);
+    private final TextButton backToMenuButton = new TextButton("SAVE AND GO TO MAIN MENU", menuButtonStyle);
     private final TextButton unPauseButton = new TextButton("UNPAUSE", menuButtonStyle);
     private final GameScreen masterScreen;
 
@@ -51,7 +51,7 @@ class PauseMenuScreen implements Screen {
         }
 
         if (backToMenuButton.isPressed()) {   //broken; graphics disposed, collision with old objects still occurs
-
+            SaveCharacter.saveCharacter(masterScreen.world.getHero(), masterScreen.world.getHero().getCharacterID());
             masterScreen.game.setScreen(new MainMenuScreen(masterScreen.game)); //masterscreen.game is an instance of
             masterScreen.dispose();                                             //the InfinityRun class
             this.dispose();
