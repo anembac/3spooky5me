@@ -23,6 +23,7 @@ public class Character extends LivingObject {
 
         super(position, new Vec2(64, 64), speedLvl, jumpLvl, hermesLvl,
                 healthLvl, meleeHandlingLvl, ChcLvl, Chdlvl, regLvl);
+        coins = numCoins;
 
 
         addUpgrade("Looting", new Looting(lootLvl));    //Multiplied as a modifier to increase number of coins dropped - 250% chance of coins means 2 coins and 50% chance of extra.
