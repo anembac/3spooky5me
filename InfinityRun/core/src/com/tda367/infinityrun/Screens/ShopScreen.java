@@ -1,6 +1,7 @@
 package com.tda367.infinityrun.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -138,6 +139,10 @@ class ShopScreen implements Screen {
         batch.setProjectionMatrix(camera.combined);
         upgradeTable.draw(batch, 0);
         batch.end();
+        if(Gdx.input.isKeyJustPressed(Input.Keys.TAB)){
+            masterScreen.game.setScreen(masterScreen);
+            this.dispose();
+        }
     }
 
 
