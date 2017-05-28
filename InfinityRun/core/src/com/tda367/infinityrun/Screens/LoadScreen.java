@@ -40,11 +40,11 @@ public class LoadScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                int whatthefuckdidyoujustsayaboutmeyoulittleshit = Integer.parseInt(actor.getName());
+                int loadID = Integer.parseInt(actor.getName());
                 dispose();
                 infRun.setScreen(new GameScreen(infRun,
                         new World(new TextbasedWorldGenerator()
-                                , LoadCharacter.loadCharacter(whatthefuckdidyoujustsayaboutmeyoulittleshit))));
+                                , LoadCharacter.loadCharacter(loadID))));
 
             }
         };
