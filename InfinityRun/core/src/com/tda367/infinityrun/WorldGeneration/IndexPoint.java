@@ -3,10 +3,10 @@ package com.tda367.infinityrun.WorldGeneration;
 /**
  * Created by kaffe on 5/17/17.
  */
-public class IndexPoint {
+class IndexPoint {
 
-    int x;
-    int y;
+    private final int x;
+    private final int y;
 
     public IndexPoint(int x, int y){this.x = x; this.y = y;}
 

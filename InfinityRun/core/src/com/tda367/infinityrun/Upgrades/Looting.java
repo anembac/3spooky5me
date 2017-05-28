@@ -2,8 +2,6 @@ package com.tda367.infinityrun.Upgrades;
 
 import com.tda367.infinityrun.Upgrade;
 
-import java.util.Random;
-
 /**
  * Created by Jacob on 5/9/2017.
  */

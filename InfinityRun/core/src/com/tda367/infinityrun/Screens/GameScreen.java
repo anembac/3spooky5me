@@ -20,13 +20,13 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
     final InfinityRun game;                 // but it's not currently successful...
 
 
-    HashMap<String, Texture> textureMap = new HashMap<String, Texture>();
-    OrthographicCamera camera;
-    Stage gameStage = new Stage();
-    World world;
-    HUD hud;
-    final int windowWidth = 1600;
-    final int windowHeight = 900;
+    private final HashMap<String, Texture> textureMap = new HashMap<String, Texture>();
+    private final OrthographicCamera camera;
+    private final Stage gameStage = new Stage();
+    final World world;
+    private final HUD hud;
+    private final int windowWidth = 1600;
+    private final int windowHeight = 900;
 
     public GameScreen(final InfinityRun game, World world) {
         this.game = game;

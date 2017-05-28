@@ -1,15 +1,13 @@
 package com.tda367.infinityrun;
 
-import com.tda367.infinityrun.Math.Utils;
-
 public class Upgrade {
 
-    protected final int cap;            //The maximum level of the skill, -1 means it doesn't have a cap.
+    private final int cap;            //The maximum level of the skill, -1 means it doesn't have a cap.
     protected int perLevelMultiplier;      //This is the basic value you get per level of the upgrade
     protected int level = 0;      //Skill level, the higher the level the more stats it gives. Starts at level 0.
     protected int basePrice;    //The base cost of an upgrade - the higher the level the higher the price will become.
 
-    public Upgrade(int cap, int level) {
+    protected Upgrade(int cap, int level) {
         this.cap = cap;
         this.level = level;
     }

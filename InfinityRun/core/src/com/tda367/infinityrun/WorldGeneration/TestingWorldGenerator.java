@@ -13,7 +13,7 @@ import java.util.List;
  * Created by Mikael on 5/24/2017.
  */
 public class TestingWorldGenerator implements WorldGenerator {
-    HashSet<IndexPoint> madeRooms = new HashSet<IndexPoint>();
+    private final HashSet<IndexPoint> madeRooms = new HashSet<IndexPoint>();
     @Override
     public List<WorldObject> generate(int x, int y) {
         if(madeRooms.contains(new IndexPoint(x,y))) return new ArrayList<WorldObject>();

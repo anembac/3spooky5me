@@ -8,21 +8,21 @@ import java.util.List;
  * Created by miktor on 2017-04-05.
  */
 
-public class KdTree<T> {
+class KdTree<T> {
 
-    KdTreeNode<T> parentNode = null;
-    final int dimensions = 2;
+    private KdTreeNode<T> parentNode = null;
+    private final int dimensions = 2;
 
     public KdTree()
     {
 
     }
 
-    boolean isEven(int value) {
+    private boolean isEven(int value) {
         return (value % 2) == 0;
     }
 
-    double getIndexValue(Point2D.Double val, int index) {
+    private double getIndexValue(Point2D.Double val, int index) {
         return (isEven(index) ? val.getX() : val.getY());
     }
 

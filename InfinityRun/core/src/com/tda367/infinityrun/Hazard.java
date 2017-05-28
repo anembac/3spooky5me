@@ -1,15 +1,14 @@
 package com.tda367.infinityrun;
 
-import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
 
 import java.util.List;
 
 public class Hazard extends WorldObject
 {
-    final float range;
-    final float dps;
-    public Hazard(Vec2 position, Vec2 bounds, float dps) {
+    private final float range;
+    private final float dps;
+    protected Hazard(Vec2 position, Vec2 bounds, float dps) {
         super(position, bounds);
         range = Vec2.distance(position, WOWrapper.worldObjectCenter(this)) * 3;
         this.dps = dps;

@@ -2,7 +2,6 @@ package com.tda367.infinityrun.RoomTiles;
 
 import com.tda367.infinityrun.Hazard;
 import com.tda367.infinityrun.Math.Vec2;
-import com.tda367.infinityrun.WorldObject;
 
 /**
  * Created by kaffe on 5/16/17.

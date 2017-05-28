@@ -5,13 +5,12 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.StringBuilder;
 // WARNING: unless u want a headache, do not touch magical saving box
 public final class SaveCharacter {
-        private static FileHandle saveFile = Gdx.files.local("savedata.txt");
-    private static StringBuilder saveText = new StringBuilder("");
+        private static final FileHandle saveFile = Gdx.files.local("savedata.txt");
+    private static final StringBuilder saveText = new StringBuilder("");
     private int saveID = 0;
-    private Character hero;
 
     private SaveCharacter(Character hero, int newChar) {
-        this.hero = hero;
+        Character hero1 = hero;
         this.saveID = newChar;
     }
 

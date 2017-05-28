@@ -13,31 +13,31 @@ import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.tda367.infinityrun.SaveCharacter;
 
-public class PauseMenuScreen implements Screen{
-    SpriteBatch batch = new SpriteBatch();
-    BitmapFont font = new BitmapFont();
-    Stage pauseStage = new Stage();
-    TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("testpack1.pack"));
-    TextureRegion textureUp = new TextureRegion(atlas.findRegion("testtexture"));
-    TextureRegion textureDown = new TextureRegion(atlas.findRegion("testtexture2"));
-    TextureRegionDrawable textureUpDrawable = new TextureRegionDrawable(textureUp);
-    TextureRegionDrawable textureDownDrawable = new TextureRegionDrawable(textureDown);
-    TextButton.TextButtonStyle menuButtonStyle =
+class PauseMenuScreen implements Screen{
+    private final SpriteBatch batch = new SpriteBatch();
+    private final BitmapFont font = new BitmapFont();
+    private final Stage pauseStage = new Stage();
+    private final TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("testpack1.pack"));
+    private final TextureRegion textureUp = new TextureRegion(atlas.findRegion("testtexture"));
+    private final TextureRegion textureDown = new TextureRegion(atlas.findRegion("testtexture2"));
+    private final TextureRegionDrawable textureUpDrawable = new TextureRegionDrawable(textureUp);
+    private final TextureRegionDrawable textureDownDrawable = new TextureRegionDrawable(textureDown);
+    private final TextButton.TextButtonStyle menuButtonStyle =
             new TextButton.TextButtonStyle(textureUpDrawable,textureDownDrawable,textureUpDrawable, font);
 
-    TextButton exitButton = new TextButton("EXIT GAME", menuButtonStyle);
-    TextButton backToMenuButton= new TextButton("MAIN MENU", menuButtonStyle);
-    TextButton unPauseButton = new TextButton("UNPAUSE", menuButtonStyle);
-    VerticalGroup buttonGroup = new VerticalGroup();
-    GameScreen masterScreen;
+    private final TextButton exitButton = new TextButton("EXIT GAME", menuButtonStyle);
+    private final TextButton backToMenuButton= new TextButton("MAIN MENU", menuButtonStyle);
+    private final TextButton unPauseButton = new TextButton("UNPAUSE", menuButtonStyle);
+    private final GameScreen masterScreen;
 
     public PauseMenuScreen(GameScreen gs){
         masterScreen = gs;
+        VerticalGroup buttonGroup = new VerticalGroup();
         buttonGroup.addActor(exitButton);
         buttonGroup.addActor(backToMenuButton);
         buttonGroup.addActor(unPauseButton);
         buttonGroup.space(10);
-        buttonGroup.setPosition(1600/2-buttonGroup.getMaxWidth(), 900/2-buttonGroup.getMaxHeight());
+        buttonGroup.setPosition(1600/2- buttonGroup.getMaxWidth(), 900/2- buttonGroup.getMaxHeight());
         pauseStage.addActor(buttonGroup);
         Gdx.input.setInputProcessor(pauseStage);
 

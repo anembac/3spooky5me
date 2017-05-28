@@ -1,7 +1,6 @@
 package com.tda367.infinityrun.WeaponTypes;
 
 import com.tda367.infinityrun.*;
-import com.tda367.infinityrun.Math.Utils;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ public class AdminsDebugginStaff extends MeleeWeapon {
     public AdminsDebugginStaff() {
         super(20, 2, 2);
     }
-    double ccd = 0;
+    private double ccd = 0;
     @Override
     public void frame(float dt, float heroX, float heroY, InputState state) {
         ccd -= dt;

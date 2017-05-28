@@ -1,7 +1,5 @@
 package com.tda367.infinityrun;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -9,12 +7,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class HUD {
 
-    Character character;
-    TextureAtlas atlas = new TextureAtlas("HUD/HUDTexture.pack");
-    SpriteBatch hudbatch = new SpriteBatch();
-    BitmapFont hudfont = new BitmapFont();
-    TextureRegion healthicon = new TextureRegion(atlas.findRegion("heart"));
-    TextureRegion coinicon = new TextureRegion(atlas.findRegion("hudcoin"));
+    private final Character character;
+    private final TextureAtlas atlas = new TextureAtlas("HUD/HUDTexture.pack");
+    private final SpriteBatch hudbatch = new SpriteBatch();
+    private final BitmapFont hudfont = new BitmapFont();
+    private final TextureRegion healthicon = new TextureRegion(atlas.findRegion("heart"));
+    private final TextureRegion coinicon = new TextureRegion(atlas.findRegion("hudcoin"));
 
 
     public HUD(Character character){
