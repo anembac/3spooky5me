@@ -1,8 +1,9 @@
 package com.tda367.infinityrun;
 
+import com.tda367.infinityrun.Controller.InputState;
 import com.tda367.infinityrun.Math.Vec2;
-import com.tda367.infinityrun.RoomTiles.CoinObject;
 import com.tda367.infinityrun.Upgrades.Looting;
+import com.tda367.infinityrun.Upgrades.Upgrade;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,50 +15,36 @@ import java.util.Random;
 public class Character extends LivingObject {
 
     public Character(Vec2 position) {
-        this(position, 0, 0, 0, 0, 0, 0, 0, 0);
+        this(position,0,0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
 
-    public Character(Vec2 position, int speedLvl, int jumpLvl, int hermesLvl, int healthLvl,
+    public Character(Vec2 position, int numCoins, int lootLvl, int speedLvl, int jumpLvl, int hermesLvl, int healthLvl,
                      int meleeHandlingLvl, int ChcLvl, int Chdlvl, int regLvl) {
 
         super(position, new Vec2(64, 64), speedLvl, jumpLvl, hermesLvl,
                 healthLvl, meleeHandlingLvl, ChcLvl, Chdlvl, regLvl);
 
-        addUpgrade("Looting", new Looting(0));    //Multiplied as a modifier to increase number of coins dropped - 250% chance of coins means 2 coins and 50% chance of extra.
+
+        addUpgrade("Looting", new Looting(lootLvl));    //Multiplied as a modifier to increase number of coins dropped - 250% chance of coins means 2 coins and 50% chance of extra.
         setTexture("WorldObjects/player.png");// default hero texture
         //new Rectangle(position.x, position.y, size, size);
     }
 
-    private int maxdistance = 0;
-
+    private int maxDistance = 0;
     private int characterID;
     private int coins = 0;
 
-    public void setLooting(int val){
-        if(upgrades.containsKey("Looting")){
-            upgrades.remove("Looting");
-        }
-        addUpgrade("Looting", new Looting(val));
-
-    }
-
-
     public void setMaxdistance(int i){
-        maxdistance = i;
+        maxDistance = i;
     }
 
     public int getMaxdistance(){
-        return maxdistance;
-    }
-    public void setCoins(int coins) {
-        this.coins = coins;
+        return maxDistance;
     }
 
     public int getCharacterID() {
         return characterID;
     }
-
-
 
     public void setCharacterID(int id){
         characterID = id;

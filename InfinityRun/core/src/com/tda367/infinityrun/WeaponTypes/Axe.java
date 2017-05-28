@@ -1,5 +1,4 @@
 package com.tda367.infinityrun.WeaponTypes;
-
 import com.tda367.infinityrun.MeleeWeapon;
 
 /**

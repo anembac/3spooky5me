@@ -1,7 +1,8 @@
 package com.tda367.infinityrun;
 
+import com.tda367.infinityrun.Controller.IInput;
+import com.tda367.infinityrun.Controller.InputGDX;
 import com.tda367.infinityrun.Math.Vec2;
-import com.tda367.infinityrun.WorldGeneration.WorldGenerator;
 
 import java.util.ArrayList;
 import java.util.List;

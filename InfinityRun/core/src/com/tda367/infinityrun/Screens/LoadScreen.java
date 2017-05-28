@@ -15,9 +15,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.tda367.infinityrun.InfinityRun;
 import com.tda367.infinityrun.LoadCharacter;
-import com.tda367.infinityrun.Screens.GameScreen;
 import com.tda367.infinityrun.World;
-import com.tda367.infinityrun.WorldGeneration.TextbasedWorldGenerator;
+import com.tda367.infinityrun.TextbasedWorldGenerator;
 
 public class LoadScreen implements Screen {
     private final InfinityRun infRun;

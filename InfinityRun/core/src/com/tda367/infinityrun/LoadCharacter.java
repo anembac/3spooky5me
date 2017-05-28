@@ -31,6 +31,8 @@ public class LoadCharacter {
         Character loadedCharacter
                 =  new Character(new Vec2(800, 450),
                 levels[1],
+                levels[0],
+                levels[7],
                 levels[3],
                 levels[5],
                 levels[4],
@@ -39,8 +41,6 @@ public class LoadCharacter {
                 levels[8],
                 levels[2] );
 
-        loadedCharacter.setCoins(levels[0]);
-        loadedCharacter.setLooting(levels[7]);
         loadedCharacter.setCharacterID(Id);
 
         return loadedCharacter;

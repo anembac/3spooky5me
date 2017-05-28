@@ -1,5 +1,4 @@
-package com.tda367.infinityrun;
-
+package com.tda367.infinityrun.Upgrades;
 
 import com.tda367.infinityrun.Math.Vec2;
 
@@ -10,9 +9,9 @@ public class ObjectModifiers {
     public final boolean inAir;
     // getters and setters later maybe
     public Vec2 acceleration;
-    ObjectModifiers(boolean inair, Vec2 acc)
-    {
-        acceleration = new Vec2(0,0);
+
+    public ObjectModifiers(boolean inair, Vec2 acc) {
+        acceleration = new Vec2(0, 0);
         acceleration = acc.clone();
         inAir = inair;
     }

@@ -1,6 +1,8 @@
 package com.tda367.infinityrun;
 
 
+import com.tda367.infinityrun.Upgrades.Upgrade;
+
 import java.util.HashMap;
 
 public class Shop {

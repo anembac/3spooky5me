@@ -1,4 +1,4 @@
-package com.tda367.infinityrun.WorldGeneration;
+package com.tda367.infinityrun;
 
 /**
  * Created by kaffe on 5/17/17.

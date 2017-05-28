@@ -1,4 +1,6 @@
-package com.tda367.infinityrun;
+package com.tda367.infinityrun.Upgrades;
+
+import com.tda367.infinityrun.Controller.InputState;
 
 public class Upgrade {
 

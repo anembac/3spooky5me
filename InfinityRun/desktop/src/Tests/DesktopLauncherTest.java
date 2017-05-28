@@ -3,12 +3,13 @@ package Tests;
 
 import com.tda367.infinityrun.*;
 import com.tda367.infinityrun.Character;
+import com.tda367.infinityrun.Controller.InputEmpty;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.Math.Vec4;
-import com.tda367.infinityrun.RoomTiles.CoinObject;
+import com.tda367.infinityrun.CoinObject;
 import com.tda367.infinityrun.Upgrades.JumpH;
-import com.tda367.infinityrun.WorldGeneration.TestingWorldGenerator;
-import com.tda367.infinityrun.WorldGeneration.TextbasedWorldGenerator;
+import com.tda367.infinityrun.TestingWorldGenerator;
+import com.tda367.infinityrun.TextbasedWorldGenerator;
 import org.junit.*;
 
 
@@ -45,7 +46,7 @@ public class DesktopLauncherTest {
     @Test
     public void testDamage(){
 
-        Character hero = new Character(((new Vec2(0,0))),1,1,1,0,1,1,1,0);
+        Character hero = new Character(((new Vec2(0,0))),1,1,1,1,1,0,1,1,1,0);
         setHero(hero);
         hero.damage(30);
         Assert.assertTrue(hero.getHealth() < hero.getMaxHealth());
@@ -81,9 +82,8 @@ public class DesktopLauncherTest {
 
     @Test
     public void testPurchaseUpgrade(){
-        Character hero = new Character(new Vec2(0,0));
+        Character hero = new Character(new Vec2(0,0),130,0,0,0,0,0,0,0,0,0);
         Shop shop = new Shop(hero);
-        hero.setCoins(10);
         String upgradeName = "Speed";
         int before1 = shop.getUpgList().get(upgradeName).getLevel();
         shop.purchaseUpgrade(upgradeName);
@@ -100,7 +100,6 @@ public class DesktopLauncherTest {
         Assert.assertTrue(shop.getPrice(shop.getUpgList().get(upgradeName)) > hero.getCoins());
 
         //Gave hero more coins, checking that upgrading beyond level 1 works
-        hero.setCoins(20);
         shop.purchaseUpgrade(upgradeName);
         Assert.assertTrue("Upgrade level should be 2,  is now: " + shop.getUpgList().get(upgradeName).getLevel()
                 , shop.getUpgList().get(upgradeName).getLevel() == 2);
@@ -108,7 +107,6 @@ public class DesktopLauncherTest {
 
         //Change upgrade, making sure it doesn't have the level of the previous one for some reason
         upgradeName = "Looting";
-        hero.setCoins(100);
         shop.purchaseUpgrade(upgradeName);
         Assert.assertTrue(shop.getUpgList().get(upgradeName).getLevel() == 1);
 
@@ -143,7 +141,7 @@ public class DesktopLauncherTest {
         // Compares the movement distance of two levels of speed during a 0.16f frame tick
         //If everything works the higher speed level should get further in a single tick than the lower speed level.
         simulatedWorld.setInput(new InputEmpty(true,false,false,false));
-        Character hero = new Character(new Vec2(0,0),0,0,0,0,0,0,0,0);
+        Character hero = new Character(new Vec2(0,0),1,1,0,0,0,0,0,0,0,0);
         setHero(hero);
         float charPos1 = hero.getPosition().x;
         simulatedWorld.frame(0.16f);
@@ -160,7 +158,7 @@ public class DesktopLauncherTest {
     @Test
     public void testJumpLvl() {
 // test different character with different speedUpgradeLvls and see that a higher lvl runs faster.
-        Character hero = new Character(new Vec2(768,64),0,0,0,0,0,0,0,0);
+        Character hero = new Character(new Vec2(768,64),0,0,0,0,0,0,0,0,0,0);
         setHero(hero);
         int oldheight = hero.getJumpAcceleration();
         hero.addUpgrade("JumpH",new JumpH(1));

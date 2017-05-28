@@ -1,4 +1,4 @@
-package com.tda367.infinityrun.RoomTiles;
+package com.tda367.infinityrun;
 
 import com.tda367.infinityrun.Hazard;
 import com.tda367.infinityrun.Math.Vec2;

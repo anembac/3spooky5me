@@ -1,4 +1,4 @@
-package com.tda367.infinityrun.RoomTiles;
+package com.tda367.infinityrun;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;

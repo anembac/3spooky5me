@@ -1,10 +1,7 @@
 package com.tda367.infinityrun;
 
-import com.sun.org.apache.bcel.internal.classfile.Constant;
-import com.tda367.infinityrun.Math.Utils;
+import com.tda367.infinityrun.Controller.InputState;
 import com.tda367.infinityrun.Math.Vec2;
-import com.tda367.infinityrun.RoomTiles.CoinObject;
-import jdk.nashorn.internal.runtime.CodeInstaller;
 
 import java.util.List;
 import java.util.Random;

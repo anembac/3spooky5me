@@ -1,4 +1,4 @@
-package com.tda367.infinityrun;
+package com.tda367.infinityrun.Controller;
 
 //FOR TESTING ONLY
 public class InputEmpty implements IInput {

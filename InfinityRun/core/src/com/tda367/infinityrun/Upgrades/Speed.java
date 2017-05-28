@@ -1,7 +1,5 @@
 package com.tda367.infinityrun.Upgrades;
-import com.tda367.infinityrun.InputState;
-import com.tda367.infinityrun.ObjectModifiers;
-import com.tda367.infinityrun.Upgrade;
+import com.tda367.infinityrun.Controller.InputState;
 
 /**
  * Created by Jacob on 5/9/2017.

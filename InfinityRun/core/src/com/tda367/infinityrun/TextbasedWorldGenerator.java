@@ -1,12 +1,10 @@
-package com.tda367.infinityrun.WorldGeneration;
+package com.tda367.infinityrun;
 
-import com.tda367.infinityrun.Enemy;
 import com.tda367.infinityrun.Math.Vec2;
-import com.tda367.infinityrun.RoomTiles.*;
-import com.tda367.infinityrun.WorldObject;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.lang.*;
 import java.util.*;
 
 /**
@@ -26,7 +24,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
             String line = br.readLine();
             int i = 0; // keep track of y axis
             int lineRow = 1;
-            List<List<Character>> map = null;
+            List<List<java.lang.Character>> map = null;
 
             while(line != null) {
                 line = line.toUpperCase();
@@ -34,9 +32,9 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                 if(i == 0) {
                     // A new room begins, reset the arrays.
                     if (map == null) {
-                        map = new ArrayList<List<Character>>(15);
+                        map = new ArrayList<List<java.lang.Character>>(15);
                         for(int j = 0; j < 25; j++) {
-                            map.add(new ArrayList<Character>());
+                            map.add(new ArrayList<java.lang.Character>());
                             for(int k = 0; k < 15; k++) {
                                 // E represents empty.
                                 map.get(j).add('E');
@@ -44,9 +42,9 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                         }
                     } else {
                         addRoom(map);
-                        map = new ArrayList<List<Character>>(15);
+                        map = new ArrayList<List<java.lang.Character>>(15);
                         for(int j = 0; j < 25; j++) {
-                            map.add(new ArrayList<Character>());
+                            map.add(new ArrayList<java.lang.Character>());
                             for(int k = 0; k < 15; k++) {
                                 // E represents empty.
                                 map.get(j).add('E');
@@ -59,7 +57,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                         System.out.println("error in textfile. AT LINE " + lineRow);
                     } else {
                         for(int x = 0; x < 25; x++) {
-                            Character _char = line.toCharArray()[x];
+                            java.lang.Character _char = line.toCharArray()[x];
                             if(_char == ' ') _char = 'E';
                             map.get(x).set(y, _char);
                         }
@@ -74,7 +72,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
         catch (Exception ex){ System.out.println("File error... ");}
     }
 
-    private void addRoom(List<List<Character>> map)
+    private void addRoom(List<List<java.lang.Character>> map)
     {
         boolean r,l,u,d;
         r = u = l = d = false;
@@ -168,7 +166,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
         boolean up = false;
         boolean down = false;
 
-        final List<List<List<Character>>> allTypes = new ArrayList<List<List<Character>>>();
+        final List<List<List<java.lang.Character>>> allTypes = new ArrayList<List<List<java.lang.Character>>>();
 
         public RoomType(boolean r, boolean l, boolean u, boolean d)
         {
@@ -182,7 +180,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
             return (right ? 1 : 0) + (left ? 2 : 0) + (up ? 4 : 0) + (down ? 8 : 0);
         }
 
-        public void addType(List<List<Character>> input)
+        public void addType(List<List<java.lang.Character>> input)
         {
             allTypes.add(input);
         }

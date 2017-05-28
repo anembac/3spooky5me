@@ -1,7 +1,5 @@
 package com.tda367.infinityrun.Upgrades;
 
-import com.tda367.infinityrun.Upgrade;
-
 /**
  * Created by Jacob on 5/9/2017.
  */

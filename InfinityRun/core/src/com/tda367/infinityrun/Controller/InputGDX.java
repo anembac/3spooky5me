@@ -1,4 +1,4 @@
-package com.tda367.infinityrun;
+package com.tda367.infinityrun.Controller;
 
 import com.badlogic.gdx.Gdx;
 

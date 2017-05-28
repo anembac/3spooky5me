@@ -16,7 +16,7 @@ import com.tda367.infinityrun.Character;
 import com.tda367.infinityrun.InfinityRun;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.World;
-import com.tda367.infinityrun.WorldGeneration.TextbasedWorldGenerator;
+import com.tda367.infinityrun.TextbasedWorldGenerator;
 
 public class MainMenuScreen implements Screen { //this class creates the main menu screen
     private final InfinityRun game;

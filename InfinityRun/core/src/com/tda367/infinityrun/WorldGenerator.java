@@ -1,4 +1,4 @@
-package com.tda367.infinityrun.WorldGeneration;
+package com.tda367.infinityrun;
 
 import com.tda367.infinityrun.WorldObject;
 
