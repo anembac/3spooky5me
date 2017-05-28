@@ -8,6 +8,7 @@ import com.tda367.infinityrun.Math.Vec4;
 import com.tda367.infinityrun.RoomTiles.BrickObject;
 import com.tda367.infinityrun.RoomTiles.CoinObject;
 import com.tda367.infinityrun.RoomTiles.Platform;
+import com.tda367.infinityrun.Upgrades.JumpH;
 import com.tda367.infinityrun.WeaponTypes.Sword;
 import com.tda367.infinityrun.WorldGeneration.TestingWorldGenerator;
 import com.tda367.infinityrun.Shop;
@@ -50,7 +51,7 @@ public class DesktopLauncherTest extends TestCase{
         simulatedWorld.setInput(new InputEmpty(false,false,false,true));
     }
     @Test
-    public void testDemage(){
+    public void testDamage(){
 
         Character hero = new Character(((new Vec2(0,0))),1,1,1,0,1,1,1,0);
         setHero(hero);
@@ -168,26 +169,17 @@ public class DesktopLauncherTest extends TestCase{
     @Test
     public void testJumpLvl() {
 // test different character with different speedUpgradeLvls and see that a higher lvl runs faster.
-        float oldJumpH = 0;
-        for(int i = 0; i < 100; i++)
-        {
-            float newJumpH = 0;
-            Character hero = new Character(new Vec2(768,64),0,i,0,0,0,0,0,0);
-            setHero(hero);
-            simulatedWorld.setInput(new InputEmpty(false,false,false,false));
-            for(int j = 0; j < 180; j++){
-// let the hero fall to the ground so that he can jump..
-                simulatedWorld.frame(0.016f);
-            }
-            simulatedWorld.setInput(new InputEmpty(false,false,true,false));
+        Character hero = new Character(new Vec2(768,64),0,0,0,0,0,0,0,0);
+        setHero(hero);
+        int oldheight = hero.getJumpAcceleration();
+        hero.addUpgrade("JumpH",new JumpH(1));
+        simulatedWorld.frame(0.016f);
+        assertTrue(hero.getJumpAcceleration() > oldheight);
+
+
             simulatedWorld.frame(0.016f);
-            newJumpH = hero.getAcceleration().y;
-            hero.despawn();
-            assertTrue("The new jumpH is " + newJumpH + " and the old one " + oldJumpH, newJumpH > oldJumpH);
-            oldJumpH = newJumpH;
-            simulatedWorld.frame(0.016f);
+
         }
-    }
 
     @Test
     public void testUpgradesExist(){
