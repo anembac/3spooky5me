@@ -27,6 +27,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
     private final HUD hud;
     private final int windowWidth = 1600;
     private final int windowHeight = 900;
+    private final Texture background = new Texture(Gdx.files.internal("WorldObjects/castle.png"));
 
     public GameScreen(final InfinityRun game, World world) {
         this.game = game;
@@ -61,7 +62,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         game.batch.setTransformMatrix(translation);
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
-
+        game.batch.draw(background,-cx,-cy);
         for (WorldObject wo : world.getWorldObjects()) {
             checkTexture(wo);
             game.batch.draw(textureMap.get(wo.getTexturename()), wo.getPosition().x, wo.getPosition().y);
