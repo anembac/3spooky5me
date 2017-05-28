@@ -17,8 +17,8 @@ public abstract class WorldObject { //We should probably refactor this class at 
 
 
     // position is for some reason a vector, deal w/it
-    protected Vec2 position = new Vec2(0,0);
-    protected Vec2 bounds = new Vec2(0,0);
+    private Vec2 position = new Vec2(0,0);
+    private Vec2 bounds = new Vec2(0,0);
     private WorldObject parent = null;
     private String texturename = "";
     private List<WorldObject> children = new ArrayList<WorldObject>();
@@ -89,9 +89,21 @@ public abstract class WorldObject { //We should probably refactor this class at 
         }
     }
 
+
+    public void setPosition(float x, float y){
+        this.position = new Vec2(x,y);
+    }
+
+    public void setPosition(Vec2 v) {
+        this.position = v.clone();
+    }
     public List<WorldObject> getChildren()
     {
         return children;
+    }
+
+    public Vec2 getNoneRelativePosition (){
+        return position.clone();
     }
 
     public Vec2 getPosition()

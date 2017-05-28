@@ -1,5 +1,6 @@
 package com.tda367.infinityrun;
 
+import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.RoomTiles.CoinObject;
 
@@ -18,8 +19,8 @@ public class Enemy extends LivingObject {
 
     @Override
     public void frame(float dt,float heroX, float heroY, InputState input) {
-        float cx = position.x + bounds.x / 2;
-        float cy = position.y + bounds.y / 2;
+        float cx = Utils.getCenter(getPosition(),getDrawingRect().bounds).x;
+        float cy = Utils.getCenter(getPosition(),getDrawingRect().bounds).y;
         boolean r = false, l = false, jump = false, attack = false;
         if(cx + 90 < heroX) r = true;
         else if(cx - 90 > heroX) l = true;

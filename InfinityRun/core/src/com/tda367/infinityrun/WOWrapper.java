@@ -9,7 +9,7 @@ import com.tda367.infinityrun.Math.Vec2;
 public class WOWrapper {
 
     public static Vec2 worldObjectCenter(WorldObject wo){
-       return  Utils.getCenter(wo.position,wo.bounds);
+       return  Utils.getCenter(wo.getPosition(),wo.getDrawingRect().bounds);
     }
 
     public static float centerDistance(WorldObject A, WorldObject B){

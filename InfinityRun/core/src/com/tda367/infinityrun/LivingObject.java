@@ -125,7 +125,7 @@ public class LivingObject extends WorldObject {
         float rightIntersection = collisionVariables.w;
         float leftIntersection = collisionVariables.y;
 
-        ObjectModifiers modifier = new ObjectModifiers(this.position.y > height, acceleration);
+        ObjectModifiers modifier = new ObjectModifiers(this.getPosition().y > height, acceleration);
         for(Upgrade u :upgrades.values())
         {
             u.frame(dt, state, modifier);
@@ -133,7 +133,7 @@ public class LivingObject extends WorldObject {
         acceleration = modifier.acceleration.clone();
 
         // add acceleration down if we are in the air.
-        if(this.position.y > height)
+        if(this.getPosition().y > height)
         {
             //acceleration.y -= 9.82*dt;
             // so 1 px is 1 unit here, we need to guess the pixel height of the character in meters, etc 150?! this is 64 now but we gravity feels quite low...
@@ -145,30 +145,31 @@ public class LivingObject extends WorldObject {
         acceleration.y = Utils.limit(-100000, acceleration.y, getJumpAcceleration());
 
         // move the character according to the acceleration vectors.
-        position.add(Vec2.mul(acceleration, dt));
-
+        Vec2 currentPos = getPosition();
+        currentPos.add(Vec2.mul(acceleration, dt));
+        setPosition(currentPos);
         // if we accelerated right into a "block"
-        if((position.x + bounds.x) > rightIntersection)
+        if((getPosition().x + getDrawingRect().bounds.x) > rightIntersection)
         {
-            position.x = rightIntersection - bounds.x;
+            setPosition(rightIntersection - getDrawingRect().bounds.x,getPosition().y);
             acceleration.x = 0;
         }
         // if we accelerated left into a "blobk"
-        if(position.x < leftIntersection)
+        if(getPosition().x < leftIntersection)
         {
-            position.x = leftIntersection;
+            setPosition(leftIntersection,getPosition().y);
             acceleration.x = 0;
         }
         // if we accelerated below the ground:
-        if(position.y < height)
+        if(getPosition().y < height)
         {
-            position.y = height;
+            setPosition(getPosition().x,height);
             acceleration.y = 0;
         }
         // if we jumped and hit a roof.
-        if((position.y + bounds.y) > roof)
+        if((getPosition().y + getDrawingRect().bounds.y) > roof)
         {
-            position.y = roof - bounds.y;
+            setPosition(getPosition().x,roof - getDrawingRect().bounds.y);
             acceleration.y = 0;
         }
 

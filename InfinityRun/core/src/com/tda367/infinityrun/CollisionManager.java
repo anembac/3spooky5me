@@ -92,8 +92,8 @@ public class CollisionManager {
     {
         // This algo could be changed to use the 2 range searches instead, 1 for each axis.
         float cx, cy;
-        cx = obj.position.x + obj.bounds.x / 2;
-        cy = obj.position.y + obj.bounds.y / 2;
+        cx = obj.getPosition().x + obj.getDrawingRect().bounds.x / 2;
+        cy = obj.getPosition().y + obj.getDrawingRect().bounds.y / 2;
         // Initialize the intersection pts to never intersect
         Vec4 output = new Vec4(-1000000000,-100000000,10000000,10000000);
 
@@ -112,18 +112,18 @@ public class CollisionManager {
             // The 4 corners of our obj
             Vec2 oCornerA, oCornerB, oCornerC, oCornerD;
             // bl, tl, tr, br
-            oCornerA = obj.position.clone();
-            oCornerB = Vec2.add(obj.position, new Vec2(0, obj.bounds.y));
-            oCornerC = Vec2.add(obj.position, obj.bounds);
-            oCornerD = Vec2.add(obj.position, new Vec2(obj.bounds.x, 0));
+            oCornerA = obj.getPosition().clone();
+            oCornerB = Vec2.add(obj.getPosition(), new Vec2(0, obj.getDrawingRect().bounds.y));
+            oCornerC = Vec2.add(obj.getPosition(), obj.getDrawingRect().bounds);
+            oCornerD = Vec2.add(obj.getPosition(), new Vec2(obj.getDrawingRect().bounds.x, 0));
 
             // The 4 corners of our target object
             Vec2 tCornerA, tCornerB, tCornerC, tCornerD;
             // bl, tl, tr, br
-            tCornerA = node.data.position.clone();
-            tCornerB = Vec2.add(node.data.position, new Vec2(0, node.data.bounds.y));
-            tCornerC = Vec2.add(node.data.position, node.data.bounds);
-            tCornerD = Vec2.add(node.data.position, new Vec2(node.data.bounds.x, 0));
+            tCornerA = node.data.getPosition().clone();
+            tCornerB = Vec2.add(node.data.getPosition(), new Vec2(0, node.data.getDrawingRect().bounds.y));
+            tCornerC = Vec2.add(node.data.getPosition(), node.data.getDrawingRect().bounds);
+            tCornerD = Vec2.add(node.data.getPosition(), new Vec2(node.data.getDrawingRect().bounds.x, 0));
 
             // For the float precition errors we have to make the character a little bit smaller.
             oCornerA.add(new Vec2(0.5f,0.5f));

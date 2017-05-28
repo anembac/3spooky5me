@@ -89,9 +89,6 @@ public class World {
             if(obj instanceof LivingObject) {
                 // This object might have a different position now, the easiest way is to remove it and then re add it.
                 CollisionManager.getInstance().updatePosition(obj);
-                if(obj != hero && obj.getDespawn()){
-                    hero.lootEnemy();
-                }
             }
             if(obj.getDespawn()) {
                 objectsToRemove.add(obj);

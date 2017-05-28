@@ -3,6 +3,8 @@ package com.tda367.infinityrun;
 import com.sun.org.apache.bcel.internal.classfile.Constant;
 import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.RoomTiles.CoinObject;
+import jdk.nashorn.internal.runtime.CodeInstaller;
 
 import java.util.List;
 import java.util.Random;
@@ -42,12 +44,12 @@ public class MeleeWeapon extends WorldObject {
 
      public void setDirRight()
      {
-         position.x = 32;
+         setPosition(32,getNoneRelativePosition().y);
      }
 
      public  void setDirLeft()
      {
-         position.x = -32;
+         setPosition(-32,getNoneRelativePosition().y);
      }
 
 
@@ -70,20 +72,14 @@ public class MeleeWeapon extends WorldObject {
         if(state.attackPressed())
         {
             // temp animation to see when we are auctually attacking
-            position.y = (position.y-1) % 30 +21;
+            setPosition(getNoneRelativePosition().x, (getNoneRelativePosition().y-1) % 30 +21);
         }
-        else position.y = 16.0f;
+        else setPosition(getNoneRelativePosition().x, 16);
 
         if(state.attackPressed() && currentCD < 0.001)
         {
-
             List<WorldObject> output= CollisionManager.getInstance().getKNearest(this, 10); // get the 10 nearest
-            System.out.println("it's fucking trying");
-            for(WorldObject wo : output)
-            {
-
-                System.out.println(wo instanceof LivingObject);
-
+            for(WorldObject wo : output) {
                 //System.out.println(WOWrapper.centerDistance(this.getParent(), wo)/10 + "wow a rapper range  " + range* Constants.meter);
                 if(wo != this.getParent() && WOWrapper.centerDistance(this.getParent(), wo)/10 < (range * Constants.meter) && wo instanceof LivingObject)
                 {
@@ -95,10 +91,10 @@ public class MeleeWeapon extends WorldObject {
                         //System.out.println("Player dealt " +  damage);
                     }
                     ((LivingObject)wo).acceleration.y = 400;
-                    if (position.x >  0){
+                    if (getPosition().x >  0){
                     ((LivingObject)wo).acceleration.x = 700;
                     }
-                    if (position.x <  0){
+                    if (getPosition().x <  0){
                         ((LivingObject)wo).acceleration.x = -700;
                     }
 
@@ -106,5 +102,6 @@ public class MeleeWeapon extends WorldObject {
                 }
             }
         }
+
     }
 }
