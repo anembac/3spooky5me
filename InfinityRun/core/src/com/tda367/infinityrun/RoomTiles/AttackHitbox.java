@@ -6,13 +6,12 @@ import com.tda367.infinityrun.WorldObject;
 /**
  * Created by kaffe on 5/21/17.
  */
-public class AttackHitbox extends WorldObject {
-        //Generic Brick, 64x64 size.
-    boolean directionRight = true;
+class AttackHitbox extends WorldObject {
 
-        public AttackHitbox(Vec2 position) {
+    public AttackHitbox(Vec2 position) {
             super(position, new Vec2(64, 64));
-            if (directionRight) {
+        boolean directionRight = true;
+        if (directionRight) {
                 setTexture("WorldObjects/SwordRight.png");
             }
             else{

@@ -20,30 +20,24 @@ import com.tda367.infinityrun.World;
 import com.tda367.infinityrun.WorldGeneration.TextbasedWorldGenerator;
 
 public class LoadScreen implements Screen {
-    final InfinityRun infRun;
-    BitmapFont font = new BitmapFont();
-    Stage loadStage;
+    private final InfinityRun infRun;
+    private final BitmapFont font = new BitmapFont();
+    private final Stage loadStage;
 
-    TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("testpack1.pack"));
-    TextureRegion textureUp = new TextureRegion(atlas.findRegion("testtexture"));
-    TextureRegion textureDown = new TextureRegion(atlas.findRegion("testtexture2"));
-    TextureRegionDrawable textureUpDrawable = new TextureRegionDrawable(textureUp);
-    TextureRegionDrawable textureDownDrawable = new TextureRegionDrawable(textureDown);
-    TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(
-            textureUpDrawable,textureDownDrawable, textureUpDrawable, font);
-    TextButton[] buttons;
-    private int numberOfButtons;
-    private ChangeListener changeListener;
-    private Table buttonTable = new Table();
+    private final TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("testpack1.pack"));
+    private final TextureRegion textureUp = new TextureRegion(atlas.findRegion("testtexture"));
+    private final TextureRegion textureDown = new TextureRegion(atlas.findRegion("testtexture2"));
+    private final TextureRegionDrawable textureUpDrawable = new TextureRegionDrawable(textureUp);
+    private final TextureRegionDrawable textureDownDrawable = new TextureRegionDrawable(textureDown);
 
 
     public LoadScreen(InfinityRun game){
         infRun = game;
         loadStage = new Stage();
-        numberOfButtons = LoadCharacter.getNumberOfSaves();
-        buttons = new TextButton[numberOfButtons];
+        int numberOfButtons = LoadCharacter.getNumberOfSaves();
+        TextButton[] buttons = new TextButton[numberOfButtons];
 
-        changeListener = new ChangeListener() {
+        ChangeListener changeListener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
@@ -51,11 +45,14 @@ public class LoadScreen implements Screen {
                 dispose();
                 infRun.setScreen(new GameScreen(infRun,
                         new World(new TextbasedWorldGenerator()
-                                ,LoadCharacter.loadCharacter(whatthefuckdidyoujustsayaboutmeyoulittleshit))));
+                                , LoadCharacter.loadCharacter(whatthefuckdidyoujustsayaboutmeyoulittleshit))));
 
             }
         };
-        for(int i = 0; i<numberOfButtons;i++){
+        Table buttonTable = new Table();
+        for(int i = 0; i< numberOfButtons; i++){
+            TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(
+                    textureUpDrawable, textureDownDrawable, textureUpDrawable, font);
             buttons[i] = new TextButton("Save "+(i+1), style);
             buttons[i].setName(""+(i+1));
             buttons[i].setWidth(128);

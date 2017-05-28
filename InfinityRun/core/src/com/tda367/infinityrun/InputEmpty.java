@@ -1,7 +1,5 @@
 package com.tda367.infinityrun;
 
-import com.badlogic.gdx.Gdx;
-
 //FOR TESTING ONLY
 public class InputEmpty implements IInput {
     private InputState state = new InputState(false,false,false,false);

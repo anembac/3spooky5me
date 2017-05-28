@@ -1,6 +1,5 @@
 package com.tda367.infinityrun;
 
-import com.sun.org.apache.bcel.internal.classfile.Constant;
 import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
 
@@ -15,11 +14,11 @@ public class MeleeWeapon extends WorldObject {
      protected  double damage;
      protected double criticalHitChance;  /// tod be fixed into final when shop is fully working
      protected double criticalHitDamage;
-     protected final double CD;
-     protected final double range;
+     private final double CD;
+     private final double range;
      private double currentCD = 0;
 
-     public MeleeWeapon (double damage, double CD, double range) {
+     protected MeleeWeapon(double damage, double CD, double range) {
          super(new Vec2(/*offset from character*/32,26), new Vec2(/*size*/164,12));
          setTexture("WorldObjects/weapon.png");
          setCollidable(false);
@@ -32,7 +31,7 @@ public class MeleeWeapon extends WorldObject {
          return damage;
      }
 
-     public double getCD(){
+     protected double getCD(){
          return CD;
      }
 
@@ -78,14 +77,11 @@ public class MeleeWeapon extends WorldObject {
         {
 
             List<WorldObject> output= CollisionManager.getInstance().getKNearest(this, 10); // get the 10 nearest
-            System.out.println("it's fucking trying");
+
             for(WorldObject wo : output)
             {
-
-                System.out.println(wo instanceof LivingObject);
-
-                //System.out.println(WOWrapper.centerDistance(this.getParent(), wo)/10 + "wow a rapper range  " + range* Constants.meter);
-                if(wo != this.getParent() && WOWrapper.centerDistance(this.getParent(), wo)/10 < (range * Constants.meter) && wo instanceof LivingObject)
+                if(wo != this.getParent() && WOWrapper.centerDistance(this.getParent(), wo)
+                        < (range * Constants.meter) && wo instanceof LivingObject)
                 {
                     if(isCritical()) {
                         ((LivingObject)wo).damage(getCriticalDamage());

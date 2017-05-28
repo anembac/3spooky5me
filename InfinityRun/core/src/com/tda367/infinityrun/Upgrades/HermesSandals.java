@@ -9,7 +9,7 @@ import com.tda367.infinityrun.Upgrade;
  */
 
 public class HermesSandals extends Upgrade {
-    int charges;
+    private int charges;
 
     //This is an upgrade which lets you jump one more time in the air for each level
     public HermesSandals(int level) {

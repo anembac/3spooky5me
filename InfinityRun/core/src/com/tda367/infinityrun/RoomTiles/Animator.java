@@ -1,9 +1,6 @@
 package com.tda367.infinityrun.RoomTiles;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -15,15 +12,15 @@ import com.tda367.infinityrun.Character;
 
 
 
-public class Animator{
+class Animator{
 
     // Constant rows and columns of the sprite sheet
 
     // Objects used
-    Animation<TextureRegion> walkAnimation; // Must declare frame type (TextureRegion)
+    private Animation<TextureRegion> walkAnimation; // Must declare frame type (TextureRegion)
     //Texture walkSheet;
-    SpriteBatch spriteBatch;
-    Character dudebro;
+    private SpriteBatch spriteBatch;
+    private final Character dudebro;
 
     public Animator(Character c) {
 
@@ -34,10 +31,10 @@ public class Animator{
 
 
     // A variable for tracking elapsed time for the animation
-    float stateTime;
+    private float stateTime;
 
     
-    public void create() {
+    private void create() {
 
         // Load the sprite sheet as a Texture
         //walkSheet = new Texture(Gdx.files.internal("worldObjects/animation/a/run.png"));

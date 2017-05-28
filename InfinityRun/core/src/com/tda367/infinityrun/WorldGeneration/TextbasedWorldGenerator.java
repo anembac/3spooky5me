@@ -3,7 +3,6 @@ package com.tda367.infinityrun.WorldGeneration;
 import com.tda367.infinityrun.Enemy;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.RoomTiles.*;
-import com.tda367.infinityrun.WeaponTypes.Sword;
 import com.tda367.infinityrun.WorldObject;
 
 import java.io.BufferedReader;
@@ -15,10 +14,10 @@ import java.util.*;
  */
 public class TextbasedWorldGenerator implements WorldGenerator {
 
-    private HashMap<Integer, RoomType> allRooms = new HashMap<Integer, RoomType>();
-    private HashMap<IndexPoint, RoomType> madeRooms = new HashMap<IndexPoint, RoomType>();
-    private static Random rand = new Random();
-    int maxDistanceFromSpawn ;
+    private final HashMap<Integer, RoomType> allRooms = new HashMap<Integer, RoomType>();
+    private final HashMap<IndexPoint, RoomType> madeRooms = new HashMap<IndexPoint, RoomType>();
+    private static final Random rand = new Random();
+    private int maxDistanceFromSpawn ;
     public TextbasedWorldGenerator()
     {
         try
@@ -169,7 +168,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
         boolean up = false;
         boolean down = false;
 
-        List<List<List<Character>>> allTypes = new ArrayList<List<List<Character>>>();
+        final List<List<List<Character>>> allTypes = new ArrayList<List<List<Character>>>();
 
         public RoomType(boolean r, boolean l, boolean u, boolean d)
         {

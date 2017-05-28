@@ -1,7 +1,5 @@
 package com.tda367.infinityrun.Math;
 
-import com.tda367.infinityrun.WorldObject;
-
 /**
  * Created by Mikael on 5/3/2017.
  */

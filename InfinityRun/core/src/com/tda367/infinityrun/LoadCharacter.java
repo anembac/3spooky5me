@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.tda367.infinityrun.Math.Vec2;
 
-import java.util.logging.FileHandler;
-
 /**
  * Created by kaffe on 5/26/17.
  */
@@ -13,8 +11,8 @@ import java.util.logging.FileHandler;
 
 
 public class LoadCharacter {
-    private static FileHandle saveFile = Gdx.files.local("savedata.txt");
-    private int saveID;
+    private static final FileHandle saveFile = Gdx.files.local("savedata.txt");
+    private final int saveID;
 
 
     private LoadCharacter(int ID){
