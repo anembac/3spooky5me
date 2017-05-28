@@ -137,8 +137,6 @@ public class MainMenuScreen implements Screen { //this class creates the main me
     @Override
     public void dispose() {
         //not sure if stage and group need to be cleared or not for java garbage disposal to deal with the actors
-        mainMenuStage.clear();
-        buttonGroup.clear();
 
         //disposal calls
         mainMenuStage.dispose();

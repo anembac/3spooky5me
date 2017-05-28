@@ -70,7 +70,7 @@ public class MeleeWeapon extends WorldObject {
         } else setPosition(getNoneRelativePosition().x, 16);
 
         if (state.attackPressed() && currentCD < 0.001) {
-            List<WorldObject> output = CollisionManager.getInstance().getKNearest(this, 50); // get the 10 nearest
+            List<WorldObject> output = CollisionManager.getInstance().getKNearest(this, 20); // get the 20 nearest
             for (WorldObject wo : output) {
                 //System.out.println(WOWrapper.centerDistance(this.getParent(), wo)/10 + "wow a rapper range  " + range* Constants.meter);
                 if (wo != this.getParent() && WOWrapper.centerDistance(this.getParent(), wo) / 10 < (range * Constants.meter) && wo instanceof LivingObject) {

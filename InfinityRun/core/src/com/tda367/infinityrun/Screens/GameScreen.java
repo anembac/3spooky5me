@@ -6,13 +6,11 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.math.Matrix4;
-import com.tda367.infinityrun.HUD;
-import com.tda367.infinityrun.InfinityRun;
+import com.tda367.infinityrun.*;
 import com.tda367.infinityrun.Math.Rect;
-import com.tda367.infinityrun.World;
-import com.tda367.infinityrun.WorldObject;
 
 import java.util.HashMap;
 
@@ -66,6 +64,11 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         for (WorldObject wo : world.getWorldObjects()) {
             checkTexture(wo);
             game.batch.draw(textureMap.get(wo.getTexturename()), wo.getPosition().x, wo.getPosition().y);
+            if(wo instanceof Enemy){
+                BitmapFont font = new BitmapFont();
+                Enemy currentEnemy = (Enemy)wo;
+                font.draw(game.batch, (int)currentEnemy.getHealth() + "/" + (int)currentEnemy.getMaxHealth(), wo.getPosition().x, wo.getPosition().y + wo.getDrawingRect().bounds.y + 20);
+            }
             for (WorldObject child : wo.getChildren()) {
                 checkTexture(child);
                 game.batch.draw(textureMap.get(child.getTexturename()), child.getPosition().x, child.getPosition().y);
