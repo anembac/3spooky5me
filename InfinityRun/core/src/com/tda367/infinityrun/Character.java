@@ -57,7 +57,6 @@ public class Character extends LivingObject {
             despawn();
             SaveCharacter.saveCharacter(this, getCharacterID());
         }
-        System.out.println(currentHealth + " health left for player");
     }
 
     @Override

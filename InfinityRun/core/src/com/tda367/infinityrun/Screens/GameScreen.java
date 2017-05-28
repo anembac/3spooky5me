@@ -78,6 +78,10 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         game.batch.end();
         hud.render();
         //spöket
+        if(world.gameDone()){
+            dispose();
+            game.setScreen(new MainMenuScreen(game));
+        }
         if (Gdx.input.isKeyPressed(Input.Keys.TAB)) {
 
             game.setScreen(new ShopScreen(world.getShop(), this));

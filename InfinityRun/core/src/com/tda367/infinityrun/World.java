@@ -17,7 +17,7 @@ public class World {
     private final Character hero;
     private WorldGenerator generator = null;
     private final Shop shop;
-
+    private boolean running = true;
 
     public World(WorldGenerator gen, Character hero) {
         CollisionManager.getInstance().forceNewInstance();
@@ -63,10 +63,14 @@ public class World {
         addRoomIfItDoesntExist(x + 1, y + 1);
     }
 
+    public boolean gameDone()
+    {
+        return !running;
+    }
+
     public List<WorldObject> getWorldObjects() {
         return worldObjects;
     }
-
 
     public void frame(float dt) {
         // 25 15
@@ -89,6 +93,7 @@ public class World {
             }
             if (obj.getDespawn()) {
                 objectsToRemove.add(obj);
+                if(obj instanceof Character) running = false;
             }
         }
 
