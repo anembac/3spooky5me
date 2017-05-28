@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.tda367.infinityrun.SaveCharacter;
 
-class PauseMenuScreen implements Screen{
+class PauseMenuScreen implements Screen {
     private final SpriteBatch batch = new SpriteBatch();
     private final BitmapFont font = new BitmapFont();
     private final Stage pauseStage = new Stage();
@@ -23,41 +23,41 @@ class PauseMenuScreen implements Screen{
     private final TextureRegionDrawable textureUpDrawable = new TextureRegionDrawable(textureUp);
     private final TextureRegionDrawable textureDownDrawable = new TextureRegionDrawable(textureDown);
     private final TextButton.TextButtonStyle menuButtonStyle =
-            new TextButton.TextButtonStyle(textureUpDrawable,textureDownDrawable,textureUpDrawable, font);
+            new TextButton.TextButtonStyle(textureUpDrawable, textureDownDrawable, textureUpDrawable, font);
 
     private final TextButton exitButton = new TextButton("EXIT GAME", menuButtonStyle);
-    private final TextButton backToMenuButton= new TextButton("MAIN MENU", menuButtonStyle);
+    private final TextButton backToMenuButton = new TextButton("MAIN MENU", menuButtonStyle);
     private final TextButton unPauseButton = new TextButton("UNPAUSE", menuButtonStyle);
     private final GameScreen masterScreen;
 
-    public PauseMenuScreen(GameScreen gs){
+    public PauseMenuScreen(GameScreen gs) {
         masterScreen = gs;
         VerticalGroup buttonGroup = new VerticalGroup();
         buttonGroup.addActor(exitButton);
         buttonGroup.addActor(backToMenuButton);
         buttonGroup.addActor(unPauseButton);
         buttonGroup.space(10);
-        buttonGroup.setPosition(1600/2- buttonGroup.getMaxWidth(), 900/2- buttonGroup.getMaxHeight());
+        buttonGroup.setPosition(1600 / 2 - buttonGroup.getMaxWidth(), 900 / 2 - buttonGroup.getMaxHeight());
         pauseStage.addActor(buttonGroup);
         Gdx.input.setInputProcessor(pauseStage);
 
     }
 
 
-    private void buttonClickedCheck(){
-        if(unPauseButton.isPressed()){
+    private void buttonClickedCheck() {
+        if (unPauseButton.isPressed()) {
             masterScreen.game.setScreen(masterScreen);
             this.dispose();
         }
 
-        if(backToMenuButton.isPressed()){   //broken; graphics disposed, collision with old objects still occurs
+        if (backToMenuButton.isPressed()) {   //broken; graphics disposed, collision with old objects still occurs
 
             masterScreen.game.setScreen(new MainMenuScreen(masterScreen.game)); //masterscreen.game is an instance of
             masterScreen.dispose();                                             //the InfinityRun class
             this.dispose();
         }
 
-        if(exitButton.isPressed()){
+        if (exitButton.isPressed()) {
             SaveCharacter.saveCharacter(masterScreen.world.getHero(), masterScreen.world.getHero().getCharacterID());
             masterScreen.dispose();
             this.dispose();
@@ -67,7 +67,8 @@ class PauseMenuScreen implements Screen{
     }
 
     @Override
-    public void show() {}
+    public void show() {
+    }
 
     @Override
     public void render(float delta) {
@@ -78,16 +79,20 @@ class PauseMenuScreen implements Screen{
     }
 
     @Override
-    public void resize(int width, int height) {}
+    public void resize(int width, int height) {
+    }
 
     @Override
-    public void pause() {}
+    public void pause() {
+    }
 
     @Override
-    public void resume() {}
+    public void resume() {
+    }
 
     @Override
-    public void hide() {    }
+    public void hide() {
+    }
 
     @Override
     public void dispose() {

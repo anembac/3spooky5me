@@ -30,7 +30,7 @@ class ShopScreen implements Screen {
     private final int numberOfUpgrades;
 
 
-    public ShopScreen(Shop shop, GameScreen masterScreen){   //constructor is pretty long...
+    public ShopScreen(Shop shop, GameScreen masterScreen) {   //constructor is pretty long...
         this.masterScreen = masterScreen;
         this.shop = shop;
         nameList = shop.getUpgNameList();
@@ -45,7 +45,7 @@ class ShopScreen implements Screen {
             }
         };
 
-        buttonArray = new TextButton[numberOfUpgrades+1];
+        buttonArray = new TextButton[numberOfUpgrades + 1];
         TextureRegion[] textureRegionsUp = new TextureRegion[numberOfUpgrades + 1];
         TextureRegion[] textureRegionsDown = new TextureRegion[numberOfUpgrades + 1];
         TextureRegionDrawable[] texturesUpDrawable = new TextureRegionDrawable[numberOfUpgrades + 1];
@@ -54,7 +54,7 @@ class ShopScreen implements Screen {
 
         //Loading in images and connecting them with the buttons, as well as connecting the buttons with the upgrades
         BitmapFont font = new BitmapFont();
-        for(int i = 0; i < numberOfUpgrades; i++){
+        for (int i = 0; i < numberOfUpgrades; i++) {
             //System.out.println(nameList[i]);
             textureRegionsUp[i] = new TextureRegion((atlas.findRegion(nameList[i])));
             textureRegionsDown[i] = new TextureRegion((atlas.findRegion(nameList[i] + "down")));
@@ -74,7 +74,7 @@ class ShopScreen implements Screen {
             buttonArray[i].addListener(changeListener);
 
             //Makes a new row every 3 upgrades
-            if(i%3==0){
+            if (i % 3 == 0) {
                 upgradeTable.row();
             }
             //Fetches the cost for the corresponding upgrade.
@@ -97,15 +97,15 @@ class ShopScreen implements Screen {
         buttonArray[numberOfUpgrades].setPosition(1400, 50);
         buttonArray[numberOfUpgrades].setName("back");
         buttonArray[numberOfUpgrades].addListener(changeListener);
-        Label.LabelStyle labelStyle = new Label.LabelStyle(font, new Color(255,0,0,255));
-        shopMessage = new Label("",labelStyle);
+        Label.LabelStyle labelStyle = new Label.LabelStyle(font, new Color(255, 0, 0, 255));
+        shopMessage = new Label("", labelStyle);
         shopMessage.setPosition(800, 75);
         shopStage.addActor(shopMessage);
 
 
         camera.setToOrtho(false, 1600, 900);
 
-        upgradeTable.setPosition(1600/2-upgradeTable.getMaxWidth(), 900/2-upgradeTable.getMaxHeight());
+        upgradeTable.setPosition(1600 / 2 - upgradeTable.getMaxWidth(), 900 / 2 - upgradeTable.getMaxHeight());
         shopStage.addActor(buttonArray[numberOfUpgrades]);
         shopStage.addActor(upgradeTable);
         Gdx.input.setInputProcessor(shopStage);
@@ -124,10 +124,10 @@ class ShopScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0.2f, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
-        if(shop.displayPoorMessage()){
+        if (shop.displayPoorMessage()) {
             shopMessage.setText("You cannot afford this upgrade.");
-            shopMessage.setPosition(800-shopMessage.getPrefWidth()/2, 75);
-        }else{
+            shopMessage.setPosition(800 - shopMessage.getPrefWidth() / 2, 75);
+        } else {
             shopMessage.setText("");
         }
 
@@ -141,8 +141,8 @@ class ShopScreen implements Screen {
     }
 
 
-    private void buttonClickedCheck(int i){
-        if(i>=0 && i<numberOfUpgrades){ //i>=0 because getIndex() returns -1 on unfamiliar actor names
+    private void buttonClickedCheck(int i) {
+        if (i >= 0 && i < numberOfUpgrades) { //i>=0 because getIndex() returns -1 on unfamiliar actor names
             shop.purchaseUpgrade(nameList[i]);
             buttonArray[i].getLabel().setText(nameList[i]
                     + ", Level: " + shop.getUpgList().get(nameList[i]).getLevel()
@@ -150,7 +150,7 @@ class ShopScreen implements Screen {
                     + shop.getPrice(shop.getUpgList().get(nameList[i])));
 
 
-        }else if(i>=numberOfUpgrades){ //should only happen for the back button
+        } else if (i >= numberOfUpgrades) { //should only happen for the back button
 
 
             //not sure where the back button should lead until we implement saving
@@ -160,10 +160,10 @@ class ShopScreen implements Screen {
         }
     }
 
-    private int getIndex(String name){
-        for(int i = 0; i<=numberOfUpgrades;i++){
+    private int getIndex(String name) {
+        for (int i = 0; i <= numberOfUpgrades; i++) {
 
-            if(name.equals(buttonArray[i].getName())){
+            if (name.equals(buttonArray[i].getName())) {
                 return i;
             }
         }

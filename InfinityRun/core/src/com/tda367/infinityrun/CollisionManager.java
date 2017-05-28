@@ -1,5 +1,7 @@
 package com.tda367.infinityrun;
 
+import com.tda367.infinityrun.Math.KdTree;
+import com.tda367.infinityrun.Math.KdTreeNode;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.Math.Vec4;
 
@@ -95,7 +97,7 @@ public class CollisionManager {
         // Initialize the intersection pts to never intersect
         Vec4 output = new Vec4(-1000000000,-100000000,10000000,10000000);
 
-        List<KdTreeNode<WorldObject>> nodes = kdTree.getKNN(new Point2D.Double(cx,cy), 20); // get the 100 closest points, this should be enough, We could update this to use the range search algo later.
+        List<KdTreeNode<WorldObject>> nodes = kdTree.getKNN(new Point2D.Double(cx,cy), 100); // get the 100 closest points, this should be enough, We could update this to use the range search algo later.
         for(KdTreeNode<WorldObject> node : nodes){
             if(node.data == obj || !node.data.getCollidable()) continue;
             /*

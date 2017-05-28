@@ -30,7 +30,7 @@ public class LoadScreen implements Screen {
     private final TextureRegionDrawable textureDownDrawable = new TextureRegionDrawable(textureDown);
 
 
-    public LoadScreen(InfinityRun game){
+    public LoadScreen(InfinityRun game) {
         infRun = game;
         loadStage = new Stage();
         int numberOfButtons = LoadCharacter.getNumberOfSaves();
@@ -49,11 +49,11 @@ public class LoadScreen implements Screen {
             }
         };
         Table buttonTable = new Table();
-        for(int i = 0; i< numberOfButtons; i++){
+        for (int i = 0; i < numberOfButtons; i++) {
             TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(
                     textureUpDrawable, textureDownDrawable, textureUpDrawable, font);
-            buttons[i] = new TextButton("Save "+(i+1), style);
-            buttons[i].setName(""+(i+1));
+            buttons[i] = new TextButton("Save " + (i + 1), style);
+            buttons[i].setName("" + (i + 1));
             buttons[i].setWidth(128);
             buttons[i].addListener(changeListener);
             //buttonTable.add(buttons[i]);

@@ -9,7 +9,10 @@ import java.util.List;
  */
 public interface WorldGenerator {
     List<WorldObject> generate(int x, int y);
+
     boolean roomExists(int x, int y);
+
     int maxdistance = 0;
+
     int getMaxDistance();
 }

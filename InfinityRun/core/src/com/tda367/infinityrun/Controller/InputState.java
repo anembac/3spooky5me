@@ -9,31 +9,26 @@ public class InputState {
     private boolean jp = false;
     private boolean ap = false;
 
-    public InputState(boolean forward, boolean back, boolean jump, boolean attack)
-    {
+    public InputState(boolean forward, boolean back, boolean jump, boolean attack) {
         fp = forward;
         bp = back;
         jp = jump;
         ap = attack;
     }
 
-    public boolean forwardPressed()
-    {
+    public boolean forwardPressed() {
         return fp;
     }
 
-    public boolean backPressed()
-    {
+    public boolean backPressed() {
         return bp;
     }
 
-    public boolean jumpPressed()
-    {
+    public boolean jumpPressed() {
         return jp;
     }
 
-    public boolean attackPressed()
-    {
+    public boolean attackPressed() {
         return ap;
     }
 }

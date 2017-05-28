@@ -7,14 +7,12 @@ public class Rect {
     public final Vec2 position;
     public final Vec2 bounds;
 
-    public Rect(Vec2 pos, Vec2 bounds)
-    {
+    public Rect(Vec2 pos, Vec2 bounds) {
         position = pos;
         this.bounds = bounds;
     }
 
-    public Vec2 getBottomLeft()
-    {
+    public Vec2 getBottomLeft() {
         return position;
     }
 

@@ -15,7 +15,7 @@ import java.util.Random;
 public class Character extends LivingObject {
 
     public Character(Vec2 position) {
-        this(position,0,0, 0, 0, 0, 0, 0, 0, 0, 0);
+        this(position, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
 
     public Character(Vec2 position, int numCoins, int lootLvl, int speedLvl, int jumpLvl, int hermesLvl, int healthLvl,
@@ -34,11 +34,11 @@ public class Character extends LivingObject {
     private int characterID;
     private int coins = 0;
 
-    public void setMaxdistance(int i){
+    public void setMaxdistance(int i) {
         maxDistance = i;
     }
 
-    public int getMaxdistance(){
+    public int getMaxdistance() {
         return maxDistance;
     }
 
@@ -46,7 +46,7 @@ public class Character extends LivingObject {
         return characterID;
     }
 
-    public void setCharacterID(int id){
+    public void setCharacterID(int id) {
         characterID = id;
     }
 
@@ -56,7 +56,7 @@ public class Character extends LivingObject {
         if (this.currentHealth <= 0) {
             despawn();
         }
-    System.out.println(currentHealth + " health left for player");
+        System.out.println(currentHealth + " health left for player");
     }
 
     @Override
@@ -102,12 +102,13 @@ public class Character extends LivingObject {
         return coins;
     }
 
-    public void chargeCoins(int cost){
-        coins = coins-cost;
-        if(coins<0){ //this case should never happen if shop is implemented properly
+    public void chargeCoins(int cost) {
+        coins = coins - cost;
+        if (coins < 0) { //this case should never happen if shop is implemented properly
             coins = 0;
         }
     }
+
     @Override
     public void frame(float dt, float heroX, float heroY, InputState state) {
         List<WorldObject> rlt = CollisionManager.getInstance().getKNearest(this, 5);
@@ -124,7 +125,7 @@ public class Character extends LivingObject {
         super.frame(dt, heroX, heroY, state);
     }
 
-    public void lootEnemy () {
+    public void lootEnemy() {
         coins += numberOfCoins();
     }
 

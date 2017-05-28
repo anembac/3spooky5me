@@ -31,41 +31,39 @@ public class World {
         shop = new Shop(getHero());
     }
 
-    public Character getHero(){
+    public Character getHero() {
         return hero;
     }
 
-    public void setInput(IInput input)
-    {
+    public void setInput(IInput input) {
         this.input = input;
     }
 
     private void generateWorld() {
-        int x = (int)(Math.floor((hero.getPosition().x+hero.getDrawingRect().bounds.x/2)
-                / (Constants.roomWidth*Constants.meter)));
+        int x = (int) (Math.floor((hero.getPosition().x + hero.getDrawingRect().bounds.x / 2)
+                / (Constants.roomWidth * Constants.meter)));
 
-        int y = (int)(Math.floor((hero.getPosition().y+hero.getDrawingRect().bounds.y/2)
-                / (Constants.roomHeight*Constants.meter)));
+        int y = (int) (Math.floor((hero.getPosition().y + hero.getDrawingRect().bounds.y / 2)
+                / (Constants.roomHeight * Constants.meter)));
 
         //creates the first room
-        addRoomIfItDoesntExist(x - 0, y-0);
+        addRoomIfItDoesntExist(x - 0, y - 0);
 
         //creates the non-corner rooms
-        addRoomIfItDoesntExist(x+1,y);
-        addRoomIfItDoesntExist(x-1,y);
-        addRoomIfItDoesntExist(x-0,y-1);
-        addRoomIfItDoesntExist(x-0,y+1);
+        addRoomIfItDoesntExist(x + 1, y);
+        addRoomIfItDoesntExist(x - 1, y);
+        addRoomIfItDoesntExist(x - 0, y - 1);
+        addRoomIfItDoesntExist(x - 0, y + 1);
 
 
         //creates diagonal rooms
-        addRoomIfItDoesntExist(x-1,y-1);
-        addRoomIfItDoesntExist(x-1,y+1);
-        addRoomIfItDoesntExist(x+1,y-1);
-        addRoomIfItDoesntExist(x+1,y+1);
+        addRoomIfItDoesntExist(x - 1, y - 1);
+        addRoomIfItDoesntExist(x - 1, y + 1);
+        addRoomIfItDoesntExist(x + 1, y - 1);
+        addRoomIfItDoesntExist(x + 1, y + 1);
     }
 
-    public List<WorldObject> getWorldObjects()
-    {
+    public List<WorldObject> getWorldObjects() {
         return worldObjects;
     }
 
@@ -81,19 +79,20 @@ public class World {
 
         Vec2 heroPos = WOWrapper.worldObjectCenter(hero);
         for (WorldObject obj : worldObjects) {
-            if(Vec2.distance(WOWrapper.worldObjectCenter(obj), heroPos) > 1500) continue; // no need to make logic that far away, the player wont see this anyway.
+            if (Vec2.distance(WOWrapper.worldObjectCenter(obj), heroPos) > 1500)
+                continue; // no need to make logic that far away, the player wont see this anyway.
             obj.frame(dt, heroPos.x, heroPos.y, input.getInput());
 
-            if(obj instanceof LivingObject) {
+            if (obj instanceof LivingObject) {
                 // This object might have a different position now, the easiest way is to remove it and then re add it.
                 CollisionManager.getInstance().updatePosition(obj);
             }
-            if(obj.getDespawn()) {
+            if (obj.getDespawn()) {
                 objectsToRemove.add(obj);
             }
         }
 
-        for(WorldObject wo : objectsToRemove) {
+        for (WorldObject wo : objectsToRemove) {
             CollisionManager.getInstance().removeObject(wo);
             worldObjects.remove(wo);
         }
@@ -108,27 +107,23 @@ public class World {
         worldObjects.add(obj);
     }
 
-    private void addWorldObjects(List<WorldObject> objs)
-    {
+    private void addWorldObjects(List<WorldObject> objs) {
 
-        for(WorldObject wo : objs)
-        {
+        for (WorldObject wo : objs) {
             addWorldObject(wo);
         }
     }
 
-    private void addRoomIfItDoesntExist(int x, int y)
-    {
-        if(!generator.roomExists(x,y)){
+    private void addRoomIfItDoesntExist(int x, int y) {
+        if (!generator.roomExists(x, y)) {
 
-     }
+        }
         {
-            List<WorldObject> newWorldObjects = generator.generate(x,y);
-            for(int i = 0; i < newWorldObjects.size(); i++)
-            {
-                for(int j = 0; j < worldObjects.size(); j++)
-                {
-                    if(newWorldObjects.get(i) == worldObjects.get(j)) System.out.println("Error worldobject already added!?");
+            List<WorldObject> newWorldObjects = generator.generate(x, y);
+            for (int i = 0; i < newWorldObjects.size(); i++) {
+                for (int j = 0; j < worldObjects.size(); j++) {
+                    if (newWorldObjects.get(i) == worldObjects.get(j))
+                        System.out.println("Error worldobject already added!?");
                 }
             }
             addWorldObjects(newWorldObjects);

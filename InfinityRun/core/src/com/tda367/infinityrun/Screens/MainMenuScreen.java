@@ -49,12 +49,12 @@ public class MainMenuScreen implements Screen { //this class creates the main me
         loadCharButton.getLabel().setFontScale(2.3f);
         buttonGroup = new VerticalGroup();
         buttonGroup.space(30); //space between buttons in group
-        buttonGroup.setX(1600/2-buttonGroup.getWidth()/2);
-        buttonGroup.setY(900/2-buttonGroup.getHeight()/2);
+        buttonGroup.setX(1600 / 2 - buttonGroup.getWidth() / 2);
+        buttonGroup.setY(900 / 2 - buttonGroup.getHeight() / 2);
         buttonGroup.addActor(newCharButton);
         buttonGroup.addActor(loadCharButton);
-        labelStyle = new Label.LabelStyle(game.font, new Color(9,205,218,255));
-        instructions = new Label("",labelStyle);
+        labelStyle = new Label.LabelStyle(game.font, new Color(9, 205, 218, 255));
+        instructions = new Label("", labelStyle);
         instructions.setText(
                 "Press one of the buttons to start playing. If you're new, hit \"NEW CHARACTER\", otherwise do as" +
                         " you please.\nYou control your character with the arrow keys, and attack with space.\n" +
@@ -77,7 +77,6 @@ public class MainMenuScreen implements Screen { //this class creates the main me
     }
 
 
-
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
@@ -93,16 +92,16 @@ public class MainMenuScreen implements Screen { //this class creates the main me
         game.batch.end();
 
 
-        if(newCharButton.isPressed()){
+        if (newCharButton.isPressed()) {
             this.dispose();
             game.setScreen(new GameScreen(game,
-                    new World(new TextbasedWorldGenerator(), new Character(new Vec2(800,450)))));
+                    new World(new TextbasedWorldGenerator(), new Character(new Vec2(800, 450)))));
         }
-        if(loadCharButton.isPressed()){
+        if (loadCharButton.isPressed()) {
             this.dispose();
             game.setScreen(new LoadScreen(game));
         }
-        if(exitButton.isPressed()){
+        if (exitButton.isPressed()) {
             this.dispose();
             System.out.println("Exiting Game...");
             Gdx.app.exit();
@@ -124,10 +123,12 @@ public class MainMenuScreen implements Screen { //this class creates the main me
     public void resume() {
 
     }
+
     @Override
     public void show() {
 
     }
+
     @Override
     public void hide() {
 

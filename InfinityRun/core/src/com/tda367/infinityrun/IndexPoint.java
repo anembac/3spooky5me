@@ -8,20 +8,23 @@ class IndexPoint {
     private final int x;
     private final int y;
 
-    public IndexPoint(int x, int y){this.x = x; this.y = y;}
+    public IndexPoint(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
     @Override
     public int hashCode() {
-        return x*104119+y*104729;
+        return x * 104119 + y * 104729;
     }
 
 
     @Override
-    public boolean equals(Object obj){
-        if(this == obj) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if(obj == null || this.getClass() != obj.getClass()) {
+        if (obj == null || this.getClass() != obj.getClass()) {
             return false;
         }
         IndexPoint point = (IndexPoint) obj;

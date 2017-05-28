@@ -5,5 +5,6 @@ package com.tda367.infinityrun.Controller;
  */
 public interface IInput {
     InputState getInput();
+
     void collectInput();
 }

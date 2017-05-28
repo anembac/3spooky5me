@@ -10,10 +10,8 @@ public class SpikeObject extends Hazard {
     //Generic spike, 32x32 size.
 
     public SpikeObject(Vec2 position, float difficulty) {
-        super(position, new Vec2(32, 32), 50+difficulty);
+        super(position, new Vec2(32, 32), 50 + difficulty);
         setTexture("WorldObjects/Spike.png");
-
-
 
 
     }

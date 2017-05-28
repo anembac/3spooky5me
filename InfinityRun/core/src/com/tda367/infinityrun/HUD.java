@@ -15,35 +15,33 @@ public class HUD {
     private final TextureRegion coinicon = new TextureRegion(atlas.findRegion("hudcoin"));
 
 
-    public HUD(Character character){
+    public HUD(Character character) {
         this.character = character;
     }
 
 
-    public void render(){
+    public void render() {
         //health
         hudbatch.begin();
-        hudbatch.draw(healthicon, 100-healthicon.getRegionWidth(), 100-healthicon.getRegionHeight()/2);
-        hudfont.draw(hudbatch, ": "+(int)character.getHealth() + "/" + (int)character.getMaxHealth(), 100,100);
+        hudbatch.draw(healthicon, 100 - healthicon.getRegionWidth(), 100 - healthicon.getRegionHeight() / 2);
+        hudfont.draw(hudbatch, ": " + (int) character.getHealth() + "/" + (int) character.getMaxHealth(), 100, 100);
 
         //coins
-        hudbatch.draw(coinicon, 100-coinicon.getRegionWidth(), 850-coinicon.getRegionHeight()/2);
-        hudfont.draw(hudbatch,": " + character.getCoins(), 100, 850);
+        hudbatch.draw(coinicon, 100 - coinicon.getRegionWidth(), 850 - coinicon.getRegionHeight() / 2);
+        hudfont.draw(hudbatch, ": " + character.getCoins(), 100, 850);
 
 
         //rooms
-        hudfont.draw(hudbatch, "Rooms cleared: " + character.getMaxdistance() , 1400, 850);
+        hudfont.draw(hudbatch, "Rooms cleared: " + character.getMaxdistance(), 1400, 850);
         hudbatch.end();
     }
 
 
-    public void dispose(){
+    public void dispose() {
         atlas.dispose();
         hudbatch.dispose();
         hudfont.dispose();
     }
-
-
 
 
 }

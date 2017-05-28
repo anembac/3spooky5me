@@ -7,7 +7,7 @@ import com.tda367.infinityrun.Upgrades.Upgrade;
 
 // WARNING: unless u want a headache, do not touch magical saving box
 public final class SaveCharacter {
-        private static final FileHandle saveFile = Gdx.files.local("savedata.txt");
+    private static final FileHandle saveFile = Gdx.files.local("savedata.txt");
     private static final StringBuilder saveText = new StringBuilder("");
     private int saveID = 0;
 
@@ -23,24 +23,24 @@ public final class SaveCharacter {
     private void applySave(String saveString) {
         if (saveFile.exists()) {
             String tmp = saveFile.readString();
-            int tmp2 = tmp.indexOf("STARTOFSAVE"+saveID);
-            if(tmp.contains("END"+saveID)){
+            int tmp2 = tmp.indexOf("STARTOFSAVE" + saveID);
+            if (tmp.contains("END" + saveID)) {
                 //Not as cryptic as it seems, 3 is the length of "END" and we want the index of the end of the sequence
-                int tmp3 = tmp.indexOf("END"+saveID)+3+Integer.toString(saveID).length();
+                int tmp3 = tmp.indexOf("END" + saveID) + 3 + Integer.toString(saveID).length();
 
                 //Takes the string before and after the desired section of the save, then rewrites the entire file
                 //with only the specific section altered.
-                String tmp4 = tmp.substring(0,tmp2);
+                String tmp4 = tmp.substring(0, tmp2);
                 String tmp5 = tmp.substring(tmp3);
                 saveFile.writeString(tmp4 + saveString + tmp5, false);
-            }else{
-                saveFile.writeString("\n"+saveString,true);
+            } else {
+                saveFile.writeString("\n" + saveString, true);
             }
 
             //if storage exists, creates the file, and saves the character with ID 1.
         } else if (Gdx.files.isLocalStorageAvailable()) {
             saveID = 1;
-            saveFile.writeString(saveString , false);
+            saveFile.writeString(saveString, false);
         } else {
             System.out.println("Application was unable to create a new save file due to lack of local storage.");
             System.out.println("The character was not saved.");
@@ -72,9 +72,9 @@ public final class SaveCharacter {
     //has a save.
     //A new character will get an ID of one number larger than the largest current ID.
     public static void saveCharacter(Character hero, int saveID) {
-        if(saveFile.exists() && saveID==0){
-            saveID = getLastID()+1;
-        }else if(!saveFile.exists() && saveID==0){
+        if (saveFile.exists() && saveID == 0) {
+            saveID = getLastID() + 1;
+        } else if (!saveFile.exists() && saveID == 0) {
             saveID = 1;
         }
         SaveCharacter s = new SaveCharacter(hero, saveID);
@@ -84,10 +84,10 @@ public final class SaveCharacter {
 
     //This method finds the last ID by searching for the last occurence of "END", which marks the end of a character
     //save, and then adds 3 to that index to get the number at the very end of the file, that number is the last ID.
-    private static int getLastID(){
+    private static int getLastID() {
         String tmp = saveFile.readString();
         int endindex = tmp.lastIndexOf("END");
-        String tmp2 = tmp.substring(endindex+3);
+        String tmp2 = tmp.substring(endindex + 3);
         return Integer.parseInt(tmp2);
 
     }

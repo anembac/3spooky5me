@@ -18,17 +18,17 @@ public class Enemy extends LivingObject {
 
 
     @Override
-    public void frame(float dt,float heroX, float heroY, InputState input) {
-        float cx = Utils.getCenter(getPosition(),getDrawingRect().bounds).x;
-        float cy = Utils.getCenter(getPosition(),getDrawingRect().bounds).y;
+    public void frame(float dt, float heroX, float heroY, InputState input) {
+        float cx = Utils.getCenter(getPosition(), getDrawingRect().bounds).x;
+        float cy = Utils.getCenter(getPosition(), getDrawingRect().bounds).y;
         boolean r = false, l = false, jump = false, attack = false;
-        if(cx + 90 < heroX) r = true;
-        else if(cx - 90 > heroX) l = true;
-        if(heroY - 90 > cy) jump = true;
+        if (cx + 90 < heroX) r = true;
+        else if (cx - 90 > heroX) l = true;
+        if (heroY - 90 > cy) jump = true;
         //if(acceleration.x > -1 && acceleration.y < 1) jump = true;
-        if(Math.sqrt((cx-heroX)*(cx-heroX)+(cy-heroY)*(cy-heroY)) < 100) attack = true;
+        if (Math.sqrt((cx - heroX) * (cx - heroX) + (cy - heroY) * (cy - heroY)) < 100) attack = true;
 
-        InputState state = new InputState(r, l,jump,attack);
+        InputState state = new InputState(r, l, jump, attack);
 
         super.frame(dt, heroX, heroY, state);
     }

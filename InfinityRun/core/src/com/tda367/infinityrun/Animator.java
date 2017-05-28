@@ -8,11 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.tda367.infinityrun.Character;
 
 
-
-
-
-
-class Animator{
+class Animator {
 
     // Constant rows and columns of the sprite sheet
 
@@ -29,16 +25,15 @@ class Animator{
     }
 
 
-
     // A variable for tracking elapsed time for the animation
     private float stateTime;
 
-    
+
     private void create() {
 
         // Load the sprite sheet as a Texture
         //walkSheet = new Texture(Gdx.files.internal("worldObjects/animation/a/run.png"));
-      //  TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("worldObjects/animation/a/run.png"));
+        //  TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("worldObjects/animation/a/run.png"));
         // Use the split utility method to create a 2D array of TextureRegions. This is
         // possible because this sprite sheet contains frames of equal size and they are
         // all aligned.
@@ -50,13 +45,13 @@ class Animator{
 
         for (int i = 0; i < 17; ) {
             System.out.println(i);
-                walkFrames[i++] = new TextureRegion(atlas.findRegion(Integer.toString(i)));
+            walkFrames[i++] = new TextureRegion(atlas.findRegion(Integer.toString(i)));
 
-            }
+        }
 
 
         // Initialize the Animation with the frame interval and array of frames
-            walkAnimation = new Animation<TextureRegion>(0.5f, walkFrames);
+        walkAnimation = new Animation<TextureRegion>(0.5f, walkFrames);
 
 
         // Instantiate a SpriteBatch for drawing and reset the elapsed animation
@@ -65,19 +60,19 @@ class Animator{
         stateTime = 0f;
     }
 
-    
+
     public void render() {
-    // Clear screen
+        // Clear screen
         stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
 
         // Get current frame of animation for the current stateTime
         TextureRegion currentFrame = walkAnimation.getKeyFrame(stateTime, true);
         spriteBatch.begin();
-        spriteBatch.draw(currentFrame, dudebro.getPosition().x ,dudebro.getPosition().y); // Draw current frame at (50, 50)
+        spriteBatch.draw(currentFrame, dudebro.getPosition().x, dudebro.getPosition().y); // Draw current frame at (50, 50)
         spriteBatch.end();
     }
 
-    
+
     public void dispose() { // SpriteBatches and Textures must always be disposed
         spriteBatch.dispose();
 

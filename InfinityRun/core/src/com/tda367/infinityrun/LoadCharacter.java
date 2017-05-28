@@ -9,27 +9,26 @@ import com.tda367.infinityrun.Math.Vec2;
  */
 
 
-
 public class LoadCharacter {
     private static final FileHandle saveFile = Gdx.files.local("savedata.txt");
     private final int saveID;
 
 
-    private LoadCharacter(int ID){
+    private LoadCharacter(int ID) {
         saveID = ID;
     }
 
 
-    public static Character loadCharacter (int Id){
-            LoadCharacter loader = new LoadCharacter(Id);
-            int levels[] = loader.getSaveData();
+    public static Character loadCharacter(int Id) {
+        LoadCharacter loader = new LoadCharacter(Id);
+        int levels[] = loader.getSaveData();
 
         //index 0 is coins and index 7 is looting,
         //both of which have unique methods attached to them so they are handled later
         //the order seems random because the upgrade order of the savedata and the constructor are different
         //an oversight that should be fixed if there is time, but isn't gamebreaking as long as you're aware of it.
         Character loadedCharacter
-                =  new Character(new Vec2(800, 450),
+                = new Character(new Vec2(800, 450),
                 levels[1],
                 levels[0],
                 levels[7],
@@ -39,7 +38,7 @@ public class LoadCharacter {
                 levels[6],
                 levels[9],
                 levels[8],
-                levels[2] );
+                levels[2]);
 
         loadedCharacter.setCharacterID(Id);
 
@@ -47,26 +46,26 @@ public class LoadCharacter {
 
     }
 
-    private int[] getSaveData(){
+    private int[] getSaveData() {
 
         int[] returnData;
 
         String fullSaveData = saveFile.readString();
         //System.out.println("SaveID: "+saveID);
-        int start = fullSaveData.indexOf("STARTOFSAVE"+saveID)
-                +"STARTOFSAVE".length()+Integer.toString(saveID).length()+1;
-        int end = fullSaveData.indexOf("END"+saveID); //character at end index is not included
+        int start = fullSaveData.indexOf("STARTOFSAVE" + saveID)
+                + "STARTOFSAVE".length() + Integer.toString(saveID).length() + 1;
+        int end = fullSaveData.indexOf("END" + saveID); //character at end index is not included
         //System.out.println("Start: "+start);
         //System.out.println("End: "+end);
-        String activeSaveData = fullSaveData.substring(start,end);
+        String activeSaveData = fullSaveData.substring(start, end);
 
         int relevantAmount = activeSaveData.length()
-                - activeSaveData.replace(":","").length();
+                - activeSaveData.replace(":", "").length();
 
-        System.out.println("RelevantAmount: "+ relevantAmount);
+        System.out.println("RelevantAmount: " + relevantAmount);
 
         returnData = new int[relevantAmount];
-        for(int i = 0; i < relevantAmount; i++){
+        for (int i = 0; i < relevantAmount; i++) {
             /* //FOR DEBUGGING
             System.out.println("Loopindex: "+i);
             System.out.println("Start2: "+(activeSaveData.indexOf(" ")+1));
@@ -74,11 +73,11 @@ public class LoadCharacter {
 
             returnData[i] = Integer.parseInt((
                     activeSaveData.substring(
-                            (activeSaveData.indexOf(" ")+1), activeSaveData.indexOf("\n")
+                            (activeSaveData.indexOf(" ") + 1), activeSaveData.indexOf("\n")
                     )
             ));
             //System.out.println("Set 1: "+activeSaveData);
-            activeSaveData = activeSaveData.substring((activeSaveData.indexOf("\n")+1));
+            activeSaveData = activeSaveData.substring((activeSaveData.indexOf("\n") + 1));
             //System.out.println("Set 2: "+activeSaveData);
 
         }
@@ -87,11 +86,11 @@ public class LoadCharacter {
     }
 
 
-    public static int getNumberOfSaves(){
+    public static int getNumberOfSaves() {
 
         String tmp = saveFile.readString();
         int endindex = tmp.lastIndexOf("END");
-        String tmp2 = tmp.substring(endindex+3);
+        String tmp2 = tmp.substring(endindex + 3);
         return Integer.parseInt(tmp2);
     }
 

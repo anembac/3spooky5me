@@ -8,21 +8,21 @@ class RangedWeapon {
     private final double CD;
     private final double range;
 
-    public RangedWeapon (int damage, double CD, double range) {
+    public RangedWeapon(int damage, double CD, double range) {
         this.damage = damage;
         this.CD = CD;
         this.range = range;
     }
 
-    public double getDamage(){
+    public double getDamage() {
         return damage;
     }
 
-    public double getCD(){
+    public double getCD() {
         return CD;
     }
 
-    public double getRange(){
+    public double getRange() {
         return range;
     }
 }

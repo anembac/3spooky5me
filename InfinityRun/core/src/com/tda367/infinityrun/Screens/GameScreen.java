@@ -41,7 +41,8 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
     }
 
     @Override
-    public void show() {}
+    public void show() {
+    }
 
     @Override
     public void render(float delta) {
@@ -64,8 +65,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         for (WorldObject wo : world.getWorldObjects()) {
             checkTexture(wo);
             game.batch.draw(textureMap.get(wo.getTexturename()), wo.getPosition().x, wo.getPosition().y);
-            for(WorldObject child : wo.getChildren())
-            {
+            for (WorldObject child : wo.getChildren()) {
                 checkTexture(child);
                 game.batch.draw(textureMap.get(child.getTexturename()), child.getPosition().x, child.getPosition().y);
             }
@@ -74,18 +74,17 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         game.batch.end();
         hud.render();
         //spöket
-        if(Gdx.input.isKeyPressed(Input.Keys.TAB)){
+        if (Gdx.input.isKeyPressed(Input.Keys.TAB)) {
 
             game.setScreen(new ShopScreen(world.getShop(), this));
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             //this.dispose();
             game.setScreen(new PauseMenuScreen(this));
         }
     }
 
-    private void checkTexture(WorldObject wo)
-    {
+    private void checkTexture(WorldObject wo) {
         if (!textureMap.containsKey(wo.getTexturename())) {
             textureMap.put(wo.getTexturename(), new Texture(Gdx.files.internal(wo.getTexturename())));
         }

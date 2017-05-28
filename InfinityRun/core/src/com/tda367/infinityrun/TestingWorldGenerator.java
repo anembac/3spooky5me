@@ -11,21 +11,22 @@ import java.util.List;
  */
 public class TestingWorldGenerator implements WorldGenerator {
     private final HashSet<IndexPoint> madeRooms = new HashSet<IndexPoint>();
+
     @Override
     public List<WorldObject> generate(int x, int y) {
-        if(madeRooms.contains(new IndexPoint(x,y))) return new ArrayList<WorldObject>();
+        if (madeRooms.contains(new IndexPoint(x, y))) return new ArrayList<WorldObject>();
 
-        madeRooms.add(new IndexPoint(x,y));
+        madeRooms.add(new IndexPoint(x, y));
         List<WorldObject> output = new ArrayList<WorldObject>();
-        for(int i = 0; i < Constants.roomWidth; i++){
-            output.add(new BrickObject(new Vec2(x*Constants.meter*Constants.roomWidth+i*Constants.meter,-Constants.meter)));
+        for (int i = 0; i < Constants.roomWidth; i++) {
+            output.add(new BrickObject(new Vec2(x * Constants.meter * Constants.roomWidth + i * Constants.meter, -Constants.meter)));
         }
         return output;
     }
 
     @Override
     public boolean roomExists(int x, int y) {
-        return madeRooms.contains(new IndexPoint(x,y));
+        return madeRooms.contains(new IndexPoint(x, y));
     }
 
     @Override
