@@ -94,4 +94,8 @@ public class LoadCharacter {
         return Integer.parseInt(tmp2);
     }
 
+    public static boolean saveDataExists(){
+        return Gdx.files.local("savedata.txt").exists();
+    }
+
 }

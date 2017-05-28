@@ -12,11 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.tda367.infinityrun.*;
 import com.tda367.infinityrun.Character;
-import com.tda367.infinityrun.InfinityRun;
 import com.tda367.infinityrun.Math.Vec2;
-import com.tda367.infinityrun.World;
-import com.tda367.infinityrun.TextbasedWorldGenerator;
 
 public class MainMenuScreen implements Screen { //this class creates the main menu screen
     private final InfinityRun game;
@@ -97,10 +95,11 @@ public class MainMenuScreen implements Screen { //this class creates the main me
             game.setScreen(new GameScreen(game,
                     new World(new TextbasedWorldGenerator(), new Character(new Vec2(800, 450)))));
         }
-        if (loadCharButton.isPressed()) {
+        if (loadCharButton.isPressed() && LoadCharacter.saveDataExists()) {
             this.dispose();
             game.setScreen(new LoadScreen(game));
         }
+
         if (exitButton.isPressed()) {
             this.dispose();
             System.out.println("Exiting Game...");
