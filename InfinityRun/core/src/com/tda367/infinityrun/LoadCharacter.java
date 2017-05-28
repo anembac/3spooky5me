@@ -62,7 +62,7 @@ public class LoadCharacter {
         int relevantAmount = activeSaveData.length()
                 - activeSaveData.replace(":", "").length();
 
-        System.out.println("RelevantAmount: " + relevantAmount);
+        //System.out.println("RelevantAmount: " + relevantAmount);
 
         returnData = new int[relevantAmount];
         for (int i = 0; i < relevantAmount; i++) {

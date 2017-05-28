@@ -87,7 +87,7 @@ public final class SaveCharacter {
     private static int getLastID() {
         String tmp = saveFile.readString();
         int endindex = tmp.lastIndexOf("END");
-        String tmp2 = tmp.substring(endindex + 3);
+        String tmp2 = tmp.substring(endindex+3);
         return Integer.parseInt(tmp2);
 
     }
