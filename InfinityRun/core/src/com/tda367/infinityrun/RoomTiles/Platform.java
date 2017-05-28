@@ -3,8 +3,6 @@ package com.tda367.infinityrun.RoomTiles;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.WorldObject;
 
-import java.awt.geom.Point2D;
-
 /**
  * Created by miktor on 2017-04-03.
  */

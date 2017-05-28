@@ -14,11 +14,11 @@ import java.util.HashMap;
 // I guess this class will be some kind of base for "Upgradable" objects, moving objects will probably use some kind
     // of upgrade to allow them to use the command pattern to move. RENAME to upgradableObject?
 public class LivingObject extends WorldObject {
-    protected HashMap<String, Upgrade> upgrades = new HashMap<String, Upgrade>(); //Holds all of the upgrades, gives them a name as index.
+    final HashMap<String, Upgrade> upgrades = new HashMap<String, Upgrade>(); //Holds all of the upgrades, gives them a name as index.
 
-    protected double timeSinceRegen = 0;
-    protected double currentHealth = 0;
-    protected Vec2 acceleration = new Vec2(0,0);
+    private double timeSinceRegen = 0;
+    double currentHealth = 0;
+    Vec2 acceleration = new Vec2(0,0);
     private MeleeWeapon meleeWeapon = null;
     private RangedWeapon rangedWeapon = null;
 
@@ -69,29 +69,29 @@ public class LivingObject extends WorldObject {
         return (double)upgrades.get("Health").getValueInt();
     }
 
-    public int getRegeneration()
+    int getRegeneration()
     {
         return upgrades.get("Regeneration").getValueInt();
     }
 
-    public int getJumpAcceleration()
+    int getJumpAcceleration()
     {
         return upgrades.get("JumpH").getValueInt();
     }
 
-    public int getMaxSpeed()
+    int getMaxSpeed()
     {
         return upgrades.get("Speed").getValueInt();
     }
 
-    public double getMeleeHandling() {return upgrades.get("Melee").getValueDouble();}
+    double getMeleeHandling() {return upgrades.get("Melee").getValueDouble();}
 
-    public double getCriticalHitChance(){return upgrades.get("CHC").getValueDouble();}
+    double getCriticalHitChance(){return upgrades.get("CHC").getValueDouble();}
 
-    public double getCriticalHitDamage(){return upgrades.get("CHD").getValueDouble();}
+    double getCriticalHitDamage(){return upgrades.get("CHD").getValueDouble();}
 
 
-    public LivingObject(Vec2 position, Vec2 bounds, int speedLvl, int jumpLvl, int hermesLvl, int healthLvl, int meleeHandlingLvl, int ChcLvl, int Chdlvl, int regLvl)
+    LivingObject(Vec2 position, Vec2 bounds, int speedLvl, int jumpLvl, int hermesLvl, int healthLvl, int meleeHandlingLvl, int ChcLvl, int Chdlvl, int regLvl)
     {
         super(position,bounds);
         addUpgrade("Speed", new Speed(speedLvl));    //Added as a flat increase to Movement Speed

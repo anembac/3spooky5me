@@ -1,13 +1,11 @@
 package com.tda367.infinityrun;
 
-import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.Math.Vec4;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -15,10 +13,10 @@ import java.util.List;
  */
 public class CollisionManager {
     private static CollisionManager manager = null;
-    KdTree<WorldObject> kdTree = new KdTree<WorldObject>();
+    private final KdTree<WorldObject> kdTree = new KdTree<WorldObject>();
     // This is kind of double stored data but it is neccecary for good complexity,
     // it allows us to map some things in both ways with O(1) and O(logn) complexity.
-    HashMap<WorldObject, KdTreeNode<WorldObject>> worldObjectToNodes;
+    private final HashMap<WorldObject, KdTreeNode<WorldObject>> worldObjectToNodes;
 
     public static CollisionManager getInstance()
     {
@@ -32,7 +30,7 @@ public class CollisionManager {
         return manager;
     }
 
-    public CollisionManager()
+    private CollisionManager()
     {
         worldObjectToNodes = new HashMap<WorldObject, KdTreeNode<WorldObject>>();
     }

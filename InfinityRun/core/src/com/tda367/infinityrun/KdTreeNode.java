@@ -6,7 +6,7 @@ import java.awt.geom.Point2D;
  * Created by miktor on 2017-04-05.
  */
 
-public class KdTreeNode<T>
+class KdTreeNode<T>
 {
     Point2D.Double point = null;
     KdTreeNode<T> right = null;
@@ -60,7 +60,7 @@ public class KdTreeNode<T>
         if (left != null) left.unflagAll();
     }
 
-    Point2D.Double vectorTo(Point2D.Double p)
+    private Point2D.Double vectorTo(Point2D.Double p)
     {
         return new Point2D.Double(p.getX() - point.getX(), p.getY() - p.getY());
     }
@@ -73,4 +73,4 @@ public class KdTreeNode<T>
         d.y = d.y / len;
         return d;
     }
-};
+}

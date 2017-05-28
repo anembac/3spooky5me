@@ -43,7 +43,7 @@ public class Vec2 {
         y/=len();
     }
 
-    public float len()
+    private float len()
     {
         return (float)Math.sqrt(x*x+y*y);
     }

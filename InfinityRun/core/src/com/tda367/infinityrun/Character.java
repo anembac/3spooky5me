@@ -1,11 +1,8 @@
 package com.tda367.infinityrun;
 
-import com.sun.org.apache.bcel.internal.classfile.Constant;
-import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.RoomTiles.CoinObject;
 import com.tda367.infinityrun.Upgrades.Looting;
-import com.tda367.infinityrun.WorldGeneration.TextbasedWorldGenerator;
 
 import java.util.HashMap;
 import java.util.List;
@@ -110,7 +107,7 @@ public class Character extends LivingObject {
         return (0.05 * 0) + super.getCriticalHitDamage();
     }
 
-    public double getCoinMultiplier() {
+    private double getCoinMultiplier() {
         return (0.05 * 0) + upgrades.get("Looting").getValueDouble();
     }
 

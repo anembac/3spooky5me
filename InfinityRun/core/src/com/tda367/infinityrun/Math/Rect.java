@@ -4,8 +4,8 @@ package com.tda367.infinityrun.Math;
  * Created by Mikael on 5/3/2017.
  */
 public class Rect {
-    public Vec2 position;
-    public Vec2 bounds;
+    public final Vec2 position;
+    public final Vec2 bounds;
 
     public Rect(Vec2 pos, Vec2 bounds)
     {

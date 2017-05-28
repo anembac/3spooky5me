@@ -2,7 +2,6 @@ package com.tda367.infinityrun;
 
 import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
-import com.tda367.infinityrun.RoomTiles.CoinObject;
 
 /**
  * Created by miktor on 2017-04-03.

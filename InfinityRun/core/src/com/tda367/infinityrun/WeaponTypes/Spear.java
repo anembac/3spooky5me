@@ -6,7 +6,7 @@ import com.tda367.infinityrun.MeleeWeapon;
  * Created by Jacob on 5/9/2017.
  */
 
-public class Spear extends MeleeWeapon {
+class Spear extends MeleeWeapon {
     public Spear(double meleeHandling, double criticalChance, double criticalDamage) {
         super(15, 1.5, 100.5);
         damage *= meleeHandling;

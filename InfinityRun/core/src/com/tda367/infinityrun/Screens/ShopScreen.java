@@ -2,6 +2,7 @@ package com.tda367.infinityrun.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,24 +16,18 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.tda367.infinityrun.Shop;
 
-public class ShopScreen implements Screen {
-    private GameScreen masterScreen;
-    Table upgradeTable;
-    Shop shop;
-    Stage shopStage = new Stage();
-    BitmapFont font = new BitmapFont();
-    SpriteBatch batch = new SpriteBatch();
-    OrthographicCamera camera = new OrthographicCamera();
-    TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("Upgrades/upgrades.pack"));
-    TextureRegion[] textureRegionsUp;
-    TextureRegion[] textureRegionsDown;
-    TextureRegionDrawable[] texturesUpDrawable;
-    TextureRegionDrawable[] texturesDownDrawable;
-    TextButton.TextButtonStyle[] buttonStyles;
-    TextButton[] buttonArray;
-    String[] nameList;
-    private int numberOfUpgrades;
-    private ChangeListener changeListener;
+class ShopScreen implements Screen {
+    private final GameScreen masterScreen;
+    private final Table upgradeTable;
+    private final Shop shop;
+    private final Stage shopStage = new Stage();
+    private final SpriteBatch batch = new SpriteBatch();
+    private final OrthographicCamera camera = new OrthographicCamera();
+    private final TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("Upgrades/upgrades.pack"));
+    private final TextButton[] buttonArray;
+    private final String[] nameList;
+    private final Label shopMessage;
+    private final int numberOfUpgrades;
 
 
     public ShopScreen(Shop shop, GameScreen masterScreen){   //constructor is pretty long...
@@ -42,22 +37,23 @@ public class ShopScreen implements Screen {
         upgradeTable = new Table();
         numberOfUpgrades = shop.getUpgList().size();
         //System.out.println("number of upgrade: " + numberOfUpgrades);
-        changeListener = new ChangeListener() {
+        ChangeListener changeListener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                System.out.println(actor.getName());
+                //System.out.println(actor.getName());
                 buttonClickedCheck(getIndex(actor.getName()));
             }
         };
 
         buttonArray = new TextButton[numberOfUpgrades+1];
-        textureRegionsUp = new TextureRegion[numberOfUpgrades+1];
-        textureRegionsDown = new TextureRegion[numberOfUpgrades+1];
-        texturesUpDrawable = new TextureRegionDrawable[numberOfUpgrades+1];
-        texturesDownDrawable = new TextureRegionDrawable[numberOfUpgrades+1];
-        buttonStyles = new TextButton.TextButtonStyle[numberOfUpgrades+1];
+        TextureRegion[] textureRegionsUp = new TextureRegion[numberOfUpgrades + 1];
+        TextureRegion[] textureRegionsDown = new TextureRegion[numberOfUpgrades + 1];
+        TextureRegionDrawable[] texturesUpDrawable = new TextureRegionDrawable[numberOfUpgrades + 1];
+        TextureRegionDrawable[] texturesDownDrawable = new TextureRegionDrawable[numberOfUpgrades + 1];
+        TextButton.TextButtonStyle[] buttonStyles = new TextButton.TextButtonStyle[numberOfUpgrades + 1];
 
         //Loading in images and connecting them with the buttons, as well as connecting the buttons with the upgrades
+        BitmapFont font = new BitmapFont();
         for(int i = 0; i < numberOfUpgrades; i++){
             //System.out.println(nameList[i]);
             textureRegionsUp[i] = new TextureRegion((atlas.findRegion(nameList[i])));
@@ -101,6 +97,10 @@ public class ShopScreen implements Screen {
         buttonArray[numberOfUpgrades].setPosition(1400, 50);
         buttonArray[numberOfUpgrades].setName("back");
         buttonArray[numberOfUpgrades].addListener(changeListener);
+        Label.LabelStyle labelStyle = new Label.LabelStyle(font, new Color(255,0,0,255));
+        shopMessage = new Label("",labelStyle);
+        shopMessage.setPosition(800, 75);
+        shopStage.addActor(shopMessage);
 
 
         camera.setToOrtho(false, 1600, 900);
@@ -121,15 +121,22 @@ public class ShopScreen implements Screen {
     @Override
     public void render(float delta) {
 
-        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+        Gdx.gl.glClearColor(0, 0, 0.2f, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
+        if(shop.displayPoorMessage()){
+            shopMessage.setText("You cannot afford this upgrade.");
+            shopMessage.setPosition(800-shopMessage.getPrefWidth()/2, 75);
+        }else{
+            shopMessage.setText("");
+        }
+
         batch.begin();
         shopStage.draw();
 
         //Batch&Font rendering
         batch.setProjectionMatrix(camera.combined);
-        upgradeTable.draw(batch, 1);
+        upgradeTable.draw(batch, 0);
         batch.end();
     }
 

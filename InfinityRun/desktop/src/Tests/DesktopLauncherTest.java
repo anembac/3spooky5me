@@ -5,17 +5,10 @@ import com.tda367.infinityrun.*;
 import com.tda367.infinityrun.Character;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.Math.Vec4;
-import com.tda367.infinityrun.RoomTiles.BrickObject;
 import com.tda367.infinityrun.RoomTiles.CoinObject;
-import com.tda367.infinityrun.RoomTiles.Platform;
 import com.tda367.infinityrun.Upgrades.JumpH;
-import com.tda367.infinityrun.WeaponTypes.Sword;
 import com.tda367.infinityrun.WorldGeneration.TestingWorldGenerator;
-import com.tda367.infinityrun.Shop;
-import com.tda367.infinityrun.World;
 import com.tda367.infinityrun.WorldGeneration.TextbasedWorldGenerator;
-import com.tda367.infinityrun.WorldGeneration.WorldGenerator;
-import junit.framework.TestCase;
 import org.junit.*;
 
 
@@ -23,17 +16,16 @@ import org.junit.*;
  * Created by Mikael on 5/23/2017.
  **/
 
-public class DesktopLauncherTest extends TestCase{
+public class DesktopLauncherTest {
     TextbasedWorldGenerator testgenerator;
-    World simulatedWorld;
-    World simulatedWorldExtra;
+    private World simulatedWorld;
 
-    public boolean almostEqual(float a, float b)
+    private boolean almostEqual(float a, float b)
     {
         return (a-b) < 0.001 && (a-b) > -0.001;
     }
 
-    public void setHero(Character hero)
+    private void setHero(Character hero)
     {
 
         simulatedWorld.addWorldObject(hero);
@@ -42,12 +34,12 @@ public class DesktopLauncherTest extends TestCase{
 
     }
 
-    @Override
-    protected void setUp() throws Exception
+    @Before
+    public void setUp() throws Exception
     {
         Character hero = new Character(new Vec2(768,200));
         simulatedWorld = new World(new TestingWorldGenerator(),hero);
-        simulatedWorldExtra = new World(new TextbasedWorldGenerator(), hero);
+        World simulatedWorldExtra = new World(new TextbasedWorldGenerator(), hero);
         simulatedWorld.setInput(new InputEmpty(false,false,false,true));
     }
     @Test
@@ -56,7 +48,7 @@ public class DesktopLauncherTest extends TestCase{
         Character hero = new Character(((new Vec2(0,0))),1,1,1,0,1,1,1,0);
         setHero(hero);
         hero.damage(30);
-        assertTrue(hero.getHealth()  < hero.getMaxHealth());
+        Assert.assertTrue(hero.getHealth() < hero.getMaxHealth());
     }
 
 
@@ -72,7 +64,7 @@ public class DesktopLauncherTest extends TestCase{
         }
 
         Vec4 collisionVariables = CollisionManager.getInstance().getDistanceToCollission(hero);
-        assertTrue(almostEqual(hero.getPosition().y, collisionVariables.x));
+        Assert.assertTrue(almostEqual(hero.getPosition().y, collisionVariables.x));
     }
 
     @Test
@@ -80,9 +72,9 @@ public class DesktopLauncherTest extends TestCase{
         Character hero = new Character(new Vec2(768, 450));
         setHero(hero);
         simulatedWorld.addWorldObject(new CoinObject(new Vec2(768,450)));
-        assertTrue(hero.getCoins() == 0);
+        Assert.assertTrue(hero.getCoins() == 0);
         simulatedWorld.frame(1);
-        assertTrue(hero.getCoins() > 0);
+        Assert.assertTrue(hero.getCoins() > 0);
 
     }
 
@@ -97,28 +89,28 @@ public class DesktopLauncherTest extends TestCase{
         shop.purchaseUpgrade(upgradeName);
         int after1 = shop.getUpgList().get(upgradeName).getLevel();
         String message = "Upgrade level before purchase was " + before1 + ". Upgrade level after is " + after1+".";
-        assertTrue(message,before1+1 == after1);
+        Assert.assertTrue(message, before1 + 1 == after1);
         int before2 = shop.getUpgList().get(upgradeName).getLevel();
 
         //At this point the hero should be too poor to afford more speed upgrades
         shop.purchaseUpgrade(upgradeName);
         int after2 = shop.getUpgList().get(upgradeName).getLevel();
         message = "Upgrade level before purchase was " + before2 + ". Upgrade level after is " + after2+".";
-        assertTrue(message,after2 == before2);
-        assertTrue(shop.getPrice(shop.getUpgList().get(upgradeName)) > hero.getCoins());
+        Assert.assertTrue(message, after2 == before2);
+        Assert.assertTrue(shop.getPrice(shop.getUpgList().get(upgradeName)) > hero.getCoins());
 
         //Gave hero more coins, checking that upgrading beyond level 1 works
         hero.setCoins(20);
         shop.purchaseUpgrade(upgradeName);
-        assertTrue("Upgrade level should be 2,  is now: " + shop.getUpgList().get(upgradeName).getLevel()
-                , shop.getUpgList().get(upgradeName).getLevel() == 2 );
+        Assert.assertTrue("Upgrade level should be 2,  is now: " + shop.getUpgList().get(upgradeName).getLevel()
+                , shop.getUpgList().get(upgradeName).getLevel() == 2);
 
 
         //Change upgrade, making sure it doesn't have the level of the previous one for some reason
         upgradeName = "Looting";
         hero.setCoins(100);
         shop.purchaseUpgrade(upgradeName);
-        assertTrue(shop.getUpgList().get(upgradeName).getLevel() == 1);
+        Assert.assertTrue(shop.getUpgList().get(upgradeName).getLevel() == 1);
 
 
     }
@@ -127,43 +119,42 @@ public class DesktopLauncherTest extends TestCase{
     public void testRegeneration(){
         Enemy monster = new Enemy(new Vec2(1,1), new Vec2(64,64), 1,0,0,0,0,0,0,0);
         simulatedWorld.addWorldObject(monster);
-        assertTrue(monster.getHealth() == monster.getMaxHealth());
+        Assert.assertTrue(monster.getHealth() == monster.getMaxHealth());
         monster.damage(50);
         simulatedWorld.frame(1);
 
         double lastdmg = monster.getHealth();
-        assertTrue(monster.getHealth() < monster.getMaxHealth());
+        Assert.assertTrue(monster.getHealth() < monster.getMaxHealth());
 
         simulatedWorld.frame(1);
-        assertTrue(monster.getHealth() > lastdmg);
+        Assert.assertTrue(monster.getHealth() > lastdmg);
         lastdmg = monster.getHealth();
         simulatedWorld.frame(1);
-        assertTrue(monster.getHealth() > lastdmg);
+        Assert.assertTrue(monster.getHealth() > lastdmg);
         lastdmg = monster.getHealth();
         simulatedWorld.frame(1);
-        assertTrue(monster.getHealth() > lastdmg);
+        Assert.assertTrue(monster.getHealth() > lastdmg);
     }
 
 
 
     @Test
     public void testSpeedUpgrade() {
-// test different character with different speedUpgradeLvls and see that a higher lvl runs faster.
-        float oldSpeed = 0;
+        // Compares the movement distance of two levels of speed during a 0.16f frame tick
+        //If everything works the higher speed level should get further in a single tick than the lower speed level.
         simulatedWorld.setInput(new InputEmpty(true,false,false,false));
-        for(int i = 0; i < 100; i++)
-        {
-            Character hero = new Character(new Vec2(768,450),i,0,0,0,0,0,0,0);
-            setHero(hero);
-            for(int j = 0; j < 60; j++){
-                simulatedWorld.frame(0.016f);
-            }
-            hero.despawn();
-            Vec2 acc = hero.getAcceleration();
-            assertTrue(oldSpeed < acc.x);
-            oldSpeed = acc.x;
-            simulatedWorld.frame(0.016f);
-        }
+        Character hero = new Character(new Vec2(0,0),0,0,0,0,0,0,0,0);
+        setHero(hero);
+        float charPos1 = hero.getPosition().x;
+        simulatedWorld.frame(0.16f);
+        float charPos2 = hero.getPosition().x;
+        float deltavalue1 = charPos2-charPos1;
+        hero.getUpgrades().get("Speed").addLevel(); //We know this works since it's a part of testPurchaseUpgrade.
+        simulatedWorld.frame(0.16f);
+        float charPos3 = hero.getPosition().x;
+        float deltavalue2 = charPos3-charPos2;
+        Assert.assertTrue(deltavalue2 > deltavalue1);
+
     }
 
     @Test
@@ -174,7 +165,7 @@ public class DesktopLauncherTest extends TestCase{
         int oldheight = hero.getJumpAcceleration();
         hero.addUpgrade("JumpH",new JumpH(1));
         simulatedWorld.frame(0.016f);
-        assertTrue(hero.getJumpAcceleration() > oldheight);
+        Assert.assertTrue(hero.getJumpAcceleration() > oldheight);
 
 
             simulatedWorld.frame(0.016f);
@@ -185,14 +176,14 @@ public class DesktopLauncherTest extends TestCase{
     public void testUpgradesExist(){
         Character hero = new Character((new Vec2(0,0)));
         setHero(hero);
-        assertTrue(hero.getUpgrades().get("Health").getValueInt() == 100);
-        assertTrue(hero.getUpgrades().get("Speed").getValueInt() == 500);
-        assertTrue(hero.getUpgrades().get("JumpH").getValueInt() == 800);
-        assertTrue(hero.getUpgrades().get("Regeneration").getValueInt() == 1);
-        assertTrue(hero.getUpgrades().get("CHC").getValueDouble() == 0);
-        assertTrue(hero.getUpgrades().get("CHD").getValueDouble() == 2);
-        assertTrue(hero.getUpgrades().get("Melee").getValueDouble() == 1);
-        assertTrue(hero.getUpgrades().get("Hermes").getValueInt() == 1);
+        Assert.assertTrue(hero.getUpgrades().get("Health").getValueInt() == 100);
+        Assert.assertTrue(hero.getUpgrades().get("Speed").getValueInt() == 500);
+        Assert.assertTrue(hero.getUpgrades().get("JumpH").getValueInt() == 800);
+        Assert.assertTrue(hero.getUpgrades().get("Regeneration").getValueInt() == 1);
+        Assert.assertTrue(hero.getUpgrades().get("CHC").getValueDouble() == 0);
+        Assert.assertTrue(hero.getUpgrades().get("CHD").getValueDouble() == 2);
+        Assert.assertTrue(hero.getUpgrades().get("Melee").getValueDouble() == 1);
+        Assert.assertTrue(hero.getUpgrades().get("Hermes").getValueInt() == 1);
     }
 
 

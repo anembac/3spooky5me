@@ -1,10 +1,7 @@
 package com.tda367.infinityrun;
 
-import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
-import com.tda367.infinityrun.WeaponTypes.Spear;
 import com.tda367.infinityrun.WorldGeneration.WorldGenerator;
-import com.tda367.infinityrun.WeaponTypes.Sword;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +11,11 @@ import java.util.List;
  */
 public class World {
 
-    private List<WorldObject> worldObjects;
-    IInput input;
+    private final List<WorldObject> worldObjects;
+    private IInput input;
     private final Character hero;
     private WorldGenerator generator = null;
-    Shop shop;
+    private final Shop shop;
 
 
     public World(WorldGenerator gen, Character hero) {
@@ -42,7 +39,7 @@ public class World {
         this.input = input;
     }
 
-    public void generateWorld() {
+    private void generateWorld() {
         int x = (int)(Math.floor((hero.getPosition().x+hero.getDrawingRect().bounds.x/2)
                 / (Constants.roomWidth*Constants.meter)));
 
@@ -110,7 +107,7 @@ public class World {
         worldObjects.add(obj);
     }
 
-    public void addWorldObjects(List<WorldObject> objs)
+    private void addWorldObjects(List<WorldObject> objs)
     {
 
         for(WorldObject wo : objs)
@@ -119,7 +116,7 @@ public class World {
         }
     }
 
-    public void addRoomIfItDoesntExist(int x, int y)
+    private void addRoomIfItDoesntExist(int x, int y)
     {
         if(!generator.roomExists(x,y)){
 
