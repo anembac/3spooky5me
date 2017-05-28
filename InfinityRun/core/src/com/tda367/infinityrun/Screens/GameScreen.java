@@ -26,7 +26,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
     private final int windowWidth = 1600;
     private final int windowHeight = 900;
     private final Texture background = new Texture(Gdx.files.internal("WorldObjects/arbetefrihet.png"));
-
+    BitmapFont font = new BitmapFont();
     public GameScreen(final InfinityRun game, World world) {
         this.game = game;
         this.world = world;
@@ -65,7 +65,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
             checkTexture(wo);
             game.batch.draw(textureMap.get(wo.getTexturename()), wo.getPosition().x, wo.getPosition().y);
             if(wo instanceof Enemy){
-                BitmapFont font = new BitmapFont();
+
                 Enemy currentEnemy = (Enemy)wo;
                 font.draw(game.batch, (int)currentEnemy.getHealth() + "/" + (int)currentEnemy.getMaxHealth(), wo.getPosition().x, wo.getPosition().y + wo.getDrawingRect().bounds.y + 20);
             }
