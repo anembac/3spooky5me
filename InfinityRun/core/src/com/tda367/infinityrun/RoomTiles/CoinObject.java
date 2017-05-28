@@ -11,7 +11,7 @@ public class CoinObject extends WorldObject {
 
     public CoinObject(Vec2 position) {
         super(position, new Vec2(64, 64));
-        setTexture("WorldObjects/coin.png");
+        setTexture("WorldObjects/smrukoin.png");
         setCollidable(false);
 
     }

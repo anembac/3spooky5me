@@ -1,5 +1,6 @@
 package com.tda367.infinityrun;
 
+import com.sun.org.apache.bcel.internal.classfile.Constant;
 import com.tda367.infinityrun.Math.Utils;
 import com.tda367.infinityrun.Math.Vec2;
 
@@ -77,10 +78,14 @@ public class MeleeWeapon extends WorldObject {
         {
 
             List<WorldObject> output= CollisionManager.getInstance().getKNearest(this, 10); // get the 10 nearest
-
+            System.out.println("it's fucking trying");
             for(WorldObject wo : output)
             {
-                if(wo != this.getParent() && WOWrapper.centerDistance(this.getParent(), wo) < (range * Constants.meter) && wo instanceof LivingObject)
+
+                System.out.println(wo instanceof LivingObject);
+
+                //System.out.println(WOWrapper.centerDistance(this.getParent(), wo)/10 + "wow a rapper range  " + range* Constants.meter);
+                if(wo != this.getParent() && WOWrapper.centerDistance(this.getParent(), wo)/10 < (range * Constants.meter) && wo instanceof LivingObject)
                 {
                     if(isCritical()) {
                         ((LivingObject)wo).damage(getCriticalDamage());

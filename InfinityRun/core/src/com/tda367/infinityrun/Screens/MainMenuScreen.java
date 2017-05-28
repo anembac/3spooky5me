@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.tda367.infinityrun.Character;
 import com.tda367.infinityrun.InfinityRun;
-import com.tda367.infinityrun.LoadScreen;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.World;
 import com.tda367.infinityrun.WorldGeneration.TextbasedWorldGenerator;
