@@ -25,7 +25,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
     private final HUD hud;
     private final int windowWidth = 1600;
     private final int windowHeight = 900;
-    private final Texture background = new Texture(Gdx.files.internal("WorldObjects/arbetefrihet.png"));
+    private final Texture background = new Texture(Gdx.files.internal("WorldObjects/castle.png"));
     BitmapFont font = new BitmapFont();
     public GameScreen(final InfinityRun game, World world) {
         this.game = game;
