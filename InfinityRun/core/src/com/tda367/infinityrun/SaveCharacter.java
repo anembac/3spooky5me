@@ -8,7 +8,7 @@ import com.tda367.infinityrun.Upgrades.Upgrade;
 // WARNING: unless u want a headache, do not touch magical saving box
 public final class SaveCharacter {
     private static final FileHandle saveFile = Gdx.files.local("savedata.txt");
-    private static final StringBuilder saveText = new StringBuilder("");
+    private static StringBuilder saveText = new StringBuilder("");
     private int saveID = 0;
 
     private SaveCharacter(Character hero, int newChar) {
@@ -30,6 +30,7 @@ public final class SaveCharacter {
 
                 //Takes the string before and after the desired section of the save, then rewrites the entire file
                 //with only the specific section altered.
+
                 String tmp4 = tmp.substring(0, tmp2);
                 String tmp5 = tmp.substring(tmp3);
                 saveFile.writeString(tmp4 + saveString + tmp5, false);
@@ -52,6 +53,7 @@ public final class SaveCharacter {
     //with "STARTOFSAVE#" where # is the ID of the character. It ends with "END#", this is so it will be easy to search
     //for specific saves later on.
     private String generateSave(Character hero) {
+        saveText = new StringBuilder("");
         saveText.append("STARTOFSAVE" + saveID);
         saveText.append("\n");
         saveText.append("Coins: " + hero.getCoins());
