@@ -3,7 +3,8 @@ package com.tda367.infinityrun;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.StringBuilder;
-import com.tda367.infinityrun.Upgrades.Upgrade;
+import com.tda367.infinityrun.Model.Character;
+import com.tda367.infinityrun.Model.Upgrades.Upgrade;
 
 // WARNING: unless u want a headache, do not touch magical saving box
 public final class SaveCharacter {

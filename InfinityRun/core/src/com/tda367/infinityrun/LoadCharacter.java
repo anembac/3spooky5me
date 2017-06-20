@@ -3,6 +3,7 @@ package com.tda367.infinityrun;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.Model.Character;
 
 /**
  * Created by kaffe on 5/26/17.

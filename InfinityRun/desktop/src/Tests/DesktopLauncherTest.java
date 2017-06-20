@@ -1,15 +1,13 @@
 
 package Tests;
 
-import com.tda367.infinityrun.*;
-import com.tda367.infinityrun.Character;
+import com.tda367.infinityrun.Model.*;
 import com.tda367.infinityrun.Controller.InputEmpty;
 import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.Math.Vec4;
-import com.tda367.infinityrun.CoinObject;
-import com.tda367.infinityrun.Upgrades.JumpH;
+import com.tda367.infinityrun.Model.Character;
+import com.tda367.infinityrun.Model.Upgrades.JumpH;
 import com.tda367.infinityrun.TestingWorldGenerator;
-import com.tda367.infinityrun.TextbasedWorldGenerator;
 import org.junit.*;
 
 

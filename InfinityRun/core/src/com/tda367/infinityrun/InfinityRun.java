@@ -3,7 +3,7 @@ package com.tda367.infinityrun;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.tda367.infinityrun.Screens.MainMenuScreen;
+import com.tda367.infinityrun.View.Screens.MainMenuScreen;
 
 
 public class InfinityRun extends Game {
