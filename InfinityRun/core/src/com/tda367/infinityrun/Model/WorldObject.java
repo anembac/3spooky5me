@@ -5,14 +5,15 @@ package com.tda367.infinityrun.Model;
  */
 
 import com.tda367.infinityrun.Controller.InputState;
-import com.tda367.infinityrun.Math.Rect;
-import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.Utils.Math.Rect;
+import com.tda367.infinityrun.Utils.Math.Vec2;
 
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
-public abstract class WorldObject { //We should probably refactor this class at some point
+public abstract class WorldObject extends Observable { //We should probably refactor this class at some point
 
 
     // position is for some reason a vector, deal w/it
@@ -109,5 +110,10 @@ public abstract class WorldObject { //We should probably refactor this class at 
     public Rect getDrawingRect() {
         if (parent == null) return new Rect(position, bounds);
         else return new Rect(Vec2.add(position, parent.getDrawingRect().getBottomLeft()), bounds);
+    }
+
+    @Override
+    protected synchronized void setChanged() {
+        super.setChanged();
     }
 }

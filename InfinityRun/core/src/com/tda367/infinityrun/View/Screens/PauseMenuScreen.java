@@ -12,9 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.tda367.infinityrun.SaveCharacter;
+import com.tda367.infinityrun.Utils.SaveCharacter;
 
-class PauseMenuScreen implements Screen {
+public class PauseMenuScreen implements Screen {
     private final SpriteBatch batch = new SpriteBatch();
     private final BitmapFont font = new BitmapFont();
     private final Stage pauseStage = new Stage();

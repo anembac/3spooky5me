@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.math.Matrix4;
 import com.tda367.infinityrun.*;
-import com.tda367.infinityrun.Math.Rect;
+import com.tda367.infinityrun.Utils.Math.Rect;
 import com.tda367.infinityrun.Model.Enemy;
 import com.tda367.infinityrun.Model.World;
 import com.tda367.infinityrun.Model.WorldObject;

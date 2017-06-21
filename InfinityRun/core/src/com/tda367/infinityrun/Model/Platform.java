@@ -1,6 +1,6 @@
 package com.tda367.infinityrun.Model;
 
-import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.Utils.Math.Vec2;
 
 /**
  * Created by miktor on 2017-04-03.

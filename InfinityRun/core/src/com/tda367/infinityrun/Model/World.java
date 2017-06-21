@@ -2,7 +2,7 @@ package com.tda367.infinityrun.Model;
 
 import com.tda367.infinityrun.Controller.IInput;
 import com.tda367.infinityrun.Controller.InputGDX;
-import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.Utils.Math.Vec2;
 
 import java.util.ArrayList;
 import java.util.List;

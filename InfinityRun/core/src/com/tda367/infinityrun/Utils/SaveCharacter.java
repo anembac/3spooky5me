@@ -1,4 +1,4 @@
-package com.tda367.infinityrun;
+package com.tda367.infinityrun.Utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -13,7 +13,7 @@ public final class SaveCharacter {
     private int saveID = 0;
 
     private SaveCharacter(Character hero, int newChar) {
-        Character hero1 = hero;
+        //Character hero1 = hero;
         this.saveID = newChar;
     }
 

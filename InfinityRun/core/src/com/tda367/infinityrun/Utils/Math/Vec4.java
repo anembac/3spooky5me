@@ -1,4 +1,4 @@
-package com.tda367.infinityrun.Math;
+package com.tda367.infinityrun.Utils.Math;
 
 /**
  * Created by Mikael on 5/9/2017.

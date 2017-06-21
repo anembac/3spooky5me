@@ -1,8 +1,8 @@
 package com.tda367.infinityrun.Model;
 
 
-import com.tda367.infinityrun.Math.Utils;
-import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.Utils.Utils;
+import com.tda367.infinityrun.Utils.Math.Vec2;
 
 //Wrapper class for worldobjects -> Utils so that utils doesn't need to contain any worldobjects.
 // (Utils shouldn't contain model code.)

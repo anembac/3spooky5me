@@ -1,4 +1,4 @@
-package com.tda367.infinityrun.Math;
+package com.tda367.infinityrun.Utils.Math;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;

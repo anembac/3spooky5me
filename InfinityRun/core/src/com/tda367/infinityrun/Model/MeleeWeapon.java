@@ -1,7 +1,7 @@
 package com.tda367.infinityrun.Model;
 
 import com.tda367.infinityrun.Controller.InputState;
-import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.Utils.Math.Vec2;
 
 import java.util.List;
 import java.util.Random;

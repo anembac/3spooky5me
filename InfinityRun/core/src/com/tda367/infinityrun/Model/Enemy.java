@@ -1,8 +1,8 @@
 package com.tda367.infinityrun.Model;
 
 import com.tda367.infinityrun.Controller.InputState;
-import com.tda367.infinityrun.Math.Utils;
-import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.Utils.Utils;
+import com.tda367.infinityrun.Utils.Math.Vec2;
 
 /**
  * Created by miktor on 2017-04-03.
@@ -28,7 +28,7 @@ public class Enemy extends LivingObject {
         //if(acceleration.x > -1 && acceleration.y < 1) jump = true;
         if (Math.sqrt((cx - heroX) * (cx - heroX) + (cy - heroY) * (cy - heroY)) < 100) attack = true;
 
-        InputState state = new InputState(r, l, jump, attack);
+        InputState state = new InputState(r, l, jump, attack, false, false);
 
         super.frame(dt, heroX, heroY, state);
     }

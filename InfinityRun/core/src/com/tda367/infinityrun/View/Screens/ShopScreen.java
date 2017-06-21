@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.tda367.infinityrun.Model.Shop;
 
-class ShopScreen implements Screen {
+public class ShopScreen implements Screen {
     private final GameScreen masterScreen;
     private final Table upgradeTable;
     private final Shop shop;

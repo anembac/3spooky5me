@@ -1,6 +1,6 @@
 package com.tda367.infinityrun.Model.Upgrades;
 
-import com.tda367.infinityrun.Math.Vec2;
+import com.tda367.infinityrun.Utils.Math.Vec2;
 
 /**
  * Created by Mikael on 5/15/2017.

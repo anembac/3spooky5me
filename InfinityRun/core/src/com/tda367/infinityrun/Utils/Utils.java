@@ -1,4 +1,6 @@
-package com.tda367.infinityrun.Math;
+package com.tda367.infinityrun.Utils;
+
+import com.tda367.infinityrun.Utils.Math.Vec2;
 
 /**
  * Created by Mikael on 5/3/2017.

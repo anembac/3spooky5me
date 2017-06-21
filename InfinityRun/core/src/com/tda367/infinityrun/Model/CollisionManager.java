@@ -1,9 +1,9 @@
 package com.tda367.infinityrun.Model;
 
-import com.tda367.infinityrun.Math.KdTree;
-import com.tda367.infinityrun.Math.KdTreeNode;
-import com.tda367.infinityrun.Math.Vec2;
-import com.tda367.infinityrun.Math.Vec4;
+import com.tda367.infinityrun.Utils.Math.KdTree;
+import com.tda367.infinityrun.Utils.Math.KdTreeNode;
+import com.tda367.infinityrun.Utils.Math.Vec2;
+import com.tda367.infinityrun.Utils.Math.Vec4;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;

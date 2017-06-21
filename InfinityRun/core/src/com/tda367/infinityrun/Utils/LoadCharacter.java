@@ -1,8 +1,7 @@
-package com.tda367.infinityrun;
+package com.tda367.infinityrun.Utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.tda367.infinityrun.Math.Vec2;
 import com.tda367.infinityrun.Model.Character;
 
 /**
@@ -24,12 +23,10 @@ public class LoadCharacter {
         LoadCharacter loader = new LoadCharacter(Id);
         int levels[] = loader.getSaveData();
 
-        //index 0 is coins and index 7 is looting,
-        //both of which have unique methods attached to them so they are handled later
         //the order seems random because the upgrade order of the savedata and the constructor are different
         //an oversight that should be fixed if there is time, but isn't gamebreaking as long as you're aware of it.
         Character loadedCharacter
-                = new Character(new Vec2(800, 450),
+                = new Character(
                 levels[0],
                 levels[7],
                 levels[1],
