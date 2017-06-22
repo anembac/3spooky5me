@@ -54,6 +54,6 @@ public class Upgrade {
 
     //Return the double value - this is a multiplier to your different stats.
     public double getValueDouble() {
-        return 1 + (this.perLevelMultiplier * this.level) / 100;
+        return 1.0 + (this.perLevelMultiplier * this.level) / 100.0;
     }
 }
