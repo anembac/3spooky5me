@@ -104,7 +104,8 @@ private static final Vec2 sizeBounds = new Vec2(64,64);
     }
 
     private double getCoinMultiplier() {
-        return (0.05 * 0) + upgrades.get("Looting").getValueDouble();
+        System.out.println(upgrades.get("Looting").getValueDouble());
+        return upgrades.get("Looting").getValueDouble();
     }
 
     public int getCoins() {
@@ -147,9 +148,11 @@ private static final Vec2 sizeBounds = new Vec2(64,64);
     250% equals 2 coins and a 50% chance to get an extra coin.
     */
     private int numberOfCoins() {
+        System.out.println(getCoinMultiplier());
         int coins = ((int) (getCoinMultiplier() * 100)) / 100;
-        if (extraCoin(((int) (getCoinMultiplier() * 100)) % 100)) {
-            return (coins + 1);
+        if (extraCoin(((int) (getCoinMultiplier() *100) %100))) {
+            coins++;
+            return (coins);
         } else {
             return coins;
         }
@@ -158,6 +161,8 @@ private static final Vec2 sizeBounds = new Vec2(64,64);
     //Determines if you will get the extra coin based on you extra percentage chance.
     private boolean extraCoin(int chance) {
         Random rnd = new Random();
+        System.out.println("slumpat fram :" + (rnd.nextInt(100) + 1) + "chansen var:" + chance);
         return chance >= (rnd.nextInt(100) + 1);
+
     }
 }

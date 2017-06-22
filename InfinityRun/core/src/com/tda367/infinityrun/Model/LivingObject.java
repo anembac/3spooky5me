@@ -8,6 +8,7 @@ import com.tda367.infinityrun.Model.Upgrades.*;
 import com.tda367.infinityrun.Model.WeaponTypes.WeaponSword;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Created by Mikael on 5/3/2017.
@@ -15,7 +16,7 @@ import java.util.HashMap;
 // I guess this class will be some kind of base for "Upgradable" objects, moving objects will probably use some kind
 // of upgrade to allow them to use the command pattern to move. RENAME to upgradableObject?
 public class LivingObject extends WorldObject {
-    final HashMap<String, Upgrade> upgrades = new HashMap<String, Upgrade>(); //Holds all of the upgrades, gives them a name as index.
+    final LinkedHashMap<String, Upgrade> upgrades = new LinkedHashMap<String, Upgrade>(); //Holds all of the upgrades, gives them a name as index.
 
     private double timeSinceRegen = 0;
     double currentHealth = 0;
@@ -100,7 +101,7 @@ public class LivingObject extends WorldObject {
         currentHealth = getMaxHealth();
     }
 
-    public LivingObject(Vec2 pos, Vec2 bound, WorldObject parent) {
+    public LivingObject(Vec2 pos, Vec2 bound, WorldObject  parent) {
         super(pos, bound, parent);
     }
 

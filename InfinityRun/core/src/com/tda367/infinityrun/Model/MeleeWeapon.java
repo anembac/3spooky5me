@@ -65,9 +65,9 @@ public class MeleeWeapon extends WorldObject {
         currentCD = Math.max(0, currentCD - dt);
 
         if (state.attackPressed()) {
-            // temp animation to see when we are auctually attacking
+            // temp animation to see when we are actually attacking
             setPosition(getNoneRelativePosition().x, (getNoneRelativePosition().y - 1) % 30 + 21);
-        } else setPosition(getNoneRelativePosition().x, 16);
+           } else setPosition(getNoneRelativePosition().x, 16);
 
         if (state.attackPressed() && currentCD < 0.001) {
             List<WorldObject> output = CollisionManager.getInstance().getKNearest(this, 20); // get the 20 nearest
@@ -76,7 +76,7 @@ public class MeleeWeapon extends WorldObject {
                 if (wo != this.getParent() && WOWrapper.centerDistance(this.getParent(), wo) / 10 < (range * Constants.meter) && wo instanceof LivingObject) {
                     if (isCritical()) {
                         ((LivingObject) wo).damage(getCriticalDamage());
-                        System.out.println("Player dealt " + getCriticalDamage() + " CRITICAL HIT");
+                     //   System.out.println("Player dealt " + getCriticalDamage() + " CRITICAL HIT");
                     } else {
                         ((LivingObject) wo).damage(damage);
                         //System.out.println("Player dealt " +  damage);
