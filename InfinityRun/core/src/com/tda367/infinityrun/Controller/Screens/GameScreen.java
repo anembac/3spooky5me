@@ -1,4 +1,4 @@
-package com.tda367.infinityrun.Controller;
+package com.tda367.infinityrun.Controller.Screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -37,7 +37,6 @@ public class GameScreen extends Observable implements Screen {  //tries to put t
     public GameScreen(final Game game, World world) {
         this.game = game;
         this.world = world;
-
         //HUDDDDDD
         hud = new HUD(world.getHero());
         //create camera

@@ -1,11 +1,8 @@
-package com.tda367.infinityrun.Controller;
+package com.tda367.infinityrun.Controller.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
@@ -15,8 +12,6 @@ import com.tda367.infinityrun.Utils.ScreenStates;
 import java.util.Observable;
 
 public class PauseMenuScreen extends Observable implements Screen {
-    private final SpriteBatch batch = new SpriteBatch();
-    private final BitmapFont font = new BitmapFont();
     private final Stage pauseStage = new Stage();
 
     //These buttons do not yet have any associated graphics, and are therefore not to be considered part of the view.
@@ -34,7 +29,7 @@ public class PauseMenuScreen extends Observable implements Screen {
         buttonGroup.space(10);
         buttonGroup.setPosition(1600 / 2 - buttonGroup.getMaxWidth(), 900 / 2 - buttonGroup.getMaxHeight());
         pauseStage.addActor(buttonGroup);
-        addObserver(ScreenManager, InfinityRun);
+
 
     }
 
@@ -46,7 +41,8 @@ public class PauseMenuScreen extends Observable implements Screen {
             this.dispose();
         }
 
-        if (backToMenuButton.isPressed()) {   //broken; graphics disposed, collision with old objects still occurs
+        if (backToMenuButton.isPressed()) {
+            //TODO rewrite saving to remove screen-level dependencies on the world class
             SaveCharacter.saveCharacter(masterScreen.world.getHero(), masterScreen.world.getHero().getCharacterID());
             setChanged();
             notifyObservers("new");
@@ -60,6 +56,7 @@ public class PauseMenuScreen extends Observable implements Screen {
             this.dispose();
             System.out.println("Exiting Game...");
             Gdx.app.exit();
+
         }
     }
 
@@ -71,12 +68,9 @@ public class PauseMenuScreen extends Observable implements Screen {
     @Override
     public void render(float delta) {
         buttonClickedCheck();
-        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        pauseStage.draw();
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            //this.dispose();
-            masterScreen.game.setScreen(masterScreen);
+            setChanged();
+            notifyObservers(ScreenStates.GameScreen);
             this.dispose();
         }
     }
@@ -105,9 +99,6 @@ public class PauseMenuScreen extends Observable implements Screen {
 
     @Override
     public void dispose() {
-        batch.dispose();
-        font.dispose();
-        atlas.dispose();
         pauseStage.dispose();
 
     }

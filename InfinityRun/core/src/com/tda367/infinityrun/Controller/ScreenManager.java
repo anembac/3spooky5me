@@ -1,5 +1,6 @@
 package com.tda367.infinityrun.Controller;
 import com.badlogic.gdx.Game;
+import com.tda367.infinityrun.Controller.Screens.*;
 import com.tda367.infinityrun.Model.*;
 import com.tda367.infinityrun.Utils.ScreenStates;
 
@@ -29,6 +30,13 @@ private ShopScreen shopScreen;
         pauseMenuScreen = new PauseMenuScreen(gameScreen);
         shopScreen = new ShopScreen(shop, gameScreen);
         mainMenuScreen = new MainMenuScreen(game);
+
+        //The following lines makes the ScreenManager listen to the screens, Is this the right way to do this?
+        gameScreen.addObserver(this);
+        loadScreen.addObserver(this);
+        pauseMenuScreen.addObserver(this);
+        shopScreen.addObserver(this);
+        mainMenuScreen.addObserver(this);
     }
 
 
@@ -48,10 +56,18 @@ private ShopScreen shopScreen;
         }
     }
 
-    /*//Takes a screen as argument
-    public void switchToScreen(Screen screen){
-        game.setScreen(screen);
-    }*/
+
+    /*
+    * InfinityRun needs access to these two classes as they might result
+    * in a situation where a newGame() call is needed.
+    */
+    public GameScreen getGameScreen(){
+        return gameScreen;
+    }
+
+    public PauseMenuScreen getPauseMenuScreen(){
+        return pauseMenuScreen;
+    }
 
     @Override
     public void update(Observable o, Object arg) {
