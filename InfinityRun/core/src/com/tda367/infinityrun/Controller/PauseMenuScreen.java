@@ -1,4 +1,4 @@
-package com.tda367.infinityrun.View.Screens;
+package com.tda367.infinityrun.Controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -6,29 +6,23 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.tda367.infinityrun.Utils.SaveCharacter;
+import com.tda367.infinityrun.Utils.ScreenStates;
 
-public class PauseMenuScreen implements Screen {
+import java.util.Observable;
+
+public class PauseMenuScreen extends Observable implements Screen {
     private final SpriteBatch batch = new SpriteBatch();
     private final BitmapFont font = new BitmapFont();
     private final Stage pauseStage = new Stage();
-    private final TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("testpack1.pack"));
-    private final TextureRegion textureUp = new TextureRegion(atlas.findRegion("testtexture"));
-    private final TextureRegion textureDown = new TextureRegion(atlas.findRegion("testtexture2"));
-    private final TextureRegionDrawable textureUpDrawable = new TextureRegionDrawable(textureUp);
-    private final TextureRegionDrawable textureDownDrawable = new TextureRegionDrawable(textureDown);
-    private final TextButton.TextButtonStyle menuButtonStyle =
-            new TextButton.TextButtonStyle(textureUpDrawable, textureDownDrawable, textureUpDrawable, font);
 
-    private final TextButton exitButton = new TextButton("SAVE AND EXIT", menuButtonStyle);
-    private final TextButton backToMenuButton = new TextButton("SAVE AND GO TO MAIN MENU", menuButtonStyle);
-    private final TextButton unPauseButton = new TextButton("UNPAUSE", menuButtonStyle);
+    //These buttons do not yet have any associated graphics, and are therefore not to be considered part of the view.
+    private final Button exitButton = new Button();
+    private final Button backToMenuButton = new Button();
+    private final Button unPauseButton = new Button();
     private final GameScreen masterScreen;
 
     public PauseMenuScreen(GameScreen gs) {
@@ -40,21 +34,23 @@ public class PauseMenuScreen implements Screen {
         buttonGroup.space(10);
         buttonGroup.setPosition(1600 / 2 - buttonGroup.getMaxWidth(), 900 / 2 - buttonGroup.getMaxHeight());
         pauseStage.addActor(buttonGroup);
-        Gdx.input.setInputProcessor(pauseStage);
+        addObserver(ScreenManager, InfinityRun);
 
     }
 
 
     private void buttonClickedCheck() {
         if (unPauseButton.isPressed()) {
-            masterScreen.game.setScreen(masterScreen);
+            setChanged();
+            notifyObservers(ScreenStates.GameScreen);
             this.dispose();
         }
 
         if (backToMenuButton.isPressed()) {   //broken; graphics disposed, collision with old objects still occurs
             SaveCharacter.saveCharacter(masterScreen.world.getHero(), masterScreen.world.getHero().getCharacterID());
-            masterScreen.game.setScreen(new MainMenuScreen(masterScreen.game)); //masterscreen.game is an instance of
-            masterScreen.dispose();                                             //the InfinityRun class
+            setChanged();
+            notifyObservers("new");
+            masterScreen.dispose();
             this.dispose();
         }
 
@@ -69,6 +65,7 @@ public class PauseMenuScreen implements Screen {
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(pauseStage);
     }
 
     @Override
@@ -82,6 +79,12 @@ public class PauseMenuScreen implements Screen {
             masterScreen.game.setScreen(masterScreen);
             this.dispose();
         }
+    }
+
+
+    @Override
+    protected synchronized void setChanged() {
+        super.setChanged();
     }
 
     @Override

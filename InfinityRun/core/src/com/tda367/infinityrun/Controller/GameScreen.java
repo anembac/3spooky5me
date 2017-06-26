@@ -1,5 +1,6 @@
-package com.tda367.infinityrun.View.Screens;
+package com.tda367.infinityrun.Controller;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -9,7 +10,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.math.Matrix4;
-import com.tda367.infinityrun.*;
 import com.tda367.infinityrun.Utils.Math.Rect;
 import com.tda367.infinityrun.Model.Enemy;
 import com.tda367.infinityrun.Model.World;
@@ -17,9 +17,10 @@ import com.tda367.infinityrun.Model.WorldObject;
 import com.tda367.infinityrun.View.HUD;
 
 import java.util.HashMap;
+import java.util.Observable;
 
-public class GameScreen implements Screen {  //tries to put textures onto the objects created in baseroom and draw them
-    final InfinityRun game;                 // but it's not currently successful...
+public class GameScreen extends Observable implements Screen {  //tries to put textures onto the objects created in baseroom and draw them
+    final Game game;                 // but it's not currently successful...
 
 
     private final HashMap<String, Texture> textureMap = new HashMap<String, Texture>();
@@ -31,13 +32,14 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
     private final int windowHeight = 900;
     private final Texture background = new Texture(Gdx.files.internal("WorldObjects/castle.png"));
     BitmapFont font = new BitmapFont();
-    public GameScreen(final InfinityRun game, World world) {
+
+    //Constructor
+    public GameScreen(final Game game, World world) {
         this.game = game;
         this.world = world;
 
         //HUDDDDDD
         hud = new HUD(world.getHero());
-        Gdx.input.setInputProcessor(gameStage);
         //create camera
         camera = new OrthographicCamera();
         camera.setToOrtho(false, windowWidth, windowHeight);
@@ -45,6 +47,7 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(gameStage);
     }
 
     @Override
@@ -100,6 +103,12 @@ public class GameScreen implements Screen {  //tries to put textures onto the ob
         if (!textureMap.containsKey(wo.getTexturename())) {
             textureMap.put(wo.getTexturename(), new Texture(Gdx.files.internal(wo.getTexturename())));
         }
+    }
+
+
+    @Override
+    protected synchronized void setChanged() {
+        super.setChanged();
     }
 
     @Override

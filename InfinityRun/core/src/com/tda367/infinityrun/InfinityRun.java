@@ -1,25 +1,44 @@
 package com.tda367.infinityrun;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.tda367.infinityrun.View.Screens.MainMenuScreen;
+import com.tda367.infinityrun.Controller.ScreenManager;
+import com.tda367.infinityrun.Model.Character;
+import com.tda367.infinityrun.Model.Shop;
+import com.tda367.infinityrun.Model.TextbasedWorldGenerator;
+import com.tda367.infinityrun.Model.World;
+import com.tda367.infinityrun.Utils.ScreenStates;
+import java.util.Observable;
+import java.util.Observer;
 
 
-public class InfinityRun extends Game {
-    public SpriteBatch batch;
-    public BitmapFont font;
+public class InfinityRun extends Game implements Observer {
+    private ScreenManager screenManager;
+    private TextbasedWorldGenerator tbWorldGen;
+    private Character hero;
+    private World world;
+    private Shop shop;
 
 
-    //creates a spritebatch and a font
-    //shows mainmenuscreen, doesn't really do anything else right now I think
-    //based on https://github.com/libgdx/libgdx/wiki/Extending-the-simple-game
     @Override
     public void create() {
-        batch = new SpriteBatch();
-        font = new BitmapFont();
-        this.setScreen(new MainMenuScreen(this));
+        //World creation
+        tbWorldGen = new TextbasedWorldGenerator();
+        newGame();
+    }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        if(arg.equals("new")){
+            newGame();
+        }
+    }
+
+    private void newGame(){
+        hero = new Character();
+        world = new World(tbWorldGen, hero);
+        shop = new Shop(hero);
+        screenManager = new ScreenManager(this, world, shop);
+        screenManager.switchToScreen(ScreenStates.MainMenuScreen);
     }
 
     @Override
@@ -29,7 +48,7 @@ public class InfinityRun extends Game {
 
     @Override
     public void dispose() {
-        batch.dispose();
-        font.dispose();
+
     }
+
 }

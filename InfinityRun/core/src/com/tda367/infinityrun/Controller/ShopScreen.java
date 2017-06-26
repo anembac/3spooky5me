@@ -1,4 +1,4 @@
-package com.tda367.infinityrun.View.Screens;
+package com.tda367.infinityrun.Controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -16,8 +16,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.tda367.infinityrun.Model.Shop;
+import com.tda367.infinityrun.Utils.ScreenStates;
 
-public class ShopScreen implements Screen {
+import java.util.Observable;
+
+public class ShopScreen extends Observable implements Screen {
     private final GameScreen masterScreen;
     private final Table upgradeTable;
     private final Shop shop;
@@ -29,6 +32,13 @@ public class ShopScreen implements Screen {
     private final String[] nameList;
     private final Label shopMessage;
     private final int numberOfUpgrades;
+    ChangeListener changeListener = new ChangeListener() {
+        @Override
+        public void changed(ChangeEvent event, Actor actor) {
+            //System.out.println(actor.getName());
+            buttonClickedCheck(getIndex(actor.getName()));
+        }
+    };;
 
 
     public ShopScreen(Shop shop, GameScreen masterScreen) {   //constructor is pretty long...
@@ -38,13 +48,7 @@ public class ShopScreen implements Screen {
         upgradeTable = new Table();
         numberOfUpgrades = shop.getUpgList().size();
         //System.out.println("number of upgrade: " + numberOfUpgrades);
-        ChangeListener changeListener = new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                //System.out.println(actor.getName());
-                buttonClickedCheck(getIndex(actor.getName()));
-            }
-        };
+
 
         buttonArray = new TextButton[numberOfUpgrades + 1];
         TextureRegion[] textureRegionsUp = new TextureRegion[numberOfUpgrades + 1];
@@ -109,7 +113,7 @@ public class ShopScreen implements Screen {
         upgradeTable.setPosition(1600 / 2 - upgradeTable.getMaxWidth(), 900 / 2 - upgradeTable.getMaxHeight());
         shopStage.addActor(buttonArray[numberOfUpgrades]);
         shopStage.addActor(upgradeTable);
-        Gdx.input.setInputProcessor(shopStage);
+
 
     }//end of constructor
 
@@ -117,6 +121,14 @@ public class ShopScreen implements Screen {
     @Override
     public void show() {
 
+        Gdx.input.setInputProcessor(shopStage);
+        changeListener = new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                //System.out.println(actor.getName());
+                buttonClickedCheck(getIndex(actor.getName()));
+            }
+        };
     }
 
     @Override
@@ -140,7 +152,8 @@ public class ShopScreen implements Screen {
         upgradeTable.draw(batch, 0);
         batch.end();
         if(Gdx.input.isKeyJustPressed(Input.Keys.TAB)){
-            masterScreen.game.setScreen(masterScreen);
+            setChanged();
+            notifyObservers(ScreenStates.GameScreen);
             this.dispose();
         }
     }
@@ -160,7 +173,8 @@ public class ShopScreen implements Screen {
 
             //not sure where the back button should lead until we implement saving
             //currently it works as an unpause button so that you upgrade as you go rather than on death
-            masterScreen.game.setScreen(masterScreen);
+            setChanged();
+            notifyObservers(ScreenStates.GameScreen);
             this.dispose();
         }
     }
@@ -173,6 +187,11 @@ public class ShopScreen implements Screen {
             }
         }
         return -1;
+    }
+
+    @Override
+    protected synchronized void setChanged() {
+        super.setChanged();
     }
 
     @Override

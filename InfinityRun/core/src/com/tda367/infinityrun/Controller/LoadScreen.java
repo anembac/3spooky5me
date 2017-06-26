@@ -1,6 +1,7 @@
-package com.tda367.infinityrun.View.Screens;
+package com.tda367.infinityrun.Controller;
 
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -17,9 +18,12 @@ import com.tda367.infinityrun.InfinityRun;
 import com.tda367.infinityrun.Utils.LoadCharacter;
 import com.tda367.infinityrun.Model.World;
 import com.tda367.infinityrun.Model.TextbasedWorldGenerator;
+import com.tda367.infinityrun.Utils.ScreenStates;
 
-public class LoadScreen implements Screen {
-    private final InfinityRun infRun;
+import java.util.Observable;
+
+public class LoadScreen extends Observable implements Screen {
+    private final Game game;
     private final BitmapFont font = new BitmapFont();
     private final Stage loadStage;
 
@@ -30,8 +34,8 @@ public class LoadScreen implements Screen {
     private final TextureRegionDrawable textureDownDrawable = new TextureRegionDrawable(textureDown);
 
 
-    public LoadScreen(InfinityRun game) {
-        infRun = game;
+    public LoadScreen(final Game game) {
+        this.game = game;
         loadStage = new Stage();
         int numberOfButtons = LoadCharacter.getNumberOfSaves();
         TextButton[] buttons = new TextButton[numberOfButtons];
@@ -42,9 +46,8 @@ public class LoadScreen implements Screen {
 
                 int loadID = Integer.parseInt(actor.getName());
                 dispose();
-                infRun.setScreen(new GameScreen(infRun,
-                        new World(new TextbasedWorldGenerator()
-                                , LoadCharacter.loadCharacter(loadID))));
+                setChanged();
+                notifyObservers(ScreenStates.GameScreen);
 
             }
         };
@@ -63,13 +66,12 @@ public class LoadScreen implements Screen {
         buttonTable.setPosition(800, 450);
         loadStage.addActor(buttonTable);
 
-        Gdx.input.setInputProcessor(loadStage);
-
     }
 
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(loadStage);
 
     }
 
@@ -77,11 +79,17 @@ public class LoadScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+//TODO create render superclass and screen rendering class
+//        game.batch.begin();
+//        loadStage.draw();
+//        game.batch.end();
 
-        infRun.batch.begin();
-        loadStage.draw();
-        infRun.batch.end();
+    }
 
+
+    @Override
+    protected synchronized void setChanged() {
+        super.setChanged();
     }
 
     @Override

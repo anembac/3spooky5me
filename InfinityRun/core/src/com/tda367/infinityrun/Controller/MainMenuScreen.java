@@ -1,5 +1,6 @@
-package com.tda367.infinityrun.View.Screens;
+package com.tda367.infinityrun.Controller;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -12,14 +13,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.tda367.infinityrun.*;
 import com.tda367.infinityrun.Model.Character;
 import com.tda367.infinityrun.Model.TextbasedWorldGenerator;
 import com.tda367.infinityrun.Model.World;
 import com.tda367.infinityrun.Utils.LoadCharacter;
 
-public class MainMenuScreen implements Screen { //this class creates the main menu screen
-    private final InfinityRun game;
+import java.util.Observable;
+
+public class MainMenuScreen extends Observable implements Screen { //this class creates the main menu screen
+    private final Game game;
     private final Stage mainMenuStage = new Stage();
     private final OrthographicCamera camera;
 
@@ -35,9 +37,8 @@ public class MainMenuScreen implements Screen { //this class creates the main me
     private final Label instructions;
 
 
-    public MainMenuScreen(final InfinityRun game) {
+    public MainMenuScreen(final Game game) {
         this.game = game;
-        Gdx.input.setInputProcessor(mainMenuStage);
         TextureRegionDrawable textureDownDrawable = new TextureRegionDrawable(textureDown);
         TextureRegionDrawable textureUpDrawable = new TextureRegionDrawable(textureUp);
         TextButton.TextButtonStyle menuButtonStyle = new TextButton.TextButtonStyle(textureUpDrawable, textureDownDrawable, textureUpDrawable, game.font);
@@ -111,6 +112,11 @@ public class MainMenuScreen implements Screen { //this class creates the main me
     }
 
     @Override
+    protected synchronized void setChanged() {
+        super.setChanged();
+    }
+
+    @Override
     public void resize(int width, int height) {
 
     }
@@ -128,6 +134,8 @@ public class MainMenuScreen implements Screen { //this class creates the main me
     @Override
     public void show() {
 
+        Gdx.input.setInputProcessor(mainMenuStage);
+
     }
 
     @Override
@@ -144,6 +152,4 @@ public class MainMenuScreen implements Screen { //this class creates the main me
         atlas.dispose();
 
     }
-
-
 }
