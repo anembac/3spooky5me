@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.StringBuilder;
 import com.tda367.infinityrun.Model.Character;
 import com.tda367.infinityrun.Model.Upgrades.Upgrade;
 
-// WARNING: unless u want a headache, do not touch magical saving box
+// TODO: make changes so that the screens don't need to access world directly (perhaps by saving in InfinityRun)
 public final class SaveCharacter {
     private static final FileHandle saveFile = Gdx.files.local("savedata.txt");
     private static StringBuilder saveText = new StringBuilder("");

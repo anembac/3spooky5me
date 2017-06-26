@@ -10,7 +10,15 @@ import com.tda367.infinityrun.Utils.ScreenStates;
 import java.util.Observable;
 import java.util.Observer;
 
-
+/*
+* Creates instances of certain model objects needed for the game to function.
+*
+* NOTE:
+* In future might manage saving because it's the only class that has access to all needed information by default,
+* although that property could also potentially lead to it becoming a god class, refactor into several classes if
+* needed.
+* TODO: Refactor or delete the note above once potential issues become clearer
+*/
 public class InfinityRun extends Game implements Observer {
     private ScreenManager screenManager;
     private TextbasedWorldGenerator tbWorldGen;
@@ -39,6 +47,17 @@ public class InfinityRun extends Game implements Observer {
         shop = new Shop(hero);
         screenManager = new ScreenManager(this, world, shop);
         screenManager.switchToScreen(ScreenStates.MainMenuScreen);
+        observeNewGameScreens();
+    }
+
+    /*
+    * This method makes InfinityRun observe GameScreen and PauseMenuScreen in order to be notified of when a newgame
+    * should be started.
+    */
+
+    private void observeNewGameScreens(){
+        screenManager.getGameScreen().addObserver(this);    //Proper XOR Horrible, Although I don't know which it is
+        screenManager.getPauseMenuScreen().addObserver(this);
     }
 
     @Override
