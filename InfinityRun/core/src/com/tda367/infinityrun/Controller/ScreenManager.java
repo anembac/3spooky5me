@@ -29,9 +29,12 @@ private ShopScreen shopScreen;
         loadScreen = new LoadScreen(game);
         pauseMenuScreen = new PauseMenuScreen(gameScreen);
         shopScreen = new ShopScreen(shop, gameScreen);
-        mainMenuScreen = new MainMenuScreen(game);
+        mainMenuScreen = new MainMenuScreen();
 
-        //The following lines makes the ScreenManager listen to the screens, Is this the right way to do this?
+        /*
+        * The addObserver() methods are called here so that the screens themselves don't need to hold references to
+        * the ScreenManager class.
+        */
         gameScreen.addObserver(this);
         loadScreen.addObserver(this);
         pauseMenuScreen.addObserver(this);

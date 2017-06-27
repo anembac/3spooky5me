@@ -51,13 +51,14 @@ public class InfinityRun extends Game implements Observer {
     }
 
     /*
-    * This method makes InfinityRun observe GameScreen and PauseMenuScreen in order to be notified of when a newgame
+    * This method makes InfinityRun observe GameScreen and PauseMenuScreen in order to be notified of when a new game
     * should be started.
     */
 
     private void observeNewGameScreens(){
-        screenManager.getGameScreen().addObserver(this);    //Proper XOR Horrible, Although I don't know which it is
+        screenManager.getGameScreen().addObserver(this);
         screenManager.getPauseMenuScreen().addObserver(this);
+
     }
 
     @Override
