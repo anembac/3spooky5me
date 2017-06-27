@@ -23,18 +23,18 @@ public final class SaveCharacter {
     // part of the file. rather than appending it to the end.
     private void applySave(String saveString) {
         if (saveFile.exists()) {
-            String tmp = saveFile.readString();
-            int tmp2 = tmp.indexOf("STARTOFSAVE" + saveID);
-            if (tmp.contains("END" + saveID)) {
+            String file = saveFile.readString();
+            int indexStartOfSave = file.indexOf("STARTOFSAVE" + saveID);
+            if (file.contains("END" + saveID)) {
                 //Not as cryptic as it seems, 3 is the length of "END" and we want the index of the end of the sequence
-                int tmp3 = tmp.indexOf("END" + saveID) + 3 + Integer.toString(saveID).length();
+                int indexEndOfSave = file.indexOf("END" + saveID) + 3 + Integer.toString(saveID).length();
 
                 //Takes the string before and after the desired section of the save, then rewrites the entire file
                 //with only the specific section altered.
 
-                String tmp4 = tmp.substring(0, tmp2);
-                String tmp5 = tmp.substring(tmp3);
-                saveFile.writeString(tmp4 + saveString + tmp5, false);
+                String beforeSave = file.substring(0, indexStartOfSave);
+                String afterSave = file.substring(indexEndOfSave);
+                saveFile.writeString(beforeSave + saveString + afterSave, false);
             } else {
                 saveFile.writeString("\n" + saveString, true);
             }
@@ -62,7 +62,9 @@ public final class SaveCharacter {
         for (int i = 0; i < hero.getUpgrades().size(); i++) {
             Upgrade currentUpgrade = hero.getUpgrades().get(hero.getUpgrades().keySet().toArray()[i]);
             saveText.append(hero.getUpgrades().keySet().toArray()[i]);
+            System.out.println(hero.getUpgrades().keySet().toArray()[i]);
             saveText.append("level: " + currentUpgrade.getLevel());
+            System.out.println("level: " + currentUpgrade.getLevel());
             saveText.append("\n");
         }
         saveText.append("END" + saveID);
