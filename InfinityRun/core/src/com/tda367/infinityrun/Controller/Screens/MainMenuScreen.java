@@ -18,11 +18,11 @@ import com.tda367.infinityrun.Model.Character;
 import com.tda367.infinityrun.Model.TextbasedWorldGenerator;
 import com.tda367.infinityrun.Model.World;
 import com.tda367.infinityrun.Utils.LoadCharacter;
+import com.tda367.infinityrun.Utils.ScreenStates;
 
 import java.util.Observable;
 
 public class MainMenuScreen extends Observable implements Screen { //this class creates the main menu screen
-    private final Game game;
     private final Stage mainMenuStage = new Stage();
 
     private final Button newCharButton;
@@ -30,8 +30,8 @@ public class MainMenuScreen extends Observable implements Screen { //this class 
     private final Button exitButton;
     private final VerticalGroup buttonGroup;
 
-    public MainMenuScreen(final Game game) {
-        this.game = game;
+    public MainMenuScreen() {
+
         newCharButton = new Button();
         loadCharButton = new Button();
         exitButton = new Button();
@@ -56,13 +56,14 @@ public class MainMenuScreen extends Observable implements Screen { //this class 
     @Override
     public void render(float delta) { //render is a strange name now that it doesn't render anything
         if (newCharButton.isPressed()) {
+            setChanged();
+            notifyObservers(ScreenStates.GameScreen);
             this.dispose();
-            game.setScreen(new GameScreen(game,
-                    new World(new TextbasedWorldGenerator(), new Character())));
         }
         if (loadCharButton.isPressed() && LoadCharacter.saveDataExists()) {
+            setChanged();
+            notifyObservers(ScreenStates.LoadScreen);
             this.dispose();
-            game.setScreen(new LoadScreen(game));
         }
 
         if (exitButton.isPressed()) {
@@ -109,6 +110,7 @@ public class MainMenuScreen extends Observable implements Screen { //this class 
     public void dispose() {
         //disposal calls
         mainMenuStage.dispose();
+        deleteObservers();
 
     }
 }
