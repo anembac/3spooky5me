@@ -1,42 +1,41 @@
 package com.tda367.infinityrun.Controller.Screens;
 
-import com.badlogic.gdx.Game;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.tda367.infinityrun.Model.Character;
-import com.tda367.infinityrun.Model.TextbasedWorldGenerator;
-import com.tda367.infinityrun.Model.World;
+import com.sun.xml.internal.bind.v2.model.core.ID;
+import com.tda367.infinityrun.Controller.IDrawnByDrawer;
+import com.tda367.infinityrun.Controller.VCButton;
 import com.tda367.infinityrun.Utils.LoadCharacter;
 import com.tda367.infinityrun.Utils.ScreenStates;
+import com.tda367.infinityrun.View.Screens.MainMenuDrawer;
 
+import java.util.LinkedList;
 import java.util.Observable;
-
+//Separated
 public class MainMenuScreen extends Observable implements Screen { //this class creates the main menu screen
     private final Stage mainMenuStage = new Stage();
 
-    private final Button newCharButton;
-    private final Button loadCharButton;
-    private final Button exitButton;
+    private final VCButton newCharButton;
+    private final VCButton loadCharButton;
+    private final VCButton exitButton;
     private final VerticalGroup buttonGroup;
+    private LinkedList<IDrawnByDrawer> vcButtons = new LinkedList<IDrawnByDrawer>();
+    private MainMenuDrawer mainMenuDrawer;
+
 
     public MainMenuScreen() {
 
-        newCharButton = new Button();
-        loadCharButton = new Button();
-        exitButton = new Button();
-        exitButton.setPosition(1400, 100);
+        newCharButton = new VCButton();
+        loadCharButton = new VCButton();
+        exitButton = new VCButton();
+        vcButtons.add(newCharButton);
+        vcButtons.add(loadCharButton);
+        vcButtons.add(exitButton);
 
+        exitButton.setPosition(1400, 100);
         buttonGroup = new VerticalGroup();
         buttonGroup.space(30); //space between buttons in group
         buttonGroup.setX(1600 / 2 - buttonGroup.getWidth() / 2);
@@ -46,15 +45,19 @@ public class MainMenuScreen extends Observable implements Screen { //this class 
 
 
         //ADD TO STAGE
-
-        mainMenuStage.addActor(buttonGroup);
-        mainMenuStage.addActor(exitButton);
+        for(IDrawnByDrawer b : vcButtons){ //only VCButtons are in the vcButtons list, so casting below is fine.
+            mainMenuStage.addActor((VCButton)b);
+        }
+        //Screen needs to hold an instance of drawer
+        mainMenuDrawer = new MainMenuDrawer(vcButtons);
 
     }
 
 
     @Override
-    public void render(float delta) { //render is a strange name now that it doesn't render anything
+    public void render(float delta) {
+
+        mainMenuDrawer.draw(delta);
         if (newCharButton.isPressed()) {
             setChanged();
             notifyObservers(ScreenStates.GameScreen);
