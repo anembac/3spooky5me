@@ -113,7 +113,7 @@
 //
 //    @Test
 //    public void testRegeneration(){
-//        Enemy monster = new Enemy(new Vec2(1,1), new Vec2(64,64), 1,0,0,0,0,0,0,0);
+//        Enemy monster = new Enemy(new Vec2(1,1), new Vec2(meter,meter), 1,0,0,0,0,0,0,0);
 //        simulatedWorld.addWorldObject(monster);
 //        Assert.assertTrue(monster.getHealth() == monster.getMaxHealth());
 //        monster.damage(50);
@@ -156,7 +156,7 @@
 //    @Test
 //    public void testJumpLvl() {
 //// test different character with different speedUpgradeLvls and see that a higher lvl runs faster.
-//        Character hero = new Character(new Vec2(768,64),0,0,0,0,0,0,0,0,0,0);
+//        Character hero = new Character(new Vec2(768,meter),0,0,0,0,0,0,0,0,0,0);
 //        setHero(hero);
 //        int oldheight = hero.getJumpAcceleration();
 //        hero.addUpgrade("JumpH",new JumpH(1));

@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Mikael on 5/3/2017.
+/*
+This class handles collisions between WorldObjects using Kd-Tree.
  */
 public class CollisionManager {
     private static CollisionManager manager = null;
@@ -19,6 +19,7 @@ public class CollisionManager {
     // This is kind of double stored data but it is neccecary for good complexity,
     // it allows us to map some things in both ways with O(1) and O(logn) complexity.
     private final HashMap<WorldObject, KdTreeNode<WorldObject>> worldObjectToNodes;
+
 
     public static CollisionManager getInstance()
     {
@@ -37,19 +38,23 @@ public class CollisionManager {
         worldObjectToNodes = new HashMap<WorldObject, KdTreeNode<WorldObject>>();
     }
 
+
+    //adds worldobjects
     public void addWorldObject(WorldObject obj)
     {
         Vec2 a = WOWrapper.worldObjectCenter(obj);
         worldObjectToNodes.put(obj, kdTree.insert(new Point2D.Double(a.x, a.y), obj));
     }
 
+    //positions are updated by removing and reading objects.
     public void updatePosition(WorldObject obj)
     {
-        // might cause a bug in rangesearch :/ mikael
         removeObject(obj);
         addWorldObject(obj);
     }
 
+
+    //when removing WorldObjects, they are also removed from the Kd-Tree
     public void removeObject(WorldObject obj)
     {
         if(!worldObjectToNodes.containsKey(obj))
@@ -60,7 +65,7 @@ public class CollisionManager {
         worldObjectToNodes.remove(obj);
     }
 
-    // seems buggy for some reason, dont use without carefully testing the result.
+    //rangeSearch is a little shifty still, and usage should be replaced.
     public List<WorldObject> rangeSearch(float left, float right, float top, float bot, WorldObject requestor)
     {
          List<WorldObject> output = nodeListToWOList(kdTree.rangeSearch2D(left, right, top, bot));
@@ -68,6 +73,8 @@ public class CollisionManager {
          return output;
     }
 
+
+    //this get's the K nearest WorldObjects using the kd-tree
     public List<WorldObject> getKNearest(WorldObject requestor, int k)
     {
         Vec2 center = WOWrapper.worldObjectCenter(requestor);
@@ -77,6 +84,8 @@ public class CollisionManager {
         return output;
     }
 
+
+    //this asigns nodes in the kd-tree to WorldObjects.
     private List<WorldObject> nodeListToWOList(List<KdTreeNode<WorldObject>> list)
     {
         List<WorldObject> output = new ArrayList<WorldObject>();
@@ -90,7 +99,7 @@ public class CollisionManager {
     // Complexity = O(log(n))
     public Vec4 getDistanceToCollission(WorldObject obj)
     {
-        // This algo could be changed to use the 2 range searches instead, 1 for each axis.
+        // This algorithm could be changed to use the 2 range searches instead, 1 for each axis.
         float cx, cy;
         cx = obj.getPosition().x + obj.getDrawingRect().bounds.x / 2;
         cy = obj.getPosition().y + obj.getDrawingRect().bounds.y / 2;
@@ -107,7 +116,7 @@ public class CollisionManager {
             Vec2 b = new Vec2(-1,0); // dir left
             Vec2 c = new Vec2(0,1); // dir up
             Vec2 d = new Vec2(1,0); // dir right
-            // I dont want to use the nearest point here, i want to use the found objects center point.
+            // the centerpoint is used.
 
             // The 4 corners of our obj
             Vec2 oCornerA, oCornerB, oCornerC, oCornerD;
@@ -125,14 +134,14 @@ public class CollisionManager {
             tCornerC = Vec2.add(node.data.getPosition(), node.data.getDrawingRect().bounds);
             tCornerD = Vec2.add(node.data.getPosition(), new Vec2(node.data.getDrawingRect().bounds.x, 0));
 
-            // For the float precition errors we have to make the character a little bit smaller.
+            // For the float precision errors we have to make the character a little bit smaller.
             oCornerA.add(new Vec2(0.5f,0.5f));
             oCornerB.add(new Vec2(0.5f,-0.5f));
             oCornerC.add(new Vec2(-0.5f,-0.5f));
             oCornerD.add(new Vec2(-0.5f,0.5f));
 
             // We have to calculate the signed distance to every point around them.
-            // We have to use the signed distance here, thats just that direction vectors "coordinate"
+            // We have to use the signed distance here, that's just that direction vectors "coordinate"
             float aLen = Vec2.dotProduct(a,tCornerC).sub(Vec2.dotProduct(a,oCornerA)).y;
             float bLen = Vec2.dotProduct(b,tCornerC).sub(Vec2.dotProduct(b,oCornerA)).x;
             float cLen = Vec2.dotProduct(c,tCornerA).sub(Vec2.dotProduct(c,oCornerC)).y;
@@ -160,8 +169,8 @@ public class CollisionManager {
 
             if(node.point.x > oCornerA.x && node.point.x < (oCornerC.x) && node.point.y > oCornerA.y && node.point.y < oCornerC.y)
             {
-                // Bugg here, this intersection doesnt cover angeled velocity intersections so we have to
-                // roll back the position. This doesnt occur very often.
+                // Bug here, this intersection doesn't cover angled velocity intersections so we have to
+                // roll back the position. This doesn't occur very often.
 
                 // Check what side are the closest
                 float e,f,g,h;

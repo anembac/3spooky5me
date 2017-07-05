@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Observable;
 
 public class GameScreen extends Observable implements Screen {  //tries to put textures onto the objects created in baseroom and draw them
-    final Game game;                 // but it's not currently successful...
+    final Game game;                                            // but it's not currently successful...
 
 
     private final HashMap<String, Texture> textureMap = new HashMap<String, Texture>();

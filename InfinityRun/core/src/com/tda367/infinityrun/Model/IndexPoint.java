@@ -1,8 +1,7 @@
 package com.tda367.infinityrun.Model;
 
-/**
- * Created by kaffe on 5/17/17.
- */
+// class to create IndexPoints for the WorldGeneration, meaning that each point is supposed to be unique. This is done by multiplying two large prime numbers.
+
 public class IndexPoint {
 
     private final int x;

@@ -2,8 +2,8 @@ package com.tda367.infinityrun.Utils.Math;
 
 import java.awt.geom.Point2D;
 
-/**
- * Created by miktor on 2017-04-05.
+/*
+This is for creating nodes in our kd-tree
  */
 
 public class KdTreeNode<T> {

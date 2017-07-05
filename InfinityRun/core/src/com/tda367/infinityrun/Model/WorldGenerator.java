@@ -2,8 +2,8 @@ package com.tda367.infinityrun.Model;
 
 import java.util.List;
 
-/**
- * Created by Mikael on 5/22/2017.
+/*
+interface for worldgeneration.
  */
 public interface WorldGenerator {
     List<WorldObject> generate(int x, int y);

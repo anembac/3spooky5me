@@ -8,10 +8,10 @@ import com.tda367.infinityrun.Model.MeleeWeapon;
 
 class WeaponSpear extends MeleeWeapon {
     public WeaponSpear(double meleeHandling, double criticalChance, double criticalDamage) {
-        super(15, 1.5, 1.5);
+        super(15, 1.5, 3.5);
         damage *= meleeHandling;
         criticalHitChance = criticalChance;
-        criticalHitDamage = criticalDamage * 1.2;
+        criticalHitDamage = criticalDamage * 1.25;
     }
 
 }

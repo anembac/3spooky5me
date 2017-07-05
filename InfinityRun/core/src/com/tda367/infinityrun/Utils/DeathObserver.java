@@ -5,7 +5,14 @@ import com.tda367.infinityrun.Model.Character;
 import java.util.Observable;
 import java.util.Observer;
 
+
+
+/*
+This is an observer for when the player dies and data is written to the savefile.
+ */
 public class DeathObserver implements Observer {
+
+
 
     @Override
     public void update(Observable o, Object arg) {

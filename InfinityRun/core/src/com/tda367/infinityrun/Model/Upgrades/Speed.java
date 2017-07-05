@@ -2,15 +2,17 @@ package com.tda367.infinityrun.Model.Upgrades;
 
 import com.tda367.infinityrun.Controller.InputState;
 
-/**
- * Created by Jacob on 5/9/2017.
+/*
+
+    This class upgrades speed of a livingobject. Each upgrade increases speed by 50, or 10%
+
  */
 public class Speed extends Upgrade {
 
     //This upgrades handles the movement speed
     public Speed(int level) {
         super(-1, level);
-        perLevelMultiplier = 10;
+        perLevelMultiplier = 50;
         basePrice = 10;
     }
 

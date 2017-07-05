@@ -1,11 +1,12 @@
 package com.tda367.infinityrun.Model.Upgrades;
 
-/**
- * Created by Jacob on 5/9/2017.
+/*
+
+    This upgrade handles the damage increase of your critical hits Each upgrade increases the criical damage by 5%
  */
 public class CriticalHitDamage extends Upgrade {
 
-    //This upgrade handles the damage increase of your critical hits
+    //This upgrade handles the damage increase of your critical hits Each upgrade increases the criical damage by 5%
     public CriticalHitDamage(int baseValue) {
         super(-1, baseValue);
         perLevelMultiplier = 5;

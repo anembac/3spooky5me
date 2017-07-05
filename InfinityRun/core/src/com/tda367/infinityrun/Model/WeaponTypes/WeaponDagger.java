@@ -10,8 +10,8 @@ class WeaponDagger extends MeleeWeapon {
     public WeaponDagger(double meleeHandling, double criticalChance, double criticalDamage) {
         super(6, 0.5, 0.5);
         damage *= meleeHandling;
-        criticalHitChance = criticalChance + 0.1;
-        criticalHitDamage = criticalDamage;
+        criticalHitChance = criticalChance + 0.15;
+        criticalHitDamage = criticalDamage * 1.4;
     }
 
 }

@@ -1,8 +1,10 @@
 package com.tda367.infinityrun.Utils.Math;
 
-/**
- * Created by Mikael on 5/9/2017.
- */
+/*
+*
+* Four dimensional vectors
+*
+*/
 public class Vec4 {
     public float x, y, z, w;
 

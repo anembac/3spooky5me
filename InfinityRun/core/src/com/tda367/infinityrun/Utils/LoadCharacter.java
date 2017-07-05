@@ -23,8 +23,7 @@ public class LoadCharacter {
         LoadCharacter loader = new LoadCharacter(Id);
         int levels[] = loader.getSaveData();
 
-        //the order seems random because the upgrade order of the savedata and the constructor are different
-        //an oversight that should be fixed if there is time, but isn't gamebreaking as long as you're aware of it.
+        //the order seems right
         Character loadedCharacter
                 = new Character(
                 levels[0],

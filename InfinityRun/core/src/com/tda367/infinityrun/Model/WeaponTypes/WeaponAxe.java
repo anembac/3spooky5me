@@ -11,7 +11,7 @@ class WeaponAxe extends MeleeWeapon {
         super(15, 1.5, 1);
         damage *= meleeHandling;
         criticalHitChance = criticalChance + 0.05;
-        criticalHitDamage = criticalDamage * 1.05;
+        criticalHitDamage = criticalDamage * 1.15;
 
     }
 }

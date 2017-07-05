@@ -17,6 +17,8 @@ public class KdTree<T> {
 
     }
 
+
+    //checks if value is even
     private boolean isEven(int value) {
         return (value % 2) == 0;
     }
@@ -25,6 +27,9 @@ public class KdTree<T> {
         return (isEven(index) ? val.getX() : val.getY());
     }
 
+
+
+    //insert method for placing 2d points into cNode for the tree to where it's suited.
     public KdTreeNode<T> insert(Point2D.Double point, T data) {
         KdTreeNode<T> cNode = parentNode;
 
@@ -54,6 +59,8 @@ public class KdTree<T> {
         }
         return cNode;
     }
+
+    //this method gets the K nearest neighbors from a  point in the tree.
 
     public List<KdTreeNode<T>> getKNN(Point2D.Double obj, int k) {
         KdTreeNode<T> node = parentNode;
@@ -136,6 +143,9 @@ public class KdTree<T> {
         }
     }
 
+
+
+    //removes point from tree, and adjusts the rest of the tree to this.
     public void removePoint(KdTreeNode<T> pNode) {
         List<KdTreeNode<T>> childs = getAllNodes(pNode);
         for (int i = 0; i < childs.size() - 1; i++) {
@@ -150,8 +160,8 @@ public class KdTree<T> {
         return output;
     }
 
-    // Returns the all child nodes to the input node, and the input node, and all childs of these....,
-    // if the input node is unwanted the place in the returen list is always the last.
+    // Returns the all child nodes to the input node, and the input node, and all children of these....,
+    // if the input node is unwanted the place in the return list is always the last.
     // this function removes the nodes from the tree but does NOT delete them.
     private void rangeSearch2DIntern(float l, float r, float t, float b, List<KdTreeNode<T>> output, KdTreeNode<T> parent, int n) {
         if (parent == null) return;
@@ -192,8 +202,8 @@ public class KdTree<T> {
     }
 
 
-    // Returns the all child nodes to the input node, and the input node, and all childs of these....,
-    // if the input node is unwanted the place in the returen list is always the last.
+    // Returns the all child nodes to the input node, and the input node, and all children of these....,
+    // if the input node is unwanted the place in the return list is always the last.
     // this function removes the nodes from the tree but does NOT delete them.
     private List<KdTreeNode<T>> getAllNodes(KdTreeNode<T> node) {
         if (node == null) return new ArrayList<KdTreeNode<T>>();

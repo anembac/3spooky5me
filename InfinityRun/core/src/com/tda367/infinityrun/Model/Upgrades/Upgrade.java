@@ -2,7 +2,10 @@ package com.tda367.infinityrun.Model.Upgrades;
 
 import com.tda367.infinityrun.Controller.InputState;
 
-public class Upgrade {
+
+//this is the abstract parent class for all upgrades. Cointains general info that all of them need.
+
+public abstract class Upgrade {
 
     private final int cap;            //The maximum level of the skill, -1 means it doesn't have a cap.
     protected int perLevelMultiplier;      //This is the basic value you get per level of the upgrade
