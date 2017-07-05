@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 /*
-MeleeWeapon is an extension of Worldobjects, as it has basic properties of one (intersections, positions, etc) but it's main purpose is to be "attached" to a LiviongObject
+MeleeWeapon is an extension of Worldobjects, as it has basic properties of one (intersections, positions, etc) but it's main purpose is to be "attached" to a LivingObject
 this gives them a source of attack to harm other LivingObjects.
  */
 //todo different knockback for different weapons

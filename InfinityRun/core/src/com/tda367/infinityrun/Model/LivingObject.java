@@ -6,9 +6,10 @@ import com.tda367.infinityrun.Utils.Utils;
 import com.tda367.infinityrun.Utils.Math.Vec2;
 import com.tda367.infinityrun.Utils.Math.Vec4;
 import com.tda367.infinityrun.Model.Upgrades.*;
-import com.tda367.infinityrun.Model.WeaponTypes.WeaponSword;
+import com.tda367.infinityrun.Model.WeaponTypes.*;
 
 import java.util.LinkedHashMap;
+import java.util.Random;
 
 /**
  * Created by Mikael on 5/3/2017.
@@ -31,15 +32,41 @@ public class LivingObject extends WorldObject {
 
 
     //sets a default weapon if it doesn't yet have one.
-    //todo randomize this
+
     public void setMeleeWeapon() {
 
         if (meleeWeapon != null) {
             removeChildren(meleeWeapon);
         }
-        MeleeWeapon weapon = new WeaponSword(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
+        MeleeWeapon weapon = getRandomWeapon();
         addChildren(weapon);
         meleeWeapon = weapon;
+    }
+
+
+
+
+    //this method randomizes a weapon for livingobjects.
+    public MeleeWeapon getRandomWeapon (){
+        Random rnd = new Random();
+        int randomizedWeapon = rnd.nextInt(100) + 1;
+
+        if (randomizedWeapon <20){
+            return new WeaponAxe(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
+        }
+
+        if (randomizedWeapon<40){
+            return new WeaponDagger(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
+        }
+
+        if (randomizedWeapon <60){
+            return new WeaponMace(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
+        }
+
+        if (randomizedWeapon <80){
+            return new WeaponSpear(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
+        }
+        return new WeaponSword(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
     }
 
     //TODO implement ranged
