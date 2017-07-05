@@ -25,10 +25,10 @@ private ShopScreen shopScreen;
 
     public ScreenManager(Game game, World world, Shop shop){
         this.game = game;
-        gameScreen  = new GameScreen(game, world);
-        loadScreen = new LoadScreen(game);
+        gameScreen  = new GameScreen(world);
+        loadScreen = new LoadScreen();
         pauseMenuScreen = new PauseMenuScreen(gameScreen);
-        shopScreen = new ShopScreen(shop, gameScreen);
+        shopScreen = new ShopScreen(shop);
         mainMenuScreen = new MainMenuScreen();
 
         /*

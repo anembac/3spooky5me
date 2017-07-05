@@ -9,6 +9,7 @@ import com.tda367.infinityrun.Model.World;
 import com.tda367.infinityrun.Utils.ScreenStates;
 import java.util.Observable;
 import java.util.Observer;
+import static com.tda367.infinityrun.Utils.Constants.newGame;
 
 /*
 * Creates instances of certain model objects needed for the game to function.
@@ -36,7 +37,7 @@ public class InfinityRun extends Game implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if(arg.equals("new")){
+        if(arg.equals(newGame)){
             newGame();
         }
     }

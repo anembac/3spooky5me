@@ -129,10 +129,10 @@ public class TextbasedWorldGenerator implements WorldGenerator {
         IndexPoint pos = new IndexPoint(x, y);
         checked.add(pos);
         if (madeRooms.containsKey(pos)) {
-            return ((madeRooms.get(pos).down && !checked.contains(new IndexPoint(x, y - 1))) ? pathOut(checked, x, y - 1) : false) ||
-                    ((madeRooms.get(pos).up && !checked.contains(new IndexPoint(x, y + 1))) ? pathOut(checked, x, y + 1) : false) ||
-                    ((madeRooms.get(pos).right && !checked.contains(new IndexPoint(x + 1, y))) ? pathOut(checked, x + 1, y) : false) ||
-                    ((madeRooms.get(pos).left && !checked.contains(new IndexPoint(x - 1, y))) ? pathOut(checked, x - 1, y) : false);
+            return ((madeRooms.get(pos).down && !checked.contains(new IndexPoint(x, y - 1))) && pathOut(checked, x, y - 1)) ||
+                    ((madeRooms.get(pos).up && !checked.contains(new IndexPoint(x, y + 1))) && pathOut(checked, x, y + 1)) ||
+                    ((madeRooms.get(pos).right && !checked.contains(new IndexPoint(x + 1, y))) && pathOut(checked, x + 1, y)) ||
+                    ((madeRooms.get(pos).left && !checked.contains(new IndexPoint(x - 1, y))) && pathOut(checked, x - 1, y));
         } else return true;
     }
 

@@ -3,16 +3,13 @@ package com.tda367.infinityrun.View.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.tda367.infinityrun.Controller.IDrawnByDrawer;
-import com.tda367.infinityrun.View.ScreenDrawer;
+import com.tda367.infinityrun.Controller.VCButton;
 
 import java.util.LinkedList;
 
@@ -23,23 +20,31 @@ public class MainMenuDrawer extends ScreenDrawer{
     private final TextureRegion textureDown = new TextureRegion(atlas.findRegion("testtexture2"));
     private final Label.LabelStyle labelStyle;
     private final Label instructions;
-    private LinkedList<IDrawnByDrawer> buttons;
 
 
     /*
-    * Receives a LinkedList of IDrawnByDrawers (although in this case they are all VCButtons) to draw. Also manages everything
-    * else that is visual but not also inherently part of the controller.
+    * Receives a LinkedList of IDrawnByDrawers (although in this case they are all VCButtons) to draw.
+    * Also manages everything else that is visual but not also inherently part of the controller.
     *
     * Because it has a list of IDrawnByDrawers the only thing it can do with the buttons is to draw them,
     * removing the possiblity of the view doing something it shouldn't be able to do with the buttons.
     */
-    public MainMenuDrawer(LinkedList<IDrawnByDrawer> buttons){
-        this.buttons = buttons;
+
+    //TODO: Make buttons have their associated text
+    public MainMenuDrawer(LinkedList<IDrawnByDrawer> vcButtons){
         TextureRegionDrawable textureDownDrawable = new TextureRegionDrawable(textureDown);
         TextureRegionDrawable textureUpDrawable = new TextureRegionDrawable(textureUp);
         TextButton.TextButtonStyle menuButtonStyle =
                 new TextButton.TextButtonStyle(textureUpDrawable, textureDownDrawable, textureUpDrawable, font);
-        labelStyle = new Label.LabelStyle(font, new Color(9, 205, 218, 255));
+        this.vcButtons = vcButtons;
+        for(IDrawnByDrawer b : vcButtons){
+            b.setStyle(menuButtonStyle);
+
+        }
+
+
+        //Instructions
+        labelStyle = new Label.LabelStyle(font, new Color(9, 205, 218, 1));
         instructions = new Label("", labelStyle);
         instructions.setText(
                 "Press one of the buttons to start playing. If you're new, hit \"NEW CHARACTER\", otherwise do as" +
@@ -60,9 +65,7 @@ public class MainMenuDrawer extends ScreenDrawer{
         super.draw(delta);
         batch.begin();
         font.draw(batch, "Welcome to InfinityRun ALPHA!!! ", 100, 150);
-        for(IDrawnByDrawer i : buttons){
-            i.draw(batch,0);
-        }
+        instructions.draw(batch, 1);
         batch.end();
 
 
