@@ -1,7 +1,7 @@
 package com.tda367.infinityrun.Model;
 
-/**
- * Created by Mikael on 5/22/2017.
+/*
+todo
  */
 class RangedWeapon {
     private final double damage;

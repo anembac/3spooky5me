@@ -25,7 +25,10 @@ public class HermesSandals extends Upgrade {
 
     /*
     This method handles jumping in the air. Everytime you jump in air you consumes one of your charges,
-    when you don't have any more charges you can't jump in air anymore. When you land on the ground you replenish your charges.
+    when you don't have any more charges you can't jump in air anymore. When you land on the ground you replenish your charges.'
+
+
+    It also resets your vertical acceleration to make jumping more fluid.
     */
     @Override
     public void frame(float dt, InputState state, ObjectModifiers mod) {

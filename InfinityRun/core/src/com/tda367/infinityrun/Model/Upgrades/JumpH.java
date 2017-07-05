@@ -2,15 +2,16 @@ package com.tda367.infinityrun.Model.Upgrades;
 
 import com.tda367.infinityrun.Controller.InputState;
 
-/**
- * Created by Jacob on 5/9/2017.
+/*
+
+    This upgrade handles the height of your jumps
  */
 public class JumpH extends Upgrade {
 
     //This upgrade handles the height of your jumps
     public JumpH(int level) {
         super(100, level);
-        perLevelMultiplier = 20;
+        perLevelMultiplier = 50;
         basePrice = 20;
     }
 

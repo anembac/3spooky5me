@@ -5,6 +5,8 @@ import com.tda367.infinityrun.Utils.Math.Vec2;
 
 import java.util.List;
 
+//hazards are extensions of WorldObjects that inflict damage to LivingObjects when collided with. Their Damage value is dependent on the difficulty level in the WorldGenerator
+
 public class Hazard extends WorldObject {
     private final float range;
     private final float dps;

@@ -1,7 +1,10 @@
 package com.tda367.infinityrun.Model;
 
-/**
- * Created by miktor on 2017-04-03.
+/*
+
+
+This is the basic abstract class WorldObject that every other object in the game inherits from. Since everything has a position, bounds renders, and frame functions.
+This was done for the ease of extending WorldObjects for new purposes: new blocks with different properties, enemies, weapons etc.
  */
 
 import com.tda367.infinityrun.Controller.InputState;
@@ -13,10 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-public abstract class WorldObject extends Observable { //We should probably refactor this class at some point
+public abstract class WorldObject extends Observable {
 
 
-    // position is for some reason a vector, deal w/it
+    // position and bounds are vectors.
+
+    //These elements are all necessary for all WorldObjects
     private Vec2 position = new Vec2(0, 0);
     private Vec2 bounds = new Vec2(0, 0);
     private WorldObject parent = null;
@@ -30,6 +35,8 @@ public abstract class WorldObject extends Observable { //We should probably refa
         this.bounds = bounds;
     }
 
+
+    //when set to true, it will be removed in the frame function, as a "cleanup"
     public void despawn() {
         despawn = true;
     }

@@ -11,16 +11,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by kaffe on 4/3/17.
+import static com.tda367.infinityrun.Utils.Constants.meter;
+
+/*
+ the player character for the game, an extension of a LivingObject, but it can also collect coins and move from the pllayer input.
  */
 public class Character extends LivingObject {
 private static final Vec2 startingcoordinates = new Vec2(800,450);
-private static final Vec2 sizeBounds = new Vec2(64,64);
+private static final Vec2 sizeBounds = new Vec2(meter,meter);
 
     public Character() {
         this( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
+
+        //stats for the player character: Number of current coins, level of Looting upgrade, speed upgrade, JumpHeight upgrade, HermesSandal upgrade, Health upgrade, MeleeHandling upgrade,
+        //CriticalHitChance upgrade, CriticalHitDamage upgrade and Regeneration upgrade.
 
     public Character(int numCoins, int lootLvl, int speedLvl, int jumpLvl, int hermesLvl, int healthLvl,
                      int meleeHandlingLvl, int ChcLvl, int Chdlvl, int regLvl) {
@@ -32,8 +37,8 @@ private static final Vec2 sizeBounds = new Vec2(64,64);
 
 
         addUpgrade("Looting", new Looting(lootLvl));    //Multiplied as a modifier to increase number of coins dropped - 250% chance of coins means 2 coins and 50% chance of extra.
-        setTexture("WorldObjects/player.png");// default hero texture
-        //new Rectangle(position.x, position.y, size, size);
+        setTexture("WorldObjects/player.png");     // default hero texture
+
     }
 
     private int maxDistance = 0;
@@ -57,6 +62,7 @@ private static final Vec2 sizeBounds = new Vec2(64,64);
     }
 
     @Override
+    //method for taking damage, and despawning the character if  it's health is below 0. This also notifies the save function to save the character.
     public void damage(double damage) {
         currentHealth -= damage;
         if (this.currentHealth <= 0) {
@@ -68,7 +74,7 @@ private static final Vec2 sizeBounds = new Vec2(64,64);
                                     //despawning otherwise. High value to prevent dying more than once per frame.
         }
     }
-
+            //methods to get the values from the upgrades.
     @Override
     public double getMaxHealth() {
         return (20 * 5) + super.getMaxHealth();
@@ -113,6 +119,8 @@ private static final Vec2 sizeBounds = new Vec2(64,64);
         return coins;
     }
 
+
+    //removes coins from the character if the players purchases an upgrade.
     public void chargeCoins(int cost) {
         coins = coins - cost;
         if (coins < 0) { //this case should never happen if shop is implemented properly
@@ -121,10 +129,13 @@ private static final Vec2 sizeBounds = new Vec2(64,64);
     }
 
     @Override
-    public void frame(float dt, float heroX, float heroY, InputState state) {
-        List<WorldObject> rlt = CollisionManager.getInstance().getKNearest(this, 5);
+    //method for collecting, and flagging coins for despawning. This is done by a small sub-section of the K-D tree.
+    //TODO despawn is still a bit retarded imo
 
-        for (WorldObject wo : rlt) {
+    public void frame(float dt, float heroX, float heroY, InputState state) {
+        List<WorldObject> NearObjects = CollisionManager.getInstance().getKNearest(this, 5); //pickup distance
+
+        for (WorldObject wo : NearObjects) {
             if (wo instanceof CoinObject) {
                 if (Vec2.distance(WOWrapper.worldObjectCenter(this)
                         , WOWrapper.worldObjectCenter(wo)) < Constants.collectRange) {
@@ -136,9 +147,6 @@ private static final Vec2 sizeBounds = new Vec2(64,64);
         super.frame(dt, heroX, heroY, state);
     }
 
-    public void lootEnemy() {
-        coins += numberOfCoins();
-    }
 
     public HashMap<String, Upgrade> getUpgrades() {
         return upgrades;
@@ -162,7 +170,7 @@ private static final Vec2 sizeBounds = new Vec2(64,64);
     //Determines if you will get the extra coin based on you extra percentage chance.
     private boolean extraCoin(int chance) {
         Random rnd = new Random();
-        System.out.println("slumpat fram :" + (rnd.nextInt(100) + 1) + "chansen var:" + chance);
+        //System.out.println("slumpat fram :" + (rnd.nextInt(100) + 1) + "chansen var:" + chance);
         return chance >= (rnd.nextInt(100) + 1);
 
     }

@@ -8,8 +8,8 @@ import com.tda367.infinityrun.Utils.Math.Vec2;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Jacob on 4/3/2017.
+/*
+Class for binding the game together and where the different objects interact with eachother.
  */
 public class World {
 
@@ -40,6 +40,9 @@ public class World {
         this.input = input;
     }
 
+
+    //this tells the TextbasedWorldGenerator what rooms are to be generated. the coordinates are used with offsets and the location
+    // of the player
     private void generateWorld() {
         int x = (int) (Math.floor((hero.getPosition().x + hero.getDrawingRect().bounds.x / 2)
                 / (Constants.roomWidth * Constants.meter)));
@@ -47,16 +50,20 @@ public class World {
         int y = (int) (Math.floor((hero.getPosition().y + hero.getDrawingRect().bounds.y / 2)
                 / (Constants.roomHeight * Constants.meter)));
 
+
+        //this will only occur once.
         //creates the first room
         addRoomIfItDoesntExist(x - 0, y - 0);
 
+
+        //generates the rooms adjacent to the current room to prevent unwanted errors.
         //creates the non-corner rooms
         addRoomIfItDoesntExist(x + 1, y);
         addRoomIfItDoesntExist(x - 1, y);
         addRoomIfItDoesntExist(x - 0, y - 1);
         addRoomIfItDoesntExist(x - 0, y + 1);
 
-
+        //the diagonal rooms are generated last.
         //creates diagonal rooms
         addRoomIfItDoesntExist(x - 1, y - 1);
         addRoomIfItDoesntExist(x - 1, y + 1);
@@ -64,15 +71,20 @@ public class World {
         addRoomIfItDoesntExist(x + 1, y + 1);
     }
 
+    //unmakes game
     public boolean gameDone()
     {
         return !running;
     }
 
+
+
     public List<WorldObject> getWorldObjects() {
         return worldObjects;
     }
 
+
+    //frame function that rewrites WorldObjects/enemies.
     public void frame(float dt) {
         // 25 15
 
@@ -119,6 +131,8 @@ public class World {
             addWorldObject(wo);
         }
     }
+
+
 
     private void addRoomIfItDoesntExist(int x, int y) {
         if (!generator.roomExists(x, y)) {

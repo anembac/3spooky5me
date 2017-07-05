@@ -6,19 +6,19 @@ import com.tda367.infinityrun.Utils.Utils;
 import com.tda367.infinityrun.Utils.Math.Vec2;
 import com.tda367.infinityrun.Utils.Math.Vec4;
 import com.tda367.infinityrun.Model.Upgrades.*;
-import com.tda367.infinityrun.Model.WeaponTypes.WeaponSword;
+import com.tda367.infinityrun.Model.WeaponTypes.*;
 
 import java.util.LinkedHashMap;
+import java.util.Random;
 
 /**
  * Created by Mikael on 5/3/2017.
  */
-// I guess this class will be some kind of base for "Upgradable" objects, moving objects will probably use some kind
-// of upgrade to allow them to use the command pattern to move. RENAME to upgradableObject?
+// LivingObject is an abstraction for any object that needs to have upgrades and can be seen as "alive". It extends regular WorldObjects with additional properties. (upgrades)
 public class LivingObject extends WorldObject {
     final LinkedHashMap<String, Upgrade> upgrades = new LinkedHashMap<String, Upgrade>(); //Holds all of the upgrades, gives them a name as index.
 
-    private double timeSinceRegen = 0;
+    private double timeSinceRegen = 0; //ensures that regeneration is done in solid ticks
     double currentHealth = 0;
     Vec2 acceleration = new Vec2(0, 0);
     private MeleeWeapon meleeWeapon = null;
@@ -29,14 +29,44 @@ public class LivingObject extends WorldObject {
         this(position, bounds, 1, 1, 1, 1, 1, 1, 1, 1);
     }
 
+
+
+    //sets a default weapon if it doesn't yet have one.
+
     public void setMeleeWeapon() {
 
         if (meleeWeapon != null) {
             removeChildren(meleeWeapon);
         }
-        MeleeWeapon weapon = new WeaponSword(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
+        MeleeWeapon weapon = getRandomWeapon();
         addChildren(weapon);
         meleeWeapon = weapon;
+    }
+
+
+
+
+    //this method randomizes a weapon for livingobjects.
+    public MeleeWeapon getRandomWeapon (){
+        Random rnd = new Random();
+        int randomizedWeapon = rnd.nextInt(100) + 1;
+
+        if (randomizedWeapon <20){
+            return new WeaponAxe(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
+        }
+
+        if (randomizedWeapon<40){
+            return new WeaponDagger(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
+        }
+
+        if (randomizedWeapon <60){
+            return new WeaponMace(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
+        }
+
+        if (randomizedWeapon <80){
+            return new WeaponSpear(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
+        }
+        return new WeaponSword(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
     }
 
     //TODO implement ranged
@@ -105,6 +135,8 @@ public class LivingObject extends WorldObject {
         super(pos, bound, parent);
     }
 
+
+    //method that regenerates LivingObjects based on their Regeneration level.
     @Override
     public void frame(float dt, float heroX, float heroY, InputState state) {
 
@@ -130,16 +162,19 @@ public class LivingObject extends WorldObject {
         // add acceleration down if we are in the air.
         if (this.getPosition().y > height) {
             //acceleration.y -= 9.82*dt;
-            // so 1 px is 1 unit here, we need to guess the pixel height of the character in meters, etc 150?! this is 64 now but we gravity feels quite low...
+            // Standard "earth" gravitation feels very wrong. Changed to make the game seem smoother.
             acceleration.y -= 2.5 * 9.82 * Constants.meter * dt;
         }
-        // limit the forward acceleration
-        // acceleration.x = Utils.limit(-getMaxSpeed(), acceleration.x, getMaxSpeed());
-        // limit the "jump/gravity" acceleration.
+
+        // limit the "jump/gravity" acceleration. This prevents problems that shouldn't occur
         acceleration.y = Utils.limit(-5000, acceleration.y, getJumpAcceleration());
 
         if (this.acceleration.x > 0 && meleeWeapon != null) meleeWeapon.setDirRight();
         else if (meleeWeapon != null && this.acceleration.x < 0) meleeWeapon.setDirLeft();
+
+
+        //NOTE: for absurdly high speeds, the game does break. However, it's very improbable that someone would ever come anywhere near this.
+
 
         // move the character according to the acceleration vectors.
         Vec2 currentPos = getPosition();
@@ -150,7 +185,7 @@ public class LivingObject extends WorldObject {
             setPosition(rightIntersection - getDrawingRect().bounds.x, getPosition().y);
             acceleration.x = 0;
         }
-        // if we accelerated left into a "blobk"
+        // if we accelerated left into a "block"
         if (getPosition().x < leftIntersection) {
             setPosition(leftIntersection, getPosition().y);
             acceleration.x = 0;

@@ -7,16 +7,27 @@ import java.io.FileReader;
 import java.lang.*;
 import java.util.*;
 
-/**
- * Created by Mikael on 5/22/2017.
+import static com.tda367.infinityrun.Utils.Constants.meter;
+import static com.tda367.infinityrun.Utils.Constants.roomHeight;
+import static com.tda367.infinityrun.Utils.Constants.roomWidth;
+
+/*
+TextbasedWorldGenerator that places rooms in a indexed hasmap with unique values. Uses a text reader to read a file as WorldObjects.
+It implements the WorldGenerator Interface
+
+ the WorldGeneration takes into account for if the generated room would have "empty" neighbors, walls or exits
  */
 public class TextbasedWorldGenerator implements WorldGenerator {
 
     private final HashMap<Integer, RoomType> allRooms = new HashMap<Integer, RoomType>();
     private final HashMap<IndexPoint, RoomType> madeRooms = new HashMap<IndexPoint, RoomType>();
     private static final Random rand = new Random();
-    private int maxDistanceFromSpawn;
+    private int maxDistanceFromSpawn;  //calculates score as the distance from start.
 
+
+
+
+    //method for reading the textfile and splitting up the chunks of text into "rooms" that is then used in the worldgeneration.
     public TextbasedWorldGenerator() {
         try {
             BufferedReader br = new BufferedReader(new FileReader("WorldRooms.txt"));
@@ -31,20 +42,20 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                 if (i == 0) {
                     // A new room begins, reset the arrays.
                     if (map == null) {
-                        map = new ArrayList<List<java.lang.Character>>(15);
-                        for (int j = 0; j < 25; j++) {
+                        map = new ArrayList<List<java.lang.Character>>(roomHeight);
+                        for (int j = 0; j < roomWidth; j++) {
                             map.add(new ArrayList<java.lang.Character>());
-                            for (int k = 0; k < 15; k++) {
+                            for (int k = 0; k < roomHeight; k++) {
                                 // E represents empty.
                                 map.get(j).add('E');
                             }
                         }
                     } else {
                         addRoom(map);
-                        map = new ArrayList<List<java.lang.Character>>(15);
-                        for (int j = 0; j < 25; j++) {
+                        map = new ArrayList<List<java.lang.Character>>(roomHeight);
+                        for (int j = 0; j < roomWidth; j++) {
                             map.add(new ArrayList<java.lang.Character>());
-                            for (int k = 0; k < 15; k++) {
+                            for (int k = 0; k < roomHeight; k++) {
                                 // E represents empty.
                                 map.get(j).add('E');
                             }
@@ -52,10 +63,10 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                     }
                 } else {
                     int y = i - 1;
-                    if (line.length() < 25) {
+                    if (line.length() < roomWidth) {
                         System.out.println("error in textfile. AT LINE " + lineRow);
                     } else {
-                        for (int x = 0; x < 25; x++) {
+                        for (int x = 0; x < roomWidth; x++) {
                             java.lang.Character _char = line.toCharArray()[x];
                             if (_char == ' ') _char = 'E';
                             map.get(x).set(y, _char);
@@ -72,13 +83,21 @@ public class TextbasedWorldGenerator implements WorldGenerator {
         }
     }
 
+
+    // asserts which rooms work and which do not for the world generation using a  text database of available rooms.
+    //the numbers 0,6,12,14,24 are coordinates in the room, and are the center top, center right, center left and center bottom in that order.
+
+
     private void addRoom(List<List<java.lang.Character>> map) {
         boolean r, l, u, d;
         r = u = l = d = false;
-        if (map.get(12).get(0) == 'E') u = true;
-        if (map.get(12).get(14) == 'E') d = true;
-        if (map.get(0).get(6) == 'E') l = true;
-        if (map.get(24).get(6) == 'E') r = true;
+        if (checkRoomForObject(map, 12, 0)) u = true;
+
+        if (checkRoomForObject(map, 12, 14)) d = true;
+
+        if (checkRoomForObject(map, 0, 6)) l = true;
+
+        if (checkRoomForObject(map, 24, 6)) r = true;
         RoomType room = new RoomType(r, l, u, d);
         if (allRooms.containsKey(room.bitmaskCode())) {
             allRooms.get(room.bitmaskCode()).addType(map);
@@ -88,6 +107,27 @@ public class TextbasedWorldGenerator implements WorldGenerator {
         }
     }
 
+
+
+
+
+
+
+
+
+    //checks if the char in the map text file is either E or ' ', meaning there is an exit to another room
+
+    private boolean checkRoomForObject(List<List<java.lang.Character>> map, int a, int b){
+
+        if (map.get(a).get(b) == 'E')
+            return true;
+        if (map.get(a).get(b) == ' ')
+            return true;
+        return false;
+    }
+
+
+    //this overrides the generate function with seperate cases for base and  for the rest it checks the roomtypes of the surrounding rooms. From this it evaluates what can be generated.
     @Override
     public List<WorldObject> generate(int x, int y) {
         if (roomExists(x, y)) return new ArrayList<WorldObject>();
@@ -124,15 +164,15 @@ public class TextbasedWorldGenerator implements WorldGenerator {
             }
         }
     }
-
+// todo should also path towards an exit for the 10 closest, and try rooms with more exits if possible.
     private boolean pathOut(HashSet<IndexPoint> checked, int x, int y) {
         IndexPoint pos = new IndexPoint(x, y);
         checked.add(pos);
         if (madeRooms.containsKey(pos)) {
-            return ((madeRooms.get(pos).down && !checked.contains(new IndexPoint(x, y - 1))) && pathOut(checked, x, y - 1)) ||
-                    ((madeRooms.get(pos).up && !checked.contains(new IndexPoint(x, y + 1))) && pathOut(checked, x, y + 1)) ||
-                    ((madeRooms.get(pos).right && !checked.contains(new IndexPoint(x + 1, y))) && pathOut(checked, x + 1, y)) ||
-                    ((madeRooms.get(pos).left && !checked.contains(new IndexPoint(x - 1, y))) && pathOut(checked, x - 1, y));
+            return ((madeRooms.get(pos).down && !checked.contains(new IndexPoint(x, y - 1))) ? pathOut(checked, x, y - 1) : false) ||
+                    ((madeRooms.get(pos).up && !checked.contains(new IndexPoint(x, y + 1))) ? pathOut(checked, x, y + 1) : false) ||
+                    ((madeRooms.get(pos).right && !checked.contains(new IndexPoint(x + 1, y))) ? pathOut(checked, x + 1, y) : false) ||
+                    ((madeRooms.get(pos).left && !checked.contains(new IndexPoint(x - 1, y))) ? pathOut(checked, x - 1, y) : false);
         } else return true;
     }
 
@@ -146,9 +186,13 @@ public class TextbasedWorldGenerator implements WorldGenerator {
         }
     }
 
+
+
     public int getMaxDistance() {
         return maxDistanceFromSpawn;
     }
+
+
 
     @Override
     public boolean roomExists(int x, int y) {
@@ -163,6 +207,8 @@ public class TextbasedWorldGenerator implements WorldGenerator {
 
         final List<List<List<java.lang.Character>>> allTypes = new ArrayList<List<List<java.lang.Character>>>();
 
+
+        //writes rooms as roomtypes; combinations of where they have/doesn't have exits
         public RoomType(boolean r, boolean l, boolean u, boolean d) {
             right = r;
             left = l;
@@ -182,18 +228,30 @@ public class TextbasedWorldGenerator implements WorldGenerator {
             return right;
         }
 
+
+
+// the general generation method. Because of all the variables in this, it's still quite complicated even after separating many things into other functions.
+
+
         public List<WorldObject> generate(int ox, int oy) {
+
+            //this is the distance formula, and whenever you reach a new maximum distance for the session, the difficulty of the game will increase
+
             int difficulty = (int) Math.sqrt(ox * ox + oy * oy);
             if (difficulty > maxDistanceFromSpawn) {
                 maxDistanceFromSpawn = difficulty;
             }
 
+
+
+            //this generates the rooms dependent upon the letters in the WorldRooms.txt file. This ensures that enemies will be of reasonable difficulty, and that WorldObjects will be placed
+            // in the correct position.
             List<WorldObject> output = new ArrayList<WorldObject>();
             int k = rand.nextInt(allTypes.size());
-            for (int x = 0; x < 25; x++) {
-                for (int y = 0; y < 15; y++) {
-                    float nx = ox * 64 * 25 + x * 64;
-                    float ny = oy * 64 * 15 + 64 * (14 - y);
+            for (int x = 0; x < roomWidth; x++) {
+                for (int y = 0; y < roomHeight; y++) {
+                    float nx = ox * meter * roomWidth + x * meter;
+                    float ny = oy * meter * roomHeight + meter * (14 - y);
                     Vec2 pos = new Vec2(nx, ny);
                     switch (allTypes.get(k).get(x).get(y)) {
                         case 'B':
@@ -209,7 +267,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                             int rnd = new Random().nextInt((100) + 1);
                             if (rnd < (((difficulty / 6) + Math.sqrt(difficulty) * (Math.sin(difficulty) * difficulty * difficulty) / 2) + 0.43) * 100) {
 
-                                Enemy enemy = (new Enemy(pos, new Vec2(64, 64), 1 * (difficulty / 4), 1 * (difficulty / 8), 1 * (difficulty / 32), 1 * (difficulty / 8), 1 * (difficulty * 2), 1 * (difficulty / 16), 1 * (difficulty / 24), 1 * (difficulty / 24)));
+                                Enemy enemy = (new Enemy(pos, new Vec2(meter, meter), 1 * (difficulty / 4), 1 * (difficulty / 8), 1 * (difficulty / 32), 1 * (difficulty / 8), 1 * (difficulty * 2), 1 * (difficulty / 16), 1 * (difficulty / 24), 1 * (difficulty / 24)));
                                 output.add(enemy);
                                 enemy.setMeleeWeapon();
                             }

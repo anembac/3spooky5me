@@ -3,7 +3,7 @@ package com.tda367.infinityrun.Model.Upgrades;
 import com.tda367.infinityrun.Utils.Math.Vec2;
 
 /**
- * Created by Mikael on 5/15/2017.
+ * helper class for jumping.
  */
 public class ObjectModifiers {
     public final boolean inAir;

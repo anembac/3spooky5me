@@ -7,13 +7,14 @@ import com.tda367.infinityrun.Utils.Math.Vec2;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by Jacob on 5/9/2017.
+/*
+MeleeWeapon is an extension of Worldobjects, as it has basic properties of one (intersections, positions, etc) but it's main purpose is to be "attached" to a LivingObject
+this gives them a source of attack to harm other LivingObjects.
  */
-
+//todo different knockback for different weapons
 public class MeleeWeapon extends WorldObject {
     protected double damage;
-    protected double criticalHitChance;  /// tod be fixed into final when shop is fully working
+    protected double criticalHitChance;
     protected double criticalHitDamage;
     protected final double CD;
     protected final double range;
@@ -60,20 +61,27 @@ public class MeleeWeapon extends WorldObject {
         return damage * criticalHitDamage;
     }
 
+
+    //when attacking, this will happen: the MeleeWeapon will move in a swing-pattern, and it will deal damage to livingObjects in range.
     @Override
     public void frame(float dt, float heroX, float heroY, InputState state) {
         super.frame(dt, heroX, heroY, state);
-        currentCD = Math.max(0, currentCD - dt);
+        currentCD = Math.max(0, currentCD - dt); //keeps track of cooldown for attack
 
         if (state.attackPressed()) {
-            // temp animation to see when we are actually attacking
+            // animation to see when we are actually attacking
             setPosition(getNoneRelativePosition().x, (getNoneRelativePosition().y - 1) % 30 + 21);
+         //   setPosition(getNoneRelativePosition().x+1*(30%21), (getNoneRelativePosition().y));
            } else setPosition(getNoneRelativePosition().x, 16);
 
+
+        //functional attack
         if (state.attackPressed() && currentCD < 0.001) {
-            List<WorldObject> output = CollisionManager.getInstance().getKNearest(this, 20); // get the 20 nearest
+            List<WorldObject> output = CollisionManager.getInstance().getKNearest(this, 20); // get the 20 nearest objects. This is done to not make unnecessarily large calculations.
             for (WorldObject wo : output) {
+
                 //System.out.println(WOWrapper.centerDistance(this.getParent(), wo)/10 + "wow a rapper range  " + range* Constants.meter);
+
                 if (wo != this.getParent() && WOWrapper.centerDistance(this.getParent(), wo) / 10 < (range * Constants.meter) && wo instanceof LivingObject) {
                     if (isCritical()) {
                         ((LivingObject) wo).damage(getCriticalDamage());

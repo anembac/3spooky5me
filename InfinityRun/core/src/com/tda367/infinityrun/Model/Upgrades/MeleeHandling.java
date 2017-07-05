@@ -1,7 +1,8 @@
 package com.tda367.infinityrun.Model.Upgrades;
 
-/**
- * Created by Jacob on 5/9/2017.
+/*
+This upgrade increases your damage by a percentage modifier. The base damage is dependent on your weapon.
+
  */
 public class MeleeHandling extends Upgrade {
 
