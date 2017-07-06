@@ -13,6 +13,7 @@ this gives them a source of attack to harm other LivingObjects.
  */
 //todo different knockback for different weapons
 public class MeleeWeapon extends WorldObject {
+    protected String name;
     protected double damage;
     protected double criticalHitChance;
     protected double criticalHitDamage;
@@ -28,6 +29,8 @@ public class MeleeWeapon extends WorldObject {
         this.CD = CD;
         this.range = range;
     }
+
+    public String getName(){return name;}
 
     public double getDamage() {
         return damage;

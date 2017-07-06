@@ -34,7 +34,16 @@ public class HUD {
 
         //rooms
         hudfont.draw(hudbatch, "Highest distance from start: " + character.getMaxdistance(), 1400, 850);
+
+
+
+        //Weapon
+        hudfont.draw(hudbatch, character.getWeapon() +" :Weapon",120 - healthicon.getRegionWidth(),80 - healthicon.getRegionHeight() / 2 );
+
+
         hudbatch.end();
+
+
     }
 
 
