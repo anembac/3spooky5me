@@ -3,19 +3,10 @@ package com.tda367.infinityrun.Controller.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.tda367.infinityrun.Controller.VCButton;
+import com.tda367.infinityrun.View.VCButton;
 import com.tda367.infinityrun.Model.Shop;
 import com.tda367.infinityrun.Utils.ScreenStates;
 import com.tda367.infinityrun.View.Screens.ShopScreenDrawer;
@@ -95,7 +86,6 @@ public class ShopScreen extends Observable implements Screen {
         if(Gdx.input.isKeyJustPressed(Input.Keys.TAB)){
             setChanged();
             notifyObservers(ScreenStates.GameScreen);
-            this.dispose();
         }
     }
 

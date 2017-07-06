@@ -28,13 +28,15 @@ public class GameScreen extends Observable implements Screen {
 
     @Override
     public void show() {
+        gameScreenDrawer.show();
         Gdx.input.setInputProcessor(gameStage);
+        System.out.println("hello there");
     }
 
     @Override
     public void render(float delta) {
         world.frame(delta);
-
+        gameScreenDrawer.draw(delta);
         if(world.gameDone()){
             dispose();
             setChanged();
@@ -46,7 +48,6 @@ public class GameScreen extends Observable implements Screen {
             notifyObservers(ScreenStates.ShopScreen);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-
             setChanged();
             notifyObservers(ScreenStates.PauseMenuScreen);
         }

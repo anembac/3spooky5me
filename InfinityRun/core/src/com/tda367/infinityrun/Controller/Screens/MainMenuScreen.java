@@ -2,12 +2,12 @@ package com.tda367.infinityrun.Controller.Screens;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
-import com.sun.xml.internal.bind.v2.model.core.ID;
-import com.tda367.infinityrun.Controller.IDrawnByDrawer;
-import com.tda367.infinityrun.Controller.VCButton;
+import com.tda367.infinityrun.View.IDrawnByDrawer;
+import com.tda367.infinityrun.View.VCButton;
 import com.tda367.infinityrun.Utils.LoadCharacter;
 import com.tda367.infinityrun.Utils.ScreenStates;
 import com.tda367.infinityrun.View.Screens.MainMenuDrawer;
@@ -51,6 +51,8 @@ public class MainMenuScreen extends Observable implements Screen { //this class 
         //Screen needs to hold an instance of drawer
         mainMenuDrawer = new MainMenuDrawer(vcButtons);
 
+        Gdx.input.setInputProcessor(mainMenuStage);
+
     }
 
 
@@ -58,7 +60,8 @@ public class MainMenuScreen extends Observable implements Screen { //this class 
     public void render(float delta) {
 
         mainMenuDrawer.draw(delta);
-        if (newCharButton.isPressed()) {
+        if (newCharButton.isPressed() || Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+            System.out.println("fkljdsfdös");
             setChanged();
             notifyObservers(ScreenStates.GameScreen);
             this.dispose();

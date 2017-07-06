@@ -8,8 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.tda367.infinityrun.Controller.IDrawnByDrawer;
-import com.tda367.infinityrun.Controller.VCButton;
+import com.tda367.infinityrun.View.IDrawnByDrawer;
 
 import java.util.LinkedList;
 
@@ -62,12 +61,16 @@ public class MainMenuDrawer extends ScreenDrawer{
 
     @Override
     public void draw(float delta) {
-        super.draw(delta);
         batch.begin();
         font.draw(batch, "Welcome to InfinityRun ALPHA!!! ", 100, 150);
         instructions.draw(batch, 1);
+        super.draw(delta);
         batch.end();
+    }
 
+    @Override
+    public void dispose() {
+        super.dispose();
 
     }
 }

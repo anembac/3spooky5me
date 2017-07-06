@@ -1,9 +1,9 @@
-package com.tda367.infinityrun.Controller;
+package com.tda367.infinityrun.View;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
+import com.tda367.infinityrun.View.IDrawnByDrawer;
 
 
 /*
@@ -26,7 +26,6 @@ public class VCButton extends Button implements IDrawnByDrawer {
     private TextButton.TextButtonStyle style;
 
 
-
     //Adds text to the button, requires a style to be added.
     public void addText(String text, TextButton.TextButtonStyle style){
         setStyle(style);
@@ -38,7 +37,6 @@ public class VCButton extends Button implements IDrawnByDrawer {
     }
 
     public void setText(String text){
-
         setStyle(this.style);
         label = new Label(text, new Label.LabelStyle(style.font, style.fontColor));
         label.setAlignment(Align.center);
@@ -53,7 +51,10 @@ public class VCButton extends Button implements IDrawnByDrawer {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        //System.out.println("vcbutton draw() reached");
         super.draw(batch, parentAlpha);
     }
+
+
 }
 

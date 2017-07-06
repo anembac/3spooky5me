@@ -14,8 +14,10 @@ import com.tda367.infinityrun.Model.World;
 import com.tda367.infinityrun.Model.WorldObject;
 import com.tda367.infinityrun.Utils.Math.Rect;
 import com.tda367.infinityrun.View.HUD;
+import com.tda367.infinityrun.View.IDrawnByDrawer;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class GameScreenDrawer extends ScreenDrawer{
 
@@ -28,10 +30,11 @@ public class GameScreenDrawer extends ScreenDrawer{
 
     public GameScreenDrawer(World world){
         this.world = world;
+        hud = new HUD(world.getHero());
+        vcButtons = new LinkedList<IDrawnByDrawer>();
     }
     @Override
     public void draw(float delta) {
-        super.draw(delta);
         Matrix4 translation = new Matrix4();
         Rect heroRect = world.getHero().getDrawingRect();
 
@@ -42,9 +45,11 @@ public class GameScreenDrawer extends ScreenDrawer{
         batch.setTransformMatrix(translation);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
+        super.draw(delta);
         batch.draw(background,-cx,-cy);
         for (WorldObject wo : world.getWorldObjects()) {
             checkTexture(wo);
+
             batch.draw(textureMap.get(wo.getTexturename()), wo.getPosition().x, wo.getPosition().y);
             if(wo instanceof Enemy){
 
@@ -59,7 +64,6 @@ public class GameScreenDrawer extends ScreenDrawer{
 
         batch.end();
         hud.render();
-        //spöket
 
     }
 
@@ -73,5 +77,9 @@ public class GameScreenDrawer extends ScreenDrawer{
         for (Texture tex : textureMap.values()) {
             tex.dispose();
         }
+    }
+
+    public void show(){
+        camera.setToOrtho(false, windowWidth, windowHeight);
     }
 }

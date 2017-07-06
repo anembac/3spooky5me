@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.tda367.infinityrun.Controller.VCButton;
+import com.tda367.infinityrun.View.VCButton;
 import com.tda367.infinityrun.Model.Shop;
 
 public class ShopScreenDrawer extends ScreenDrawer{

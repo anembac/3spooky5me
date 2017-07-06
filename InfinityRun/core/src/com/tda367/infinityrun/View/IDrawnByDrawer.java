@@ -1,4 +1,4 @@
-package com.tda367.infinityrun.Controller;
+package com.tda367.infinityrun.View;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -14,5 +14,4 @@ public interface IDrawnByDrawer {
 
     void setStyle(Button.ButtonStyle style);
 
-    Cell<Label> add(CharSequence text);
 }

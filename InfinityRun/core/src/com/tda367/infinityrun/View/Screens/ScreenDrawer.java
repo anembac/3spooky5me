@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.tda367.infinityrun.Controller.IDrawnByDrawer;
+import com.tda367.infinityrun.View.IDrawnByDrawer;
 
 import java.util.LinkedList;
 /*
@@ -16,20 +16,21 @@ public abstract class ScreenDrawer {
     protected SpriteBatch batch = new SpriteBatch();
     protected BitmapFont font = new BitmapFont();
     protected OrthographicCamera camera = new OrthographicCamera();
-    protected LinkedList<IDrawnByDrawer> vcButtons = new LinkedList<IDrawnByDrawer>();
+    protected LinkedList<IDrawnByDrawer> vcButtons;
 
 
     public void draw(float delta){
         //TODO: Pick a nice color
-        Gdx.gl.glClearColor(0, 110, 90, 0);
+        Gdx.gl.glClearColor(0.04f, 0.8f, 0.85f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
         batch.setProjectionMatrix(camera.combined);
-        batch.begin();
+        //batch.begin();
         for(IDrawnByDrawer i : vcButtons){
-            i.draw(batch,1);
+
+            i.draw(batch,1  );
         }
-        batch.end();
+        //batch.end();
     }
 
     public void dispose(){
