@@ -45,6 +45,8 @@ private static final Vec2 sizeBounds = new Vec2(meter,meter);
     private int characterID;
     private int coins = 0;
 
+   // public String getWeapon(){return MeleeWeapon.g;}
+
     public void setMaxdistance(int i) {
         maxDistance = i;
     }

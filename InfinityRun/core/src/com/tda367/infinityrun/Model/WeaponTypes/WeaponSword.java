@@ -11,6 +11,7 @@ import com.tda367.infinityrun.Model.MeleeWeapon;
 public class WeaponSword extends MeleeWeapon {
     public WeaponSword(double meleeHandling, double criticalChance, double criticalDamage) {
         super(12, 0.9, 2);
+        name = "Sword";
         damage *= meleeHandling*1.1;
         criticalHitChance = criticalChance;
         criticalHitDamage = criticalDamage;

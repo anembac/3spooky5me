@@ -11,6 +11,7 @@ import com.tda367.infinityrun.Model.MeleeWeapon;
 public class WeaponMace extends MeleeWeapon {
     public WeaponMace(double meleeHandling, double criticalChance, double criticalDamage) {
         super(14, 1.8, 1);
+        name = "Mace";
         damage *= meleeHandling*1.2;
         criticalHitChance = criticalChance;
         criticalHitDamage = criticalDamage+0.4;

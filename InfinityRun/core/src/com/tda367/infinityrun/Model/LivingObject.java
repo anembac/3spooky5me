@@ -38,7 +38,7 @@ public class LivingObject extends WorldObject {
         if (meleeWeapon != null) {
             removeChildren(meleeWeapon);
         }
-        MeleeWeapon weapon = getRandomWeapon();
+        MeleeWeapon weapon = setRandomWeapon();
         addChildren(weapon);
         meleeWeapon = weapon;
     }
@@ -46,8 +46,11 @@ public class LivingObject extends WorldObject {
 
 
 
+
+
+
     //this method randomizes a weapon for livingobjects.
-    public MeleeWeapon getRandomWeapon (){
+    public MeleeWeapon setRandomWeapon (){
         Random rnd = new Random();
         int randomizedWeapon = rnd.nextInt(100) + 1;
 
