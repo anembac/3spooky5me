@@ -9,11 +9,24 @@ import com.tda367.infinityrun.Model.Character;
 public class HUD {
 
     private final Character character;
-    private final TextureAtlas atlas = new TextureAtlas("HUD/HUDTexture.pack");
+    private final TextureAtlas atlas = new TextureAtlas("HUD/HUDTexture.atlas");
     private final SpriteBatch hudbatch = new SpriteBatch();
     private final BitmapFont hudfont = new BitmapFont();
     private final TextureRegion healthicon = new TextureRegion(atlas.findRegion("heart"));
     private final TextureRegion coinicon = new TextureRegion(atlas.findRegion("hudcoin"));
+
+    private final TextureRegion axeIcon = new TextureRegion(atlas.findRegion("HudAxe"));
+
+    private final TextureRegion maceIcon = new TextureRegion(atlas.findRegion("HudMace"));
+
+    private final TextureRegion daggerIcon = new TextureRegion(atlas.findRegion("HudDagger"));
+
+    private final TextureRegion spearIcon = new TextureRegion(atlas.findRegion("HudSpear"));
+
+    private final TextureRegion swordIcon = new TextureRegion(atlas.findRegion("HudSword"));
+
+    private final TextureRegion weaponContainer = new TextureRegion(atlas.findRegion("WeaponContainer"));
+
 
 
     public HUD(Character character) {
@@ -35,16 +48,37 @@ public class HUD {
         //rooms
         hudfont.draw(hudbatch, "Highest distance from start: " + character.getMaxdistance(), 1400, 850);
 
+        //weapon container
+        hudbatch.draw(weaponContainer, 105 - healthicon.getRegionWidth(),55 - healthicon.getRegionHeight() / 2 );
+
+        //Weapon name
+        hudfont.draw(hudbatch, character.getWeapon(),165 - healthicon.getRegionWidth(),80 - healthicon.getRegionHeight() / 2 );
+
+        //
+        hudbatch.draw(Weapontype(character.getWeapon()),105 - healthicon.getRegionWidth(),55 - healthicon.getRegionHeight() / 2 );
 
 
-        //Weapon
-        hudfont.draw(hudbatch, character.getWeapon() +" :Weapon",120 - healthicon.getRegionWidth(),80 - healthicon.getRegionHeight() / 2 );
 
 
         hudbatch.end();
 
 
     }
+
+
+
+    public TextureRegion Weapontype(String weapon){
+            switch (weapon){
+                case "Axe": return axeIcon;
+                case "Dagger": return daggerIcon;
+                case "Mace": return maceIcon;
+                case "Spear": return spearIcon;
+                case "Sword": return swordIcon;
+
+            }
+            return swordIcon;
+    }
+
 
 
     public void dispose() {

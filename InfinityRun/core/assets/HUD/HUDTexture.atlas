@@ -1,0 +1,61 @@
+
+HUDTexture.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+HudSword
+  rotate: false
+  xy: 1, 1
+  size: 54, 44
+  orig: 54, 44
+  offset: 0, 0
+  index: -1
+WeaponContainer
+  rotate: false
+  xy: 57, 1
+  size: 54, 44
+  orig: 54, 44
+  offset: 0, 0
+  index: -1
+HudDagger
+  rotate: false
+  xy: 113, 1
+  size: 54, 44
+  orig: 54, 44
+  offset: 0, 0
+  index: -1
+HudMace
+  rotate: false
+  xy: 169, 1
+  size: 54, 44
+  orig: 54, 44
+  offset: 0, 0
+  index: -1
+HudAxe
+  rotate: false
+  xy: 225, 1
+  size: 54, 44
+  orig: 54, 44
+  offset: 0, 0
+  index: -1
+HudSpear
+  rotate: false
+  xy: 281, 1
+  size: 54, 44
+  orig: 54, 44
+  offset: 0, 0
+  index: -1
+hudcoin
+  rotate: false
+  xy: 337, 13
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+heart
+  rotate: false
+  xy: 371, 13
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
