@@ -30,7 +30,6 @@ public class GameScreen extends Observable implements Screen {
     public void show() {
         gameScreenDrawer.show();
         Gdx.input.setInputProcessor(gameStage);
-        System.out.println("hello there");
     }
 
     @Override

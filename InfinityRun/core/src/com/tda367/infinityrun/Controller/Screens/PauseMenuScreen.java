@@ -73,6 +73,7 @@ public class PauseMenuScreen extends Observable implements Screen {
 
     @Override
     public void show() {
+        pauseMenuDrawer.show();
         Gdx.input.setInputProcessor(pauseStage);
     }
 
@@ -84,7 +85,6 @@ public class PauseMenuScreen extends Observable implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             setChanged();
             notifyObservers(ScreenStates.GameScreen);
-            this.dispose();
         }
     }
 

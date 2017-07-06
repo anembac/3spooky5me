@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.tda367.infinityrun.View.IDrawnByDrawer;
 
 import java.util.LinkedList;
@@ -13,15 +14,17 @@ import java.util.LinkedList;
 * Superclass for the drawer classes, contains some basic functions that all drawer classes will use.
 */
 public abstract class ScreenDrawer {
-    protected SpriteBatch batch = new SpriteBatch();
-    protected BitmapFont font = new BitmapFont();
-    protected OrthographicCamera camera = new OrthographicCamera();
-    protected LinkedList<IDrawnByDrawer> vcButtons;
+    final int windowWidth = 1600;
+    final int windowHeight = 900;
+    SpriteBatch batch = new SpriteBatch();
+    BitmapFont font = new BitmapFont();
+    OrthographicCamera camera = new OrthographicCamera();
+    LinkedList<IDrawnByDrawer> vcButtons;
 
 
     public void draw(float delta){
         //TODO: Pick a nice color
-        Gdx.gl.glClearColor(0.04f, 0.8f, 0.85f, 1);
+        Gdx.gl.glClearColor(0.04f, 0.8f, 0.85f, 1); // #09CDDA
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
         batch.setProjectionMatrix(camera.combined);
@@ -33,8 +36,20 @@ public abstract class ScreenDrawer {
         //batch.end();
     }
 
+
+    public void show(){
+       camera.setToOrtho(false, windowWidth, windowHeight);
+    }
+
     public void dispose(){
         batch.dispose();
         font.dispose();
+    }
+
+    public void setButtonTexture(Button.ButtonStyle style){
+        for(IDrawnByDrawer b : vcButtons){
+            b.setStyle(style);
+
+        }
     }
 }

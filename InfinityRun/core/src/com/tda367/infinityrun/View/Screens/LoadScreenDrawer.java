@@ -22,9 +22,8 @@ public class LoadScreenDrawer extends ScreenDrawer{
     public LoadScreenDrawer(LinkedList<IDrawnByDrawer> vcButton){
 
         this.vcButtons = vcButton;
-        for(IDrawnByDrawer i : vcButtons){
-           i.setStyle(style);
-        }
+
+        setButtonTexture(style);
 
     }
 
@@ -37,6 +36,12 @@ public class LoadScreenDrawer extends ScreenDrawer{
 
             buttonTable.setPosition(800, 450);
     */
+
+    public void draw(float delta){
+        batch.begin();
+        super.draw(delta);
+        batch.end();
+    }
 
 
 }

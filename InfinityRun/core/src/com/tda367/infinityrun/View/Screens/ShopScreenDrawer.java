@@ -92,6 +92,7 @@ public class ShopScreenDrawer extends ScreenDrawer{
 
     @Override
     public void draw(float delta) {
+        batch.begin();
         super.draw(delta);
         if (shop.displayPoorMessage()) {
             shopMessage.setText("You cannot afford this upgrade.");
@@ -100,5 +101,6 @@ public class ShopScreenDrawer extends ScreenDrawer{
         } else {
             shopMessage.setText("");
         }
+        batch.end();
     }
 }

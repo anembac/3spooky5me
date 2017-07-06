@@ -74,7 +74,9 @@ private ShopScreen shopScreen;
 
     @Override
     public void update(Observable o, Object arg) {
+        if(arg instanceof ScreenStates){
+            switchToScreen(((ScreenStates)arg));
+        }
 
-        switchToScreen(((ScreenStates)arg));
     }
 }

@@ -60,6 +60,7 @@ public class LoadScreen extends Observable implements Screen {
 
     @Override
     public void show() {
+        loadScreenDrawer.show();
         Gdx.input.setInputProcessor(loadStage);
 
     }

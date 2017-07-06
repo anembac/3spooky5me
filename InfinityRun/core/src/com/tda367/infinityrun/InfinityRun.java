@@ -32,17 +32,6 @@ public class InfinityRun extends Game implements Observer {
     public void create() {
         //World creation
         tbWorldGen = new TextbasedWorldGenerator();
-        newGame();
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        if(arg.equals(newGame)){
-            newGame();
-        }
-    }
-
-    private void newGame(){
         hero = new Character();
         world = new World(tbWorldGen, hero);
         shop = new Shop(hero);
@@ -50,6 +39,22 @@ public class InfinityRun extends Game implements Observer {
         screenManager.switchToScreen(ScreenStates.MainMenuScreen);
         observeNewGameScreens();
     }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if(arg.equals(newGame)){
+            create();
+        }
+    }
+
+//    private void newGame(){
+//        hero = new Character();
+//        world = new World(tbWorldGen, hero);
+//        shop = new Shop(hero);
+//        screenManager = new ScreenManager(this, world, shop);
+//        screenManager.switchToScreen(ScreenStates.MainMenuScreen);
+//        observeNewGameScreens();
+//    }
 
     /*
     * This method makes InfinityRun observe GameScreen and PauseMenuScreen in order to be notified of when a new game

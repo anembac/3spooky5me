@@ -23,11 +23,14 @@ public class PauseMenuDrawer extends ScreenDrawer {
 
     public PauseMenuDrawer(LinkedList<IDrawnByDrawer> vcButtons){
         this.vcButtons = vcButtons;
+        setButtonTexture(menuButtonStyle);
     }
 
     @Override
     public void draw(float delta) {
+        batch.begin();
         super.draw(delta);
+        batch.end();
 
     }
 

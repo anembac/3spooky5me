@@ -36,10 +36,7 @@ public class MainMenuDrawer extends ScreenDrawer{
         TextButton.TextButtonStyle menuButtonStyle =
                 new TextButton.TextButtonStyle(textureUpDrawable, textureDownDrawable, textureUpDrawable, font);
         this.vcButtons = vcButtons;
-        for(IDrawnByDrawer b : vcButtons){
-            b.setStyle(menuButtonStyle);
-
-        }
+        setButtonTexture(menuButtonStyle);
 
 
         //Instructions

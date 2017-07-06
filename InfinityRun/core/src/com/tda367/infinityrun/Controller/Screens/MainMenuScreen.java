@@ -61,7 +61,6 @@ public class MainMenuScreen extends Observable implements Screen { //this class 
 
         mainMenuDrawer.draw(delta);
         if (newCharButton.isPressed() || Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
-            System.out.println("fkljdsfdös");
             setChanged();
             notifyObservers(ScreenStates.GameScreen);
             this.dispose();
@@ -102,7 +101,7 @@ public class MainMenuScreen extends Observable implements Screen { //this class 
 
     @Override
     public void show() {
-
+        mainMenuDrawer.show();
         Gdx.input.setInputProcessor(mainMenuStage);
 
     }

@@ -69,7 +69,7 @@ public class ShopScreen extends Observable implements Screen {
 
     @Override
     public void show() {
-
+        shopScreenDrawer.show();
         Gdx.input.setInputProcessor(shopStage);
         changeListener = new ChangeListener() {
             @Override

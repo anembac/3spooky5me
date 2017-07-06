@@ -21,8 +21,6 @@ import java.util.LinkedList;
 
 public class GameScreenDrawer extends ScreenDrawer{
 
-    private final int windowWidth = 1600;
-    private final int windowHeight = 900;
     private HUD hud;
     private World world;
     private final Texture background = new Texture(Gdx.files.internal("WorldObjects/castle.png"));
@@ -79,7 +77,4 @@ public class GameScreenDrawer extends ScreenDrawer{
         }
     }
 
-    public void show(){
-        camera.setToOrtho(false, windowWidth, windowHeight);
-    }
 }
