@@ -1,7 +1,7 @@
 package com.tda367.infinityrun.Utils.Math;
 
-/**
- * Created by Mikael on 5/3/2017.
+/*
+abstraction of a rectangle from our Vec2 points.
  */
 public class Rect {
     public final Vec2 position;
