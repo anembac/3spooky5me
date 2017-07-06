@@ -60,6 +60,7 @@ public class MainMenuScreen extends Observable implements Screen { //this class 
     public void render(float delta) {
 
         mainMenuDrawer.draw(delta);
+
         if (newCharButton.isPressed() || Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
             setChanged();
             notifyObservers(ScreenStates.GameScreen);

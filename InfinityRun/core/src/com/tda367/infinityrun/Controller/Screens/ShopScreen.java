@@ -82,6 +82,7 @@ public class ShopScreen extends Observable implements Screen {
 
     @Override
     public void render(float delta) {
+        shopScreenDrawer.draw(delta);
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.TAB)){
             setChanged();

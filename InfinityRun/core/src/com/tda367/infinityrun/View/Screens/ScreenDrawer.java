@@ -19,10 +19,10 @@ public abstract class ScreenDrawer {
     SpriteBatch batch = new SpriteBatch();
     BitmapFont font = new BitmapFont();
     OrthographicCamera camera = new OrthographicCamera();
-    LinkedList<IDrawnByDrawer> vcButtons;
+    LinkedList<IDrawnByDrawer> vcButtons = new LinkedList<IDrawnByDrawer>();
 
 
-    public void draw(float delta){
+    public void draw(float delta){ //Subclasses' draw() methods must begin with batch.begin().
         //TODO: Pick a nice color
         Gdx.gl.glClearColor(0.04f, 0.8f, 0.85f, 1); // #09CDDA
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

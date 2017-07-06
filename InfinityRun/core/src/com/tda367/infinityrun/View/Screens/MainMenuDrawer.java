@@ -59,9 +59,9 @@ public class MainMenuDrawer extends ScreenDrawer{
     @Override
     public void draw(float delta) {
         batch.begin();
+        super.draw(delta);
         font.draw(batch, "Welcome to InfinityRun ALPHA!!! ", 100, 150);
         instructions.draw(batch, 1);
-        super.draw(delta);
         batch.end();
     }
 
