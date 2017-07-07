@@ -135,9 +135,6 @@ public class World {
 
 
     private void addRoomIfItDoesntExist(int x, int y) {
-        if (!generator.roomExists(x, y)) {
-
-        }
         {
             List<WorldObject> newWorldObjects = generator.generate(x, y);
             for (int i = 0; i < newWorldObjects.size(); i++) {

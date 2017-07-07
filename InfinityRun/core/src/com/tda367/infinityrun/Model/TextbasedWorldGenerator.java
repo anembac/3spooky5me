@@ -68,7 +68,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                     } else {
                         for (int x = 0; x < roomWidth; x++) {
                             java.lang.Character _char = line.toCharArray()[x];
-                            if (_char == ' ') _char = 'E';
+                            if (_char.equals(' ')) _char = 'E';
                             map.get(x).set(y, _char);
                         }
                     }
@@ -95,9 +95,9 @@ public class TextbasedWorldGenerator implements WorldGenerator {
 
         if (checkRoomForObject(map, 12, 14)) d = true;
 
-        if (checkRoomForObject(map, 0, 6)) l = true;
+        if (checkRoomForObject(map, 0, 7)) l = true;
 
-        if (checkRoomForObject(map, 24, 6)) r = true;
+        if (checkRoomForObject(map, 24, 7)) r = true;
         RoomType room = new RoomType(r, l, u, d);
         if (allRooms.containsKey(room.bitmaskCode())) {
             allRooms.get(room.bitmaskCode()).addType(map);
@@ -119,15 +119,16 @@ public class TextbasedWorldGenerator implements WorldGenerator {
 
     private boolean checkRoomForObject(List<List<java.lang.Character>> map, int a, int b){
 
-        if (map.get(a).get(b) == 'E')
+        if (map.get(a).get(b).equals('E'))
             return true;
-        if (map.get(a).get(b) == ' ')
+        if (map.get(a).get(b).equals(' '))
             return true;
         return false;
     }
 
 
-    //this overrides the generate function with seperate cases for base and  for the rest it checks the roomtypes of the surrounding rooms. From this it evaluates what can be generated.
+    //this overrides the generate function with seperate cases for base and  for the rest it checks the roomtypes of
+    //the surrounding rooms. From this it evaluates what can be generated.
     @Override
     public List<WorldObject> generate(int x, int y) {
         if (roomExists(x, y)) return new ArrayList<WorldObject>();
@@ -235,7 +236,11 @@ public class TextbasedWorldGenerator implements WorldGenerator {
 
         public List<WorldObject> generate(int ox, int oy) {
 
-            //this is the distance formula, and whenever you reach a new maximum distance for the session, the difficulty of the game will increase
+           /* This is the distance formula, and whenever you reach a new maximum distance for the session,
+            the difficulty of the game will increase
+
+            Findbugs complains about this, however we need the root
+            as an integer, precision is less important. */
 
             int difficulty = (int) Math.sqrt(ox * ox + oy * oy);
             if (difficulty > maxDistanceFromSpawn) {
@@ -276,6 +281,8 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                         case 'S':
                             output.add(new SpikeObject(pos, (difficulty)));
                             output.add(new SpikeObject((new Vec2(pos.x + 32, pos.y)), (difficulty)));
+                            break;
+                        default:
                             break;
 
                     }

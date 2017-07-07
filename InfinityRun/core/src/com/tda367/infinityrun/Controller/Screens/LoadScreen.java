@@ -32,9 +32,8 @@ public class LoadScreen extends Observable implements Screen {
         ChangeListener changeListener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
+                //TODO: Implement loading properly
                 int loadID = Integer.parseInt(actor.getName());
-                dispose();
                 setChanged();
                 notifyObservers(ScreenStates.GameScreen);
 
@@ -49,10 +48,10 @@ public class LoadScreen extends Observable implements Screen {
 
         }
 
+        //Add to actor
         loadStage.addActor(buttonTable);
 
-
-        //drawer
+        //Create drawer/view
         loadScreenDrawer = new LoadScreenDrawer(vcButtons);
 
     }
