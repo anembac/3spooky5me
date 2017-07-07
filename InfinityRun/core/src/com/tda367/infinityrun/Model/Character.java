@@ -159,7 +159,6 @@ private static final Vec2 sizeBounds = new Vec2(meter,meter);
     250% equals 2 coins and a 50% chance to get an extra coin.
     */
     private int numberOfCoins() {
-        System.out.println(getCoinMultiplier());
         int coins = ((int) (getCoinMultiplier() * 100)) / 100;
         if (extraCoin(((int) (getCoinMultiplier() *100) %100))) {
             coins++;

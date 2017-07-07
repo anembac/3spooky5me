@@ -62,9 +62,7 @@ public final class SaveCharacter {
         for (int i = 0; i < hero.getUpgrades().size(); i++) {
             Upgrade currentUpgrade = hero.getUpgrades().get(hero.getUpgrades().keySet().toArray()[i]);
             saveText.append(hero.getUpgrades().keySet().toArray()[i]);
-            System.out.println(hero.getUpgrades().keySet().toArray()[i]);
             saveText.append("level: " + currentUpgrade.getLevel());
-            System.out.println("level: " + currentUpgrade.getLevel());
             saveText.append("\n");
         }
         saveText.append("END" + saveID);

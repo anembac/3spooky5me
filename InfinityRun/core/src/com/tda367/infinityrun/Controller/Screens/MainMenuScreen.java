@@ -56,28 +56,21 @@ public class MainMenuScreen extends Observable implements Screen { //this class 
 
     @Override
     public void render(float delta) {
-//        System.out.println("newchar x : " + newCharButton.getX());
-//        System.out.println("newchar y : " + newCharButton.getY());
-//        System.out.println("loadchar x : " + loadCharButton.getX());
-//        System.out.println("loadchar y : " + loadCharButton.getY());
 
         mainMenuDrawer.draw(delta);
 
         if (newCharButton.isPressed() || Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
-            System.out.println("daga otoko da");
             setChanged();
             notifyObservers(ScreenStates.GameScreen);
             this.dispose();
         }
         if (loadCharButton.isPressed() && LoadCharacter.saveDataExists()) {
-            System.out.println("Omae wa mou shindeiru");
             setChanged();
             notifyObservers(ScreenStates.LoadScreen);
             this.dispose();
         }
 
         if (exitButton.isPressed()) {
-            System.out.println("domo arigato mr robato");
             this.dispose();
             System.out.println("Exiting Game...");
             Gdx.app.exit();
