@@ -21,7 +21,6 @@ public class MainMenuScreen extends Observable implements Screen { //this class 
     private final VCButton newCharButton;
     private final VCButton loadCharButton;
     private final VCButton exitButton;
-    private final VerticalGroup buttonGroup;
     private LinkedList<IDrawnByDrawer> vcButtons = new LinkedList<IDrawnByDrawer>();
     private MainMenuDrawer mainMenuDrawer;
 
@@ -35,19 +34,18 @@ public class MainMenuScreen extends Observable implements Screen { //this class 
         vcButtons.add(loadCharButton);
         vcButtons.add(exitButton);
 
+        newCharButton.setPosition(800-newCharButton.getWidth()/2, 450-newCharButton.getHeight()/2);
+        loadCharButton.setPosition(800-loadCharButton.getWidth()/2, 400-loadCharButton.getHeight()/2);
         exitButton.setPosition(1400, 100);
-        buttonGroup = new VerticalGroup();
-        buttonGroup.space(30); //space between buttons in group
-        buttonGroup.setX(1600 / 2 - buttonGroup.getWidth() / 2);
-        buttonGroup.setY(900 / 2 - buttonGroup.getHeight() / 2);
-        buttonGroup.addActor(newCharButton);
-        buttonGroup.addActor(loadCharButton);
+
+
 
 
         //ADD TO STAGE
-        for(IDrawnByDrawer b : vcButtons){ //only VCButtons are in the vcButtons list, so casting below is fine.
-            mainMenuStage.addActor((VCButton)b);
-        }
+        mainMenuStage.addActor(newCharButton);
+        mainMenuStage.addActor(loadCharButton);
+        mainMenuStage.addActor(exitButton);
+
         //Screen needs to hold an instance of drawer
         mainMenuDrawer = new MainMenuDrawer(vcButtons);
 
@@ -58,21 +56,28 @@ public class MainMenuScreen extends Observable implements Screen { //this class 
 
     @Override
     public void render(float delta) {
+//        System.out.println("newchar x : " + newCharButton.getX());
+//        System.out.println("newchar y : " + newCharButton.getY());
+//        System.out.println("loadchar x : " + loadCharButton.getX());
+//        System.out.println("loadchar y : " + loadCharButton.getY());
 
         mainMenuDrawer.draw(delta);
 
         if (newCharButton.isPressed() || Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+            System.out.println("daga otoko da");
             setChanged();
             notifyObservers(ScreenStates.GameScreen);
             this.dispose();
         }
         if (loadCharButton.isPressed() && LoadCharacter.saveDataExists()) {
+            System.out.println("Omae wa mou shindeiru");
             setChanged();
             notifyObservers(ScreenStates.LoadScreen);
             this.dispose();
         }
 
         if (exitButton.isPressed()) {
+            System.out.println("domo arigato mr robato");
             this.dispose();
             System.out.println("Exiting Game...");
             Gdx.app.exit();

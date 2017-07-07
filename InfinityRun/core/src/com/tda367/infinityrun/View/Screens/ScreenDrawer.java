@@ -22,18 +22,22 @@ public abstract class ScreenDrawer {
     LinkedList<IDrawnByDrawer> vcButtons = new LinkedList<IDrawnByDrawer>();
 
 
-    public void draw(float delta){ //Subclasses' draw() methods must begin with batch.begin().
+    /*
+    * Responsible for drawing all the things all drawers have in common. Usually overridden, but with a call to
+    * super.draw() at some point.
+    *
+    * Does not use own batch.begin() and batch.end(). Subclasses' draw() methods must begin with batch.begin().
+    */
+    public void draw(float delta){
         //TODO: Pick a nice color
         Gdx.gl.glClearColor(0.04f, 0.8f, 0.85f, 1); // #09CDDA
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
         batch.setProjectionMatrix(camera.combined);
-        //batch.begin();
         for(IDrawnByDrawer i : vcButtons){
 
             i.draw(batch,1  );
         }
-        //batch.end();
     }
 
 

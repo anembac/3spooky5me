@@ -16,12 +16,12 @@ import java.util.Observer;
 * something that was not possible in earlier iterations where new screens had to be created due to visibility issues.
 */
 public class ScreenManager implements Observer {
-private Game game;
-private GameScreen gameScreen;
-private LoadScreen loadScreen;
-private MainMenuScreen mainMenuScreen;
-private PauseMenuScreen pauseMenuScreen;
-private ShopScreen shopScreen;
+    private Game game;
+    private GameScreen gameScreen;
+    private LoadScreen loadScreen;
+    private MainMenuScreen mainMenuScreen;
+    private PauseMenuScreen pauseMenuScreen;
+    private ShopScreen shopScreen;
 
     public ScreenManager(Game game, World world, Shop shop){
         this.game = game;
@@ -43,19 +43,20 @@ private ShopScreen shopScreen;
     }
 
 
-    //Takes a string as argument
+    //Takes the ScreenStates enum as argument
     public void switchToScreen(ScreenStates screen){
         switch(screen){
             case GameScreen: game.setScreen(gameScreen);
-            break;
+                break;
             case LoadScreen: game.setScreen(loadScreen);
-            break;
+                break;
             case MainMenuScreen: game.setScreen(mainMenuScreen);
-            break;
+                break;
             case PauseMenuScreen: game.setScreen(pauseMenuScreen);
-            break;
+                break;
             case ShopScreen: game.setScreen(shopScreen);
             default:
+                break;
         }
     }
 

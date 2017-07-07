@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.tda367.infinityrun.View.IDrawnByDrawer;
+import com.tda367.infinityrun.View.VCButton;
 
 import java.util.LinkedList;
 
@@ -37,10 +38,11 @@ public class MainMenuDrawer extends ScreenDrawer{
                 new TextButton.TextButtonStyle(textureUpDrawable, textureDownDrawable, textureUpDrawable, font);
         this.vcButtons = vcButtons;
         setButtonTexture(menuButtonStyle);
-
+        vcButtons.get(0).setAndDisplayText("New Character", menuButtonStyle);
+        vcButtons.get(1).setAndDisplayText("Load Character", menuButtonStyle);
 
         //Instructions
-        labelStyle = new Label.LabelStyle(font, new Color(9, 205, 218, 1));
+        labelStyle = new Label.LabelStyle(font, new Color(1, 1, 1, 1));
         instructions = new Label("", labelStyle);
         instructions.setText(
                 "Press one of the buttons to start playing. If you're new, hit \"NEW CHARACTER\", otherwise do as" +

@@ -44,7 +44,7 @@ public class ShopScreenDrawer extends ScreenDrawer{
             buttonStyles[i] = new TextButton.TextButtonStyle(
                     texturesUpDrawable[i], texturesDownDrawable[i], texturesUpDrawable[i], font);
 
-            buttonArray[i].addText(nameList[i]
+            buttonArray[i].setAndDisplayText(nameList[i]
                     + ", Level: " + shop.getUpgList().get(nameList[i]).getLevel()
                     + ", Price: "
                     + shop.getPrice(shop.getUpgList().get(nameList[i])), buttonStyles[i]);
@@ -72,7 +72,7 @@ public class ShopScreenDrawer extends ScreenDrawer{
                 (texturesUpDrawable[numberOfUpgrades],
                         texturesDownDrawable[numberOfUpgrades],
                         texturesUpDrawable[numberOfUpgrades], font);
-        buttonArray[numberOfUpgrades].addText("Back", buttonStyles[numberOfUpgrades]);
+        buttonArray[numberOfUpgrades].setAndDisplayText("Back", buttonStyles[numberOfUpgrades]);
         buttonArray[numberOfUpgrades].setPosition(1400, 50);
         buttonArray[numberOfUpgrades].setName("back");
 

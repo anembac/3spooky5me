@@ -23,25 +23,35 @@ public class VCButton extends Button implements IDrawnByDrawer {
 
     //These do nothing unless the addText() method is called. This is intentional.
     private Label label;
-    private TextButton.TextButtonStyle style;
+    private String text = "";
+    private final float defaultWidth = 120;
+    private final float defaultHeight = 32;
+
+    public VCButton(){
+        super();
+        setSize(defaultWidth,defaultHeight);
+    }
 
 
     //Adds text to the button, requires a style to be added.
-    public void addText(String text, TextButton.TextButtonStyle style){
+    public void setAndDisplayText(String text, TextButton.TextButtonStyle style){
+        setText(text);
+        displayText(style);
+    }
+
+    public void displayText(TextButton.TextButtonStyle style){
+        float currX = getX()+getWidth()/2;
+        float currY = getY()+getHeight()/2;
         setStyle(style);
-        this.style = style;
-        label = new Label(text, new Label.LabelStyle(style.font, style.fontColor));
+        label = new Label(this.text, new Label.LabelStyle(style.font, style.fontColor));
         label.setAlignment(Align.center);
         add(label).expand().fill();
         setSize(getPrefWidth(), getPrefHeight());
+        setPosition(currX-getWidth()/2,currY-getHeight()/2);
     }
 
     public void setText(String text){
-        setStyle(this.style);
-        label = new Label(text, new Label.LabelStyle(style.font, style.fontColor));
-        label.setAlignment(Align.center);
-        add(label).expand().fill();
-        setSize(getPrefWidth(), getPrefHeight());
+        this.text = text;
     }
 
 
