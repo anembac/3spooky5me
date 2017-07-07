@@ -139,7 +139,7 @@ public class World {
             List<WorldObject> newWorldObjects = generator.generate(x, y);
             for (int i = 0; i < newWorldObjects.size(); i++) {
                 for (int j = 0; j < worldObjects.size(); j++) {
-                    if (newWorldObjects.get(i) == worldObjects.get(j))
+                    if (newWorldObjects.get(i).equals(worldObjects.get(j)))
                         System.out.println("Error worldobject already added!?");
                 }
             }

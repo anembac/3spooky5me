@@ -142,6 +142,14 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                     possible.add(a.getValue());
                 }
 
+                for(int loop = 0; loop < allRooms.size();loop++){
+                    System.out.println("Key #: " + allRooms.keySet().toArray()[loop]);
+                    System.out.println("Right: " + allRooms.get(allRooms.keySet().toArray()[loop]).right);
+                    System.out.println("Left: " + allRooms.get(allRooms.keySet().toArray()[loop]).left);
+                    System.out.println("Up: " + allRooms.get(allRooms.keySet().toArray()[loop]).up);
+                    System.out.println("Down: " + allRooms.get(allRooms.keySet().toArray()[loop]).down);
+                }
+
                 if (madeRooms.containsKey(new IndexPoint(x + 1, y)) && madeRooms.get(new IndexPoint(x + 1, y)).left)
                     cleanPossible(possible, 1);
                 if (madeRooms.containsKey(new IndexPoint(x - 1, y)) && madeRooms.get(new IndexPoint(x - 1, y)).right)
