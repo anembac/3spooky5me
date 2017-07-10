@@ -85,7 +85,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
 
 
     // asserts which rooms work and which do not for the world generation using a  text database of available rooms.
-    //the numbers 0,6,12,14,24 are coordinates in the room, and are the center top, center right, center left and center bottom in that order.
+    //the numbers 0,7,12,14,24 are coordinates in the room, and are the center top, center right, center left and center bottom in that order.
 
 
     private void addRoom(List<List<java.lang.Character>> map) {
@@ -150,14 +150,22 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                     System.out.println("Down: " + allRooms.get(allRooms.keySet().toArray()[loop]).down);
                 }
 
-                if (madeRooms.containsKey(new IndexPoint(x + 1, y)) && madeRooms.get(new IndexPoint(x + 1, y)).left)
+                if (madeRooms.containsKey(new IndexPoint(x + 1, y)) && madeRooms.get(new IndexPoint(x + 1, y)).left){
                     cleanPossible(possible, 1);
-                if (madeRooms.containsKey(new IndexPoint(x - 1, y)) && madeRooms.get(new IndexPoint(x - 1, y)).right)
+                }
+
+                if (madeRooms.containsKey(new IndexPoint(x - 1, y)) && madeRooms.get(new IndexPoint(x - 1, y)).right){
                     cleanPossible(possible, 2);
-                if (madeRooms.containsKey(new IndexPoint(x, y + 1)) && madeRooms.get(new IndexPoint(x, y + 1)).down)
+                }
+
+                if (madeRooms.containsKey(new IndexPoint(x, y + 1)) && madeRooms.get(new IndexPoint(x, y + 1)).down){
                     cleanPossible(possible, 4);
-                if (madeRooms.containsKey(new IndexPoint(x, y - 1)) && madeRooms.get(new IndexPoint(x, y - 1)).up)
+                }
+
+                if (madeRooms.containsKey(new IndexPoint(x, y - 1)) && madeRooms.get(new IndexPoint(x, y - 1)).up){
                     cleanPossible(possible, 8);
+                }
+
 
                 RoomType madeRoom = null;
                 while (madeRoom == null) {
