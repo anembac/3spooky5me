@@ -113,7 +113,6 @@ private static final Vec2 sizeBounds = new Vec2(meter,meter);
     }
 
     private double getCoinMultiplier() {
-        System.out.println(upgrades.get("Looting").getValueDouble());
         return upgrades.get("Looting").getValueDouble();
     }
 
@@ -171,7 +170,6 @@ private static final Vec2 sizeBounds = new Vec2(meter,meter);
     //Determines if you will get the extra coin based on you extra percentage chance.
     private boolean extraCoin(int chance) {
         Random rnd = new Random();
-        //System.out.println("slumpat fram :" + (rnd.nextInt(100) + 1) + "chansen var:" + chance);
         return chance >= (rnd.nextInt(100) + 1);
 
     }

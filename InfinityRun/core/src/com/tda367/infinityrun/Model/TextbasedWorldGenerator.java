@@ -127,8 +127,8 @@ public class TextbasedWorldGenerator implements WorldGenerator {
     }
 
 
-    //this overrides the generate function with seperate cases for base and  for the rest it checks the roomtypes of
-    //the surrounding rooms. From this it evaluates what can be generated.
+    //this overrides the generate function with seperate cases for base and for theOTHER CASESit checks the roomtypes of
+    //the surrounding rooms. From this it evaluates what rooms can be generated, and randomly picks one.
     @Override
     public List<WorldObject> generate(int x, int y) {
         if (roomExists(x, y)) return new ArrayList<WorldObject>();
@@ -143,28 +143,37 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                 }
 
                 for(int loop = 0; loop < allRooms.size();loop++){
-                    System.out.println("Key #: " + allRooms.keySet().toArray()[loop]);
-                    System.out.println("Right: " + allRooms.get(allRooms.keySet().toArray()[loop]).right);
-                    System.out.println("Left: " + allRooms.get(allRooms.keySet().toArray()[loop]).left);
-                    System.out.println("Up: " + allRooms.get(allRooms.keySet().toArray()[loop]).up);
-                    System.out.println("Down: " + allRooms.get(allRooms.keySet().toArray()[loop]).down);
-                }
 
+
+                    //this part removes rooms from the list of possible rooms that have too many entrances
+                }
                 if (madeRooms.containsKey(new IndexPoint(x + 1, y)) && madeRooms.get(new IndexPoint(x + 1, y)).left){
-                    cleanPossible(possible, 1);
+                    cleanPossible(possible, 1, true);
                 }
-
                 if (madeRooms.containsKey(new IndexPoint(x - 1, y)) && madeRooms.get(new IndexPoint(x - 1, y)).right){
-                    cleanPossible(possible, 2);
+                    cleanPossible(possible, 2, true);
                 }
-
                 if (madeRooms.containsKey(new IndexPoint(x, y + 1)) && madeRooms.get(new IndexPoint(x, y + 1)).down){
-                    cleanPossible(possible, 4);
+                    cleanPossible(possible, 4, true);
+                }
+                if (madeRooms.containsKey(new IndexPoint(x, y - 1)) && madeRooms.get(new IndexPoint(x, y - 1)).up){
+                    cleanPossible(possible, 8, true);
                 }
 
-                if (madeRooms.containsKey(new IndexPoint(x, y - 1)) && madeRooms.get(new IndexPoint(x, y - 1)).up){
-                    cleanPossible(possible, 8);
-                }
+
+            if (madeRooms.containsKey(new IndexPoint(x + 1, y)) && !madeRooms.get(new IndexPoint(x + 1, y)).left){
+                cleanPossible(possible, 1, false);
+            }
+            if (madeRooms.containsKey(new IndexPoint(x - 1, y)) && !madeRooms.get(new IndexPoint(x - 1, y)).right){
+                cleanPossible(possible, 2, false);
+            }
+
+            if (madeRooms.containsKey(new IndexPoint(x, y + 1)) && !madeRooms.get(new IndexPoint(x, y + 1)).down){
+                cleanPossible(possible, 4, false);
+            }
+            if (madeRooms.containsKey(new IndexPoint(x, y - 1)) && !madeRooms.get(new IndexPoint(x, y - 1)).up){
+                cleanPossible(possible, 8, false);
+            }
 
 
                 RoomType madeRoom = null;
@@ -193,15 +202,39 @@ public class TextbasedWorldGenerator implements WorldGenerator {
         } else return true;
     }
 
-    private void cleanPossible(List<RoomType> possible, int i) {
+
+        //this method helps the roomgeneration by comparing bitmasks from the possible rooms to the direction that was chosen (int i).
+
+        //it takes in a  argument list of roomtypes, that is the list that is to be evaluated and reworked to the right number of rooms
+        // it takes in an argument int i. This is the bitmask that the roomlist is compared to(and for the relevant cases here, should be directions in the nearby rooms)
+        //last argument is a boolean that determines if the bitmask is positive or negative. This is if the evaluation is for walls or entrances.
+        // Both need to be checked for proper generation of the world
+
+    private void cleanPossible(List<RoomType> possible, int i, boolean state) {
+
         for (int k = 0; k < possible.size(); ) {
-            if ((possible.get(k).bitmaskCode() & i) == 0) {
-                possible.remove(k);
-                continue;
+            if (state) {
+                if ((possible.get(k).bitmaskCode() & i) == 0) {
+
+
+                    possible.remove(k);
+                    continue;
+                }
+                k++;
+
             }
-            k++;
+            if (!state){
+                if ((possible.get(k).bitmaskCode() & i) != 0) {
+
+
+                    possible.remove(k);
+                    continue;
+                }
+                k++;
+            }
         }
     }
+
 
 
 
@@ -288,7 +321,11 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                             int rnd = new Random().nextInt((100) + 1);
                             if (rnd < (((difficulty / 6) + Math.sqrt(difficulty) * (Math.sin(difficulty) * difficulty * difficulty) / 2) + 0.43) * 100) {
 
-                                Enemy enemy = (new Enemy(pos, new Vec2(meter, meter), 1 * (difficulty / 4), 1 * (difficulty / 8), 1 * (difficulty / 32), 1 * (difficulty / 8), 1 * (difficulty * 2), 1 * (difficulty / 16), 1 * (difficulty / 24), 1 * (difficulty / 24)));
+                                Enemy enemy = (new Enemy(pos, new Vec2(meter, meter),
+                                        1 * (difficulty / 4), 1 * (difficulty / 8),
+                                        1 * (difficulty / 32), 1 * (difficulty / 8),
+                                        1 * (difficulty * 2), 1 * (difficulty / 16),
+                                        1 * (difficulty / 24), 1 * (difficulty / 24)));
                                 output.add(enemy);
                                 enemy.setMeleeWeapon();
                             }

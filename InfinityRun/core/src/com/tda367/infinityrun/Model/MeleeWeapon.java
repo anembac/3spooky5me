@@ -74,7 +74,7 @@ public class MeleeWeapon extends WorldObject {
         if (state.attackPressed()) {
             // animation to see when we are actually attacking
             setPosition(getNoneRelativePosition().x, (getNoneRelativePosition().y - 1) % 30 + 21);
-         //   setPosition(getNoneRelativePosition().x+1*(30%21), (getNoneRelativePosition().y));
+        //   setPosition((getNoneRelativePosition().x- 1) % 30 + 21, (getNoneRelativePosition().y));
            } else setPosition(getNoneRelativePosition().x, 16);
 
 

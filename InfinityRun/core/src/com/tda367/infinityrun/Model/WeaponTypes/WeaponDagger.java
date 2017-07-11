@@ -10,7 +10,7 @@ import com.tda367.infinityrun.Model.MeleeWeapon;
 
 public class WeaponDagger extends MeleeWeapon {
     public WeaponDagger(double meleeHandling, double criticalChance, double criticalDamage) {
-        super(6, 0.5, 0.5);
+        super(6, 0.5, 0.4);
         name = "Dagger";
         damage *= meleeHandling * 0.95;
         criticalHitChance = criticalChance + 0.15;

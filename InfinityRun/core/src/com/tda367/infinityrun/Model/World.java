@@ -58,12 +58,12 @@ public class World {
 
         //generates the rooms adjacent to the current room to prevent unwanted errors.
         //creates the non-corner rooms
-        addRoomIfItDoesntExist(x + 1, y);
+       addRoomIfItDoesntExist(x + 1, y);
         addRoomIfItDoesntExist(x - 1, y);
         addRoomIfItDoesntExist(x - 0, y - 1);
         addRoomIfItDoesntExist(x - 0, y + 1);
 
-        //the diagonal rooms are generated last.
+      //the diagonal rooms are generated last.
         //creates diagonal rooms
         addRoomIfItDoesntExist(x - 1, y - 1);
         addRoomIfItDoesntExist(x - 1, y + 1);
