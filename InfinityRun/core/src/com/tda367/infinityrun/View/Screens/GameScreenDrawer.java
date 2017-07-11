@@ -19,6 +19,9 @@ import com.tda367.infinityrun.View.IDrawnByDrawer;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import static com.tda367.infinityrun.Utils.Constants.windowHeight;
+import static com.tda367.infinityrun.Utils.Constants.windowWidth;
+
 public class GameScreenDrawer extends ScreenDrawer{
 
     private HUD hud;

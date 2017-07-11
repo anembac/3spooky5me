@@ -85,11 +85,15 @@ public class LoadCharacter {
 
 
     public static int getNumberOfSaves() {
+        if(saveDataExists()){
+            String tmp = saveFile.readString();
+            int endindex = tmp.lastIndexOf("END");
+            String tmp2 = tmp.substring(endindex + 3);
+            return Integer.parseInt(tmp2);
+        }else{
+            return 0;
+        }
 
-        String tmp = saveFile.readString();
-        int endindex = tmp.lastIndexOf("END");
-        String tmp2 = tmp.substring(endindex + 3);
-        return Integer.parseInt(tmp2);
     }
 
     public static boolean saveDataExists(){

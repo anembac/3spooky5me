@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.tda367.infinityrun.Utils.Constants;
 import com.tda367.infinityrun.View.IDrawnByDrawer;
 
 import java.util.LinkedList;
@@ -14,8 +15,6 @@ import java.util.LinkedList;
 * Superclass for the drawer classes, contains some basic functions that all drawer classes will use.
 */
 public abstract class ScreenDrawer {
-    final int windowWidth = 1600;
-    final int windowHeight = 900;
     SpriteBatch batch = new SpriteBatch();
     BitmapFont font = new BitmapFont();
     OrthographicCamera camera = new OrthographicCamera();
@@ -42,7 +41,7 @@ public abstract class ScreenDrawer {
 
 
     public void show(){
-       camera.setToOrtho(false, windowWidth, windowHeight);
+       camera.setToOrtho(false, Constants.windowWidth, Constants.windowHeight);
     }
 
     public void dispose(){

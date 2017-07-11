@@ -39,17 +39,20 @@ public class LoadScreen extends Observable implements Screen {
 
             }
         };
-        Table buttonTable = new Table();
+
+
+
+
+
+
         for (int i = 0; i < numberOfButtons; i++) {
 
             buttons[i] = new VCButton();
             buttons[i].addListener(changeListener);
             vcButtons.add(buttons[i]);
+            loadStage.addActor(buttons[i]);
 
         }
-
-        //Add to actor
-        loadStage.addActor(buttonTable);
 
         //Create drawer/view
         loadScreenDrawer = new LoadScreenDrawer(vcButtons);
