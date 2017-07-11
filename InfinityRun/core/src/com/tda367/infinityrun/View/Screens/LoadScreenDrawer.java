@@ -1,8 +1,10 @@
 package com.tda367.infinityrun.View.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -20,6 +22,7 @@ public class LoadScreenDrawer extends ScreenDrawer{
     TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(
             textureUpDrawable, textureDownDrawable, textureUpDrawable, font);
     Table table = new Table();
+    Stage stage = new Stage();
 
 
     public LoadScreenDrawer(LinkedList<IDrawnByDrawer> vcButtons){
@@ -28,34 +31,32 @@ public class LoadScreenDrawer extends ScreenDrawer{
         setButtonTexture(style);
         int i = 0;
         for (IDrawnByDrawer button : this.vcButtons) {
-            //button.setAndDisplayText("Save " + (++i), style);
-            table.add((VCButton)button).expand().center();
-//            button.setPosition(
-//                    800-button.getWidth()/2,
-//                    450+(button.getHeight()*vcButtons.size()/2)-(i*button.getHeight()+i*10)
-//            );
+            button.setAndDisplayText("Save " + (++i), style);
+            if(i%10 == 1){ //this yields rows of 10 columns each
+                table.row();
+            }
+            table.add((VCButton)button).width(button.getWidth()).pad(5);
+
         }
         table.setPosition(800-table.getWidth()/2,450-table.getHeight()/2);
-        System.out.println(table.getX());
-        System.out.println(table.getY());
-        System.out.println(vcButtons.get(0).getX());
-        System.out.println(vcButtons.get(0).getY());
+        stage.addActor(table);
+
+//        System.out.println(table.getX());
+//        System.out.println(table.getY());
+//        System.out.println(vcButtons.get(0).getX());
+//        System.out.println(vcButtons.get(0).getY());
 
     }
 
-    /*
-            buttons[i].setName("" + (i + 1));
-            buttons[i].setWidth(128);
-            buttons[i].addListener(changeListener);
-            buttonTable.row();
-            buttonTable.add(buttons[i]).width(buttons[i].getPrefWidth()).pad(5);
-
-            buttonTable.setPosition(800, 450);
-    */
 
     public void draw(float delta){
+        Gdx.gl.glClearColor(0.04f, 0.8f, 0.85f, 1); // #09CDDA
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        super.draw(delta);
+        //super.draw(delta);
+        stage.draw();
         batch.end();
     }
 
