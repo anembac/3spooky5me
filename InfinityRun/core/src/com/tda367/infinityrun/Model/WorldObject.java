@@ -7,7 +7,6 @@ This is the basic abstract class WorldObject that every other object in the game
 This was done for the ease of extending WorldObjects for new purposes: new blocks with different properties, enemies, weapons etc.
  */
 
-import com.tda367.infinityrun.Controller.InputState;
 import com.tda367.infinityrun.Utils.Math.Rect;
 import com.tda367.infinityrun.Utils.Math.Vec2;
 

@@ -1,4 +1,4 @@
-package com.tda367.infinityrun.Controller;
+package com.tda367.infinityrun.Model;
 
 /**
  * Created by Mikael on 5/3/2017.

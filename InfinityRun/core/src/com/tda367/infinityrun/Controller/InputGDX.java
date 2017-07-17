@@ -1,7 +1,7 @@
 package com.tda367.infinityrun.Controller;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.tda367.infinityrun.Model.InputState;
 
 /**
  * Created by Mikael on 5/3/2017.

@@ -1,6 +1,6 @@
 package com.tda367.infinityrun.Model.Upgrades;
 
-import com.tda367.infinityrun.Controller.InputState;
+import com.tda367.infinityrun.Model.InputState;
 
 
 //this is the abstract parent class for all upgrades. Cointains general info that all of them need.

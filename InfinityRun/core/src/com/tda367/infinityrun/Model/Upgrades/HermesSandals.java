@@ -1,6 +1,6 @@
 package com.tda367.infinityrun.Model.Upgrades;
 
-import com.tda367.infinityrun.Controller.InputState;
+import com.tda367.infinityrun.Model.InputState;
 
 /**
  * Created by Jacob on 5/9/2017.
