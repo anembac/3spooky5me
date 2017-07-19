@@ -29,7 +29,6 @@ public class ShopScreen extends Observable implements Screen {
     ChangeListener changeListener = new ChangeListener() {
         @Override
         public void changed(ChangeEvent event, Actor actor) {
-            System.out.println(actor.getName());
             buttonClickedCheck(getIndex(actor.getName()));
         }
     };

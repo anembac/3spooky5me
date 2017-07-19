@@ -84,8 +84,6 @@ public class ShopScreenDrawer extends ScreenDrawer{
         shopMessage.setPosition(Constants.windowWidth/2, 75);
         buttonArray[numberOfUpgrades].setPosition(1400, 50);
         upgradeTable.setPosition(Constants.windowWidth/2, Constants.windowHeight/2);
-        System.out.println(upgradeTable.getX());
-        System.out.println(upgradeTable.getY());
 
 
     }//end of constructor
