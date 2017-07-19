@@ -1,6 +1,8 @@
 package com.tda367.infinityrun;
 
 import com.badlogic.gdx.Game;
+import com.tda367.infinityrun.Controller.IInput;
+import com.tda367.infinityrun.Controller.InputGDX;
 import com.tda367.infinityrun.Controller.ScreenManager;
 import com.tda367.infinityrun.Model.Character;
 import com.tda367.infinityrun.Model.Shop;
@@ -26,6 +28,7 @@ public class InfinityRun extends Game implements Observer {
     private Character hero;
     private World world;
     private Shop shop;
+    private IInput input;
 
 
     @Override
@@ -33,8 +36,10 @@ public class InfinityRun extends Game implements Observer {
         //World creation
         tbWorldGen = new TextbasedWorldGenerator();
         hero = new Character();
+
         world = new World(tbWorldGen, hero);
         shop = new Shop(hero);
+        input = new InputGDX();
         screenManager = new ScreenManager(this, world, shop);
         screenManager.switchToScreen(ScreenStates.MainMenuScreen);
         observeNewGameScreens();
