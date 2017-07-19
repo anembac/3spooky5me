@@ -30,9 +30,6 @@ public class LoadScreenDrawer extends ScreenDrawer{
         int i = 0;
         for (VCButton button : buttons) {
             button.setAndDisplayText("Save " + (++i), style);
-            if(i % 10 == 0){
-                table.row();
-            }
         }
     }
 

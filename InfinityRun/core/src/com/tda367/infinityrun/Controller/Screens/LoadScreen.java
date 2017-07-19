@@ -47,6 +47,9 @@ public class LoadScreen extends Observable implements Screen {
 
             buttons[i] = new VCButton();
             buttons[i].addListener(changeListener);
+            if(i % 10 == 0){
+                table.row();
+            }
             table.add(buttons[i]).pad(5);
         }
         //Set table position

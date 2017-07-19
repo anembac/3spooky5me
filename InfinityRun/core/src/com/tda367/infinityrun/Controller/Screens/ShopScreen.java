@@ -5,7 +5,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.tda367.infinityrun.Utils.Constants;
 import com.tda367.infinityrun.View.VCButton;
 import com.tda367.infinityrun.Model.Shop;
 import com.tda367.infinityrun.Utils.ScreenStates;
@@ -18,6 +20,7 @@ public class ShopScreen extends Observable implements Screen {
     private final String[] nameList;
     private final Stage shopStage = new Stage();
     private ShopScreenDrawer shopScreenDrawer;
+    private Table buttonTable = new Table();
 
     private final VCButton[] buttonArray;
 
@@ -26,7 +29,7 @@ public class ShopScreen extends Observable implements Screen {
     ChangeListener changeListener = new ChangeListener() {
         @Override
         public void changed(ChangeEvent event, Actor actor) {
-            //System.out.println(actor.getName());
+            System.out.println(actor.getName());
             buttonClickedCheck(getIndex(actor.getName()));
         }
     };
@@ -47,20 +50,29 @@ public class ShopScreen extends Observable implements Screen {
             //adds listener to button
             buttonArray[i].addListener(changeListener);
 
-            //adds button to stage
-            shopStage.addActor(buttonArray[i]);
+            //adds button to table
+            if (i % 3 == 0) {
+                buttonTable.row();
+            }
+            buttonTable.add(buttonArray[i]);
 
         }//end of loop
 
         buttonArray[numberOfUpgrades] = new VCButton();
 
+
         buttonArray[numberOfUpgrades].addListener(changeListener);
+
+
+        //Add actors to stage
+        shopStage.addActor(buttonTable);
         shopStage.addActor(buttonArray[numberOfUpgrades]);
+        //shopStage.addActor(buttonArray[numberOfUpgrades]);
 
 
 
         //Create the view
-        shopScreenDrawer = new ShopScreenDrawer(shop, buttonArray);
+        shopScreenDrawer = new ShopScreenDrawer(shop, buttonTable, buttonArray);
 
 
 
@@ -69,15 +81,10 @@ public class ShopScreen extends Observable implements Screen {
 
     @Override
     public void show() {
+        shop.setDisplayPoorMessage(false);
         shopScreenDrawer.show();
         Gdx.input.setInputProcessor(shopStage);
-        changeListener = new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                //System.out.println(actor.getName());
-                buttonClickedCheck(getIndex(actor.getName()));
-            }
-        };
+
     }
 
     @Override
@@ -98,7 +105,6 @@ public class ShopScreen extends Observable implements Screen {
         } else if (i >= numberOfUpgrades) { //should only be true for the back button
             setChanged();
             notifyObservers(ScreenStates.GameScreen);
-            this.dispose();
         }
     }
 

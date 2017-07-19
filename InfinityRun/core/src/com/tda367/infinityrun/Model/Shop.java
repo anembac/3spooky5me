@@ -17,7 +17,7 @@ public class Shop {
     public Shop(Character currentChar) {
         shopOwner = currentChar;
         upgList = shopOwner.getUpgrades();
-        displayPoorMessage = false;
+        displayPoorMessage = true;
     }
 
     //todo whenever upgrading, prices for all upgrades should go up by a little.
@@ -36,14 +36,15 @@ public class Shop {
                 shopOwner.setMeleeWeapon();
             }
         } else {
-
-            displayPoorMessage = true;
+            setDisplayPoorMessage(true);
         }
     }
 
     public boolean displayPoorMessage() {
         return displayPoorMessage;
     }
+
+    public void setDisplayPoorMessage(boolean isPoor){ displayPoorMessage = isPoor;}
 
     public int getPrice(Upgrade upg) {
         return upg.getBasePrice() * (upg.getLevel() + 1);
