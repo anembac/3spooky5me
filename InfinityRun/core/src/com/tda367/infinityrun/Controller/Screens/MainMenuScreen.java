@@ -18,21 +18,19 @@ import java.util.Observable;
 public class MainMenuScreen extends Observable implements Screen { //this class creates the main menu screen
     private final Stage mainMenuStage = new Stage();
 
-    private final VCButton newCharButton;
-    private final VCButton loadCharButton;
-    private final VCButton exitButton;
-    private LinkedList<IDrawnByDrawer> vcButtons = new LinkedList<IDrawnByDrawer>();
+    private final VCButton newCharButton = new VCButton();
+    private final VCButton loadCharButton = new VCButton();
+    private final VCButton exitButton = new VCButton();
+    private VCButton[] vcButtons = {newCharButton, loadCharButton, exitButton};;
     private MainMenuDrawer mainMenuDrawer;
 
 
     public MainMenuScreen() {
 
-        newCharButton = new VCButton();
-        loadCharButton = new VCButton();
-        exitButton = new VCButton();
-        vcButtons.add(newCharButton);
-        vcButtons.add(loadCharButton);
-        vcButtons.add(exitButton);
+//        newCharButton = new VCButton();
+//        loadCharButton = new VCButton();
+//        exitButton = new VCButton();
+
 
         newCharButton.setPosition(800-newCharButton.getWidth()/2, 450-newCharButton.getHeight()/2);
         loadCharButton.setPosition(800-loadCharButton.getWidth()/2, 400-loadCharButton.getHeight()/2);

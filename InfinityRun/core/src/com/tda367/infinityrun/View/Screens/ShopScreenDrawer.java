@@ -89,11 +89,9 @@ public class ShopScreenDrawer extends ScreenDrawer{
 
     }//end of constructor
 
-
-    @Override
     public void draw(float delta) {
         batch.begin();
-        super.draw(delta);
+        super.draw(vcButtons, delta);
         if (shop.displayPoorMessage()) {
             shopMessage.setText("You cannot afford this upgrade.");
             shopMessage.setPosition(800 - shopMessage.getPrefWidth() / 2, 75);

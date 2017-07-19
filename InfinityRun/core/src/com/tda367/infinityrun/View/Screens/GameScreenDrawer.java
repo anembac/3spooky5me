@@ -15,6 +15,7 @@ import com.tda367.infinityrun.Model.WorldObject;
 import com.tda367.infinityrun.Utils.Math.Rect;
 import com.tda367.infinityrun.View.HUD;
 import com.tda367.infinityrun.View.IDrawnByDrawer;
+import com.tda367.infinityrun.View.VCButton;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -32,9 +33,8 @@ public class GameScreenDrawer extends ScreenDrawer{
     public GameScreenDrawer(World world){
         this.world = world;
         hud = new HUD(world.getHero());
-        vcButtons = new LinkedList<IDrawnByDrawer>();
     }
-    @Override
+
     public void draw(float delta) {
         Matrix4 translation = new Matrix4();
         Rect heroRect = world.getHero().getDrawingRect();
@@ -46,7 +46,7 @@ public class GameScreenDrawer extends ScreenDrawer{
         batch.setTransformMatrix(translation);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        super.draw(delta);
+        super.draw(vcButtons, delta);
         batch.draw(background,-cx,-cy);
         for (WorldObject wo : world.getWorldObjects()) {
             checkTexture(wo);

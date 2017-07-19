@@ -7,21 +7,24 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.tda367.infinityrun.Utils.Constants;
 import com.tda367.infinityrun.View.IDrawnByDrawer;
 import com.tda367.infinityrun.View.VCButton;
 import com.tda367.infinityrun.Utils.LoadCharacter;
 import com.tda367.infinityrun.Utils.ScreenStates;
 import com.tda367.infinityrun.View.Screens.LoadScreenDrawer;
 
-import java.util.LinkedList;
+
 import java.util.Observable;
+
+import static com.tda367.infinityrun.Utils.Constants.windowWidth;
+
 //separated
 public class LoadScreen extends Observable implements Screen {
 
     private final Stage loadStage;
     private LoadScreenDrawer loadScreenDrawer;
-    private LinkedList<IDrawnByDrawer> vcButtons = new LinkedList<IDrawnByDrawer>();
-
+    Table table = new Table();
 
 
     public LoadScreen() {
@@ -34,28 +37,26 @@ public class LoadScreen extends Observable implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 //TODO: Implement loading properly
                 int loadID = Integer.parseInt(actor.getName());
+                System.out.println("Button pressed");
                 setChanged();
                 notifyObservers(ScreenStates.GameScreen);
 
             }
         };
-
-
-
-
-
-
         for (int i = 0; i < numberOfButtons; i++) {
 
             buttons[i] = new VCButton();
             buttons[i].addListener(changeListener);
-            vcButtons.add(buttons[i]);
-            loadStage.addActor(buttons[i]);
-
+            table.add(buttons[i]).pad(5);
         }
+        //Set table position
+        table.setPosition(windowWidth/2 - table.getWidth()/2, Constants.windowHeight/2 - table.getHeight()/2);
+
+        //Add to stage
+        loadStage.addActor(table);
 
         //Create drawer/view
-        loadScreenDrawer = new LoadScreenDrawer(vcButtons);
+        loadScreenDrawer = new LoadScreenDrawer(table, buttons);
 
     }
 

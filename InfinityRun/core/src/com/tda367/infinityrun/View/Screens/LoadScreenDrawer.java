@@ -21,31 +21,19 @@ public class LoadScreenDrawer extends ScreenDrawer{
     private final TextureRegionDrawable textureDownDrawable = new TextureRegionDrawable(textureDown);
     TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(
             textureUpDrawable, textureDownDrawable, textureUpDrawable, font);
-    Table table = new Table();
-    Stage stage = new Stage();
+    Table buttonTable = new Table();
+    VCButton[] buttons;
 
-
-    public LoadScreenDrawer(LinkedList<IDrawnByDrawer> vcButtons){
-
-        this.vcButtons = vcButtons;
-        setButtonTexture(style);
+    public LoadScreenDrawer(Table table, VCButton[] buttons){
+        buttonTable = table;
+        this.buttons = buttons;
         int i = 0;
-        for (IDrawnByDrawer button : this.vcButtons) {
+        for (VCButton button : buttons) {
             button.setAndDisplayText("Save " + (++i), style);
-            if(i%10 == 1){ //this yields rows of 10 columns each
+            if(i % 10 == 0){
                 table.row();
             }
-            table.add((VCButton)button).width(button.getWidth()).pad(5);
-
         }
-        table.setPosition(800-table.getWidth()/2,450-table.getHeight()/2);
-        stage.addActor(table);
-
-//        System.out.println(table.getX());
-//        System.out.println(table.getY());
-//        System.out.println(vcButtons.get(0).getX());
-//        System.out.println(vcButtons.get(0).getY());
-
     }
 
 
@@ -55,8 +43,7 @@ public class LoadScreenDrawer extends ScreenDrawer{
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        //super.draw(delta);
-        stage.draw();
+        buttonTable.draw(batch, 1);
         batch.end();
     }
 

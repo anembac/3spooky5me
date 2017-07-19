@@ -24,14 +24,11 @@ public class PauseMenuScreen extends Observable implements Screen {
     private final VCButton exitButton = new VCButton();
     private final VCButton backToMenuButton = new VCButton();
     private final VCButton unPauseButton = new VCButton();
-    private LinkedList<IDrawnByDrawer> vcButtons = new LinkedList<IDrawnByDrawer>();
+    private VCButton[] vcButtons = {exitButton, backToMenuButton, unPauseButton};
     private final GameScreen masterScreen;
     private PauseMenuDrawer pauseMenuDrawer;
 
     public PauseMenuScreen(GameScreen gs) {
-        vcButtons.add(exitButton);
-        vcButtons.add(backToMenuButton);
-        vcButtons.add(unPauseButton);
         masterScreen = gs;
         VerticalGroup buttonGroup = new VerticalGroup();
         buttonGroup.addActor(exitButton);
@@ -41,18 +38,20 @@ public class PauseMenuScreen extends Observable implements Screen {
         buttonGroup.setPosition(1600 / 2 - buttonGroup.getMaxWidth(), 900 / 2 - buttonGroup.getMaxHeight());
         pauseStage.addActor(buttonGroup);
 
-        pauseMenuDrawer = new PauseMenuDrawer(vcButtons);
+        pauseMenuDrawer = new PauseMenuDrawer(buttonGroup, vcButtons);
     }
 
 
     private void buttonClickedCheck() {
-        if (unPauseButton.isPressed()) {
+        //Unpause
+        if (vcButtons[2].isChecked()) {
+            vcButtons[2].setChecked(false);
             setChanged();
             notifyObservers(ScreenStates.GameScreen);
-            this.dispose();
-        }
 
-        if (backToMenuButton.isPressed()) {
+        }
+        //Exit to main menu
+        if (vcButtons[1].isPressed()) {
             //TODO rewrite saving to remove screen-level dependencies on the world class
             SaveCharacter.saveCharacter(masterScreen.world.getHero(), masterScreen.world.getHero().getCharacterID());
             setChanged();
@@ -60,8 +59,8 @@ public class PauseMenuScreen extends Observable implements Screen {
             masterScreen.dispose();
             this.dispose();
         }
-
-        if (exitButton.isPressed()) {
+        //Exit game
+        if (vcButtons[0].isPressed()) {
             SaveCharacter.saveCharacter(masterScreen.world.getHero(), masterScreen.world.getHero().getCharacterID());
             masterScreen.dispose();
             this.dispose();

@@ -31,15 +31,15 @@ public class MainMenuDrawer extends ScreenDrawer{
     */
 
     //TODO: Make buttons have their associated text
-    public MainMenuDrawer(LinkedList<IDrawnByDrawer> vcButtons){
+    public MainMenuDrawer(VCButton[] vcButtons){
         TextureRegionDrawable textureDownDrawable = new TextureRegionDrawable(textureDown);
         TextureRegionDrawable textureUpDrawable = new TextureRegionDrawable(textureUp);
         TextButton.TextButtonStyle menuButtonStyle =
                 new TextButton.TextButtonStyle(textureUpDrawable, textureDownDrawable, textureUpDrawable, font);
         this.vcButtons = vcButtons;
-        setButtonTexture(menuButtonStyle);
-        vcButtons.get(0).setAndDisplayText("New Character", menuButtonStyle);
-        vcButtons.get(1).setAndDisplayText("Load Character", menuButtonStyle);
+        vcButtons[0].setAndDisplayText("New Character", menuButtonStyle);
+        vcButtons[1].setAndDisplayText("Load Character", menuButtonStyle);
+        vcButtons[2].setAndDisplayText("Exit Game", menuButtonStyle);
 
         //Instructions
         labelStyle = new Label.LabelStyle(font, new Color(1, 1, 1, 1));
@@ -58,10 +58,9 @@ public class MainMenuDrawer extends ScreenDrawer{
         camera.setToOrtho(false, 1600, 900);
     }
 
-    @Override
     public void draw(float delta) {
         batch.begin();
-        super.draw(delta);
+        super.draw(vcButtons, delta);
         font.draw(batch, "Welcome to InfinityRun ALPHA!!! ", 100, 150);
         instructions.draw(batch, 1);
         batch.end();

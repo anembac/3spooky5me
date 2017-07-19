@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.tda367.infinityrun.Utils.Constants;
 import com.tda367.infinityrun.View.IDrawnByDrawer;
+import com.tda367.infinityrun.View.VCButton;
 
 import java.util.LinkedList;
 /*
@@ -18,7 +19,7 @@ public abstract class ScreenDrawer {
     SpriteBatch batch = new SpriteBatch();
     BitmapFont font = new BitmapFont();
     OrthographicCamera camera = new OrthographicCamera();
-    LinkedList<IDrawnByDrawer> vcButtons = new LinkedList<IDrawnByDrawer>();
+    VCButton[] vcButtons;
 
 
     /*
@@ -27,16 +28,19 @@ public abstract class ScreenDrawer {
     *
     * Does not use own batch.begin() and batch.end(). Subclasses' draw() methods must begin with batch.begin().
     */
-    public void draw(float delta){
+    public void draw(VCButton[] vcButtons, float delta){
         //TODO: Pick a nice color
         Gdx.gl.glClearColor(0.04f, 0.8f, 0.85f, 1); // #09CDDA
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
         batch.setProjectionMatrix(camera.combined);
-        for(IDrawnByDrawer i : vcButtons){
+        if(vcButtons != null){
+            for(VCButton i : vcButtons){
 
-            i.draw(batch,1  );
+                i.draw(batch,1  );
+            }
         }
+
     }
 
 
@@ -49,10 +53,4 @@ public abstract class ScreenDrawer {
         font.dispose();
     }
 
-    public void setButtonTexture(Button.ButtonStyle style){
-        for(IDrawnByDrawer b : vcButtons){
-            b.setStyle(style);
-
-        }
-    }
 }
