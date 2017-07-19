@@ -49,7 +49,10 @@ public class ShopScreenDrawer extends ScreenDrawer{
             texturesDownDrawable[i] = new TextureRegionDrawable(textureRegionsDown[i]);
             buttonStyles[i] = new TextButton.TextButtonStyle(
                     texturesUpDrawable[i], texturesDownDrawable[i], texturesUpDrawable[i], font);
-            updateButtonInformation(i);
+            buttonArray[i].setAndDisplayText(nameList[i]
+                    + ", Level: " + shop.getUpgList().get(nameList[i]).getLevel()
+                    + ", Price: "
+                    + shop.getPrice(shop.getUpgList().get(nameList[i])), buttonStyles[i]);
             buttonArray[i].getLabel().setWrap(true);
             buttonArray[i].getLabel().setWidth(128);
             buttonArray[i].setName(nameList[i]);
@@ -91,7 +94,6 @@ public class ShopScreenDrawer extends ScreenDrawer{
         //Update button information
 
         //Drawing
-        //updateButtonInformation();
         batch.begin();
         super.draw(vcButtons, delta);
         upgradeTable.draw(batch, 1);
@@ -108,30 +110,18 @@ public class ShopScreenDrawer extends ScreenDrawer{
 
 
     private void updateButtonInformation(int i){
-        buttonArray[i].setAndDisplayText(nameList[i]
+        buttonArray[i].changeDisplayText(nameList[i]
                 + ", Level: " + shop.getUpgList().get(nameList[i]).getLevel()
                 + ", Price: "
-                + shop.getPrice(shop.getUpgList().get(nameList[i])), buttonStyles[i]);
+                + shop.getPrice(shop.getUpgList().get(nameList[i])));
     }
 
-    private void updateButtonInformation(){
+    public void updateButtonInformation(){
         for(int i = 0; i < numberOfUpgrades; i++){
-            buttonArray[i].setAndDisplayText(nameList[i]
+            buttonArray[i].changeDisplayText(nameList[i]
                     + ", Level: " + shop.getUpgList().get(nameList[i]).getLevel()
                     + ", Price: "
-                    + shop.getPrice(shop.getUpgList().get(nameList[i])), buttonStyles[i]);
-
-            buttonArray[i].getLabel().setWrap(true);
-            buttonArray[i].getLabel().setWidth(128);
-            buttonArray[i].setName(nameList[i]);
-            buttonArray[i].getCell(buttonArray[i].getLabel()).padBottom(-158);
-            //Makes a new row every 3 upgrades
-            if (i % 3 == 0) {
-                upgradeTable.row();
-            }
-            //Fetches the cost for the corresponding upgrade.
-            //buttonArray[i].add("Cost: " + shop.getPrice(shop.getUpgList().get(nameList[i])));
-            upgradeTable.add(buttonArray[i]).width(buttonArray[i].getPrefWidth()).pad(15);
+                    + shop.getPrice(shop.getUpgList().get(nameList[i])));
         }
 
 

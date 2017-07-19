@@ -101,6 +101,8 @@ public class ShopScreen extends Observable implements Screen {
     private void buttonClickedCheck(int i) {
         if (i >= 0 && i < numberOfUpgrades) { //i>=0 because getIndex() returns -1 on unfamiliar actor names
             shop.purchaseUpgrade(nameList[i]);
+            shopScreenDrawer.updateButtonInformation();
+
 
         } else if (i >= numberOfUpgrades) { //should only be true for the back button
             setChanged();

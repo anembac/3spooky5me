@@ -50,6 +50,11 @@ public class VCButton extends Button implements IDrawnByDrawer {
         setPosition(currX-getWidth()/2,currY-getHeight()/2);
     }
 
+    public void changeDisplayText(String text){
+        label.setText(text);
+        label.invalidate();
+    }
+
     public void setText(String text){
         this.text = text;
     }
