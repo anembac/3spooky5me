@@ -19,8 +19,8 @@ It implements the WorldGenerator Interface
  */
 public class TextbasedWorldGenerator implements WorldGenerator {
 
-    private final HashMap<Integer, RoomType> allRooms = new HashMap<Integer, RoomType>();
-    private final HashMap<IndexPoint, RoomType> madeRooms = new HashMap<IndexPoint, RoomType>();
+    private final HashMap<Integer, RoomType> allRooms = new HashMap<Integer, RoomType>();           //this is a hashmap that contains the rooms read from the constructor
+    private final HashMap<IndexPoint, RoomType> madeRooms = new HashMap<IndexPoint, RoomType>();    //This is a hashmap that contains the list of the generated world, and their indexes
     private static final Random rand = new Random();
     private int maxDistanceFromSpawn;  //calculates score as the distance from start.
 
@@ -134,7 +134,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
         if (roomExists(x, y)) return new ArrayList<WorldObject>();
         else {
             if (x == 0 && y == 0) {
-                madeRooms.put(new IndexPoint(x, y), allRooms.get(7));
+                madeRooms.put(new IndexPoint(x, y), allRooms.get(7)); //this is the index number of the URL room.
                 return allRooms.get(7).generate(x, y);
             } else {
                 List<RoomType> possible = new ArrayList<RoomType>();
@@ -145,6 +145,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                 for(int loop = 0; loop < allRooms.size();loop++){
 
 
+                 //todo remove lines with a loop
                     //this part removes rooms from the list of possible rooms that have too many entrances
                 }
                 if (madeRooms.containsKey(new IndexPoint(x + 1, y)) && madeRooms.get(new IndexPoint(x + 1, y)).left){
@@ -180,6 +181,11 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                 while (madeRoom == null) {
                     int q = rand.nextInt(possible.size());
                     madeRoom = possible.get(q);
+                    if (madeRoom.bitmaskCode() == 1 || madeRoom.bitmaskCode() == 2 || madeRoom.bitmaskCode() == 4 || madeRoom.bitmaskCode() == 8 && (rand.nextBoolean())){
+
+                        q = rand.nextInt(possible.size());
+                        madeRoom = possible.get(q);
+                    }
                     madeRooms.put(new IndexPoint(x, y), madeRoom);
                     if (!pathOut(new HashSet<IndexPoint>(), 0, 0)) {
                         madeRoom = null;
@@ -274,14 +280,10 @@ public class TextbasedWorldGenerator implements WorldGenerator {
             allTypes.add(input);
         }
 
-        public boolean isRight() {
-            return right;
-        }
-
 
 
 // the general generation method. Because of all the variables in this, it's still quite complicated even after separating many things into other functions.
-
+// this is the part that generates worldobjects into the world, based on the models in the other generate method.
 
         public List<WorldObject> generate(int ox, int oy) {
 
@@ -319,7 +321,9 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                             break;
                         case 'Q': {
                             int rnd = new Random().nextInt((100) + 1);
-                            if (rnd < (((difficulty / 6) + Math.sqrt(difficulty) * (Math.sin(difficulty) * difficulty * difficulty) / 2) + 0.43) * 100) {
+                            if (rnd < (((difficulty / 6) + Math.sqrt(difficulty) * (Math.sin(difficulty) * difficulty * difficulty) / 2) + 0.43) * 100)
+                            //this is a difficulty scaling algorithm, and the numbers are nothing special.
+                            {
 
                                 Enemy enemy = (new Enemy(pos, new Vec2(meter, meter),
                                         1 * (difficulty / 4), 1 * (difficulty / 8),

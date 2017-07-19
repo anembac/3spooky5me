@@ -3,9 +3,7 @@ package com.tda367.infinityrun.Model;
 import com.tda367.infinityrun.Utils.Utils;
 import com.tda367.infinityrun.Utils.Math.Vec2;
 
-/**
- * Created by miktor on 2017-04-03.
- */
+
 public class Enemy extends LivingObject {
         //An Enemy is a LivingObject with a simple ai features that attempt to attack the player. Their stats are dependent upon the worldGeneration, as their difficulty increases with
         //Progress in the game. Despite being similar to a player, they are barred from things like menu/shop/pausing.

@@ -14,11 +14,12 @@ Class for binding the game together and where the different objects interact wit
 public class World {
 
     private final List<WorldObject> worldObjects;
-    private IInput input;
+
     private final Character hero;
     private WorldGenerator generator = null;
     private final Shop shop;
     private boolean running = true;
+    private IInput input;
 
     public World(WorldGenerator gen, Character hero) {
         CollisionManager.getInstance().forceNewInstance();
@@ -36,9 +37,9 @@ public class World {
         return hero;
     }
 
-    public void setInput(IInput input) {
-        this.input = input;
-    }
+   // public void setInput(IInput input) {
+     //   this.input = input;
+   // }
 
 
     //this tells the TextbasedWorldGenerator what rooms are to be generated. the coordinates are used with offsets and the location
