@@ -4,10 +4,12 @@ import com.badlogic.gdx.Game;
 import com.tda367.infinityrun.Controller.IInput;
 import com.tda367.infinityrun.Controller.InputGDX;
 import com.tda367.infinityrun.Controller.ScreenManager;
+import com.tda367.infinityrun.Controller.Screens.LoadScreen;
 import com.tda367.infinityrun.Model.Character;
 import com.tda367.infinityrun.Model.Shop;
 import com.tda367.infinityrun.Model.TextbasedWorldGenerator;
 import com.tda367.infinityrun.Model.World;
+import com.tda367.infinityrun.Utils.LoadCharacter;
 import com.tda367.infinityrun.Utils.ScreenStates;
 import java.util.Observable;
 import java.util.Observer;
@@ -29,19 +31,29 @@ public class InfinityRun extends Game implements Observer {
     private World world;
     private Shop shop;
     private IInput input;
+    private int loadID = -1;
 
 
     @Override
     public void create() {
         //World creation
         tbWorldGen = new TextbasedWorldGenerator();
-        hero = new Character();
+        System.out.println(loadID);
+        if(loadID>0){
+            hero = LoadCharacter.loadCharacter(loadID);
+        }else{
+            hero = new Character();
+        }
 
         world = new World(tbWorldGen, hero);
         shop = new Shop(hero);
         input = new InputGDX();
         screenManager = new ScreenManager(this, world, shop);
-        screenManager.switchToScreen(ScreenStates.MainMenuScreen);
+        if(loadID>0){
+            screenManager.switchToScreen(ScreenStates.GameScreen);
+        }else{
+            screenManager.switchToScreen(ScreenStates.MainMenuScreen);
+        }
         observeNewGameScreens();
     }
 
@@ -50,25 +62,22 @@ public class InfinityRun extends Game implements Observer {
         if(arg.equals(newGame)){
             create();
         }
+        if(o instanceof LoadScreen){
+            loadID = (int)arg;
+            create();
+            loadID = -1;
+        }
     }
-
-//    private void newGame(){
-//        hero = new Character();
-//        world = new World(tbWorldGen, hero);
-//        shop = new Shop(hero);
-//        screenManager = new ScreenManager(this, world, shop);
-//        screenManager.switchToScreen(ScreenStates.MainMenuScreen);
-//        observeNewGameScreens();
-//    }
 
     /*
     * This method makes InfinityRun observe GameScreen and PauseMenuScreen in order to be notified of when a new game
-    * should be started.
+    * should be started, and LoadScreen in order to be notified of which save to load.
     */
 
     private void observeNewGameScreens(){
         screenManager.getGameScreen().addObserver(this);
         screenManager.getPauseMenuScreen().addObserver(this);
+        screenManager.getLoadScreen().addObserver(this);
 
     }
 

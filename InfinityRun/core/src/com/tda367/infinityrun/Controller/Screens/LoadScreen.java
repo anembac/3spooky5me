@@ -37,15 +37,15 @@ public class LoadScreen extends Observable implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 //TODO: Implement loading properly
                 int loadID = Integer.parseInt(actor.getName());
-                System.out.println("Button pressed");
                 setChanged();
-                notifyObservers(ScreenStates.GameScreen);
+                notifyObservers(loadID);
 
             }
         };
         for (int i = 0; i < numberOfButtons; i++) {
 
             buttons[i] = new VCButton();
+            buttons[i].setName(""+(i+1));
             buttons[i].addListener(changeListener);
             if(i % 10 == 0){
                 table.row();
