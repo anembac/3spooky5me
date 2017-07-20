@@ -73,6 +73,8 @@ public class ScreenManager implements Observer {
         return pauseMenuScreen;
     }
 
+    public LoadScreen getLoadScreen() {return loadScreen; }
+
     @Override
     public void update(Observable o, Object arg) {
         if(arg instanceof ScreenStates){
