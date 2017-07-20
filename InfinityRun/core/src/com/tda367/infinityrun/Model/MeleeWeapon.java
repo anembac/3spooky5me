@@ -115,7 +115,7 @@ public class MeleeWeapon extends WorldObject {
                     } else {
                         ((LivingObject) wo).damage(damage);
 
-                        System.out.println("Player dealt " +  damage);
+                    //    System.out.println("Player dealt " +  damage);
                     }
                     ((LivingObject) wo).acceleration.y = 400;
 
