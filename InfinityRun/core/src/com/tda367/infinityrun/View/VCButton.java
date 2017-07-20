@@ -13,13 +13,12 @@ import com.tda367.infinityrun.View.IDrawnByDrawer;
 * A version of the libGDX button that inplements the IDrawnByDrawer interface, letting the controlling screens
 * use the button as a controller, while the drawer classes only hold a reference to the interface, preventing it from
 * doing anything with the button that isn't related to drawing it.
-* SplitButton or similar.
 * Since some buttons will need labels it also contains elements found in the TextButton class, although far from all
 * of them. It would not be worth extending TextButton instead of Button as TextButton has many unneeded or even unwanted
 * features and requirements.
 */
 
-public class VCButton extends Button implements IDrawnByDrawer {
+public class VCButton extends Button{
 
     //These do nothing unless the addText() method is called. This is intentional.
     private Label label;

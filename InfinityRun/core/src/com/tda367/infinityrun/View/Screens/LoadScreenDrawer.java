@@ -14,21 +14,23 @@ import com.tda367.infinityrun.View.VCButton;
 import java.util.LinkedList;
 
 public class LoadScreenDrawer extends ScreenDrawer{
-    private final TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("testpack1.pack"));
-    private final TextureRegion textureUp = new TextureRegion(atlas.findRegion("testtexture"));
-    private final TextureRegion textureDown = new TextureRegion(atlas.findRegion("testtexture2"));
-    private final TextureRegionDrawable textureUpDrawable = new TextureRegionDrawable(textureUp);
-    private final TextureRegionDrawable textureDownDrawable = new TextureRegionDrawable(textureDown);
-    TextButton.TextButtonStyle style = new TextButton.TextButtonStyle(
-            textureUpDrawable, textureDownDrawable, textureUpDrawable, font);
-    Table buttonTable = new Table();
-    VCButton[] buttons;
+
+    private Table buttonTable = new Table();
+    private VCButton[] buttons;
 
     public LoadScreenDrawer(Table table, VCButton[] buttons){
         buttonTable = table;
         this.buttons = buttons;
         int i = 0;
+        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("testpack1.pack"));
+        TextButton.TextButtonStyle style = (TextButton.TextButtonStyle) generateStyle(
+                atlas,
+                "testtexture",
+                "testtexture2",
+                "testtexture",
+                true);
         for (VCButton button : buttons) {
+
             button.setAndDisplayText("Save " + (++i), style);
         }
     }

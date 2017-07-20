@@ -14,41 +14,32 @@ import com.tda367.infinityrun.Model.Shop;
 
 public class ShopScreenDrawer extends ScreenDrawer{
 
-    private final TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("Upgrades/upgrades.pack"));
     private final String[] nameList;
     private final Label shopMessage;
     private final int numberOfUpgrades;
     private final Table upgradeTable;
     private Shop shop;
     private final VCButton[] buttonArray;
-    TextButton.TextButtonStyle[] buttonStyles;
 
 
     public ShopScreenDrawer(Shop shop, Table table, VCButton[] buttonArray){
-
-        //constructor is pretty long...
 
         this.shop = shop;
         this.buttonArray = buttonArray;
         nameList = shop.getUpgNameList();
         upgradeTable = table;
         numberOfUpgrades = shop.getUpgList().size();
-        TextureRegion[] textureRegionsUp = new TextureRegion[numberOfUpgrades + 1];
-        TextureRegion[] textureRegionsDown = new TextureRegion[numberOfUpgrades + 1];
-        TextureRegionDrawable[] texturesUpDrawable = new TextureRegionDrawable[numberOfUpgrades + 1];
-        TextureRegionDrawable[] texturesDownDrawable = new TextureRegionDrawable[numberOfUpgrades + 1];
-        buttonStyles = new TextButton.TextButtonStyle[numberOfUpgrades + 1];
+        TextButton.TextButtonStyle[] buttonStyles = new TextButton.TextButtonStyle[numberOfUpgrades + 1];
 
-
-
-        //Loading in images and connecting them with the buttons, as well as connecting the buttons with the upgrades
+        //Generating the buttonstyles needed, plus other code to make it look nice
+        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("Upgrades/upgrades.pack"));
         for (int i = 0; i < numberOfUpgrades; i++) {
-            textureRegionsUp[i] = new TextureRegion((atlas.findRegion(nameList[i])));
-            textureRegionsDown[i] = new TextureRegion((atlas.findRegion(nameList[i] + "down")));
-            texturesUpDrawable[i] = new TextureRegionDrawable(textureRegionsUp[i]);
-            texturesDownDrawable[i] = new TextureRegionDrawable(textureRegionsDown[i]);
-            buttonStyles[i] = new TextButton.TextButtonStyle(
-                    texturesUpDrawable[i], texturesDownDrawable[i], texturesUpDrawable[i], font);
+            buttonStyles[i] = (TextButton.TextButtonStyle)generateStyle(atlas,
+                    nameList[i],
+                    nameList[i]+"down",
+                    nameList[i],
+                    true);
+
             buttonArray[i].setAndDisplayText(nameList[i]
                     + ", Level: " + shop.getUpgList().get(nameList[i]).getLevel()
                     + ", Price: "
@@ -56,23 +47,18 @@ public class ShopScreenDrawer extends ScreenDrawer{
             buttonArray[i].getLabel().setWrap(true);
             buttonArray[i].getLabel().setWidth(128);
             buttonArray[i].setName(nameList[i]);
+            ///158 comes from the buttonwidth/height, 128 + a decent spacing for text, which happened to be 30
             buttonArray[i].getCell(buttonArray[i].getLabel()).padBottom(-158);
 
             //Creates a space between the buttons.
             upgradeTable.getCell(buttonArray[i]).width(buttonArray[i].getPrefWidth()).pad(15);
         }//end of loop
 
-        //Since array initilization uses the amount of elements wanted, but then starts indexing at 0,
-        //"numberOfUpgrades" actually gives the empty index that comes after all the upgrades since the arrays
-        //have numberOfUpgrades+1 elements.
-        textureRegionsUp[numberOfUpgrades] = new TextureRegion(atlas.findRegion("back"));
-        textureRegionsDown[numberOfUpgrades] = new TextureRegion(atlas.findRegion("backdown"));
-        texturesUpDrawable[numberOfUpgrades] = new TextureRegionDrawable(textureRegionsUp[numberOfUpgrades]);
-        texturesDownDrawable[numberOfUpgrades] = new TextureRegionDrawable(textureRegionsDown[numberOfUpgrades]);
-        buttonStyles[numberOfUpgrades] = new TextButton.TextButtonStyle
-                (texturesUpDrawable[numberOfUpgrades],
-                        texturesDownDrawable[numberOfUpgrades],
-                        texturesUpDrawable[numberOfUpgrades], font);
+        buttonStyles[numberOfUpgrades] = (TextButton.TextButtonStyle) generateStyle(atlas,
+                "back",
+                "backdown",
+                "back",
+                true);
         buttonArray[numberOfUpgrades].setAndDisplayText("Back", buttonStyles[numberOfUpgrades]);
         buttonArray[numberOfUpgrades].setName("back");
 
