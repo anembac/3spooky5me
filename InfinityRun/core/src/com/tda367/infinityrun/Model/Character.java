@@ -139,6 +139,7 @@ private static final Vec2 sizeBounds = new Vec2(meter,meter);
             if (wo instanceof CoinObject) {
                 if (Vec2.distance(WOWrapper.worldObjectCenter(this)
                         , WOWrapper.worldObjectCenter(wo)) < Constants.collectRange) {
+
                     wo.despawn();
                     coins += numberOfCoins();
                 }

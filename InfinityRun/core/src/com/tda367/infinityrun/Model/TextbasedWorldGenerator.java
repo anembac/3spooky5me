@@ -150,6 +150,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                 }
                 if (madeRooms.containsKey(new IndexPoint(x + 1, y)) && madeRooms.get(new IndexPoint(x + 1, y)).left){
                     cleanPossible(possible, 1, true);
+
                 }
                 if (madeRooms.containsKey(new IndexPoint(x - 1, y)) && madeRooms.get(new IndexPoint(x - 1, y)).right){
                     cleanPossible(possible, 2, true);
@@ -310,6 +311,9 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                     float ny = oy * meter * roomHeight + meter * (14 - y);
                     Vec2 pos = new Vec2(nx, ny);
                     switch (allTypes.get(k).get(x).get(y)) {
+                        case 'A':
+                            output.add(new AnvilObject(pos));
+                            break;
                         case 'B':
                             output.add(new BrickObject(pos));
                             break;

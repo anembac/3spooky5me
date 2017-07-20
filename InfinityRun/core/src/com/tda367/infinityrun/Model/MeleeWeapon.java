@@ -58,6 +58,12 @@ public class MeleeWeapon extends WorldObject {
         return (criticalHitChance * 100) > rnd;
     }
 
+
+
+
+
+
+
     //Calculates the damage you will get if you get a critical strike.
     private double getCriticalDamage() {
         return damage * criticalHitDamage;
@@ -73,8 +79,26 @@ public class MeleeWeapon extends WorldObject {
         if (state.attackPressed()) {
             // animation to see when we are actually attacking
             setPosition(getNoneRelativePosition().x, (getNoneRelativePosition().y - 1) % 30 + 21);
-        //   setPosition((getNoneRelativePosition().x- 1) % 30 + 21, (getNoneRelativePosition().y));
-           } else setPosition(getNoneRelativePosition().x, 16);
+            //   setPosition((getNoneRelativePosition().x- 1) % 30 + 21, (getNoneRelativePosition().y));
+        } else setPosition(getNoneRelativePosition().x, 16);
+
+
+
+
+
+        //This upgrades your weapon when you collect an anvil
+        List<WorldObject> NearObjects = CollisionManager.getInstance().getKNearest(this, 5); //pickup distance
+
+        for (WorldObject wo : NearObjects) {
+            if (wo instanceof AnvilObject) {
+                if (Vec2.distance(WOWrapper.worldObjectCenter(this)
+                        , WOWrapper.worldObjectCenter(wo)) < Constants.collectRange) {
+
+                    wo.despawn();
+                    this.damage = (damage + 2) * 1.05;
+                }
+            }
+        }
 
 
         //functional attack
@@ -90,7 +114,8 @@ public class MeleeWeapon extends WorldObject {
                      //   System.out.println("Player dealt " + getCriticalDamage() + " CRITICAL HIT");
                     } else {
                         ((LivingObject) wo).damage(damage);
-                        //System.out.println("Player dealt " +  damage);
+
+                        System.out.println("Player dealt " +  damage);
                     }
                     ((LivingObject) wo).acceleration.y = 400;
 
