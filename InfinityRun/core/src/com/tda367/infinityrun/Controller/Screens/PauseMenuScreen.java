@@ -47,6 +47,7 @@ public class PauseMenuScreen extends Observable implements Screen {
         if (vcButtons[2].isChecked()) {
             vcButtons[2].setChecked(false);
             setChanged();
+            unPauseButton.toggle();
             notifyObservers(ScreenStates.GameScreen);
 
         }
