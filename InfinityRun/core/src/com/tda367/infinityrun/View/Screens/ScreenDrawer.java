@@ -6,7 +6,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.sun.istack.internal.Nullable;
 import com.tda367.infinityrun.Utils.Constants;
 import com.tda367.infinityrun.View.IDrawnByDrawer;
 import com.tda367.infinityrun.View.VCButton;
@@ -45,12 +50,41 @@ public abstract class ScreenDrawer {
 
 
     public void show(){
-       camera.setToOrtho(false, Constants.windowWidth, Constants.windowHeight);
+        camera.setToOrtho(false, Constants.windowWidth, Constants.windowHeight);
     }
 
     public void dispose(){
         batch.dispose();
         font.dispose();
+    }
+
+    public Button.ButtonStyle generateStyle
+            ( //these are the parameters for the method
+              TextureAtlas textureAtlas,
+              String regionNameUp,
+              String regionNameDown,
+              String regionNameChecked,
+              Boolean textButton){
+        //method body starts here...
+        TextureAtlas atlas = textureAtlas;
+        TextureRegion[] region = new TextureRegion[3];
+        TextureRegionDrawable[] drawable = new TextureRegionDrawable[3];
+
+        region[0] = atlas.findRegion(regionNameUp);
+        region[1] = atlas.findRegion(regionNameDown);
+        region[2] = atlas.findRegion(regionNameChecked);
+
+        drawable[0] = new TextureRegionDrawable(region[0]);
+        drawable[1] = new TextureRegionDrawable(region[1]);
+        drawable[2] = new TextureRegionDrawable(region[2]);
+
+
+        if(!textButton){
+            return new Button.ButtonStyle(drawable[0], drawable[1], drawable[2]);
+        }else{
+            return new TextButton.TextButtonStyle(drawable[0], drawable[1], drawable[2], font);
+        }
+        //...and ends here
     }
 
 }

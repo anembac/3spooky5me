@@ -16,8 +16,6 @@ import java.util.LinkedList;
 public class MainMenuDrawer extends ScreenDrawer{
 
     private final TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("testpack1.pack"));
-    private final TextureRegion textureUp = new TextureRegion(atlas.findRegion("testtexture"));
-    private final TextureRegion textureDown = new TextureRegion(atlas.findRegion("testtexture2"));
     private final Label.LabelStyle labelStyle;
     private final Label instructions;
 
@@ -29,13 +27,17 @@ public class MainMenuDrawer extends ScreenDrawer{
     * Because it has a list of IDrawnByDrawers the only thing it can do with the buttons is to draw them,
     * removing the possiblity of the view doing something it shouldn't be able to do with the buttons.
     */
-
-    //TODO: Make buttons have their associated text
+    
     public MainMenuDrawer(VCButton[] vcButtons){
-        TextureRegionDrawable textureDownDrawable = new TextureRegionDrawable(textureDown);
-        TextureRegionDrawable textureUpDrawable = new TextureRegionDrawable(textureUp);
+
         TextButton.TextButtonStyle menuButtonStyle =
-                new TextButton.TextButtonStyle(textureUpDrawable, textureDownDrawable, textureUpDrawable, font);
+                (TextButton.TextButtonStyle) generateStyle(
+                        atlas,
+                        "testtexture",
+                        "testtexture2",
+                        "testtexture",
+                        true);
+
         this.vcButtons = vcButtons;
         vcButtons[0].setAndDisplayText("New Character", menuButtonStyle);
         vcButtons[1].setAndDisplayText("Load Character", menuButtonStyle);

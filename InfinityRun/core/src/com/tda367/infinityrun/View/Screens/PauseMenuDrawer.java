@@ -12,14 +12,8 @@ import com.tda367.infinityrun.View.VCButton;
 import java.util.LinkedList;
 
 public class PauseMenuDrawer extends ScreenDrawer {
-    private final TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("testpack1.pack"));
-    private final TextureRegion textureUp = new TextureRegion(atlas.findRegion("testtexture"));
-    private final TextureRegion textureDown = new TextureRegion(atlas.findRegion("testtexture2"));
-    private final TextureRegionDrawable textureUpDrawable = new TextureRegionDrawable(textureUp);
-    private final TextureRegionDrawable textureDownDrawable = new TextureRegionDrawable(textureDown);
-    private final TextButton.TextButtonStyle menuButtonStyle =
-            new TextButton.TextButtonStyle(textureUpDrawable, textureDownDrawable, textureUpDrawable, font);
-    VerticalGroup buttonGroup;
+
+    private VerticalGroup buttonGroup;
 
 
 
@@ -27,7 +21,14 @@ public class PauseMenuDrawer extends ScreenDrawer {
     public PauseMenuDrawer(VerticalGroup buttonGroup, VCButton[] vcButtons){
         this.vcButtons = vcButtons;
         this.buttonGroup = buttonGroup;
-        //setButtonTexture(menuButtonStyle);
+        final TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("testpack1.pack"));
+        TextButton.TextButtonStyle menuButtonStyle =
+                (TextButton.TextButtonStyle) generateStyle(
+                        atlas,
+                        "testtexture",
+                        "testtexture2",
+                        "testtexture",
+                        true);
         vcButtons[0].setAndDisplayText("Exit Game", menuButtonStyle);
         vcButtons[1].setAndDisplayText("Exit to Main Menu", menuButtonStyle);
         vcButtons[2].setAndDisplayText("Unpause", menuButtonStyle);
