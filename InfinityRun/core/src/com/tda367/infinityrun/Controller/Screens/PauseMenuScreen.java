@@ -14,6 +14,7 @@ import com.tda367.infinityrun.View.Screens.PauseMenuDrawer;
 import java.util.LinkedList;
 import java.util.Observable;
 
+import static com.tda367.infinityrun.Utils.Constants.exitGame;
 import static com.tda367.infinityrun.Utils.Constants.newGame;
 
 //separated
@@ -47,27 +48,23 @@ public class PauseMenuScreen extends Observable implements Screen {
         if (vcButtons[2].isChecked()) {
             vcButtons[2].setChecked(false);
             setChanged();
-            unPauseButton.toggle();
             notifyObservers(ScreenStates.GameScreen);
 
         }
         //Exit to main menu
         if (vcButtons[1].isPressed()) {
             //TODO rewrite saving to remove screen-level dependencies on the world class
-            SaveCharacter.saveCharacter(masterScreen.world.getHero(), masterScreen.world.getHero().getCharacterID());
             setChanged();
             notifyObservers(newGame);
             masterScreen.dispose();
             this.dispose();
         }
         //Exit game
+        //TODO: solve saving here as well
         if (vcButtons[0].isPressed()) {
-            SaveCharacter.saveCharacter(masterScreen.world.getHero(), masterScreen.world.getHero().getCharacterID());
-            masterScreen.dispose();
+            setChanged();
+            notifyObservers(exitGame);
             this.dispose();
-            System.out.println("Exiting Game...");
-            Gdx.app.exit();
-
         }
     }
 
