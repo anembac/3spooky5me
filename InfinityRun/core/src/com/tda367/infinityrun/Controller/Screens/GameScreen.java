@@ -39,7 +39,7 @@ public class GameScreen extends Observable implements Screen {
         if(world.gameDone()){
             dispose();
             setChanged();
-            notifyObservers(newGame);
+            notifyObservers(newGame); //Notifies InfinityRun
         }
         //TODO: implement standard input format instead
         if (Gdx.input.isKeyJustPressed(Input.Keys.TAB)) {

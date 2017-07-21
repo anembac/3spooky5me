@@ -1,6 +1,7 @@
 package com.tda367.infinityrun;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.tda367.infinityrun.Controller.IInput;
 import com.tda367.infinityrun.Controller.InputGDX;
 import com.tda367.infinityrun.Controller.ScreenManager;
@@ -10,9 +11,12 @@ import com.tda367.infinityrun.Model.Shop;
 import com.tda367.infinityrun.Model.TextbasedWorldGenerator;
 import com.tda367.infinityrun.Model.World;
 import com.tda367.infinityrun.Utils.LoadCharacter;
+import com.tda367.infinityrun.Utils.SaveCharacter;
 import com.tda367.infinityrun.Utils.ScreenStates;
 import java.util.Observable;
 import java.util.Observer;
+
+import static com.tda367.infinityrun.Utils.Constants.exitGame;
 import static com.tda367.infinityrun.Utils.Constants.newGame;
 
 /*
@@ -38,7 +42,6 @@ public class InfinityRun extends Game implements Observer {
     public void create() {
         //World creation
         tbWorldGen = new TextbasedWorldGenerator();
-        System.out.println(loadID);
         if(loadID>0){
             hero = LoadCharacter.loadCharacter(loadID);
         }else{
@@ -49,6 +52,7 @@ public class InfinityRun extends Game implements Observer {
         shop = new Shop(hero);
         input = new InputGDX();
         screenManager = new ScreenManager(this, world, shop);
+
         if(loadID>0){
             screenManager.switchToScreen(ScreenStates.GameScreen);
         }else{
@@ -60,12 +64,13 @@ public class InfinityRun extends Game implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         if(arg.equals(newGame)){
-            create();
+            newGame();
         }
-        if(o instanceof LoadScreen){
-            loadID = (int)arg;
-            create();
-            loadID = -1;
+        if(o instanceof LoadScreen && arg instanceof Integer){
+            loadGame((int)arg);
+        }
+        if(arg.equals(exitGame)){
+            exitGame();
         }
     }
 
@@ -80,6 +85,25 @@ public class InfinityRun extends Game implements Observer {
         screenManager.getLoadScreen().addObserver(this);
 
     }
+
+    private void newGame(){
+        SaveCharacter.saveCharacter(hero, hero.getCharacterID());
+        create();
+    }
+
+    private void exitGame(){
+        SaveCharacter.saveCharacter(hero, hero.getCharacterID());
+        System.out.println("Exiting Game...");
+        Gdx.app.exit();
+    }
+
+    private void loadGame(int id){
+        loadID = id;
+        create();
+        loadID = -1;
+    }
+
+
 
     @Override
     public void render() {

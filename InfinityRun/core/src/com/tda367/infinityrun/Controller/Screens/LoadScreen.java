@@ -38,7 +38,7 @@ public class LoadScreen extends Observable implements Screen {
                 //TODO: Implement loading properly
                 int loadID = Integer.parseInt(actor.getName());
                 setChanged();
-                notifyObservers(loadID);
+                notifyObservers(loadID); //notifies InfinityRun
 
             }
         };

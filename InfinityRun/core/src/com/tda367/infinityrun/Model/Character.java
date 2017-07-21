@@ -26,8 +26,8 @@ private static final Vec2 sizeBounds = new Vec2(meter,meter);
         //stats for the player character: Number of current coins, level of Looting upgrade, speed upgrade, JumpHeight upgrade, HermesSandal upgrade, Health upgrade, MeleeHandling upgrade,
         //CriticalHitChance upgrade, CriticalHitDamage upgrade and Regeneration upgrade.
 
-    public Character(int numCoins, int lootLvl, int speedLvl, int jumpLvl, int hermesLvl, int healthLvl,
-                     int meleeHandlingLvl, int ChcLvl, int Chdlvl, int regLvl) {
+    public Character(int numCoins, int speedLvl, int jumpLvl, int hermesLvl, int healthLvl,
+                     int meleeHandlingLvl, int ChcLvl, int Chdlvl, int regLvl, int lootLvl) {
 
         super(startingcoordinates, sizeBounds, speedLvl, jumpLvl, hermesLvl, healthLvl, meleeHandlingLvl, ChcLvl,
                 Chdlvl, regLvl);

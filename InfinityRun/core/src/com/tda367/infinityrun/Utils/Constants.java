@@ -9,4 +9,5 @@ public final class Constants {
     public static final double collectRange = 64;
 
     public static final String newGame = "newGame";
+    public static final String exitGame = "exitGame";
 }

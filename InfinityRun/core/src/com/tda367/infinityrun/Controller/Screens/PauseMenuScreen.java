@@ -48,14 +48,14 @@ public class PauseMenuScreen extends Observable implements Screen {
         if (vcButtons[2].isChecked()) {
             vcButtons[2].setChecked(false);
             setChanged();
-            notifyObservers(ScreenStates.GameScreen);
+            notifyObservers(ScreenStates.GameScreen); //Notifies ScreenManager
 
         }
         //Exit to main menu
         if (vcButtons[1].isPressed()) {
             //TODO rewrite saving to remove screen-level dependencies on the world class
             setChanged();
-            notifyObservers(newGame);
+            notifyObservers(newGame); //Notifies InfinityRun
             masterScreen.dispose();
             this.dispose();
         }
@@ -63,7 +63,7 @@ public class PauseMenuScreen extends Observable implements Screen {
         //TODO: solve saving here as well
         if (vcButtons[0].isPressed()) {
             setChanged();
-            notifyObservers(exitGame);
+            notifyObservers(exitGame); //Notifies InfinityRun
             this.dispose();
         }
     }
