@@ -8,10 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.tda367.infinityrun.Utils.Constants;
-import com.tda367.infinityrun.View.IDrawnByDrawer;
 import com.tda367.infinityrun.View.VCButton;
-import com.tda367.infinityrun.Utils.LoadCharacter;
-import com.tda367.infinityrun.Utils.ScreenStates;
+import com.tda367.infinityrun.Model.LoadCharacter;
 import com.tda367.infinityrun.View.Screens.LoadScreenDrawer;
 
 

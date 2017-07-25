@@ -1,9 +1,8 @@
-package com.tda367.infinityrun.Utils;
+package com.tda367.infinityrun.Model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.StringBuilder;
-import com.tda367.infinityrun.Model.Character;
 import com.tda367.infinityrun.Model.Upgrades.Upgrade;
 
 // TODO: make changes so that the screens don't need to access world directly (perhaps by saving in InfinityRun)

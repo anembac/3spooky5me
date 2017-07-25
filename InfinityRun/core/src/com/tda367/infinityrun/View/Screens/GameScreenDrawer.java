@@ -2,20 +2,13 @@ package com.tda367.infinityrun.View.Screens;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Matrix4;
-import com.tda367.infinityrun.Controller.Screens.MainMenuScreen;
-import com.tda367.infinityrun.Controller.Screens.PauseMenuScreen;
-import com.tda367.infinityrun.Controller.Screens.ShopScreen;
 import com.tda367.infinityrun.Model.Enemy;
 import com.tda367.infinityrun.Model.World;
 import com.tda367.infinityrun.Model.WorldObject;
 import com.tda367.infinityrun.Utils.Math.Rect;
 import com.tda367.infinityrun.View.HUD;
-import com.tda367.infinityrun.View.IDrawnByDrawer;
-import com.tda367.infinityrun.View.VCButton;
 
 import java.util.HashMap;
 import java.util.LinkedList;

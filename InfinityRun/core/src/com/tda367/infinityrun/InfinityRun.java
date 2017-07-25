@@ -2,7 +2,6 @@ package com.tda367.infinityrun;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.tda367.infinityrun.Controller.IInput;
 import com.tda367.infinityrun.Controller.InputGDX;
 import com.tda367.infinityrun.Controller.ScreenManager;
 import com.tda367.infinityrun.Controller.Screens.LoadScreen;
@@ -10,8 +9,8 @@ import com.tda367.infinityrun.Model.Character;
 import com.tda367.infinityrun.Model.Shop;
 import com.tda367.infinityrun.Model.TextbasedWorldGenerator;
 import com.tda367.infinityrun.Model.World;
-import com.tda367.infinityrun.Utils.LoadCharacter;
-import com.tda367.infinityrun.Utils.SaveCharacter;
+import com.tda367.infinityrun.Model.LoadCharacter;
+import com.tda367.infinityrun.Model.SaveCharacter;
 import com.tda367.infinityrun.Utils.ScreenStates;
 import java.util.Observable;
 import java.util.Observer;

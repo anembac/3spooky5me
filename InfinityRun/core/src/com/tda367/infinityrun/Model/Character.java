@@ -1,7 +1,6 @@
 package com.tda367.infinityrun.Model;
 
 import com.tda367.infinityrun.Utils.Constants;
-import com.tda367.infinityrun.Utils.DeathObserver;
 import com.tda367.infinityrun.Utils.Math.Vec2;
 import com.tda367.infinityrun.Model.Upgrades.Looting;
 import com.tda367.infinityrun.Model.Upgrades.Upgrade;

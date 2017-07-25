@@ -1,8 +1,7 @@
-package com.tda367.infinityrun.Utils;
+package com.tda367.infinityrun.Model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.tda367.infinityrun.Model.Character;
 
 /**
  * Created by kaffe on 5/26/17.

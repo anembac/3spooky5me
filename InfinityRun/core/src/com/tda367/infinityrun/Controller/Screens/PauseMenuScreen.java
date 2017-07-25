@@ -5,13 +5,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
-import com.tda367.infinityrun.View.IDrawnByDrawer;
 import com.tda367.infinityrun.View.VCButton;
-import com.tda367.infinityrun.Utils.SaveCharacter;
 import com.tda367.infinityrun.Utils.ScreenStates;
 import com.tda367.infinityrun.View.Screens.PauseMenuDrawer;
 
-import java.util.LinkedList;
 import java.util.Observable;
 
 import static com.tda367.infinityrun.Utils.Constants.exitGame;

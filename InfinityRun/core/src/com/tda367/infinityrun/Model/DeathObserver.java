@@ -1,6 +1,4 @@
-package com.tda367.infinityrun.Utils;
-
-import com.tda367.infinityrun.Model.Character;
+package com.tda367.infinityrun.Model;
 
 import java.util.Observable;
 import java.util.Observer;
