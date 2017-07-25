@@ -34,7 +34,7 @@ public class InfinityRun extends Game implements Observer {
     private Character hero;
     private World world;
     private Shop shop;
-    private IInput input;
+    private InputGDX input;
     private int loadID = -1;
 
 
@@ -50,7 +50,8 @@ public class InfinityRun extends Game implements Observer {
 
         world = new World(tbWorldGen, hero);
         shop = new Shop(hero);
-        input = new InputGDX();
+        input = new InputGDX(world.getInputState());
+        world.addObserver(input);
         screenManager = new ScreenManager(this, world, shop);
 
         if(loadID>0){

@@ -1,8 +1,6 @@
 package com.tda367.infinityrun.Model.WeaponTypes;
 
-import com.tda367.infinityrun.Model.MeleeWeapon;
-
-/*
+import com.tda367.infinityrun.Model.MeleeWeapon;/*
 
     Mace is a melee weapon with slow swing speed but high damage and good early critical hits.
 

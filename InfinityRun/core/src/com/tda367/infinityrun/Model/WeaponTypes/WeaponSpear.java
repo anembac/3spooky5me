@@ -1,8 +1,6 @@
 package com.tda367.infinityrun.Model.WeaponTypes;
 
-import com.tda367.infinityrun.Model.MeleeWeapon;
-
-/*
+import com.tda367.infinityrun.Model.MeleeWeapon;/*
 
         Spear is a MeleeWeapon with high range but somewhat slow attacks, and higher critical rate.
 

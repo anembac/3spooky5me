@@ -20,6 +20,15 @@ public class InputState {
         this.goToShop = goToShop;
     }
 
+    public void update(boolean forward, boolean back, boolean jump, boolean attack, boolean goToMenu, boolean goToShop){
+        this.forward = forward;
+        this.back = back;
+        this.jump = jump;
+        this.attack = attack;
+        this.goToMenu = goToMenu;
+        this.goToShop = goToShop;
+    }
+
     public boolean forwardPressed() {
         return forward;
     }

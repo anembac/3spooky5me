@@ -1,5 +1,6 @@
 package com.tda367.infinityrun.Model;
 
+import com.tda367.infinityrun.Model.*;
 import com.tda367.infinityrun.Utils.Constants;
 import com.tda367.infinityrun.Utils.Math.Vec2;
 

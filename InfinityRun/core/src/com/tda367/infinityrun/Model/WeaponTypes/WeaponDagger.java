@@ -1,8 +1,6 @@
 package com.tda367.infinityrun.Model.WeaponTypes;
 
-import com.tda367.infinityrun.Model.MeleeWeapon;
-
-/*
+import com.tda367.infinityrun.Model.MeleeWeapon;/*
 
         Dagger is a melee weapon with high attack rate, and critical hits, but low damage.
 

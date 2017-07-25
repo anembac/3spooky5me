@@ -1,8 +1,6 @@
 package com.tda367.infinityrun.Model.WeaponTypes;
 
-import com.tda367.infinityrun.Model.MeleeWeapon;
-
-/*
+import com.tda367.infinityrun.Model.MeleeWeapon;/*
 
     Sword is a all-around good MeleeWeapon. Not too good in any spot, but no downsides.
 

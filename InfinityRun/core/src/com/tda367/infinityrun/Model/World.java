@@ -7,32 +7,29 @@ import com.tda367.infinityrun.Utils.Math.Vec2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /*
 Class for binding the game together and where the different objects interact with eachother.
  */
-public class World {
+public class World extends Observable {
 
     private final List<WorldObject> worldObjects;
 
     private final Character hero;
     private WorldGenerator generator = null;
-    private final Shop shop;
     private boolean running = true;
-    private IInput input;
+    private InputState state;
 
     public World(WorldGenerator gen, Character hero) {
         CollisionManager.getInstance().forceNewInstance();
         worldObjects = new ArrayList<WorldObject>();
         generator = gen;
-        // not sure where to put this really since the entry points for the project are tied to libgdx
-        input = new InputGDX();
+        state = new InputState(false,false,false,false,false,false);
         addWorldObject(hero);
         this.hero = hero;
         hero.setMeleeWeapon();
-        shop = new Shop(getHero());
     }
-
     public Character getHero() {
         return hero;
     }
@@ -88,18 +85,17 @@ public class World {
     //frame function that rewrites WorldObjects/enemies.
     public void frame(float dt) {
         // 25 15
-
+        setChanged();
+        notifyObservers();
         generateWorld();
         //addWorldObjects(generator2.generate(0,0));
         List<WorldObject> objectsToRemove = new ArrayList<WorldObject>();
-
-        input.collectInput();
-
         Vec2 heroPos = WOWrapper.worldObjectCenter(hero);
         for (WorldObject obj : worldObjects) {
             if (Vec2.distance(WOWrapper.worldObjectCenter(obj), heroPos) > 1500)
                 continue; // no need to make logic that far away, the player wont see this anyway.
-            obj.frame(dt, heroPos.x, heroPos.y, input.getInput());
+            obj.frame(dt, heroPos.x, heroPos.y, state);
+
 
             if (obj instanceof LivingObject) {
                 // This object might have a different position now, the easiest way is to remove it and then re add it.
@@ -148,8 +144,12 @@ public class World {
         }
     }
 
-    public Shop getShop() {
-        return shop;
+//    public void updateState(boolean forward, boolean back, boolean jump, boolean attack, boolean goToMenu, boolean goToShop) {
+//        state = new InputState(forward, back, jump, attack, goToMenu,goToShop);
+//    }
+
+    public InputState getInputState(){
+        return state;
     }
 
 }

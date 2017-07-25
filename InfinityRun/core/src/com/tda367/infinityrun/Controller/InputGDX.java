@@ -1,15 +1,21 @@
 package com.tda367.infinityrun.Controller;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.tda367.infinityrun.Model.InputState;
+
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by Mikael on 5/3/2017.
  */
-public class InputGDX implements IInput {
-    private InputState state = new InputState(false, false, false, false, false, false);
+public class InputGDX implements IInput, Observer {
+    private InputState state;
 
-    public InputGDX() {
+    public InputGDX(InputState state) {
+        this.state = state;
+
 
     }
 
@@ -31,6 +37,12 @@ public class InputGDX implements IInput {
         if (Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.UP)) jump = true;
         if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.SPACE)) attack = true;
 
-        state = new InputState(forward, back, jump, attack, goToMenu, goToShop);
+        //state = new InputState(forward, back, jump, attack, goToMenu, goToShop);
+        state.update(forward, back, jump, attack, goToMenu, goToShop);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        collectInput();
     }
 }

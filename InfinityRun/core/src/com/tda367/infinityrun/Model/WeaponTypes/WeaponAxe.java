@@ -1,8 +1,6 @@
 package com.tda367.infinityrun.Model.WeaponTypes;
 
-import com.tda367.infinityrun.Model.MeleeWeapon;
-
-/*
+import com.tda367.infinityrun.Model.MeleeWeapon;/*
 
     Axe is a meleeWeapon with increased critical hits, and higher base damage.
 
