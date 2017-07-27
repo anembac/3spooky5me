@@ -20,6 +20,7 @@ public class LivingObject extends WorldObject {
     private double damage = 0;
     private double range = 0;
     private double cooldown = 1;
+    private float currentCooldown = 0;
     private double critHitChance = 0;
     private double critHitDamage = 0;
     private MeleeWeapon equippedWeapon;
@@ -41,7 +42,7 @@ public class LivingObject extends WorldObject {
 
 
     }
-    //Equips a specific weapon
+    //Equips a specific weapon, not currently in use.
     public void equipWeapon(MeleeWeapon weapon) {
         removeEquippedWeapon();
         addChildren(weapon);
@@ -204,7 +205,7 @@ public class LivingObject extends WorldObject {
         }
 
         if(state.attackPressed()){
-            attack();
+            attack(dt);
         }
 
         // limit the "jump/gravity" acceleration. This prevents problems that shouldn't occur
@@ -249,10 +250,18 @@ public class LivingObject extends WorldObject {
         upgrades.put(name, upg);
     }
 
-    public void attack(){
-        if(equippedWeapon.possibleTarget() != null && !equippedWeapon.possibleTarget().equals(this)){
-            equippedWeapon.possibleTarget().takeDamage(damage);
+    public void attack(float dt){
+
+        currentCooldown = Math.max(0, currentCooldown-dt);
+
+        if(currentCooldown < 0.001){
+            if(equippedWeapon.possibleTarget() != null && !equippedWeapon.possibleTarget().equals(this)){
+                equippedWeapon.possibleTarget().takeDamage(damage);
+                currentCooldown = (float)cooldown;
+            }
         }
+
+
     }
 
 }
