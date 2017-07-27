@@ -69,4 +69,13 @@ public class MeleeWeapon extends WorldObject {
         return null;
     }
 
+
+    public void turnWeaponRight(){
+         setPosition(Vec2.dotProduct(getNonRelativePosition(), new Vec2(-1,1)));
+        setPosition(64,getNonRelativePosition().y);
+    }
+    public void turnWeaponLeft() {
+        setPosition(Vec2.dotProduct(getNonRelativePosition(), new Vec2(-1,1)));
+        setPosition(-64, getNonRelativePosition().y);
+    }
 }

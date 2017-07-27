@@ -211,7 +211,9 @@ public class LivingObject extends WorldObject {
         acceleration.y = Utils.limit(-5000, acceleration.y, getJumpAcceleration());
 
 //        if (this.acceleration.x > 0 && equippedWeapon != null) equippedWeapon.setDirRight();
-//        else if (equippedWeapon != null && this.acceleration.x < 0) equippedWeapon.setDirLeft();
+//        else if (this.acceleration.x < 0 && equippedWeapon != null) equippedWeapon.setDirLeft();
+        if (this.acceleration.x > 0 && equippedWeapon != null) equippedWeapon.turnWeaponRight();
+        if (this.acceleration.x < 0 && equippedWeapon != null) equippedWeapon.turnWeaponLeft();
 
 
         //NOTE: for absurdly high speeds, the game does break. However, it's very improbable that someone would ever come anywhere near this.
