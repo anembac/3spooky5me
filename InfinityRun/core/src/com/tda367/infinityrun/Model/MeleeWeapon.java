@@ -18,6 +18,7 @@ public class MeleeWeapon extends WorldObject {
     protected double criticalHitDamage;
     private final double CD;
     protected double weaponThickness;
+    protected double knockBack;
 
     public double getDamage() {
         return damage;
@@ -59,7 +60,7 @@ public class MeleeWeapon extends WorldObject {
         HitBoxObject hitBoxObject = new HitBoxObject(getPosition(),
                 new Vec2((float)range*meter, (float)weaponThickness));
 
-
+        for(double i = 0; i < 999; i = i+0.1){}
         WorldObject wo = CollisionManager.getInstance().getCollidedObject(hitBoxObject);
         if(wo instanceof LivingObject){
             System.out.println("MeleeWeapon: Thing is living");
@@ -71,11 +72,17 @@ public class MeleeWeapon extends WorldObject {
 
 
     public void turnWeaponRight(){
-         setPosition(Vec2.dotProduct(getNonRelativePosition(), new Vec2(-1,1)));
+        setPosition(Vec2.dotProduct(getNonRelativePosition(), new Vec2(-1,1)));
         setPosition(64,getNonRelativePosition().y);
     }
     public void turnWeaponLeft() {
         setPosition(Vec2.dotProduct(getNonRelativePosition(), new Vec2(-1,1)));
         setPosition(-64, getNonRelativePosition().y);
+    }
+
+    public void rotate(double rotation){
+        setPosition(
+                (float)(getPosition().x*Math.cos(rotation)- getPosition().y*Math.sin(rotation)),
+                (float)(getPosition().y*Math.cos(rotation)+ getPosition().x*Math.sin(rotation)));
     }
 }
