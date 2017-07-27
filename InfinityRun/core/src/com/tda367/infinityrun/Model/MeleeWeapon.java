@@ -46,7 +46,8 @@ public class MeleeWeapon extends WorldObject {
     private final double range;
 
     public MeleeWeapon(double damage, double CD, double range) {
-        super(new Vec2(/*offset from character*/32, 26), new Vec2(/*size*/164, 12));
+        super(new Vec2(/*offset from character*/65, 16), new Vec2(/*size*/164, 12));
+        System.out.println(this.getPosition().x + this.getPosition().y);
         setTexture("WorldObjects/weapon.png");
         setCollidable(false);
         this.damage = damage;
@@ -55,12 +56,16 @@ public class MeleeWeapon extends WorldObject {
     }
 
     public LivingObject possibleTarget(){
-        HitBoxObject hitBoxObject = new HitBoxObject(getNonRelativePosition(),
+        HitBoxObject hitBoxObject = new HitBoxObject(getPosition(),
                 new Vec2((float)range*meter, (float)weaponThickness));
+
+
         WorldObject wo = CollisionManager.getInstance().getCollidedObject(hitBoxObject);
         if(wo instanceof LivingObject){
+            System.out.println("MeleeWeapon: Thing is living");
             return (LivingObject)wo;
         }
+        //System.out.println("MeleeWeapon: Thing is null");
         return null;
     }
 

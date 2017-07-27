@@ -248,7 +248,7 @@ public class LivingObject extends WorldObject {
     }
 
     public void attack(){
-        if(equippedWeapon.possibleTarget() != null){
+        if(equippedWeapon.possibleTarget() != null && !equippedWeapon.possibleTarget().equals(this)){
             equippedWeapon.possibleTarget().takeDamage(damage);
         }
     }

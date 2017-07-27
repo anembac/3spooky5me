@@ -250,7 +250,8 @@ public class CollisionManager {
                 if(aLen > 0) output.x = Math.max(output.x, tCornerC.y);
                 // roof intersection
                 if(cLen > 0) output.z = Math.min(output.z, tCornerA.y);
-
+                System.out.println("CollManager: horizontal intersection");
+                System.out.println("node data" + node.data );
                 return node.data;
             }
 
@@ -263,7 +264,7 @@ public class CollisionManager {
                 // right intersection
                 if(dLen > 0) output.w = Math.min(output.w, tCornerA.x);
 
-
+                System.out.println("CollManager: vertical intersection");
                 return node.data;
             }
 
