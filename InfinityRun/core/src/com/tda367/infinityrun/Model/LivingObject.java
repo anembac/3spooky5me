@@ -35,11 +35,9 @@ public class LivingObject extends WorldObject {
         MeleeWeapon weapon = setRandomWeapon();
         addChildren(weapon);
         equippedWeapon = weapon;
-        damage = equippedWeapon.getDamage();
+        calculateDamage();
         range = equippedWeapon.getRange();
         cooldown = equippedWeapon.getCD();
-        critHitChance = equippedWeapon.getCriticalHitChance();
-        critHitDamage = equippedWeapon.getCriticalHitDamage();
 
 
     }
@@ -48,13 +46,9 @@ public class LivingObject extends WorldObject {
         removeEquippedWeapon();
         addChildren(weapon);
         equippedWeapon = weapon;
-        damage = equippedWeapon.getDamage();
+        calculateDamage();
         range = equippedWeapon.getRange();
         cooldown = equippedWeapon.getCD();
-        critHitChance = equippedWeapon.getCriticalHitChance();
-        critHitDamage = equippedWeapon.getCriticalHitDamage();
-
-
     }
 
     public void removeEquippedWeapon(){
@@ -75,6 +69,12 @@ public class LivingObject extends WorldObject {
 
     public MeleeWeapon getWeapon(){
         return equippedWeapon;
+    }
+
+    public void calculateDamage(){
+        damage = equippedWeapon.damage * getMeleeHandling();
+        critHitChance = equippedWeapon.criticalHitChance * getCriticalHitChance();
+        critHitDamage = equippedWeapon.criticalHitDamage * getCriticalHitDamage();
     }
 
     //this method randomizes a weapon for livingobjects.
@@ -102,7 +102,7 @@ public class LivingObject extends WorldObject {
     }
 
     //TODO implement ranged
-    public void setRangedWeapon() {
+    public void equipRangedWeapon() {
     }
 
 
@@ -162,6 +162,7 @@ public class LivingObject extends WorldObject {
         addUpgrade("CHD", new CriticalHitDamage(Chdlvl)); //Added as multiplier to your CriticalHitDamage
         addUpgrade("Regeneration", new Regeneration(regLvl)); //Added as a flat increase to your overall health regeneration per second
         currentHealth = getMaxHealth();
+        calculateDamage();
     }
 
     public LivingObject(Vec2 pos, Vec2 bound, WorldObject  parent) {
@@ -239,5 +240,10 @@ public class LivingObject extends WorldObject {
         upgrades.put(name, upg);
     }
 
+    public void attack(){
+        if(equippedWeapon.possibleTarget() != null){
+            equippedWeapon.possibleTarget().takeDamage(damage);
+        }
+    }
 
 }

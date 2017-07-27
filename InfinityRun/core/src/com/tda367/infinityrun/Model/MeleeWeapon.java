@@ -1,6 +1,7 @@
 package com.tda367.infinityrun.Model;
 
 import com.tda367.infinityrun.Utils.Math.Vec2;
+import com.tda367.infinityrun.Utils.Math.Vec4;
 
 import static com.tda367.infinityrun.Utils.Constants.meter;
 
@@ -53,9 +54,14 @@ public class MeleeWeapon extends WorldObject {
         this.range = range;
     }
 
-    public void attack(){
+    public LivingObject possibleTarget(){
         HitBoxObject hitBoxObject = new HitBoxObject(getNonRelativePosition(),
                 new Vec2((float)range*meter, (float)weaponThickness));
+        WorldObject wo = CollisionManager.getInstance().getCollidedObject(hitBoxObject);
+        if(wo instanceof LivingObject){
+            return (LivingObject)wo;
+        }
+        return null;
     }
 
-   }
+}
