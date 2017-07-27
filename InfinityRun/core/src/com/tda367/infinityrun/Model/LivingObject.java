@@ -10,45 +10,75 @@ import com.tda367.infinityrun.Model.WeaponTypes.*;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
-/**
- * Created by Mikael on 5/3/2017.
- */
 // LivingObject is an abstraction for any object that needs to have upgrades and can be seen as "alive". It extends regular WorldObjects with additional properties. (upgrades)
 public class LivingObject extends WorldObject {
     final LinkedHashMap<String, Upgrade> upgrades = new LinkedHashMap<String, Upgrade>(); //Holds all of the upgrades, gives them a name as index.
 
     private double timeSinceRegen = 0; //ensures that regeneration is done in solid ticks
     double currentHealth = 0;
-    Vec2 acceleration = new Vec2(0, 0);
-    private MeleeWeapon meleeWeapon = null;
-    private RangedWeapon rangedWeapon = null;
+    private Vec2 acceleration = new Vec2(0, 0);
+    private double damage = 0;
+    private double range = 0;
+    private double cooldown = 1;
+    private double critHitChance = 0;
+    private double critHitDamage = 0;
+    private MeleeWeapon equippedWeapon;
 
     public LivingObject(Vec2 position, Vec2 bounds) {
         // Initialize the default enemy with lvl 1.
         this(position, bounds, 1, 1, 1, 1, 1, 1, 1, 1);
     }
 
-
-
-    //sets a default weapon if it doesn't yet have one.
-
-    public void setMeleeWeapon() {
-
-        if (meleeWeapon != null) {
-            removeChildren(meleeWeapon);
-        }
+    //Equips a random weapon.
+    public void equipWeapon() {
+        removeEquippedWeapon();
         MeleeWeapon weapon = setRandomWeapon();
         addChildren(weapon);
-        meleeWeapon = weapon;
+        equippedWeapon = weapon;
+        damage = equippedWeapon.getDamage();
+        range = equippedWeapon.getRange();
+        cooldown = equippedWeapon.getCD();
+        critHitChance = equippedWeapon.getCriticalHitChance();
+        critHitDamage = equippedWeapon.getCriticalHitDamage();
+
+
+    }
+    //Equips a specific weapon
+    public void equipWeapon(MeleeWeapon weapon) {
+        removeEquippedWeapon();
+        addChildren(weapon);
+        equippedWeapon = weapon;
+        damage = equippedWeapon.getDamage();
+        range = equippedWeapon.getRange();
+        cooldown = equippedWeapon.getCD();
+        critHitChance = equippedWeapon.getCriticalHitChance();
+        critHitDamage = equippedWeapon.getCriticalHitDamage();
+
+
     }
 
+    public void removeEquippedWeapon(){
+        if (equippedWeapon != null) {
+            removeChildren(equippedWeapon);
+            damage = 0;
+            range = 0;
+            cooldown = 1;
+            critHitChance = 0;
+            critHitDamage = 0;
+        }
+    }
 
+    //gets a weapon if the worldobject has one.
+    public String getWeaponName() {
+        return equippedWeapon.getName();
+    }
 
-
-
-
+    public MeleeWeapon getWeapon(){
+        return equippedWeapon;
+    }
 
     //this method randomizes a weapon for livingobjects.
+    //TODO: Improve extensiblity
     public MeleeWeapon setRandomWeapon (){
         Random rnd = new Random();
         int randomizedWeapon = rnd.nextInt(100) + 1;
@@ -75,7 +105,8 @@ public class LivingObject extends WorldObject {
     public void setRangedWeapon() {
     }
 
-    public void damage(double damage) {
+
+    public void takeDamage(double damage) {
         currentHealth -= damage;
         if (this.currentHealth <= 0) {
             despawn();
@@ -171,8 +202,8 @@ public class LivingObject extends WorldObject {
         // limit the "jump/gravity" acceleration. This prevents problems that shouldn't occur
         acceleration.y = Utils.limit(-5000, acceleration.y, getJumpAcceleration());
 
-        if (this.acceleration.x > 0 && meleeWeapon != null) meleeWeapon.setDirRight();
-        else if (meleeWeapon != null && this.acceleration.x < 0) meleeWeapon.setDirLeft();
+        if (this.acceleration.x > 0 && equippedWeapon != null) equippedWeapon.setDirRight();
+        else if (equippedWeapon != null && this.acceleration.x < 0) equippedWeapon.setDirLeft();
 
 
         //NOTE: for absurdly high speeds, the game does break. However, it's very improbable that someone would ever come anywhere near this.
@@ -202,8 +233,6 @@ public class LivingObject extends WorldObject {
             setPosition(getPosition().x, roof - getDrawingRect().bounds.y);
             acceleration.y = 0;
         }
-
-        if (meleeWeapon != null) meleeWeapon.frame(dt, heroX, heroY, state);
     }
 
     public void addUpgrade(String name, Upgrade upg) {

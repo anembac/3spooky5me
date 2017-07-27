@@ -6,6 +6,8 @@ import com.tda367.infinityrun.Model.MeleeWeapon;/*
 
  */
 
+import static com.tda367.infinityrun.Utils.Constants.meter;
+
 public class WeaponSpear extends MeleeWeapon {
     public WeaponSpear(double meleeHandling, double criticalChance, double criticalDamage) {
         super(15, 1.4, 4);
@@ -13,6 +15,7 @@ public class WeaponSpear extends MeleeWeapon {
         damage *= meleeHandling*1.1;
         criticalHitChance = criticalChance;
         criticalHitDamage = criticalDamage * 1.25;
+        weaponThickness = meter/4;
     }
 
 }

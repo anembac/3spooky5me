@@ -6,6 +6,8 @@ import com.tda367.infinityrun.Model.MeleeWeapon;/*
 
  */
 
+import static com.tda367.infinityrun.Utils.Constants.meter;
+
 public class WeaponAxe extends MeleeWeapon {
     public WeaponAxe(double meleeHandling, double criticalChance, double criticalDamage) {
         super(15, 1.5, 1);
@@ -13,6 +15,7 @@ public class WeaponAxe extends MeleeWeapon {
         damage *= meleeHandling;
         criticalHitChance = criticalChance + 0.05;
         criticalHitDamage = criticalDamage * 1.15;
+        weaponThickness = meter/4;
 
     }
 }

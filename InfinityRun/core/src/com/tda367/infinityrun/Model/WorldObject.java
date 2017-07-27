@@ -78,18 +78,6 @@ public abstract class WorldObject extends Observable {
         children.add(object);
     }
 
-    //gets a weapon if the worldobject has one.
-    public String getWeapon() {
-
-        for (WorldObject wo : children) {
-            if (wo instanceof MeleeWeapon) {
-                return ((MeleeWeapon) wo).getName();
-            }
-
-
-        }
-        return "";
-    }
 
     public void removeChildren(WorldObject object) {
         if (children.contains(object)) {
@@ -110,7 +98,7 @@ public abstract class WorldObject extends Observable {
         return children;
     }
 
-    public Vec2 getNoneRelativePosition() {
+    public Vec2 getNonRelativePosition() {
         return position.clone();
     }
 
