@@ -206,6 +206,7 @@ public class LivingObject extends WorldObject {
 
         if(state.attackPressed()){
             attack(dt);
+            equippedWeapon.rotate(dt);
         }
 
         // limit the "jump/gravity" acceleration. This prevents problems that shouldn't occur

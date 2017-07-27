@@ -82,7 +82,11 @@ public class MeleeWeapon extends WorldObject {
 
     public void rotate(double rotation){
         setPosition(
-                (float)(getPosition().x*Math.cos(rotation)- getPosition().y*Math.sin(rotation)),
-                (float)(getPosition().y*Math.cos(rotation)+ getPosition().x*Math.sin(rotation)));
+                (float)(getNonRelativePosition().x*Math.cos(rotation)- getNonRelativePosition().y*Math.sin(rotation)),
+                (float)(getNonRelativePosition().y*Math.cos(rotation)+ getNonRelativePosition().x*Math.sin(rotation)));
+    }
+
+    public void frame(float dt){
+        rotate(dt);
     }
 }
