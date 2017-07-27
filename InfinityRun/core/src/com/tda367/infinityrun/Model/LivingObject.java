@@ -72,9 +72,12 @@ public class LivingObject extends WorldObject {
     }
 
     public void calculateDamage(){
-        damage = equippedWeapon.damage * getMeleeHandling();
-        critHitChance = equippedWeapon.criticalHitChance * getCriticalHitChance();
-        critHitDamage = equippedWeapon.criticalHitDamage * getCriticalHitDamage();
+        if(equippedWeapon != null){
+            damage = equippedWeapon.damage * getMeleeHandling();
+            critHitChance = equippedWeapon.criticalHitChance * getCriticalHitChance();
+            critHitDamage = equippedWeapon.criticalHitDamage * getCriticalHitDamage();
+        }
+
     }
 
     //this method randomizes a weapon for livingobjects.
@@ -200,11 +203,15 @@ public class LivingObject extends WorldObject {
             acceleration.y -= 2.5 * 9.82 * Constants.meter * dt;
         }
 
+        if(state.attackPressed()){
+            attack();
+        }
+
         // limit the "jump/gravity" acceleration. This prevents problems that shouldn't occur
         acceleration.y = Utils.limit(-5000, acceleration.y, getJumpAcceleration());
 
-        if (this.acceleration.x > 0 && equippedWeapon != null) equippedWeapon.setDirRight();
-        else if (equippedWeapon != null && this.acceleration.x < 0) equippedWeapon.setDirLeft();
+//        if (this.acceleration.x > 0 && equippedWeapon != null) equippedWeapon.setDirRight();
+//        else if (equippedWeapon != null && this.acceleration.x < 0) equippedWeapon.setDirLeft();
 
 
         //NOTE: for absurdly high speeds, the game does break. However, it's very improbable that someone would ever come anywhere near this.

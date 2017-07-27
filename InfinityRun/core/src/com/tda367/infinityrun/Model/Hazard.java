@@ -22,7 +22,7 @@ public class Hazard extends WorldObject {
         List<WorldObject> objects = CollisionManager.getInstance().getKNearest(this, 10);
         for (WorldObject wo : objects) {
             if (WOWrapper.centerDistance(this, wo) < range && wo instanceof LivingObject) {
-                ((LivingObject) wo).damage(dps * dt);
+                ((LivingObject) wo).takeDamage(dps * dt);
             }
         }
     }

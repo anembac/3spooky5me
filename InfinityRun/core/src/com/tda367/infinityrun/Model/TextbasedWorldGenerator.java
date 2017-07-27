@@ -335,7 +335,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                                         1 * (difficulty * 2), 1 * (difficulty / 16),
                                         1 * (difficulty / 24), 1 * (difficulty / 24)));
                                 output.add(enemy);
-                                enemy.setMeleeWeapon();
+                                enemy.equipWeapon();
                             }
                         }
                         break;

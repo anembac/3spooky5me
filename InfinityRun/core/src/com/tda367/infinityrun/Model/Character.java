@@ -63,8 +63,7 @@ public class Character extends LivingObject {
     public void setCharacterID(int id) {
         characterID = id;
     }
-
-    @Override
+    
     //method for taking damage, and despawning the character if  it's health is below 0. This also notifies the save function to save the character.
     public void damage(double damage) {
         currentHealth -= damage;
