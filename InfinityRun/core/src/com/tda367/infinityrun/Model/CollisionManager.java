@@ -98,6 +98,7 @@ public class CollisionManager {
 
     // Complexity = O(log(n))
     public Vec4 getDistanceToCollission(WorldObject obj)
+
     {
         // This algorithm could be changed to use the 2 range searches instead, 1 for each axis.
         float cx, cy;
@@ -250,8 +251,6 @@ public class CollisionManager {
                 if(aLen > 0) output.x = Math.max(output.x, tCornerC.y);
                 // roof intersection
                 if(cLen > 0) output.z = Math.min(output.z, tCornerA.y);
-                System.out.println("CollManager: horizontal intersection");
-                System.out.println("node data" + node.data );
                 return node.data;
             }
 
@@ -263,8 +262,6 @@ public class CollisionManager {
                 if(bLen > 0) output.y = Math.max(output.y, tCornerC.x);
                 // right intersection
                 if(dLen > 0) output.w = Math.min(output.w, tCornerA.x);
-
-                System.out.println("CollManager: vertical intersection");
                 return node.data;
             }
 
