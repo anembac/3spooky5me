@@ -47,7 +47,9 @@ public class MeleeWeapon extends WorldObject {
     private final double range;
 
     public MeleeWeapon(double damage, double CD, double range) {
-        super(new Vec2(/*offset from character*/65, 16), new Vec2(/*size*/164, 12));
+        /*Size here doesn't matter as we update it immediately*/
+        super(new Vec2(/*offset from character*/65, 16), new Vec2(0,0));
+        setBounds(new Vec2((float)range*meter, (float)weaponThickness));
         System.out.println(this.getPosition().x + this.getPosition().y);
         setTexture("WorldObjects/weapon.png");
         setCollidable(false);
@@ -57,8 +59,7 @@ public class MeleeWeapon extends WorldObject {
     }
 
     public LivingObject possibleTarget(){
-        HitBoxObject hitBoxObject = new HitBoxObject(getPosition(),
-                new Vec2((float)range*meter, (float)weaponThickness));
+        HitBoxObject hitBoxObject = new HitBoxObject(getPosition(), getBounds());
 
         for(double i = 0; i < 999; i = i+0.1){}
         WorldObject wo = CollisionManager.getInstance().getCollidedObject(hitBoxObject);

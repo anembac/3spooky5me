@@ -110,6 +110,14 @@ public abstract class WorldObject extends Observable {
         }
     }
 
+    public Vec2 getBounds(){
+        return bounds;
+    }
+
+    public void setBounds(Vec2 newBounds){
+        bounds = newBounds;
+    }
+
     public WorldObject getParent() {
         return parent;
     }
