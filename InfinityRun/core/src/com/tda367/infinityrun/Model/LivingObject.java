@@ -7,7 +7,9 @@ import com.tda367.infinityrun.Utils.Math.Vec4;
 import com.tda367.infinityrun.Model.Upgrades.*;
 import com.tda367.infinityrun.Model.WeaponTypes.*;
 
+import java.lang.*;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Random;
 
 // LivingObject is an abstraction for any object that needs to have upgrades and can be seen as "alive". It extends regular WorldObjects with additional properties. (upgrades)
@@ -23,6 +25,7 @@ public class LivingObject extends WorldObject {
     private float currentCooldown = 0;
     private double critHitChance = 0;
     private double critHitDamage = 0;
+    private double anvilDamage = 0;
     private MeleeWeapon equippedWeapon;
 
     public LivingObject(Vec2 position, Vec2 bounds) {
@@ -203,6 +206,22 @@ public class LivingObject extends WorldObject {
             // Standard "earth" gravitation feels very wrong. Changed to make the game seem smoother.
             acceleration.y -= 2.5 * 9.82 * Constants.meter * dt;
         }
+
+            List<WorldObject> NearObjects = CollisionManager.getInstance().getKNearest(this, 2); //pickup distance
+
+            for (WorldObject wo : NearObjects) {
+                if (wo instanceof AnvilObject) {
+                  if (this instanceof Character) {
+                        if (Vec2.distance(WOWrapper.worldObjectCenter(this)
+                                , WOWrapper.worldObjectCenter(wo)) < Constants.collectRange) {
+
+                            wo.despawn();
+                            anvilDamage += 2;
+                        }
+                    }
+                }
+            }
+
 
         if(state.attackPressed()){
             attack(dt);
