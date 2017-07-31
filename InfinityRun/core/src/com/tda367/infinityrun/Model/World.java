@@ -28,7 +28,7 @@ public class World extends Observable {
         state = new InputState(false,false,false,false,false,false);
         addWorldObject(hero);
         this.hero = hero;
-        hero.equipWeapon();
+        //hero.equipWeapon();
     }
     public Character getHero() {
         return hero;

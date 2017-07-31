@@ -15,7 +15,7 @@ public class WeaponDagger extends MeleeWeapon {
         damage *= meleeHandling * 0.95;
         criticalHitChance = criticalChance + 0.15;
         criticalHitDamage = criticalDamage * 1.4;
-        weaponThickness = meter/5;
+        setWeaponThickness(meter/5);
     }
 
 }

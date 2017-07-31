@@ -15,7 +15,7 @@ public class WeaponAxe extends MeleeWeapon {
         damage *= meleeHandling;
         criticalHitChance = criticalChance + 0.05;
         criticalHitDamage = criticalDamage * 1.15;
-        weaponThickness = meter/4;
+        setWeaponThickness(meter/4);
 
     }
 }

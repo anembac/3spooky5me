@@ -37,6 +37,7 @@ public class Character extends LivingObject {
                 Chdlvl, regLvl);
         coins = numCoins;
         this.addObserver(new DeathObserver());
+        equipWeapon();
 
 
         addUpgrade("Looting", new Looting(lootLvl));    //Multiplied as a modifier to increase number of coins dropped - 250% chance of coins means 2 coins and 50% chance of extra.
@@ -63,7 +64,7 @@ public class Character extends LivingObject {
     public void setCharacterID(int id) {
         characterID = id;
     }
-    
+
     //method for taking damage, and despawning the character if  it's health is below 0. This also notifies the save function to save the character.
     public void damage(double damage) {
         currentHealth -= damage;

@@ -1,5 +1,6 @@
 package com.tda367.infinityrun.Model;
 
+import com.tda367.infinityrun.Utils.Math.Rect;
 import com.tda367.infinityrun.Utils.Math.Vec2;
 import com.tda367.infinityrun.Utils.Math.Vec4;
 
@@ -12,6 +13,8 @@ this gives them a source of attack to harm other LivingObjects.
  */
 //todo different knockback for different weapons
 public class MeleeWeapon extends WorldObject {
+    public  Vec2 upperLeft;
+    public  Vec2 lowerRight;
     protected String name;
     protected double damage;
     protected double criticalHitChance;
@@ -19,6 +22,7 @@ public class MeleeWeapon extends WorldObject {
     private final double CD;
     protected double weaponThickness;
     protected double knockBack;
+    private float rotation = 0;
 
     public double getDamage() {
         return damage;
@@ -49,8 +53,6 @@ public class MeleeWeapon extends WorldObject {
     public MeleeWeapon(double damage, double CD, double range) {
         /*Size here doesn't matter as we update it immediately*/
         super(new Vec2(/*offset from character*/65, 16), new Vec2(0,0));
-        setBounds(new Vec2((float)range*meter, (float)weaponThickness));
-        System.out.println(this.getPosition().x + this.getPosition().y);
         setTexture("WorldObjects/weapon.png");
         setCollidable(false);
         this.damage = damage;
@@ -58,22 +60,34 @@ public class MeleeWeapon extends WorldObject {
         this.range = range;
     }
 
+    public void setWeaponThickness(int thickness){
+        weaponThickness = thickness;
+        setBounds(new Vec2((float)range*meter, getWeaponThickness()));
+        setExtraPoints(new Vec2(getNonRelativePosition().x,getBounds().y), new Vec2(getBounds().x, getNonRelativePosition().y));
+    }
+
+    protected void setExtraPoints(Vec2 upperLeft, Vec2 lowerRight){
+        this.upperLeft = upperLeft;
+        this.lowerRight = lowerRight;
+//        System.out.println("ULx: "+upperLeft.x);
+//        System.out.println("ULy: "+upperLeft.y);
+//        System.out.println("LRx: "+lowerRight.x);
+//        System.out.println("LRy: "+lowerRight.y);
+    }
+
     public LivingObject possibleTarget(){
         HitBoxObject hitBoxObject = new HitBoxObject(getPosition(), getBounds());
-
-        for(double i = 0; i < 999; i = i+0.1){}
         WorldObject wo = CollisionManager.getInstance().getCollidedObject(hitBoxObject);
         if(wo instanceof LivingObject){
-            System.out.println("MeleeWeapon: Thing is living");
             return (LivingObject)wo;
         }
-        //System.out.println("MeleeWeapon: Thing is null");
         return null;
     }
 
 
     public void turnWeaponRight(){
         setPosition(Vec2.dotProduct(getNonRelativePosition(), new Vec2(-1,1)));
+
         setPosition(64,getNonRelativePosition().y);
     }
     public void turnWeaponLeft() {
@@ -82,12 +96,39 @@ public class MeleeWeapon extends WorldObject {
     }
 
     public void rotate(double rotation){
-        setPosition(
-                (float)(getNonRelativePosition().x*Math.cos(rotation)- getNonRelativePosition().y*Math.sin(rotation)),
-                (float)(getNonRelativePosition().y*Math.cos(rotation)+ getNonRelativePosition().x*Math.sin(rotation)));
+//        setBounds(new Vec2(
+//                (float)(getBounds().x*Math.cos(rotation)- getBounds().y*Math.sin(rotation)),
+//                (float)(getBounds().y*Math.cos(rotation)+ getBounds().x*Math.sin(rotation))));
+        this.rotation = (float)rotation;
+
+        double s = Math.sin(rotation);
+        double c = Math.sin(rotation);
+
+        upperLeft = new Vec2 ((float)(getNonRelativePosition().x * Math.cos(rotation)), ((float)(getBounds().y * Math.cos(rotation))));
+        setBounds(new Vec2 ((float)(getBounds().x * Math.sin(rotation)), ((float)(getBounds().y * Math.sin(rotation)))));
+        //setPosition(new Vec2 ((float)(getNonRelativePosition().x * -1 * Math.sin(rotation)), ((float)(getNonRelativePosition().y * -1 * Math.sin(rotation)))));
+        lowerRight = new Vec2 ((float)(lowerRight.x * Math.cos(rotation)), ((float)(lowerRight.y * Math.cos(rotation))));
+        System.out.println("ULx: "+upperLeft.x);
+        System.out.println("ULy: "+upperLeft.y);
+        System.out.println("LRx: "+lowerRight.x);
+        System.out.println("LRy: "+lowerRight.y);
+
     }
+
 
     public void frame(float dt){
         rotate(dt);
+    }
+
+    public float getWeaponThickness(){
+        return (float)weaponThickness;
+    }
+
+    public float getRotation(){
+        return rotation;
+    }
+
+    public Rect getDrawingRect() {
+        return new Rect(getPosition(),upperLeft,lowerRight,getBounds());
     }
 }

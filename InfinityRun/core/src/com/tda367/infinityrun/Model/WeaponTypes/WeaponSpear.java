@@ -15,7 +15,7 @@ public class WeaponSpear extends MeleeWeapon {
         damage *= meleeHandling*1.1;
         criticalHitChance = criticalChance;
         criticalHitDamage = criticalDamage * 1.25;
-        weaponThickness = meter/4;
+        setWeaponThickness(meter/4);
     }
 
 }
