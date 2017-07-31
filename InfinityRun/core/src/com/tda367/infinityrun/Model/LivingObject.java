@@ -77,7 +77,7 @@ public class LivingObject extends WorldObject {
 
     public void calculateDamage(){
         if(equippedWeapon != null){
-            damage = equippedWeapon.damage * getMeleeHandling();
+            damage = (equippedWeapon.damage + anvilDamage) * getMeleeHandling();
             critHitChance = equippedWeapon.criticalHitChance * getCriticalHitChance();
             critHitDamage = equippedWeapon.criticalHitDamage * getCriticalHitDamage();
         }
