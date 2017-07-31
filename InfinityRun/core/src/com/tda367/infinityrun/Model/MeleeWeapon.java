@@ -2,7 +2,6 @@ package com.tda367.infinityrun.Model;
 
 import com.tda367.infinityrun.Utils.Math.Rect;
 import com.tda367.infinityrun.Utils.Math.Vec2;
-import com.tda367.infinityrun.Utils.Math.Vec4;
 
 import static com.tda367.infinityrun.Utils.Constants.meter;
 
@@ -23,6 +22,7 @@ public class MeleeWeapon extends WorldObject {
     protected double weaponThickness;
     protected double knockBack;
     private float rotation = 0;
+    private boolean weaponFacingRight = true;
 
     public double getDamage() {
         return damage;
@@ -52,7 +52,7 @@ public class MeleeWeapon extends WorldObject {
 
     public MeleeWeapon(double damage, double CD, double range) {
         /*Size here doesn't matter as we update it immediately*/
-        super(new Vec2(/*offset from character*/65, 16), new Vec2(0,0));
+        super(new Vec2(/*offset from character*/64, 16), new Vec2(0,0));
         setTexture("WorldObjects/weapon.png");
         setCollidable(false);
         this.damage = damage;
@@ -63,7 +63,8 @@ public class MeleeWeapon extends WorldObject {
     public void setWeaponThickness(int thickness){
         weaponThickness = thickness;
         setBounds(new Vec2((float)range*meter, getWeaponThickness()));
-        setExtraPoints(new Vec2(getNonRelativePosition().x,getBounds().y), new Vec2(getBounds().x, getNonRelativePosition().y));
+        setExtraPoints(new Vec2(getNonRelativePosition().x,getBounds().y),
+                new Vec2(getBounds().x, getNonRelativePosition().y));
     }
 
     protected void setExtraPoints(Vec2 upperLeft, Vec2 lowerRight){
@@ -86,33 +87,27 @@ public class MeleeWeapon extends WorldObject {
 
 
     public void turnWeaponRight(){
-        setPosition(Vec2.dotProduct(getNonRelativePosition(), new Vec2(-1,1)));
+        if(!weaponFacingRight){
+            Vec2 newPos = new Vec2(64, getNonRelativePosition().y);
+            setPosition(newPos);
+            weaponFacingRight = true;
+        }
 
-        setPosition(64,getNonRelativePosition().y);
     }
     public void turnWeaponLeft() {
-        setPosition(Vec2.dotProduct(getNonRelativePosition(), new Vec2(-1,1)));
-        setPosition(-64, getNonRelativePosition().y);
+        if(weaponFacingRight){
+            Vec2 newPos = new Vec2(-(float)(meter*range), getNonRelativePosition().y);
+            setPosition(newPos);
+            weaponFacingRight = false;
+        }
     }
 
-    public void rotate(double rotation){
-//        setBounds(new Vec2(
-//                (float)(getBounds().x*Math.cos(rotation)- getBounds().y*Math.sin(rotation)),
-//                (float)(getBounds().y*Math.cos(rotation)+ getBounds().x*Math.sin(rotation))));
-        this.rotation = (float)rotation;
-
-        double s = Math.sin(rotation);
-        double c = Math.sin(rotation);
-
-        upperLeft = new Vec2 ((float)(getNonRelativePosition().x * Math.cos(rotation)), ((float)(getBounds().y * Math.cos(rotation))));
-        setBounds(new Vec2 ((float)(getBounds().x * Math.sin(rotation)), ((float)(getBounds().y * Math.sin(rotation)))));
-        //setPosition(new Vec2 ((float)(getNonRelativePosition().x * -1 * Math.sin(rotation)), ((float)(getNonRelativePosition().y * -1 * Math.sin(rotation)))));
-        lowerRight = new Vec2 ((float)(lowerRight.x * Math.cos(rotation)), ((float)(lowerRight.y * Math.cos(rotation))));
-        System.out.println("ULx: "+upperLeft.x);
-        System.out.println("ULy: "+upperLeft.y);
-        System.out.println("LRx: "+lowerRight.x);
-        System.out.println("LRy: "+lowerRight.y);
-
+    public void rotate(float rotation){
+        this.rotation = this.rotation+rotation;
+        upperLeft = rotateVec2(upperLeft, rotation);
+        lowerRight = rotateVec2(lowerRight, rotation);
+        setPosition(rotateVec2(getNonRelativePosition(), rotation));
+        setBounds(rotateVec2(getBounds(), rotation));
     }
 
 
@@ -130,5 +125,19 @@ public class MeleeWeapon extends WorldObject {
 
     public Rect getDrawingRect() {
         return new Rect(getPosition(),upperLeft,lowerRight,getBounds());
+    }
+
+    private Vec2 rotateVec2(Vec2 v, float theta){
+
+        float xprim = (float)((v.clone().x*Math.cos(theta))-(v.clone().y*Math.sin(theta)));
+        float yprim = (float)((v.clone().x*Math.sin(theta))+(v.clone().y*Math.cos(theta)));
+
+        return new Vec2(xprim, yprim);
+    }
+
+    public Vec2 yreflection (Vec2 v){
+        float xprim = v.clone().x * 1 + v.clone().y * 0;
+        float yprim = v.clone().x * 0 + v.clone().y * -1;
+        return new Vec2(xprim, yprim);
     }
 }

@@ -59,6 +59,7 @@ public class GameScreenDrawer extends ScreenDrawer {
                 float childWidth = child.getBounds().x;
                 float childHeight =  child.getBounds().y;
                 float theta = -((MeleeWeapon)child).getRotation(); //negative because rotation is counterclockwise and we want clockwise
+                System.out.println(theta);
                 batch.draw(textureMap.get(child.getTexturename()),child.getPosition().x,child.getPosition().y,0,0, childWidth, childHeight, 1, 1, theta, 0, 0, 0, 0, false, false);
             }
         }

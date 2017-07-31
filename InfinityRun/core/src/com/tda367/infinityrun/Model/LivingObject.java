@@ -27,7 +27,6 @@ public class LivingObject extends WorldObject {
     private double critHitDamage = 0;
     private double anvilDamage = 0;
     private MeleeWeapon equippedWeapon;
-
     public LivingObject(Vec2 position, Vec2 bounds) {
         // Initialize the default enemy with lvl 1.
         this(position, bounds, 1, 1, 1, 1, 1, 1, 1, 1);
@@ -223,9 +222,9 @@ public class LivingObject extends WorldObject {
             }
 
 
-        if(state.attackPressed()){
+        if(equippedWeapon!=null && state.attackPressed()){
             attack(dt);
-            equippedWeapon.rotate(dt);
+            equippedWeapon.rotate(10*dt);
         }
 
         // limit the "jump/gravity" acceleration. This prevents problems that shouldn't occur
@@ -271,15 +270,17 @@ public class LivingObject extends WorldObject {
     }
 
     public void attack(float dt){
+        if(equippedWeapon!=null){
+            currentCooldown = Math.max(0, currentCooldown-dt);
 
-        currentCooldown = Math.max(0, currentCooldown-dt);
-
-        if(currentCooldown < 0.001){
-            if(equippedWeapon.possibleTarget() != null && !equippedWeapon.possibleTarget().equals(this)){
-                equippedWeapon.possibleTarget().takeDamage(damage);
-                currentCooldown = (float)cooldown;
+            if(currentCooldown < 0.001){
+                if(equippedWeapon.possibleTarget() != null && !equippedWeapon.possibleTarget().equals(this)){
+                    equippedWeapon.possibleTarget().takeDamage(damage);
+                    currentCooldown = (float)cooldown;
+                }
             }
         }
+
 
 
     }
