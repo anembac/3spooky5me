@@ -65,6 +65,10 @@ public class LivingObject extends WorldObject {
         }
     }
 
+    public double getDamage() {
+        return damage;
+    }
+
     //gets a weapon if the worldobject has one.
     public String getWeaponName() {
         return equippedWeapon.getName();
@@ -150,11 +154,13 @@ public class LivingObject extends WorldObject {
     }
 
     double getCriticalHitChance() {
-        return upgrades.get("CHC").getValueDouble();
+
+        return critHitChance;
     }
 
     double getCriticalHitDamage() {
-        return upgrades.get("CHD").getValueDouble();
+
+        return critHitDamage;
     }
 
 
@@ -215,14 +221,16 @@ public class LivingObject extends WorldObject {
                     if (Vec2.distance(WOWrapper.worldObjectCenter(this)
                             , WOWrapper.worldObjectCenter(wo)) < Constants.collectRange) {
 
-                        wo.despawn();
-                        anvilDamage += 2;
+                            wo.despawn();
+                            anvilDamage += 2;
+                            calculateDamage();
+                        }
                     }
                 }
             }
-        }
-        //Attacking here
-        if(state.attackPressed()){
+
+
+        if(equippedWeapon!=null && state.attackPressed()){
             attack(dt);
         }
         if(equippedWeapon !=null && equippedWeapon.isAttacking()){

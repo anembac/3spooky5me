@@ -52,11 +52,13 @@ public class HUD {
         hudbatch.draw(weaponContainer, 105 - healthicon.getRegionWidth(),55 - healthicon.getRegionHeight() / 2 );
 
         //Weapon name
-        hudfont.draw(hudbatch, character.getWeaponName(),165 - healthicon.getRegionWidth(),80 - healthicon.getRegionHeight() / 2 );
+        hudfont.draw(hudbatch, character.getWeaponName(),165 - healthicon.getRegionWidth(),90 - healthicon.getRegionHeight() / 2 );
 
-        //
+        //weapon icon
         hudbatch.draw(Weapontype(character.getWeaponName()),105 - healthicon.getRegionWidth(),55 - healthicon.getRegionHeight() / 2 );
 
+
+        hudfont.draw(hudbatch, "Damage: "+ Integer.toString((int)character.getDamage()), 165 - healthicon.getRegionWidth(),70 - healthicon.getRegionHeight() / 2);
 
 
 

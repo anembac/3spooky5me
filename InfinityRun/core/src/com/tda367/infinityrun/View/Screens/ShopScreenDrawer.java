@@ -2,18 +2,20 @@ package com.tda367.infinityrun.View.Screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.tda367.infinityrun.Model.Character;
 import com.tda367.infinityrun.Utils.Constants;
 import com.tda367.infinityrun.View.VCButton;
 import com.tda367.infinityrun.Model.Shop;
 
 public class ShopScreenDrawer extends ScreenDrawer{
-
+    private final Character character;
     private final String[] nameList;
     private final Label shopMessage;
     private final int numberOfUpgrades;
@@ -22,9 +24,11 @@ public class ShopScreenDrawer extends ScreenDrawer{
     private final VCButton[] buttonArray;
 
 
-    public ShopScreenDrawer(Shop shop, Table table, VCButton[] buttonArray){
+    public ShopScreenDrawer(Character character, Shop shop, Table table, VCButton[] buttonArray){
 
         this.shop = shop;
+
+            this.character = character;
         this.buttonArray = buttonArray;
         nameList = shop.getUpgNameList();
         upgradeTable = table;
@@ -86,7 +90,14 @@ public class ShopScreenDrawer extends ScreenDrawer{
             shopMessage.draw(batch,1);
         } else {
             shopMessage.setText("");
+
         }
+        font.draw(batch, "Weapon:: "+  (character.getWeapon().getName()), 20, 800);
+        font.draw(batch, "Damage: "+ Integer.toString((int)character.getDamage()), 20, 780);
+        font.draw(batch, "Critical chance : "+ Integer.toString((int)character.getCriticalHitChance()) +  "%", 20, 760);
+        font.draw(batch, "Critical Damage: "+ Integer.toString((int)character.getCriticalHitDamage()), 20, 740);
+        font.draw(batch, "Regen: "+ Integer.toString(character.getRegeneration()), 20, 720);
+
         batch.end();
     }
 

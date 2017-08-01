@@ -110,6 +110,7 @@ public class Character extends LivingObject {
 
     @Override
     public double getCriticalHitDamage() {
+
         return (0.05 * 0) + super.getCriticalHitDamage();
     }
 

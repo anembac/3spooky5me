@@ -28,7 +28,7 @@ public class ScreenManager implements Observer {
         gameScreen  = new GameScreen(world);
         loadScreen = new LoadScreen();
         pauseMenuScreen = new PauseMenuScreen(gameScreen);
-        shopScreen = new ShopScreen(shop);
+        shopScreen = new ShopScreen(world.getHero(), shop);
         mainMenuScreen = new MainMenuScreen();
 
         /*

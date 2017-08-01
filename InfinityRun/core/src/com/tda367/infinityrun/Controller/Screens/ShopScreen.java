@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.tda367.infinityrun.Model.Character;
 import com.tda367.infinityrun.Utils.Constants;
 import com.tda367.infinityrun.View.VCButton;
 import com.tda367.infinityrun.Model.Shop;
@@ -21,6 +22,7 @@ public class ShopScreen extends Observable implements Screen {
     private final Stage shopStage = new Stage();
     private ShopScreenDrawer shopScreenDrawer;
     private Table buttonTable = new Table();
+    private Character character;
 
     private final VCButton[] buttonArray;
 
@@ -34,8 +36,9 @@ public class ShopScreen extends Observable implements Screen {
     };
 
 
-    public ShopScreen(Shop shop) {
+    public ShopScreen(Character character, Shop shop) {
         this.shop = shop;
+        this.character = character;
 
         numberOfUpgrades = shop.getUpgList().size();
         buttonArray = new VCButton[numberOfUpgrades + 1];
@@ -71,7 +74,7 @@ public class ShopScreen extends Observable implements Screen {
 
 
         //Create the view
-        shopScreenDrawer = new ShopScreenDrawer(shop, buttonTable, buttonArray);
+        shopScreenDrawer = new ShopScreenDrawer(character, shop, buttonTable, buttonArray);
 
 
 
