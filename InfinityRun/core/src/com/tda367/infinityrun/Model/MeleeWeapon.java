@@ -81,7 +81,13 @@ public class MeleeWeapon extends WorldObject {
     }
 
     public LivingObject possibleTarget(){
-        HitBoxObject hitBoxObject = new HitBoxObject(getPosition(), getBounds());
+        HitBoxObject hitBoxObject = new HitBoxObject(new Vec2(1,1),new Vec2(1,1));
+        if(weaponFacingRight) {
+             hitBoxObject = new HitBoxObject(getPosition(), new Vec2(getBounds().x, getBounds().x));
+        }
+        if(!weaponFacingRight){
+                 hitBoxObject = new HitBoxObject(getBounds(), new Vec2(getPosition().x,getPosition().x));
+        }
         WorldObject wo = CollisionManager.getInstance().getCollidedObject(hitBoxObject);
         if(wo instanceof LivingObject){
             return (LivingObject)wo;
