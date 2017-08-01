@@ -102,6 +102,10 @@ public abstract class WorldObject extends Observable {
         return position.clone();
     }
 
+    public Vec2 getNonRelativeBounds() {
+        return bounds.clone();
+    }
+
     public Vec2 getPosition() {
         if (parent == null) return position.clone();
         else {

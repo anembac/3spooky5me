@@ -1,7 +1,9 @@
 package com.tda367.infinityrun.Model;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
 import com.tda367.infinityrun.Utils.Math.Rect;
 import com.tda367.infinityrun.Utils.Math.Vec2;
+import com.tda367.infinityrun.Utils.Utils;
 
 import static com.tda367.infinityrun.Utils.Constants.meter;
 
@@ -86,18 +88,35 @@ public class MeleeWeapon extends WorldObject {
     }
 
 
+//turns the weapon right. hardcoded for now.
     public void turnWeaponRight(){
         if(!weaponFacingRight){
-            Vec2 newPos = new Vec2(64, getNonRelativePosition().y);
+
+
+            Vec2 newPos = new Vec2(64,16);
+          //  newPos = xreflection(newPos);
+
+            System.out.println("newposx: " + newPos.x);
+            System.out.println("neposx: " + newPos.y);
+
+            Vec2 newBounds = new Vec2(((float)(meter*range)), ((float)( weaponThickness)));
+         //   newBounds = xreflection(newBounds);
+            setBounds(newBounds);
             setPosition(newPos);
             weaponFacingRight = true;
         }
 
     }
+
+    //turns the weapon left. Hardcoded for now
     public void turnWeaponLeft() {
         if(weaponFacingRight){
-            Vec2 newPos = new Vec2(-(float)(meter*range), getNonRelativePosition().y);
+            Vec2 newPos = new Vec2(0,16);
+            newPos = xreflection(newPos);
             setPosition(newPos);
+            Vec2 newBounds = new Vec2(((float)(meter*range)), ((float)( weaponThickness)));
+            newBounds = xreflection(newBounds);
+            setBounds(newBounds);
             weaponFacingRight = false;
         }
     }
@@ -139,5 +158,12 @@ public class MeleeWeapon extends WorldObject {
         float xprim = v.clone().x * 1 + v.clone().y * 0;
         float yprim = v.clone().x * 0 + v.clone().y * -1;
         return new Vec2(xprim, yprim);
+    }
+
+    public Vec2 xreflection (Vec2 v) {
+        float xprim = v.clone().x * -1 + v.clone().y * 0;
+        float yprim = v.clone().x * 0 + v.clone().y * 1;
+        return new Vec2(xprim, yprim);
+
     }
 }
