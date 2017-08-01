@@ -2,19 +2,15 @@ package com.tda367.infinityrun.View.Screens;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Matrix4;
-import com.sun.xml.internal.bind.v2.model.util.ArrayInfoUtil;
 import com.tda367.infinityrun.Model.Enemy;
 import com.tda367.infinityrun.Model.MeleeWeapon;
 import com.tda367.infinityrun.Model.World;
 import com.tda367.infinityrun.Model.WorldObject;
 import com.tda367.infinityrun.Utils.Math.Rect;
-import com.tda367.infinityrun.Utils.Math.Vec2;
 import com.tda367.infinityrun.View.HUD;
 
-import java.sql.Array;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -63,10 +59,9 @@ public class GameScreenDrawer extends ScreenDrawer {
 
                 float childWidth = child.getBounds().x;
                 float childHeight =  child.getBounds().y;
-                float theta = -((MeleeWeapon)child).getRotation(); //negative because rotation is counterclockwise and we want clockwise
+                float theta = ((MeleeWeapon)child).getRotation(); //negative because rotation is counterclockwise and we want clockwise
                 //System.out.println(theta);
                 batch.draw(textureMap.get(child.getTexturename()),child.getPosition().x,child.getPosition().y,0,0, childWidth, childHeight, 1, 1, theta, 0, 0, 0, 0, false, false);
-
             }
         }
 

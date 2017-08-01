@@ -122,6 +122,10 @@ public abstract class WorldObject extends Observable {
         bounds = newBounds;
     }
 
+    public void setBounds(float x, float y){
+        setBounds(new Vec2(x,y));
+    }
+
     public WorldObject getParent() {
         return parent;
     }

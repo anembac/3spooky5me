@@ -25,6 +25,8 @@ public class MeleeWeapon extends WorldObject {
     protected double knockBack;
     private float rotation = 0;
     private boolean weaponFacingRight = true;
+    private boolean isAttacking = false;
+
 
     public double getDamage() {
         return damage;
@@ -88,19 +90,15 @@ public class MeleeWeapon extends WorldObject {
     }
 
 
-//turns the weapon right. hardcoded for now.
+    //turns the weapon right. hardcoded for now.
     public void turnWeaponRight(){
         if(!weaponFacingRight){
 
 
             Vec2 newPos = new Vec2(64,16);
-          //  newPos = xreflection(newPos);
-
-            System.out.println("newposx: " + newPos.x);
-            System.out.println("neposx: " + newPos.y);
-
+            //  newPos = xreflection(newPos);
             Vec2 newBounds = new Vec2(((float)(meter*range)), ((float)( weaponThickness)));
-         //   newBounds = xreflection(newBounds);
+            //   newBounds = xreflection(newBounds);
             setBounds(newBounds);
             setPosition(newPos);
             weaponFacingRight = true;
@@ -125,13 +123,30 @@ public class MeleeWeapon extends WorldObject {
         this.rotation = this.rotation+rotation;
         upperLeft = rotateVec2(upperLeft, rotation);
         lowerRight = rotateVec2(lowerRight, rotation);
-        setPosition(rotateVec2(getNonRelativePosition(), rotation));
-        setBounds(rotateVec2(getBounds(), rotation));
+        // setPosition(rotateVec2(getNonRelativePosition(), rotation));
+        //setBounds(rotateVec2(getBounds(), rotation));
     }
 
+    public void setRotation(float theta){
+//        setPosition(theta-this.rotation, theta -this.rotation);
+        float direction = 1;
+        if(!weaponFacingRight){
+            direction = -1;
+        }else{
+            direction = 1;
+        }
+        rotate(direction*(theta-this.rotation));
+    }
 
-    public void frame(float dt){
-        rotate(dt);
+    public void slash(float dt){
+        if(this.rotation == 0){
+            this.setRotation(90);
+        }else if(this.rotation < 0){
+            this.setRotation(0);
+            setAttacking(false);
+        }else{
+            this.setRotation(this.getRotation()-1000*dt);
+        }
     }
 
     public float getWeaponThickness(){
@@ -165,5 +180,13 @@ public class MeleeWeapon extends WorldObject {
         float yprim = v.clone().x * 0 + v.clone().y * 1;
         return new Vec2(xprim, yprim);
 
+    }
+
+    public boolean isAttacking() {
+        return isAttacking;
+    }
+
+    public void setAttacking(boolean attacking) {
+        isAttacking = attacking;
     }
 }

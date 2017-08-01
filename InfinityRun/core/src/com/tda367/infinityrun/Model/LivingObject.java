@@ -88,6 +88,7 @@ public class LivingObject extends WorldObject {
     public MeleeWeapon setRandomWeapon (){
         Random rnd = new Random();
         int randomizedWeapon = rnd.nextInt(100) + 1;
+        randomizedWeapon=60; //always spear TODO: remove this line when done debugging
 
         if (randomizedWeapon <20){
             return new WeaponAxe(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
@@ -206,26 +207,29 @@ public class LivingObject extends WorldObject {
             acceleration.y -= 2.5 * 9.82 * Constants.meter * dt;
         }
 
-            List<WorldObject> NearObjects = CollisionManager.getInstance().getKNearest(this, 2); //pickup distance
+        List<WorldObject> NearObjects = CollisionManager.getInstance().getKNearest(this, 2); //pickup distance
 
-            for (WorldObject wo : NearObjects) {
-                if (wo instanceof AnvilObject) {
-                  if (this instanceof Character) {
-                        if (Vec2.distance(WOWrapper.worldObjectCenter(this)
-                                , WOWrapper.worldObjectCenter(wo)) < Constants.collectRange) {
+        for (WorldObject wo : NearObjects) {
+            if (wo instanceof AnvilObject) {
+                if (this instanceof Character) {
+                    if (Vec2.distance(WOWrapper.worldObjectCenter(this)
+                            , WOWrapper.worldObjectCenter(wo)) < Constants.collectRange) {
 
-                            wo.despawn();
-                            anvilDamage += 2;
-                        }
+                        wo.despawn();
+                        anvilDamage += 2;
                     }
                 }
             }
-
-
-        if(equippedWeapon!=null && state.attackPressed()){
-            attack(dt);
-            equippedWeapon.rotate(10*dt);
         }
+        //Attacking here
+        if(state.attackPressed()){
+            attack(dt);
+        }
+        if(equippedWeapon !=null && equippedWeapon.isAttacking()){
+            equippedWeapon.slash(dt);
+        }
+
+
 
         // limit the "jump/gravity" acceleration. This prevents problems that shouldn't occur
         acceleration.y = Utils.limit(-5000, acceleration.y, getJumpAcceleration());
@@ -271,12 +275,18 @@ public class LivingObject extends WorldObject {
 
     public void attack(float dt){
         if(equippedWeapon!=null){
+
             currentCooldown = Math.max(0, currentCooldown-dt);
 
+
+
             if(currentCooldown < 0.001){
+
+                equippedWeapon.setAttacking(true);
                 if(equippedWeapon.possibleTarget() != null && !equippedWeapon.possibleTarget().equals(this)){
                     equippedWeapon.possibleTarget().takeDamage(damage);
                     currentCooldown = (float)cooldown;
+
                 }
             }
         }

@@ -3,7 +3,6 @@ package com.tda367.infinityrun.View;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
-import com.tda367.infinityrun.View.IDrawnByDrawer;
 
 
 /*
