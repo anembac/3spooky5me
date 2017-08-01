@@ -23,8 +23,8 @@ public class LivingObject extends WorldObject {
     private double range = 0;
     private double cooldown = 1;
     private float currentCooldown = 0;
-    private double critHitChance = 0;
-    private double critHitDamage = 0;
+    private double critHitChance = 1;
+    private double critHitDamage = 10;
     private double anvilDamage = 0;
     private MeleeWeapon equippedWeapon;
     public LivingObject(Vec2 position, Vec2 bounds) {
@@ -81,8 +81,8 @@ public class LivingObject extends WorldObject {
     public void calculateDamage(){
         if(equippedWeapon != null){
             damage = (equippedWeapon.damage + anvilDamage) * getMeleeHandling();
-            critHitChance = equippedWeapon.criticalHitChance * getCriticalHitChance();
-            critHitDamage = equippedWeapon.criticalHitDamage * getCriticalHitDamage();
+            critHitChance = equippedWeapon.criticalHitChance * getCriticalHitChanceMultiplier();
+            critHitDamage = damage + equippedWeapon.criticalHitDamage * getCriticalHitDamageMultiplier();
         }
 
     }
@@ -153,16 +153,22 @@ public class LivingObject extends WorldObject {
         return upgrades.get("Melee").getValueDouble();
     }
 
-    double getCriticalHitChance() {
-
+    public double getCriticalHitChance() {
         return critHitChance;
     }
 
-    double getCriticalHitDamage() {
-
+    public double getCriticalHitDamage() {
         return critHitDamage;
     }
 
+    double getCriticalHitChanceMultiplier() {
+
+        return upgrades.get("CHC").getValueDouble();
+    }
+
+    double getCriticalHitDamageMultiplier() {
+        return upgrades.get("CHD").getValueDouble();
+    }
 
     LivingObject(Vec2 position, Vec2 bounds, int speedLvl, int jumpLvl, int hermesLvl, int healthLvl, int meleeHandlingLvl, int ChcLvl, int Chdlvl, int regLvl) {
         super(position, bounds);

@@ -92,9 +92,11 @@ public class ShopScreenDrawer extends ScreenDrawer{
             shopMessage.setText("");
 
         }
+
+        //Character stats
         font.draw(batch, "Weapon:: "+  (character.getWeapon().getName()), 20, 800);
         font.draw(batch, "Damage: "+ Integer.toString((int)character.getDamage()), 20, 780);
-        font.draw(batch, "Critical chance : "+ Integer.toString((int)character.getCriticalHitChance()) +  "%", 20, 760);
+        font.draw(batch, "Critical Chance : "+ Double.toString(character.getCriticalHitChance()) +  "%", 20, 760);
         font.draw(batch, "Critical Damage: "+ Integer.toString((int)character.getCriticalHitDamage()), 20, 740);
         font.draw(batch, "Regen: "+ Integer.toString(character.getRegeneration()), 20, 720);
 

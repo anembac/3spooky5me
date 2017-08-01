@@ -104,14 +104,13 @@ public class Character extends LivingObject {
     }
 
     @Override
-    public double getCriticalHitChance() {
-        return (0.01 * 5) + super.getCriticalHitChance();
+    public double getCriticalHitChanceMultiplier() {
+        return (0.01 * 5) + super.getCriticalHitChanceMultiplier();
     }
 
     @Override
-    public double getCriticalHitDamage() {
-
-        return (0.05 * 0) + super.getCriticalHitDamage();
+    public double getCriticalHitDamageMultiplier() {
+        return (0.05 * 0) + super.getCriticalHitDamageMultiplier();
     }
 
     private double getCoinMultiplier() {

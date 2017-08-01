@@ -33,6 +33,7 @@ public class Shop {
             if (currentUpg.getLevel() < currentUpg.getCap() || currentUpg.getCap() < 0) {
                 shopOwner.chargeCoins(getPrice(currentUpg));
                 currentUpg.addLevel();
+                shopOwner.calculateDamage();
             }
         } else {
             setDisplayPoorMessage(true);
