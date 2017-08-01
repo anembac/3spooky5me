@@ -93,6 +93,8 @@ public class MeleeWeapon extends WorldObject {
     //turns the weapon right. hardcoded for now.
     public void turnWeaponRight(){
         if(!weaponFacingRight){
+            setAttacking(false);
+            setRotation(0);
 
 
             Vec2 newPos = new Vec2(64,16);
@@ -109,6 +111,8 @@ public class MeleeWeapon extends WorldObject {
     //turns the weapon left. Hardcoded for now
     public void turnWeaponLeft() {
         if(weaponFacingRight){
+            setAttacking(false);
+            setRotation(0);
             Vec2 newPos = new Vec2(0,16);
             newPos = xreflection(newPos);
             setPosition(newPos);
@@ -131,7 +135,7 @@ public class MeleeWeapon extends WorldObject {
 //        setPosition(theta-this.rotation, theta -this.rotation);
         float direction = 1;
         if(!weaponFacingRight){
-            direction = -1;
+            direction = 1;
         }else{
             direction = 1;
         }
@@ -139,13 +143,28 @@ public class MeleeWeapon extends WorldObject {
     }
 
     public void slash(float dt){
-        if(this.rotation == 0){
-            this.setRotation(90);
-        }else if(this.rotation < 0){
-            this.setRotation(0);
-            setAttacking(false);
-        }else{
-            this.setRotation(this.getRotation()-1000*dt);
+
+            if (weaponFacingRight == true){
+
+            if (this.rotation == 0) {
+                this.setRotation(90);
+            } else if (this.rotation < 0) {
+                this.setRotation(0);
+                setAttacking(false);
+            } else {
+                this.setRotation(this.getRotation() - 800 * dt);
+            }
+        }
+        if (weaponFacingRight == false) {
+            System.out.println();
+            if (this.rotation == 0) {
+                this.setRotation(270);
+            } else if (this.rotation > 360) {
+                this.setRotation(0);
+                setAttacking(false);
+            } else {
+                this.setRotation(this.getRotation() - -800 * dt);
+            }
         }
     }
 

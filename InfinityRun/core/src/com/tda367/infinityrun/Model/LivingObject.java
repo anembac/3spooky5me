@@ -229,7 +229,7 @@ public class LivingObject extends WorldObject {
                 }
             }
 
-
+//attacking
         if(equippedWeapon!=null && state.attackPressed()){
             attack(dt);
         }
