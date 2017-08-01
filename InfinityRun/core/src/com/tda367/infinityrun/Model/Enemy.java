@@ -12,7 +12,7 @@ public class Enemy extends LivingObject {
                  int meleeHandlingLvl, int ChcLvl, int Chdlvl, int regLvl) {
         super(position, bounds, speedLvl, jumpLvl, hermesLvl, healthLvl, meleeHandlingLvl, ChcLvl, Chdlvl, regLvl);
         setTexture("WorldObjects/enemy.png");
-        //equipWeapon();
+        equipWeapon();
     }
 
 
