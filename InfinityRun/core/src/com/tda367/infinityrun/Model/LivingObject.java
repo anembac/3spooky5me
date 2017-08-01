@@ -117,6 +117,12 @@ public class LivingObject extends WorldObject {
     }
 
 
+    private boolean isCritical() {
+        int rnd = new Random().nextInt(100);
+        return (critHitChance) > rnd;
+    }
+
+
     public void takeDamage(double damage) {
         currentHealth -= damage;
         if (this.currentHealth <= 0) {
@@ -235,7 +241,7 @@ public class LivingObject extends WorldObject {
                 }
             }
 
-
+//attacking
         if(equippedWeapon!=null && state.attackPressed()){
             attack(dt);
         }
@@ -298,6 +304,9 @@ public class LivingObject extends WorldObject {
 
                 equippedWeapon.setAttacking(true);
                 if(equippedWeapon.possibleTarget() != null && !equippedWeapon.possibleTarget().equals(this)){
+                    if (isCritical()){
+                        equippedWeapon.possibleTarget().takeDamage(critHitDamage);
+                    }
                     equippedWeapon.possibleTarget().takeDamage(damage);
                     currentCooldown = (float)cooldown;
 
