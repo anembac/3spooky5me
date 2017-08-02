@@ -14,15 +14,15 @@ this gives them a source of attack to harm other LivingObjects.
  */
 //todo different knockback for different weapons
 public class MeleeWeapon extends WorldObject {
-    public  Vec2 upperLeft;
-    public  Vec2 lowerRight;
+    public Vec2 upperLeft;
+    public Vec2 lowerRight;
     protected String name;
     protected double damage;
     protected double criticalHitChance;
     protected double criticalHitDamage;
     private final double CD;
     protected double weaponThickness;
-    protected double knockBack;
+    protected float knockBack;
     private float rotation = 0;
     private boolean weaponFacingRight = true;
     private boolean isAttacking = false;
@@ -56,7 +56,7 @@ public class MeleeWeapon extends WorldObject {
 
     public MeleeWeapon(double damage, double CD, double range) {
         /*Size here doesn't matter as we update it immediately*/
-        super(new Vec2(/*offset from character*/64, 16), new Vec2(0,0));
+        super(new Vec2(/*offset from character*/64, 16), new Vec2(0, 0));
         setTexture("WorldObjects/weapon.png");
         setCollidable(false);
         this.damage = damage;
@@ -64,14 +64,14 @@ public class MeleeWeapon extends WorldObject {
         this.range = range;
     }
 
-    public void setWeaponThickness(int thickness){
+    public void setWeaponThickness(int thickness) {
         weaponThickness = thickness;
-        setBounds(new Vec2((float)range*meter, getWeaponThickness()));
-        setExtraPoints(new Vec2(getNonRelativePosition().x,getBounds().y),
+        setBounds(new Vec2((float) range * meter, getWeaponThickness()));
+        setExtraPoints(new Vec2(getNonRelativePosition().x, getBounds().y),
                 new Vec2(getBounds().x, getNonRelativePosition().y));
     }
 
-    protected void setExtraPoints(Vec2 upperLeft, Vec2 lowerRight){
+    protected void setExtraPoints(Vec2 upperLeft, Vec2 lowerRight) {
         this.upperLeft = upperLeft;
         this.lowerRight = lowerRight;
 //        System.out.println("ULx: "+upperLeft.x);
@@ -80,30 +80,30 @@ public class MeleeWeapon extends WorldObject {
 //        System.out.println("LRy: "+lowerRight.y);
     }
 
-    public LivingObject possibleTarget(){
-        HitBoxObject hitBoxObject = new HitBoxObject(new Vec2(1,1),new Vec2(1,1));
+    public LivingObject possibleTarget() {
+        HitBoxObject hitBoxObject = new HitBoxObject(new Vec2(1, 1), new Vec2(1, 1));
 
 
-             hitBoxObject = new HitBoxObject(getPosition(), new Vec2(getBounds().x, Math.abs(getBounds().x)));
+        hitBoxObject = new HitBoxObject(getPosition(), new Vec2(getBounds().x, Math.abs(getBounds().x)));
 
         WorldObject wo = CollisionManager.getInstance().getCollidedObject(hitBoxObject);
-        if(wo instanceof LivingObject){
-            return (LivingObject)wo;
+        if (wo instanceof LivingObject) {
+            return (LivingObject) wo;
         }
         return null;
     }
 
 
     //turns the weapon right. hardcoded for now.
-    public void turnWeaponRight(){
-        if(!weaponFacingRight){
+    public void turnWeaponRight() {
+        if (!weaponFacingRight) {
             setAttacking(false);
             setRotation(0);
 
 
-            Vec2 newPos = new Vec2(64,16);
+            Vec2 newPos = new Vec2(64, 16);
             //  newPos = xreflection(newPos);
-            Vec2 newBounds = new Vec2(((float)(meter*range)), ((float)( weaponThickness)));
+            Vec2 newBounds = new Vec2(((float) (meter * range)), ((float) (weaponThickness)));
             //   newBounds = xreflection(newBounds);
             setBounds(newBounds);
             setPosition(newPos);
@@ -114,41 +114,41 @@ public class MeleeWeapon extends WorldObject {
 
     //turns the weapon left. Hardcoded for now
     public void turnWeaponLeft() {
-        if(weaponFacingRight){
+        if (weaponFacingRight) {
             setAttacking(false);
             setRotation(0);
-            Vec2 newPos = new Vec2(0,16);
+            Vec2 newPos = new Vec2(0, 16);
             newPos = xreflection(newPos);
             setPosition(newPos);
-            Vec2 newBounds = new Vec2(((float)(meter*range)), ((float)( weaponThickness)));
+            Vec2 newBounds = new Vec2(((float) (meter * range)), ((float) (weaponThickness)));
             newBounds = xreflection(newBounds);
             setBounds(newBounds);
             weaponFacingRight = false;
         }
     }
 
-    public void rotate(float rotation){
-        this.rotation = this.rotation+rotation;
+    public void rotate(float rotation) {
+        this.rotation = this.rotation + rotation;
         upperLeft = rotateVec2(upperLeft, rotation);
         lowerRight = rotateVec2(lowerRight, rotation);
         // setPosition(rotateVec2(getNonRelativePosition(), rotation));
         //setBounds(rotateVec2(getBounds(), rotation));
     }
 
-    public void setRotation(float theta){
+    public void setRotation(float theta) {
 //        setPosition(theta-this.rotation, theta -this.rotation);
         float direction = 1;
-        if(!weaponFacingRight){
+        if (!weaponFacingRight) {
             direction = 1;
-        }else{
+        } else {
             direction = 1;
         }
-        rotate(direction*(theta-this.rotation));
+        rotate(direction * (theta - this.rotation));
     }
 
-    public void slash(float dt){
+    public void slash(float dt) {
 
-            if (weaponFacingRight == true){
+        if (weaponFacingRight == true) {
 
             if (this.rotation == 0) {
                 this.setRotation(90);
@@ -172,33 +172,33 @@ public class MeleeWeapon extends WorldObject {
         }
     }
 
-    public float getWeaponThickness(){
-        return (float)weaponThickness;
+    public float getWeaponThickness() {
+        return (float) weaponThickness;
     }
 
-    public float getRotation(){
+    public float getRotation() {
         return rotation;
     }
 
     public Rect getDrawingRect() {
-        return new Rect(getPosition(),upperLeft,lowerRight,getBounds());
+        return new Rect(getPosition(), upperLeft, lowerRight, getBounds());
     }
 
-    private Vec2 rotateVec2(Vec2 v, float theta){
+    private Vec2 rotateVec2(Vec2 v, float theta) {
 
-        float xprim = (float)((v.clone().x*Math.cos(theta))-(v.clone().y*Math.sin(theta)));
-        float yprim = (float)((v.clone().x*Math.sin(theta))+(v.clone().y*Math.cos(theta)));
+        float xprim = (float) ((v.clone().x * Math.cos(theta)) - (v.clone().y * Math.sin(theta)));
+        float yprim = (float) ((v.clone().x * Math.sin(theta)) + (v.clone().y * Math.cos(theta)));
 
         return new Vec2(xprim, yprim);
     }
 
-    public Vec2 yreflection (Vec2 v){
+    public Vec2 yreflection(Vec2 v) {
         float xprim = v.clone().x * 1 + v.clone().y * 0;
         float yprim = v.clone().x * 0 + v.clone().y * -1;
         return new Vec2(xprim, yprim);
     }
 
-    public Vec2 xreflection (Vec2 v) {
+    public Vec2 xreflection(Vec2 v) {
         float xprim = v.clone().x * -1 + v.clone().y * 0;
         float yprim = v.clone().x * 0 + v.clone().y * 1;
         return new Vec2(xprim, yprim);
@@ -207,6 +207,10 @@ public class MeleeWeapon extends WorldObject {
 
     public boolean isAttacking() {
         return isAttacking;
+    }
+
+    public float getKnockback() {
+        return knockBack;
     }
 
     public void setAttacking(boolean attacking) {
