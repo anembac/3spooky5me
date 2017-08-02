@@ -15,16 +15,15 @@ import static com.tda367.infinityrun.Utils.Constants.meter;
  the player character for the game, an extension of a LivingObject, but it can also collect coins and move from the pllayer input.
  */
 public class Character extends LivingObject {
-    private static final Vec2 startingcoordinates = new Vec2(800,450);
-    private static final Vec2 sizeBounds = new Vec2(meter,meter);
+    private static final Vec2 startingcoordinates = new Vec2(800, 450);
+    private static final Vec2 sizeBounds = new Vec2(meter, meter);
     private int maxDistance = 0;
     private int characterID;
     private int coins = 0;
 
 
-
     public Character() {
-        this( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        this(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     }
 
     //stats for the player character: Number of current coins, level of Looting upgrade, speed upgrade, JumpHeight upgrade, HermesSandal upgrade, Health upgrade, MeleeHandling upgrade,
@@ -44,7 +43,6 @@ public class Character extends LivingObject {
         setTexture("WorldObjects/player.png");     // default hero texture
 
     }
-
 
 
     // public String getWeapon(){return MeleeWeapon.g;}
@@ -70,13 +68,14 @@ public class Character extends LivingObject {
         currentHealth -= damage;
         if (this.currentHealth <= 0) {
             setChanged();
-            notifyObservers("dead"+getCharacterID());
+            notifyObservers("dead" + getCharacterID());
             despawn();
             currentHealth = 10000;  //Sets health to above 1 to avoid entering if-statement more than once
             //due to the frame-based method calling it will save more than once before
             //despawning otherwise. High value to prevent dying more than once per frame.
         }
     }
+
     //methods to get the values from the upgrades.
     @Override
     public double getMaxHealth() {
@@ -135,18 +134,8 @@ public class Character extends LivingObject {
     //TODO despawn is still a bit retarded imo
 
     public void frame(float dt, float heroX, float heroY, InputState state) {
-        List<WorldObject> NearObjects = CollisionManager.getInstance().getKNearest(this, 5); //pickup distance
-
-        for (WorldObject wo : NearObjects) {
-            if (wo instanceof CoinObject) {
-                if (Vec2.distance(WOWrapper.worldObjectCenter(this)
-                        , WOWrapper.worldObjectCenter(wo)) < Constants.collectRange) {
-
-                    wo.despawn();
-                    coins += numberOfCoins();
-                }
-            }
-        }
+        pickUpAnvil();
+        pickUpCoin();
         super.frame(dt, heroX, heroY, state);
     }
 
@@ -161,7 +150,7 @@ public class Character extends LivingObject {
     */
     private int numberOfCoins() {
         int coins = ((int) (getCoinMultiplier() * 100)) / 100;
-        if (extraCoin(((int) (getCoinMultiplier() *100) %100))) {
+        if (extraCoin(((int) (getCoinMultiplier() * 100) % 100))) {
             coins++;
             return (coins);
         } else {
@@ -174,5 +163,39 @@ public class Character extends LivingObject {
         Random rnd = new Random();
         return chance >= (rnd.nextInt(100) + 1);
 
+    }
+
+
+    //Method for picking up an anvil
+    private void pickUpAnvil() {
+        List<WorldObject> NearObjects = CollisionManager.getInstance().getKNearest(this, 2); //pickup distance
+
+        for (WorldObject wo : NearObjects) {
+            if (wo instanceof AnvilObject) {
+                if (Vec2.distance(WOWrapper.worldObjectCenter(this)
+                        , WOWrapper.worldObjectCenter(wo)) < Constants.collectRange) {
+
+                    wo.despawn();
+                    anvilDamage += 2;
+                    calculateDamage();
+                }
+            }
+        }
+    }
+
+    //Method for picking up coin. Can't easily be abstracted to same method as anvil since the items act differently.
+    private void pickUpCoin() {
+        List<WorldObject> NearObjects = CollisionManager.getInstance().getKNearest(this, 5); //pickup distance
+
+        for (WorldObject wo : NearObjects) {
+            if (wo instanceof CoinObject) {
+                if (Vec2.distance(WOWrapper.worldObjectCenter(this)
+                        , WOWrapper.worldObjectCenter(wo)) < Constants.collectRange) {
+
+                    wo.despawn();
+                    coins += numberOfCoins();
+                }
+            }
+        }
     }
 }
