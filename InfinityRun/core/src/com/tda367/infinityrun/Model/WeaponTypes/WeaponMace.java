@@ -15,6 +15,7 @@ public class WeaponMace extends MeleeWeapon {
         damage *= meleeHandling*1.2;
         criticalHitChance = criticalChance;
         criticalHitDamage = criticalDamage+0.4;
+        knockBack = 500;
         setWeaponThickness(meter/3);
     }
 }

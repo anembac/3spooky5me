@@ -15,6 +15,7 @@ public class WeaponSword extends MeleeWeapon {
         damage *= meleeHandling*1.1;
         criticalHitChance = criticalChance;
         criticalHitDamage = criticalDamage;
+        knockBack = 350;
         setWeaponThickness(meter/4);
     }
 }

@@ -54,6 +54,10 @@ public class MeleeWeapon extends WorldObject {
         return name;
     }
 
+    public boolean isWeaponFacingRight() {
+        return weaponFacingRight;
+    }
+
     private final double range;
 
     public MeleeWeapon(double damage, double CD, double range) {

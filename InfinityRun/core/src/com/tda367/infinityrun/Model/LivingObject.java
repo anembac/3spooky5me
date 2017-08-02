@@ -1,5 +1,6 @@
 package com.tda367.infinityrun.Model;
 
+import com.badlogic.gdx.Input;
 import com.tda367.infinityrun.Utils.Constants;
 import com.tda367.infinityrun.Utils.Utils;
 import com.tda367.infinityrun.Utils.Math.Vec2;
@@ -9,11 +10,10 @@ import com.tda367.infinityrun.Model.WeaponTypes.*;
 
 import java.lang.*;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Random;
 
 // LivingObject is an abstraction for any object that needs to have upgrades and can be seen as "alive". It extends regular WorldObjects with additional properties. (upgrades)
-public class LivingObject extends WorldObject {
+public abstract class LivingObject extends WorldObject {
     final LinkedHashMap<String, Upgrade> upgrades = new LinkedHashMap<String, Upgrade>(); //Holds all of the upgrades, gives them a name as index.
 
     private double timeSinceRegen = 0; //ensures that regeneration is done in solid ticks
@@ -25,9 +25,11 @@ public class LivingObject extends WorldObject {
     private float currentCooldown = 0;
     private double critHitChance = 1;
     private double critHitDamage = 1;
-    private double anvilDamage = 0;
+    protected double anvilDamage = 0;
     private MeleeWeapon equippedWeapon;
     private boolean knockedBack = false;
+    private float stunTimer = 0;
+    private InputState state;
 
     public LivingObject(Vec2 position, Vec2 bounds) {
         // Initialize the default enemy with lvl 1.
@@ -200,6 +202,7 @@ public class LivingObject extends WorldObject {
     //method that regenerates LivingObjects based on their Regeneration level.
     @Override
     public void frame(float dt, float heroX, float heroY, InputState state) {
+     this.state = state;
 
         //Setup
         //Movement and collision checking
@@ -220,18 +223,21 @@ public class LivingObject extends WorldObject {
         acceleration.y = Utils.limit(-5000, acceleration.y, getJumpAcceleration());
 
         //Actions
+        stunCheck();
         regenerate(dt);
         fall(dt, height);
-        attack(dt, state);
+        attack(dt);
         turn();
         move(dt, height, rightIntersection, leftIntersection, roof);
+        stunTimerCountDown(dt);
+
     }
 
     public void addUpgrade(String name, Upgrade upg) {
         upgrades.put(name, upg);
     }
 
-    public void attack(float dt, InputState state) {
+    public void attack(float dt) {
         if (equippedWeapon != null && equippedWeapon.isAttacking()) {
             equippedWeapon.slash(dt);
         }
@@ -243,12 +249,14 @@ public class LivingObject extends WorldObject {
             if (currentCooldown < 0.001) {
 
                 equippedWeapon.setAttacking(true);
-                if (equippedWeapon.possibleTarget() != null && !equippedWeapon.possibleTarget().equals(this)) {
+
+                LivingObject target = equippedWeapon.possibleTarget();
+                if (target != null && !target.equals(this)) {
                     if (isCritical()) {
-                        equippedWeapon.possibleTarget().takeDamage(critHitDamage);
+                        target.takeDamage(critHitDamage);
                     }
-                    equippedWeapon.possibleTarget().takeDamage(damage);
-                    equippedWeapon.possibleTarget().knockback(equippedWeapon.getKnockback());
+                    target.takeDamage(damage);
+                    target.knockback(equippedWeapon.getKnockback(), target.equippedWeapon.isWeaponFacingRight());
                     currentCooldown = (float) cooldown;
 
                 }
@@ -258,8 +266,28 @@ public class LivingObject extends WorldObject {
 
     }
 
-    public void knockback(float strength) {
-        knockedBack = true;
+    public void knockback(float strength, boolean weaponDirection) {
+        if(!weaponDirection){
+            acceleration.x = -strength;
+        }else{
+            acceleration.x = strength;
+        }
+        acceleration.y = strength;
+        stunTimer = 50555550;
+    }
+
+    public void stunTimerCountDown(float dt){
+
+        stunTimer = stunTimer - dt;
+        if(stunTimer<0){
+            stunTimer = 0;
+        }
+    }
+
+    public void stunCheck(){
+        if(stunTimer > 0){
+            state = new InputState(false, false, false, false, false, false);
+        }
     }
 
 
@@ -305,7 +333,7 @@ public class LivingObject extends WorldObject {
         }
     }
 
-    private void turn(){
+    private void turn() {
         if (this.acceleration.x > 0 && equippedWeapon != null) equippedWeapon.turnWeaponRight();
         if (this.acceleration.x < 0 && equippedWeapon != null) equippedWeapon.turnWeaponLeft();
     }
