@@ -193,7 +193,7 @@ public class CollisionManager {
 
 
     //Returns a WorldObject that the given WorldObject collides with.
-    public WorldObject getCollidedObject(WorldObject obj)
+    public ArrayList<WorldObject> getCollidedObject(WorldObject obj)
     {
         // This algorithm could be changed to use the 2 range searches instead, 1 for each axis.
         float cx, cy;
@@ -201,7 +201,7 @@ public class CollisionManager {
         cy = obj.getPosition().y + obj.getDrawingRect().bounds.y / 2;
         // Initialize the intersection pts to never intersect
         Vec4 output = new Vec4(-1000000000,-100000000,10000000,10000000);
-
+        ArrayList<WorldObject>  colidedObjects = new ArrayList<WorldObject>();
         List<KdTreeNode<WorldObject>> nodes = kdTree.getKNN(new Point2D.Double(cx,cy), 30); // get the 100 closest points, this should be enough, We could update this to use the range search algo later.
         for(KdTreeNode<WorldObject> node : nodes){
             if(node.data == obj || !node.data.getCollidable()) continue;
@@ -251,7 +251,8 @@ public class CollisionManager {
                 if(aLen > 0) output.x = Math.max(output.x, tCornerC.y);
                 // roof intersection
                 if(cLen > 0) output.z = Math.min(output.z, tCornerA.y);
-                return node.data;
+                colidedObjects.add(node.data);
+
             }
 
             // Vertical (Horizontal intersection)
@@ -262,7 +263,7 @@ public class CollisionManager {
                 if(bLen > 0) output.y = Math.max(output.y, tCornerC.x);
                 // right intersection
                 if(dLen > 0) output.w = Math.min(output.w, tCornerA.x);
-                return node.data;
+                colidedObjects.add(node.data);
             }
 
             if(node.point.x > oCornerA.x && node.point.x < (oCornerC.x) && node.point.y > oCornerA.y && node.point.y < oCornerC.y)
@@ -284,8 +285,8 @@ public class CollisionManager {
             }
 
         }
-        //No collision with worldobject found
-        return null;
+        return colidedObjects;
+
     }
 
     private boolean pointBetweenHorizontal(Vec2 start, Vec2 point, Vec2 end)

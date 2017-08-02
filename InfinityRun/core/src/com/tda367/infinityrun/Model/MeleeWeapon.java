@@ -5,6 +5,8 @@ import com.tda367.infinityrun.Utils.Math.Rect;
 import com.tda367.infinityrun.Utils.Math.Vec2;
 import com.tda367.infinityrun.Utils.Utils;
 
+import java.util.ArrayList;
+
 import static com.tda367.infinityrun.Utils.Constants.meter;
 
 
@@ -85,10 +87,12 @@ public class MeleeWeapon extends WorldObject {
 
 
              hitBoxObject = new HitBoxObject(getPosition(), new Vec2(getBounds().x, Math.abs(getBounds().x)));
+       ArrayList<WorldObject> wo = CollisionManager.getInstance().getCollidedObject(hitBoxObject);
 
-        WorldObject wo = CollisionManager.getInstance().getCollidedObject(hitBoxObject);
-        if(wo instanceof LivingObject){
-            return (LivingObject)wo;
+        for(WorldObject o : wo){
+            if(o instanceof LivingObject){
+                return (LivingObject)o;
+            }
         }
         return null;
     }

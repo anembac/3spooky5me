@@ -24,7 +24,7 @@ public class LivingObject extends WorldObject {
     private double cooldown = 1;
     private float currentCooldown = 0;
     private double critHitChance = 1;
-    private double critHitDamage = 10;
+    private double critHitDamage = 1;
     private double anvilDamage = 0;
     private MeleeWeapon equippedWeapon;
     public LivingObject(Vec2 position, Vec2 bounds) {
@@ -82,7 +82,7 @@ public class LivingObject extends WorldObject {
         if(equippedWeapon != null){
             damage = (equippedWeapon.damage + anvilDamage) * getMeleeHandling();
             critHitChance = equippedWeapon.criticalHitChance * getCriticalHitChanceMultiplier();
-            critHitDamage = damage + equippedWeapon.criticalHitDamage * getCriticalHitDamageMultiplier();
+            critHitDamage = damage * equippedWeapon.criticalHitDamage * getCriticalHitDamageMultiplier();
         }
 
     }
