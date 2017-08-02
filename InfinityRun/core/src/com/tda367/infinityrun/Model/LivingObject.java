@@ -25,8 +25,10 @@ public class LivingObject extends WorldObject {
     private float currentCooldown = 0;
     private double critHitChance = 1;
     private double critHitDamage = 10;
-    private double anvilDamage = 0;
+    protected double anvilDamage = 0;
     private MeleeWeapon equippedWeapon;
+    private boolean knockedBack = false;
+
     public LivingObject(Vec2 position, Vec2 bounds) {
         // Initialize the default enemy with lvl 1.
         this(position, bounds, 1, 1, 1, 1, 1, 1, 1, 1);
@@ -44,6 +46,7 @@ public class LivingObject extends WorldObject {
 
 
     }
+
     //Equips a specific weapon, not currently in use.
     public void equipWeapon(MeleeWeapon weapon) {
         removeEquippedWeapon();
@@ -54,7 +57,7 @@ public class LivingObject extends WorldObject {
         cooldown = equippedWeapon.getCD();
     }
 
-    public void removeEquippedWeapon(){
+    public void removeEquippedWeapon() {
         if (equippedWeapon != null) {
             removeChildren(equippedWeapon);
             damage = 0;
@@ -74,12 +77,12 @@ public class LivingObject extends WorldObject {
         return equippedWeapon.getName();
     }
 
-    public MeleeWeapon getWeapon(){
+    public MeleeWeapon getWeapon() {
         return equippedWeapon;
     }
 
-    public void calculateDamage(){
-        if(equippedWeapon != null){
+    public void calculateDamage() {
+        if (equippedWeapon != null) {
             damage = (equippedWeapon.damage + anvilDamage) * getMeleeHandling();
             critHitChance = equippedWeapon.criticalHitChance * getCriticalHitChanceMultiplier();
             critHitDamage = damage + equippedWeapon.criticalHitDamage * getCriticalHitDamageMultiplier();
@@ -89,24 +92,24 @@ public class LivingObject extends WorldObject {
 
     //this method randomizes a weapon for livingobjects.
     //TODO: Improve extensiblity
-    public MeleeWeapon setRandomWeapon (){
+    public MeleeWeapon setRandomWeapon() {
         Random rnd = new Random();
         int randomizedWeapon = rnd.nextInt(100) + 1;
-        randomizedWeapon=60; //always spear TODO: remove this line when done debugging
+        randomizedWeapon = 60; //always spear TODO: remove this line when done debugging
 
-        if (randomizedWeapon <20){
+        if (randomizedWeapon < 20) {
             return new WeaponAxe(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
         }
 
-        if (randomizedWeapon<40){
+        if (randomizedWeapon < 40) {
             return new WeaponDagger(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
         }
 
-        if (randomizedWeapon <60){
+        if (randomizedWeapon < 60) {
             return new WeaponMace(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
         }
 
-        if (randomizedWeapon <80){
+        if (randomizedWeapon < 80) {
             return new WeaponSpear(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
         }
         return new WeaponSword(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
@@ -190,80 +193,77 @@ public class LivingObject extends WorldObject {
         calculateDamage();
     }
 
-    public LivingObject(Vec2 pos, Vec2 bound, WorldObject  parent) {
+    public LivingObject(Vec2 pos, Vec2 bound, WorldObject parent) {
         super(pos, bound, parent);
     }
 
 
-    //method that regenerates LivingObjects based on their Regeneration level.
     @Override
     public void frame(float dt, float heroX, float heroY, InputState state) {
 
-        timeSinceRegen += dt;
-        if (timeSinceRegen >= 1) {
-            currentHealth = Math.min(getRegeneration() + currentHealth, getMaxHealth());
-            timeSinceRegen = 0;
-        }
-
-
+        //Setup
+        //Movement and collision checking
         Vec4 collisionVariables = CollisionManager.getInstance().getDistanceToCollission(this);
         float height = collisionVariables.x;
         float roof = collisionVariables.z;
         float rightIntersection = collisionVariables.w;
         float leftIntersection = collisionVariables.y;
-
         ObjectModifiers modifier = new ObjectModifiers(this.getPosition().y > height, acceleration);
+
+        //Calls upgrades' own frame methods
         for (Upgrade u : upgrades.values()) {
             u.frame(dt, state, modifier);
         }
         acceleration = modifier.acceleration.clone();
 
-        // add acceleration down if we are in the air.
-        if (this.getPosition().y > height) {
-            //acceleration.y -= 9.82*dt;
-            // Standard "earth" gravitation feels very wrong. Changed to make the game seem smoother.
-            acceleration.y -= 2.5 * 9.82 * Constants.meter * dt;
-        }
-
-        List<WorldObject> NearObjects = CollisionManager.getInstance().getKNearest(this, 2); //pickup distance
-
-        for (WorldObject wo : NearObjects) {
-            if (wo instanceof AnvilObject) {
-                if (this instanceof Character) {
-                    if (Vec2.distance(WOWrapper.worldObjectCenter(this)
-                            , WOWrapper.worldObjectCenter(wo)) < Constants.collectRange) {
-
-                            wo.despawn();
-                            anvilDamage += 2;
-                            calculateDamage();
-                        }
-                    }
-                }
-            }
-
-//attacking
-        if(equippedWeapon!=null && state.attackPressed()){
-            attack(dt);
-        }
-        if(equippedWeapon !=null && equippedWeapon.isAttacking()){
-            equippedWeapon.slash(dt);
-        }
-
-
-
         // limit the "jump/gravity" acceleration. This prevents problems that shouldn't occur
         acceleration.y = Utils.limit(-5000, acceleration.y, getJumpAcceleration());
 
-//        if (this.acceleration.x > 0 && equippedWeapon != null) equippedWeapon.setDirRight();
-//        else if (this.acceleration.x < 0 && equippedWeapon != null) equippedWeapon.setDirLeft();
-        if (this.acceleration.x > 0 && equippedWeapon != null) equippedWeapon.turnWeaponRight();
-        if (this.acceleration.x < 0 && equippedWeapon != null) equippedWeapon.turnWeaponLeft();
+        //Actions
+        regenerate(dt);
+        fall(dt, height);
+        attack(dt, state);
+        turn();
+        move(dt, height, rightIntersection, leftIntersection, roof);
+    }
+
+    public void addUpgrade(String name, Upgrade upg) {
+        upgrades.put(name, upg);
+    }
+
+    public void attack(float dt, InputState state) {
+        if (equippedWeapon != null && equippedWeapon.isAttacking()) {
+            equippedWeapon.slash(dt);
+        }
+
+        if (equippedWeapon != null && state.attackPressed()) {
+            currentCooldown = Math.max(0, currentCooldown - dt);
 
 
-        //NOTE: for absurdly high speeds, the game does break. However, it's very improbable that someone would ever come anywhere near this.
+            if (currentCooldown < 0.001) {
+
+                equippedWeapon.setAttacking(true);
+                if (equippedWeapon.possibleTarget() != null && !equippedWeapon.possibleTarget().equals(this)) {
+                    if (isCritical()) {
+                        equippedWeapon.possibleTarget().takeDamage(critHitDamage);
+                    }
+                    equippedWeapon.possibleTarget().takeDamage(damage);
+                    equippedWeapon.possibleTarget().knockback(equippedWeapon.getKnockback());
+                    currentCooldown = (float) cooldown;
+
+                }
+            }
+        }
 
 
-        // move the character according to the acceleration vectors.
+    }
+
+    public void knockback(float strength) {
+        knockedBack = true;
+    }
+
+
+    public void move(float dt, float height, float rightIntersection, float leftIntersection, float roof) {
         Vec2 currentPos = getPosition();
         currentPos.add(Vec2.mul(acceleration, dt));
         setPosition(currentPos);
@@ -289,33 +289,24 @@ public class LivingObject extends WorldObject {
         }
     }
 
-    public void addUpgrade(String name, Upgrade upg) {
-        upgrades.put(name, upg);
-    }
-
-    public void attack(float dt){
-        if(equippedWeapon!=null){
-
-            currentCooldown = Math.max(0, currentCooldown-dt);
-
-
-
-            if(currentCooldown < 0.001){
-
-                equippedWeapon.setAttacking(true);
-                if(equippedWeapon.possibleTarget() != null && !equippedWeapon.possibleTarget().equals(this)){
-                    if (isCritical()){
-                        equippedWeapon.possibleTarget().takeDamage(critHitDamage);
-                    }
-                    equippedWeapon.possibleTarget().takeDamage(damage);
-                    currentCooldown = (float)cooldown;
-
-                }
-            }
+    private void regenerate(float dt) {
+        timeSinceRegen += dt;
+        if (timeSinceRegen >= 1) {
+            currentHealth = Math.min(getRegeneration() + currentHealth, getMaxHealth());
+            timeSinceRegen = 0;
         }
-
-
-
     }
 
+    private void fall(float dt, float height) {
+        if (this.getPosition().y > height) {
+            //acceleration.y -= 9.82*dt;
+            // Standard "earth" gravitation feels very wrong. Changed to make the game seem smoother.
+            acceleration.y -= 2.5 * 9.82 * Constants.meter * dt;
+        }
+    }
+
+    private void turn(){
+        if (this.acceleration.x > 0 && equippedWeapon != null) equippedWeapon.turnWeaponRight();
+        if (this.acceleration.x < 0 && equippedWeapon != null) equippedWeapon.turnWeaponLeft();
+    }
 }
