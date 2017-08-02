@@ -95,7 +95,7 @@ public class LivingObject extends WorldObject {
     public MeleeWeapon setRandomWeapon() {
         Random rnd = new Random();
         int randomizedWeapon = rnd.nextInt(100) + 1;
-        randomizedWeapon = 60; //always spear TODO: remove this line when done debugging
+    //    randomizedWeapon = 60; //always spear TODO: remove this line when done debugging
 
         if (randomizedWeapon < 20) {
             return new WeaponAxe(getMeleeHandling(), getCriticalHitChance(), getCriticalHitDamage());
