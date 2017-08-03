@@ -36,7 +36,7 @@ public class GameScreen extends Observable implements Screen {
     public void render(float delta) {
         world.frame(delta);
         gameScreenDrawer.draw(delta);
-        if(world.gameDone()){
+        if (world.gameDone()) {
             dispose();
             setChanged();
             notifyObservers(newGame); //Notifies InfinityRun

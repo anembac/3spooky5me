@@ -72,10 +72,8 @@ public class ShopScreen extends Observable implements Screen {
         //shopStage.addActor(buttonArray[numberOfUpgrades]);
 
 
-
         //Create the view
         shopScreenDrawer = new ShopScreenDrawer(character, shop, buttonTable, buttonArray);
-
 
 
     }//end of constructor
@@ -93,7 +91,7 @@ public class ShopScreen extends Observable implements Screen {
     public void render(float delta) {
         shopScreenDrawer.draw(delta);
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.TAB)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.TAB)) {
             setChanged();
             notifyObservers(ScreenStates.GameScreen);
         }
@@ -128,13 +126,20 @@ public class ShopScreen extends Observable implements Screen {
     }
 
     @Override
-    public void resize(int width, int height){}
+    public void resize(int width, int height) {
+    }
+
     @Override
-    public void pause(){}
+    public void pause() {
+    }
+
     @Override
-    public void resume(){}
+    public void resume() {
+    }
+
     @Override
-    public void hide(){}
+    public void hide() {
+    }
 
     @Override
     public void dispose() {

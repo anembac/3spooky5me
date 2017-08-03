@@ -33,7 +33,6 @@ public class LoadScreen extends Observable implements Screen {
         ChangeListener changeListener = new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //TODO: Implement loading properly
                 int loadID = Integer.parseInt(actor.getName());
                 setChanged();
                 notifyObservers(loadID); //notifies InfinityRun
@@ -43,15 +42,15 @@ public class LoadScreen extends Observable implements Screen {
         for (int i = 0; i < numberOfButtons; i++) {
 
             buttons[i] = new VCButton();
-            buttons[i].setName(""+(i+1));
+            buttons[i].setName("" + (i + 1));
             buttons[i].addListener(changeListener);
-            if(i % 10 == 0){
+            if (i % 10 == 0) {
                 table.row();
             }
             table.add(buttons[i]).pad(5);
         }
         //Set table position
-        table.setPosition(windowWidth/2 - table.getWidth()/2, Constants.windowHeight/2 - table.getHeight()/2);
+        table.setPosition(windowWidth / 2 - table.getWidth() / 2, Constants.windowHeight / 2 - table.getHeight() / 2);
 
         //Add to stage
         loadStage.addActor(table);

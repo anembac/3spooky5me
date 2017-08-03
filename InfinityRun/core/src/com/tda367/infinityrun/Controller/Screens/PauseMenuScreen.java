@@ -50,14 +50,12 @@ public class PauseMenuScreen extends Observable implements Screen {
         }
         //Exit to main menu
         if (vcButtons[1].isPressed()) {
-            //TODO rewrite saving to remove screen-level dependencies on the world class
             setChanged();
             notifyObservers(newGame); //Notifies InfinityRun
             masterScreen.dispose();
             this.dispose();
         }
         //Exit game
-        //TODO: solve saving here as well
         if (vcButtons[0].isPressed()) {
             setChanged();
             notifyObservers(exitGame); //Notifies InfinityRun
