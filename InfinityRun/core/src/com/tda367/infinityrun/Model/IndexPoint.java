@@ -11,13 +11,13 @@ public class IndexPoint {
         this.x = x;
         this.y = y;
     }
-
+//hashcode to not get equivivalent room-id's
     @Override
     public int hashCode() {
         return x * 104119 + y * 104729;
     }
 
-
+//compares id's
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

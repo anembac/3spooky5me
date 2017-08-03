@@ -130,8 +130,7 @@ public class Character extends LivingObject {
     }
 
     @Override
-    //method for collecting, and flagging coins for despawning. This is done by a small sub-section of the K-D tree.
-    //TODO despawn is still a bit retarded imo
+    //method for collecting, and flagging coins&anvils for despawning. This is done by a small sub-section of the K-D tree.
 
     public void frame(float dt, float heroX, float heroY, InputState state) {
         pickUpAnvil();

@@ -8,7 +8,7 @@ import static com.tda367.infinityrun.Utils.Constants.meter;
  * Created by kaffe on 7/20/17.
  */
 public class AnvilObject extends WorldObject {
-    //Generic coin,64x64 size.
+    //anvil that upgrades damage when "picked up"
 
     public AnvilObject(Vec2 position) {
         super(position, new Vec2(meter, meter));
