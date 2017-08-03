@@ -11,7 +11,7 @@ import com.tda367.infinityrun.Utils.ScreenStates;
 import com.tda367.infinityrun.View.Screens.MainMenuDrawer;
 
 import java.util.Observable;
-//Separated
+
 public class MainMenuScreen extends Observable implements Screen { //this class creates the main menu screen
     private final Stage mainMenuStage = new Stage();
 

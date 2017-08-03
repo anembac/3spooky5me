@@ -17,7 +17,7 @@ import java.util.Observable;
 
 import static com.tda367.infinityrun.Utils.Constants.windowWidth;
 
-//separated
+
 public class LoadScreen extends Observable implements Screen {
 
     private final Stage loadStage;

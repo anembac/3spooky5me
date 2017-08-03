@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Observable;
 
 import static com.tda367.infinityrun.Utils.Constants.newGame;
-//separated
+
 public class GameScreen extends Observable implements Screen {
     private final Stage gameStage = new Stage();
     private GameScreenDrawer gameScreenDrawer;
@@ -41,7 +41,7 @@ public class GameScreen extends Observable implements Screen {
             setChanged();
             notifyObservers(newGame); //Notifies InfinityRun
         }
-        //TODO: implement standard input format instead
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.TAB)) {
             setChanged();
             notifyObservers(ScreenStates.ShopScreen);

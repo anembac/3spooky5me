@@ -14,7 +14,7 @@ import java.util.Observable;
 import static com.tda367.infinityrun.Utils.Constants.exitGame;
 import static com.tda367.infinityrun.Utils.Constants.newGame;
 
-//separated
+
 public class PauseMenuScreen extends Observable implements Screen {
     private final Stage pauseStage = new Stage();
 
