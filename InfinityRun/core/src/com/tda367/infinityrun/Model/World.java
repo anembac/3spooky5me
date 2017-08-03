@@ -130,7 +130,7 @@ public class World extends Observable {
     }
 
 
-
+//adds rooms into the world
     private void addRoomIfItDoesntExist(int x, int y) {
         {
             List<WorldObject> newWorldObjects = generator.generate(x, y);

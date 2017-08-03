@@ -69,23 +69,13 @@ public class MeleeWeapon extends WorldObject {
         this.CD = CD;
         this.range = range;
     }
-
+    //sets thickness of a weapon, used in colision detection.
     public void setWeaponThickness(int thickness) {
         weaponThickness = thickness;
+
         setBounds(new Vec2((float) range * meter, getWeaponThickness()));
-        setExtraPoints(new Vec2(getNonRelativePosition().x, getBounds().y),
-                new Vec2(getBounds().x, getNonRelativePosition().y));
     }
-
-    protected void setExtraPoints(Vec2 upperLeft, Vec2 lowerRight) {
-        this.upperLeft = upperLeft;
-        this.lowerRight = lowerRight;
-//        System.out.println("ULx: "+upperLeft.x);
-//        System.out.println("ULy: "+upperLeft.y);
-//        System.out.println("LRx: "+lowerRight.x);
-//        System.out.println("LRy: "+lowerRight.y);
-    }
-
+        //creates a square, nontangible worldobject with the size of the meleeWeapon. It then compares bounds with all worldobjects within it's area and returns a livingobject.
     public LivingObject possibleTarget() {
         HitBoxObject hitBoxObject = new HitBoxObject(new Vec2(1, 1), new Vec2(1, 1));
 
@@ -126,34 +116,32 @@ public class MeleeWeapon extends WorldObject {
             setAttacking(false);
             setRotation(0);
             Vec2 newPos = new Vec2(0, 16);
-            newPos = xreflection(newPos);
+            newPos = Utils.xreflection(newPos);
             setPosition(newPos);
             Vec2 newBounds = new Vec2(((float) (meter * range)), ((float) (weaponThickness)));
-            newBounds = xreflection(newBounds);
+            newBounds = Utils.xreflection(newBounds);
             setBounds(newBounds);
             weaponFacingRight = false;
         }
     }
-
+        //roates the weapon. used in attacking.
     public void rotate(float rotation) {
         this.rotation = this.rotation + rotation;
-        upperLeft = rotateVec2(upperLeft, rotation);
-        lowerRight = rotateVec2(lowerRight, rotation);
+        upperLeft = Utils.rotateVec2(upperLeft, rotation);
+        lowerRight = Utils.rotateVec2(lowerRight, rotation);
         // setPosition(rotateVec2(getNonRelativePosition(), rotation));
         //setBounds(rotateVec2(getBounds(), rotation));
     }
 
+    //sets roation to a fix degree
     public void setRotation(float theta) {
 //        setPosition(theta-this.rotation, theta -this.rotation);
         float direction = 1;
-        if (!weaponFacingRight) {
-            direction = 1;
-        } else {
-            direction = 1;
-        }
+
+
         rotate(direction * (theta - this.rotation));
     }
-
+        //this creates a slashing animation in the drawer. Has two cases for the direction the weapon is facing.
     public void slash(float dt) {
 
         if (weaponFacingRight == true) {
@@ -192,26 +180,6 @@ public class MeleeWeapon extends WorldObject {
         return new Rect(getPosition(), upperLeft, lowerRight, getBounds());
     }
 
-    private Vec2 rotateVec2(Vec2 v, float theta) {
-
-        float xprim = (float) ((v.clone().x * Math.cos(theta)) - (v.clone().y * Math.sin(theta)));
-        float yprim = (float) ((v.clone().x * Math.sin(theta)) + (v.clone().y * Math.cos(theta)));
-
-        return new Vec2(xprim, yprim);
-    }
-
-    public Vec2 yreflection(Vec2 v) {
-        float xprim = v.clone().x * 1 + v.clone().y * 0;
-        float yprim = v.clone().x * 0 + v.clone().y * -1;
-        return new Vec2(xprim, yprim);
-    }
-
-    public Vec2 xreflection(Vec2 v) {
-        float xprim = v.clone().x * -1 + v.clone().y * 0;
-        float yprim = v.clone().x * 0 + v.clone().y * 1;
-        return new Vec2(xprim, yprim);
-
-    }
 
     public boolean isAttacking() {
         return isAttacking;

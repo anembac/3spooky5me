@@ -192,7 +192,7 @@ public class CollisionManager {
     }
 
 
-    //Returns a WorldObject that the given WorldObject collides with.
+    //Returns a WorldObject list that the given WorldObject collides with. pretty much a copied method of the above, only with slightly different function.
     public ArrayList<WorldObject> getCollidedObject(WorldObject obj)
     {
         // This algorithm could be changed to use the 2 range searches instead, 1 for each axis.

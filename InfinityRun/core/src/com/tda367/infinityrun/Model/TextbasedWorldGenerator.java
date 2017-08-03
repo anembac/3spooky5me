@@ -145,7 +145,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                 for(int loop = 0; loop < allRooms.size();loop++){
 
 
-                 //todo remove lines with a loop
+
                     //this part removes rooms from the list of possible rooms that have too many entrances
                 }
                 if (madeRooms.containsKey(new IndexPoint(x + 1, y)) && madeRooms.get(new IndexPoint(x + 1, y)).left){
@@ -162,6 +162,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
                     cleanPossible(possible, 8, true);
                 }
 
+                //this removes rooms with too few entrances.
 
             if (madeRooms.containsKey(new IndexPoint(x + 1, y)) && !madeRooms.get(new IndexPoint(x + 1, y)).left){
                 cleanPossible(possible, 1, false);
@@ -197,7 +198,7 @@ public class TextbasedWorldGenerator implements WorldGenerator {
             }
         }
     }
-// todo should also path towards an exit for the 10 closest, and try rooms with more exits if possible.
+//ensures that te world can never be closed in bar incredibly unlikely scenarios.
     private boolean pathOut(HashSet<IndexPoint> checked, int x, int y) {
         IndexPoint pos = new IndexPoint(x, y);
         checked.add(pos);
