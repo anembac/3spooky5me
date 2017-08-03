@@ -203,7 +203,7 @@ public abstract class LivingObject extends WorldObject {
     @Override
     public void frame(float dt, float heroX, float heroY, InputState state) {
      this.state = state;
-
+        stunCheck();
         //Setup
         //Movement and collision checking
         Vec4 collisionVariables = CollisionManager.getInstance().getDistanceToCollission(this);
@@ -215,7 +215,7 @@ public abstract class LivingObject extends WorldObject {
 
         //Calls upgrades' own frame methods
         for (Upgrade u : upgrades.values()) {
-            u.frame(dt, state, modifier);
+            u.frame(dt, this.state, modifier);
         }
         acceleration = modifier.acceleration.clone();
 
@@ -273,12 +273,12 @@ public abstract class LivingObject extends WorldObject {
             acceleration.x = strength;
         }
         acceleration.y = strength;
-        stunTimer = 50555550;
+        stunTimer = 250;
     }
 
     public void stunTimerCountDown(float dt){
-
-        stunTimer = stunTimer - dt;
+        System.out.println(stunTimer);
+        stunTimer = stunTimer - 1000*dt;
         if(stunTimer<0){
             stunTimer = 0;
         }
