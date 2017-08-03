@@ -1,6 +1,5 @@
 package com.tda367.infinityrun.Model;
 
-import com.badlogic.gdx.Input;
 import com.tda367.infinityrun.Utils.Constants;
 import com.tda367.infinityrun.Utils.Utils;
 import com.tda367.infinityrun.Utils.Math.Vec2;
@@ -256,7 +255,7 @@ public abstract class LivingObject extends WorldObject {
                         target.takeDamage(critHitDamage);
                     }
                     target.takeDamage(damage);
-                    target.knockback(equippedWeapon.getKnockback(), target.equippedWeapon.isWeaponFacingRight());
+                    target.knockback(equippedWeapon.getKnockback(), equippedWeapon.isWeaponFacingRight());
                     currentCooldown = (float) cooldown;
 
                 }
@@ -267,17 +266,17 @@ public abstract class LivingObject extends WorldObject {
     }
 
     public void knockback(float strength, boolean weaponDirection) {
-        if(!weaponDirection){
-            acceleration.x = -strength;
-        }else{
-            acceleration.x = strength;
-        }
         acceleration.y = strength;
+        if(!weaponDirection){
+            acceleration.x = -1.5f*strength;
+        }else{
+            acceleration.x = 1.5f*strength;
+        }
+
         stunTimer = 250;
     }
 
     public void stunTimerCountDown(float dt){
-        System.out.println(stunTimer);
         stunTimer = stunTimer - 1000*dt;
         if(stunTimer<0){
             stunTimer = 0;
