@@ -1,9 +1,8 @@
 package com.tda367.infinityrun.Model;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
 import com.tda367.infinityrun.Utils.Math.Rect;
 import com.tda367.infinityrun.Utils.Math.Vec2;
-import com.tda367.infinityrun.Utils.Utils;
+import com.tda367.infinityrun.Utils.Math.Utils;
 
 import java.util.ArrayList;
 
@@ -150,7 +149,6 @@ public class MeleeWeapon extends WorldObject {
             }
         }
         if (weaponFacingRight == false) {
-            System.out.println();
             if (this.rotation == 0) {
                 this.setRotation(270);
             } else if (this.rotation > 360) {

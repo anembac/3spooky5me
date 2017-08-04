@@ -1,7 +1,7 @@
 package com.tda367.infinityrun.Model;
 
 import com.tda367.infinityrun.Utils.Constants;
-import com.tda367.infinityrun.Utils.Utils;
+import com.tda367.infinityrun.Utils.Math.Utils;
 import com.tda367.infinityrun.Utils.Math.Vec2;
 import com.tda367.infinityrun.Utils.Math.Vec4;
 import com.tda367.infinityrun.Model.Upgrades.*;
