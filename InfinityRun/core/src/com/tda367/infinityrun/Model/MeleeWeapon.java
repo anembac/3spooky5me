@@ -127,19 +127,13 @@ public class MeleeWeapon extends WorldObject {
         //roates the weapon. used in attacking.
     public void rotate(float rotation) {
         this.rotation = this.rotation + rotation;
-        upperLeft = Utils.rotateVec2(upperLeft, rotation);
-        lowerRight = Utils.rotateVec2(lowerRight, rotation);
-        // setPosition(rotateVec2(getNonRelativePosition(), rotation));
-        //setBounds(rotateVec2(getBounds(), rotation));
+
     }
 
     //sets roation to a fix degree
     public void setRotation(float theta) {
 //        setPosition(theta-this.rotation, theta -this.rotation);
-        float direction = 1;
-
-
-        rotate(direction * (theta - this.rotation));
+        rotate( (theta - this.rotation));
     }
         //this creates a slashing animation in the drawer. Has two cases for the direction the weapon is facing.
     public void slash(float dt) {

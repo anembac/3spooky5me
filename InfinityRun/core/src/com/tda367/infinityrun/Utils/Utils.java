@@ -14,7 +14,6 @@ public class Utils {
 
     //rotates a Vec2 with linear algebra
     public static Vec2 rotateVec2(Vec2 v, float theta) {
-
         float xprim = (float) ((v.clone().x * Math.cos(theta)) - (v.clone().y * Math.sin(theta)));
         float yprim = (float) ((v.clone().x * Math.sin(theta)) + (v.clone().y * Math.cos(theta)));
 
