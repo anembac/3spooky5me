@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.tda367.infinityrun</OriginalElement>
+  <nodes>
+    <node x="414.0" y="1022.0">com.tda367.infinityrun.Controller.InputGDX</node>
+    <node x="250.5" y="300.0">com.tda367.infinityrun.Model.Character</node>
+    <node x="977.0" y="1454.0">com.tda367.infinityrun.Utils.Math</node>
+    <node x="495.0" y="1562.0">com.tda367.infinityrun.Utils.Constants</node>
+    <node x="0.0" y="1454.0">com.tda367.infinityrun.Controller.Screens.LoadScreen</node>
+    <node x="430.5" y="313.5">com.tda367.infinityrun.Model.Enemy</node>
+    <node x="318.25" y="936.0">com.tda367.infinityrun.Controller.IInput</node>
+    <node x="450.0" y="828.0">com.tda367.infinityrun.View.Screens.MainMenuDrawer</node>
+    <node x="1746.5" y="327.0">com.tda367.infinityrun.Model.WeaponTypes</node>
+    <node x="199.0" y="1454.0">com.tda367.infinityrun.View.VCButton</node>
+    <node x="795.0" y="742.0">com.tda367.infinityrun.View.Screens.ScreenDrawer</node>
+    <node x="0.0" y="1238.0">com.tda367.infinityrun.Controller.Screens.ShopScreen</node>
+    <node x="792.0" y="1454.0">com.tda367.infinityrun.Model.DeathObserver</node>
+    <node x="471.0" y="1346.0">com.tda367.infinityrun.Model.IndexPoint</node>
+    <node x="0.0" y="1346.0">com.tda367.infinityrun.Controller.Screens.MainMenuScreen</node>
+    <node x="1013.0" y="173.5">com.tda367.infinityrun.Model.AnvilObject</node>
+    <node x="1679.0" y="173.5">com.tda367.infinityrun.Model.MeleeWeapon</node>
+    <node x="607.0" y="1238.0">com.tda367.infinityrun.Controller.Screens.GameScreen</node>
+    <node x="853.0" y="1238.0">com.tda367.infinityrun.Model.CollisionManager</node>
+    <node x="170.0" y="1562.0">com.tda367.infinityrun.Model.WOWrapper</node>
+    <node x="737.0" y="828.0">com.tda367.infinityrun.View.Screens.GameScreenDrawer</node>
+    <node x="121.0" y="435.0">com.tda367.infinityrun.Model.WorldGenerator</node>
+    <node x="339.0" y="1562.0">com.tda367.infinityrun.InfinityRun</node>
+    <node x="1344.0" y="828.0">com.tda367.infinityrun.View.Screens.PauseMenuDrawer</node>
+    <node x="236.0" y="1346.0">com.tda367.infinityrun.Model.LoadCharacter</node>
+    <node x="0.0" y="634.0">com.tda367.infinityrun.Model.TextbasedWorldGenerator.RoomType</node>
+    <node x="592.0" y="1454.0">com.tda367.infinityrun.desktop.DesktopLauncher</node>
+    <node x="0.0" y="1022.0">com.tda367.infinityrun.Controller.InputEmpty</node>
+    <node x="1006.0" y="828.0">com.tda367.infinityrun.View.Screens.LoadScreenDrawer</node>
+    <node x="1219.0" y="173.5">com.tda367.infinityrun.Model.HitBoxObject</node>
+    <node x="351.0" y="160.0">com.tda367.infinityrun.Model.LivingObject</node>
+    <node x="69.0" y="521.0">com.tda367.infinityrun.Model.TextbasedWorldGenerator</node>
+    <node x="383.0" y="1454.0">com.tda367.infinityrun.Model.Upgrades</node>
+    <node x="0.0" y="1562.0">com.tda367.infinityrun.Utils.ScreenStates</node>
+    <node x="0.0" y="828.0">com.tda367.infinityrun.View.Screens.ShopScreenDrawer</node>
+    <node x="876.75" y="0.0">com.tda367.infinityrun.Model.WorldObject</node>
+    <node x="668.0" y="936.0">com.tda367.infinityrun.Model.InputState</node>
+    <node x="353.0" y="1130.0">com.tda367.infinityrun.Model.World</node>
+    <node x="693.0" y="1130.0">com.tda367.infinityrun.Controller.Screens.PauseMenuScreen</node>
+    <node x="622.0" y="173.5">com.tda367.infinityrun.Model.Platform</node>
+    <node x="1476.0" y="173.5">com.tda367.infinityrun.Model.CoinObject</node>
+    <node x="808.0" y="173.5">com.tda367.infinityrun.Model.BrickObject</node>
+    <node x="704.0" y="1346.0">com.tda367.infinityrun.Model.Shop</node>
+    <node x="0.0" y="1130.0">com.tda367.infinityrun.Controller.ScreenManager</node>
+    <node x="3.5" y="313.5">com.tda367.infinityrun.Model.SpikeObject</node>
+    <node x="0.0" y="173.5">com.tda367.infinityrun.Model.Hazard</node>
+    <node x="923.0" y="1346.0">com.tda367.infinityrun.View.HUD</node>
+    <node x="304.0" y="1238.0">com.tda367.infinityrun.Model.SaveCharacter</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.tda367.infinityrun.Model.SpikeObject" target="com.tda367.infinityrun.Model.Hazard">
+      <point x="0.0" y="-31.5" />
+      <point x="0.0" y="31.5" />
+    </edge>
+    <edge source="com.tda367.infinityrun.Model.CoinObject" target="com.tda367.infinityrun.Model.WorldObject">
+      <point x="0.0" y="-31.5" />
+      <point x="1567.5" y="120.0" />
+      <point x="1082.3125" y="120.0" />
+      <point x="79.0625" y="45.0" />
+    </edge>
+    <edge source="com.tda367.infinityrun.Model.TextbasedWorldGenerator" target="com.tda367.infinityrun.Model.WorldGenerator">
+      <point x="0.0" y="-31.5" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.tda367.infinityrun.Model.Hazard" target="com.tda367.infinityrun.Model.WorldObject">
+      <point x="0.0" y="-31.5" />
+      <point x="117.0" y="110.0" />
+      <point x="892.5625" y="110.0" />
+      <point x="-110.6875" y="45.0" />
+    </edge>
+    <edge source="com.tda367.infinityrun.Model.Enemy" target="com.tda367.infinityrun.Model.LivingObject">
+      <point x="0.0" y="-31.5" />
+      <point x="622.5" y="275.0" />
+      <point x="539.25" y="275.0" />
+      <point x="62.75" y="45.0" />
+    </edge>
+    <edge source="com.tda367.infinityrun.View.Screens.PauseMenuDrawer" target="com.tda367.infinityrun.View.Screens.ScreenDrawer">
+      <point x="0.0" y="-31.5" />
+      <point x="1529.0" y="798.0" />
+      <point x="914.7" y="798.0" />
+      <point x="53.19999999999999" y="18.0" />
+    </edge>
+    <edge source="com.tda367.infinityrun.Controller.InputGDX" target="com.tda367.infinityrun.Controller.IInput">
+      <point x="0.0" y="-31.5" />
+      <point x="518.5" y="997.0" />
+      <point x="377.5" y="997.0" />
+      <point x="19.75" y="18.0" />
+    </edge>
+    <edge source="com.tda367.infinityrun.View.Screens.GameScreenDrawer" target="com.tda367.infinityrun.View.Screens.ScreenDrawer">
+      <point x="0.0" y="-31.5" />
+      <point x="0.0" y="18.0" />
+    </edge>
+    <edge source="com.tda367.infinityrun.Model.TextbasedWorldGenerator.RoomType" target="com.tda367.infinityrun.Model.TextbasedWorldGenerator">
+      <point x="0.0" y="-31.5" />
+      <point x="0.0" y="31.5" />
+    </edge>
+    <edge source="com.tda367.infinityrun.Model.BrickObject" target="com.tda367.infinityrun.Model.WorldObject">
+      <point x="0.0" y="-31.5" />
+      <point x="900.5" y="140.0" />
+      <point x="987.4375" y="140.0" />
+      <point x="-15.8125" y="45.0" />
+    </edge>
+    <edge source="com.tda367.infinityrun.Model.AnvilObject" target="com.tda367.infinityrun.Model.WorldObject">
+      <point x="0.0" y="-31.5" />
+      <point x="1106.0" y="140.0" />
+      <point x="1019.0625" y="140.0" />
+      <point x="15.8125" y="45.0" />
+    </edge>
+    <edge source="com.tda367.infinityrun.Controller.InputEmpty" target="com.tda367.infinityrun.Controller.IInput">
+      <point x="0.0" y="-31.5" />
+      <point x="197.0" y="997.0" />
+      <point x="338.0" y="997.0" />
+      <point x="-19.75" y="18.0" />
+    </edge>
+    <edge source="com.tda367.infinityrun.Model.WeaponTypes" target="com.tda367.infinityrun.Model.MeleeWeapon">
+      <point x="0.0" y="-18.0" />
+      <point x="0.0" y="31.5" />
+    </edge>
+    <edge source="com.tda367.infinityrun.View.Screens.ShopScreenDrawer" target="com.tda367.infinityrun.View.Screens.ScreenDrawer">
+      <point x="0.0" y="-31.5" />
+      <point x="215.0" y="798.0" />
+      <point x="808.3" y="798.0" />
+      <point x="-53.2" y="18.0" />
+    </edge>
+    <edge source="com.tda367.infinityrun.Model.LivingObject" target="com.tda367.infinityrun.Model.WorldObject">
+      <point x="0.0" y="-45.0" />
+      <point x="476.5" y="120.0" />
+      <point x="924.1875" y="120.0" />
+      <point x="-79.0625" y="45.0" />
+    </edge>
+    <edge source="com.tda367.infinityrun.Model.Platform" target="com.tda367.infinityrun.Model.WorldObject">
+      <point x="0.0" y="-31.5" />
+      <point x="705.0" y="130.0" />
+      <point x="955.8125" y="130.0" />
+      <point x="-47.4375" y="45.0" />
+    </edge>
+    <edge source="com.tda367.infinityrun.Model.HitBoxObject" target="com.tda367.infinityrun.Model.WorldObject">
+      <point x="0.0" y="-31.5" />
+      <point x="1337.5" y="130.0" />
+      <point x="1050.6875" y="130.0" />
+      <point x="47.4375" y="45.0" />
+    </edge>
+    <edge source="com.tda367.infinityrun.Model.MeleeWeapon" target="com.tda367.infinityrun.Model.WorldObject">
+      <point x="0.0" y="-31.5" />
+      <point x="1843.5" y="110.0" />
+      <point x="1113.9375" y="110.0" />
+      <point x="110.6875" y="45.0" />
+    </edge>
+    <edge source="com.tda367.infinityrun.View.Screens.MainMenuDrawer" target="com.tda367.infinityrun.View.Screens.ScreenDrawer">
+      <point x="0.0" y="-31.5" />
+      <point x="583.5" y="808.0" />
+      <point x="834.9" y="808.0" />
+      <point x="-26.6" y="18.0" />
+    </edge>
+    <edge source="com.tda367.infinityrun.View.Screens.LoadScreenDrawer" target="com.tda367.infinityrun.View.Screens.ScreenDrawer">
+      <point x="0.0" y="-31.5" />
+      <point x="1165.0" y="808.0" />
+      <point x="888.1" y="808.0" />
+      <point x="26.599999999999994" y="18.0" />
+    </edge>
+    <edge source="com.tda367.infinityrun.Model.Character" target="com.tda367.infinityrun.Model.LivingObject">
+      <point x="0.0" y="-45.0" />
+      <point x="330.5" y="275.0" />
+      <point x="413.75" y="275.0" />
+      <point x="-62.75" y="45.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.30000000000000016" x="948.9999999999995" y="975.9999999999995" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
